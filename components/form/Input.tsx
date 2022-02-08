@@ -13,7 +13,6 @@ export default function Input({ ...props }) {
                 focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
                 w-full
                 text-xl
-                
             '
             {...props}
         />

@@ -27,23 +27,19 @@ export default function SelectOne({ leftText, rightText }: ISelectOne) {
             '
         >
             <div
-                className={
-                    `
+                className={`
                     border-b-4 text-center hover:border-b-fuchsia-500 transition-colors w-full cursor-pointer rounded-md
                     ${loginMode ? "border-b-fuchsia-500" : "border-b-fuchsia-100"}
-                    `
-                }
+                `}
                 onClick={() => changeLoginMode(true)}
             >
                 {leftText}
             </div>
             <div
-                className={
-                    `
+                className={`
                     border-b-4 text-center hover:border-b-fuchsia-500 transition-colors w-full cursor-pointer rounded-md
                     ${loginMode ? "border-b-fuchsia-100" : "border-b-fuchsia-500"}
-                    `
-                }
+                `}
                 onClick={() => changeLoginMode(false)}
             >
                 {rightText}

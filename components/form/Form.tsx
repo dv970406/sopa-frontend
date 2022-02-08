@@ -6,12 +6,14 @@
 import React from 'react';
 
 interface IForm {
-    children: React.ReactNode
+    children: React.ReactNode;
+    onSubmit(): void;
 }
 
-export default function Form({ children }: IForm) {
+export default function Form({ children, onSubmit }: IForm) {
     return (
         <form
+            onSubmit={onSubmit}
             className='
                 flex flex-col space-y-3
                 px-12 pt-16 pb-8
