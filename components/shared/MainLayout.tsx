@@ -6,6 +6,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { clsName } from '../../utils/tailwindUtilFunc';
 import NavBar from './NavBar';
 
 interface IMainLayout {
@@ -15,14 +16,27 @@ interface IMainLayout {
 
 export default function MainLayout({ title, children }: IMainLayout) {
     const { pathname } = useRouter()
-    const hideNavBarPath = pathname === "/login" || pathname === "/sign-up"
+    const loginOrSignUp = pathname === "/auth"
     return (
-        <div>
-            {hideNavBarPath ? null : <NavBar />}
+        <div
+            className={
+                `font-Dongle `
+            }
+        >
+            {loginOrSignUp ? null : <NavBar />}
             <Head>
                 <title>{title} | SOPA</title>
             </Head>
-            {children}
+            <div
+                className={
+                    `flex flex-col justify-center w-screen h-screen mx-auto px-16
+                    ${loginOrSignUp ? "flex items-center" : ""}
+                    w-full
+                    sm:w-4/5 md:w-3/5`
+                }
+            >
+                {children}
+            </div>
         </div>
     )
 }

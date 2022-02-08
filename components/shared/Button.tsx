@@ -6,19 +6,22 @@
 import { clsName } from '../../utils/tailwindUtilFunc';
 
 interface IButton {
-    isFull: boolean;
+    text: string;
+    onClick(): void;
 }
 
-export default function Button({ isFull }: IButton) {
+export default function Button({ text, onClick }: IButton) {
     return (
-        <button className={
-            clsName(
-                isFull ? "w-full" : "w-10",
-                "h-4 bg-fuchsia-600 rounded-xl px-3 py-2",
-            )
-        }>
+        <button
+            className="
+                flex justify-center items-center
+                h-4 bg-fuchsia-500
+                rounded-xl px-5 py-4 
+            "
+            onClick={onClick}
+        >
             <span className='font-bold text-white'>
-                로그인
+                {text}
             </span>
         </button>
     )
