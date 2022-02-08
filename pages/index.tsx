@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
+import MainLayout from '../components/shared/MainLayout'
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <MainLayout title="당신의 소울파트너">
 
-    </div>
+    </MainLayout>
   )
 }
 
