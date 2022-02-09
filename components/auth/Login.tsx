@@ -1,9 +1,8 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.09
  */
 
-import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
@@ -16,53 +15,24 @@ interface IForm {
     email: string;
     password: string;
 };
-interface ILoginMutation {
-    login: {
-        ok: boolean;
-        token?: string;
-        error?: string;
-    }
-};
-
-const LOGIN_MUTATION = gql`
-    mutation login($email:String!,$password:String!){
-        login(email:$email,password:$password){
-            ok
-            token
-            error
-        }
-    }
-`;
 
 export default function Login() {
-    const { register, handleSubmit } = useForm<IForm>();
     const setTokenState = useSetRecoilState(tokenState);
+    const { register, handleSubmit } = useForm<IForm>();
     const router = useRouter();
 
-    const loginCompleted = ({ login }: ILoginMutation) => {
-        const { ok, token, error } = login;
-        if (!ok) {
-            alert(error);
-            return;
-        };
-        if (token) {
-            setTokenState(token);
-            router.push("/")
-        };
-    }
-    const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
-        onCompleted: loginCompleted
-    })
-
     const onValid = async (data: IForm) => {
-        if (loading) return;
-        const { email, password } = data;
-        loginMutation({
-            variables: {
-                email,
-                password
-            }
+        const response = await fetch("/api/login", {
+            method: "POST",
+            body: JSON.stringify(data)
         });
+
+        const { login } = await response.json();
+
+        if (login.ok) {
+            setTokenState(login.token);
+            router.push("/");
+        };
     };
 
     return (
