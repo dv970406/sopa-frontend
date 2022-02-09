@@ -4,15 +4,25 @@
  */
 
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
-import { isLoggedInSelector } from '../../utils/atoms';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import useMyInfo from '../../hooks/useMyInfo';
+import { tokenState } from '../../utils/atoms';
 import Button from './Button';
 
-export default function NavBar() {
-    const isLoggedIn = useRecoilValue(isLoggedInSelector);
+
+function NavBar() {
+    const [token, setToken] = useRecoilState(tokenState)
+
     const router = useRouter();
+    const myInfoData = useMyInfo();
+    console.log(myInfoData);
 
     const goToLogin = () => router.push("/auth");
+
+    useEffect(() => {
+        setToken(localStorage.getItem("TOKEN"));
+    }, []);
 
     return (
         <div className='
@@ -25,10 +35,10 @@ export default function NavBar() {
                     space-x-3
                 `}
             >
-                <div onClick={isLoggedIn ? () => alert("will go post upload") : goToLogin}>
+                <div onClick={token ? () => alert("will go post upload") : goToLogin}>
                     글 쓰기
                 </div>
-                {isLoggedIn ? (
+                {token ? (
                     <Button
                         text="프로필"
                         onClick={() => null}
@@ -43,3 +53,5 @@ export default function NavBar() {
         </div>
     )
 }
+
+export default NavBar

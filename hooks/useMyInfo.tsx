@@ -24,16 +24,21 @@ const SEE_MY_PROFILE_QUERY = gql`
     }
 `;
 
-export default function useMyInfo() {
-    const setTokenState = useSetRecoilState(tokenState);
-    const seeMyProfileCompleted = (data: ISeeMyProfile) => {
-        if (data?.seeMyProfile === null) {
-            setTokenState("");
+function useMyInfo() {
+    const setToken = useSetRecoilState(tokenState);
+
+    const myInfoCompleted = (data: ISeeMyProfile) => {
+        if (data.seeMyProfile === null) {
+            setToken(null);
+            localStorage.removeItem("TOKEN");
         };
     };
-    const { data } = useQuery(SEE_MY_PROFILE_QUERY, {
-        onCompleted: seeMyProfileCompleted
+
+    const { data: myInfoData } = useQuery(SEE_MY_PROFILE_QUERY, {
+        onCompleted: myInfoCompleted
     });
-    console.log(data)
-    return data
+
+    return myInfoData;
 }
+
+export default useMyInfo

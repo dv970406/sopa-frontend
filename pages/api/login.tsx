@@ -24,8 +24,10 @@ export default async function Handler(req: NextApiRequest, res: NextApiResponse)
         variables: {
             email,
             password
-        },
+        }
     })
+
+    req.headers['set-cookie'] = login.token
 
     return res.status(200).json({ login });
 }

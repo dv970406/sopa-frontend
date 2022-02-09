@@ -17,7 +17,7 @@ interface IForm {
 };
 
 export default function Login() {
-    const setTokenState = useSetRecoilState(tokenState);
+    const setToken = useSetRecoilState(tokenState);
     const { register, handleSubmit } = useForm<IForm>();
     const router = useRouter();
 
@@ -30,7 +30,8 @@ export default function Login() {
         const { login } = await response.json();
 
         if (login.ok) {
-            setTokenState(login.token);
+            setToken(login.token);
+            localStorage.setItem("TOKEN", login.token);
             router.push("/");
         };
     };

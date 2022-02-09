@@ -1,7 +1,6 @@
 import { gql } from '@apollo/client'
-import type { GetStaticProps } from 'next'
+import type { GetServerSideProps } from 'next'
 import MainLayout from '../components/shared/MainLayout'
-import useMyInfo from '../hooks/useMyInfo'
 import { client } from '../utils/apollo'
 
 interface IPost {
@@ -14,8 +13,6 @@ interface IPosts {
 }
 
 const Home = ({ posts }: IPosts) => {
-  const data = useMyInfo()
-
   return (
     <MainLayout title="당신의 소울파트너">
       <div>
@@ -25,7 +22,7 @@ const Home = ({ posts }: IPosts) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
   const { data } = await client.query({
     query: gql`
@@ -35,11 +32,12 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
           title
         }
       }
-    `,
+    `
   });
+
   return {
     props: {
-      posts: data.seePosts
+      posts: data.seePosts,
     }
   }
 }
