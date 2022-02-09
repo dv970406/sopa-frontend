@@ -1,30 +1,16 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.09
  */
 
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
 
-export const loginModeState = atom({
+export const loginModeState = atom<boolean>({
     key: "loginModeState",
     default: true
-})
+});
 
-export const loginState = atom({
-    key: "loginState",
-    default: false
-})
-
-export const tokenState = atom<string>({
+export const tokenState = atom<string | null>({
     key: "tokenState",
-    default: ""
-})
-
-export const isLoggedInSelector = selector<boolean>({
-    key: "isLoggedInSelector",
-    get: ({ get }) => {
-        const token = get(tokenState);
-        if (token) localStorage.setItem("TOKEN", token);
-        return token ? true : false
-    }
-})
+    default: null
+});

@@ -1,12 +1,11 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.09
  */
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { clsName } from '../../utils/tailwindUtilFunc';
 import NavBar from './NavBar';
 
 interface IMainLayout {
