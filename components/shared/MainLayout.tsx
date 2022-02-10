@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.09
+ * 수정일: 2022.02.10
  */
 
 import Head from 'next/head';
@@ -14,12 +14,13 @@ interface IMainLayout {
 }
 
 export default function MainLayout({ title, children }: IMainLayout) {
-    const { pathname } = useRouter()
-    const loginOrSignUp = pathname === "/auth"
+    const { pathname } = useRouter();
+    const loginOrSignUp = pathname === "/auth";
+
     return (
         <div
             className={
-                `font-Dongle `
+                `font-Dongle`
             }
         >
             {loginOrSignUp ? null : <NavBar />}

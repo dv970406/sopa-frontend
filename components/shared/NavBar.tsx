@@ -1,28 +1,20 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.09
+ * 수정일: 2022.02.10
  */
 
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import useMyInfo from '../../hooks/useMyInfo';
+import { useRecoilValue } from 'recoil';
 import { tokenState } from '../../utils/atoms';
 import Button from './Button';
 
-
 function NavBar() {
-    const [token, setToken] = useRecoilState(tokenState)
-
+    const token = useRecoilValue(tokenState)
     const router = useRouter();
-    const myInfoData = useMyInfo();
-    console.log(myInfoData);
+
+    console.log(token);
 
     const goToLogin = () => router.push("/auth");
-
-    useEffect(() => {
-        setToken(localStorage.getItem("TOKEN"));
-    }, []);
 
     return (
         <div className='

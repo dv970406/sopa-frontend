@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.09
+ * 수정일: 2022.02.10
  */
 
 import { useRouter } from 'next/router';
@@ -31,7 +31,7 @@ export default function Login() {
 
         if (login.ok) {
             setToken(login.token);
-            localStorage.setItem("TOKEN", login.token);
+            document.cookie = `TOKEN=${login.token}`;
             router.push("/");
         };
     };

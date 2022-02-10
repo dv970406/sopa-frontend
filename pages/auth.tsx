@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.10
  */
 
 import MainLayout from '../components/shared/MainLayout';
@@ -11,7 +11,8 @@ import SignUp from '../components/auth/SignUp';
 import Login from '../components/auth/Login';
 
 export default function Authentication() {
-    const loginMode = useRecoilValue(loginModeState)
+    const loginMode = useRecoilValue(loginModeState);
+
     return (
         <MainLayout title="로그인">
             <SelectOne leftText='로그인' rightText='회원가입' />
