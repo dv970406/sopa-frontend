@@ -12,9 +12,9 @@ interface ISelectOne {
 }
 
 export default function SelectOne({ leftText, rightText }: ISelectOne) {
-    const [loginMode, setLoginMode] = useRecoilState(loginModeState)
+    const [loginMode, setLoginMode] = useRecoilState(loginModeState);
 
-    const changeLoginMode = (bool: boolean) => setLoginMode(bool)
+    const changeLoginMode = (bool: boolean) => setLoginMode(bool);
 
     return (
         <div

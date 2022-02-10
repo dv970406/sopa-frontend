@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.09
+ * 수정일: 2022.02.10
  */
 
 import { atom } from 'recoil';
@@ -12,5 +12,5 @@ export const loginModeState = atom<boolean>({
 
 export const tokenState = atom<string | null>({
     key: "tokenState",
-    default: null
+    default: typeof window === "undefined" ? null : document.cookie.split("TOKEN=")[1],
 });

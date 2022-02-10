@@ -6,7 +6,7 @@
 interface IButton {
     text: string;
     onClick(): void;
-}
+};
 
 export default function Button({ text, onClick }: IButton) {
     return (
