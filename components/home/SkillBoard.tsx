@@ -3,26 +3,28 @@
  * 수정일: ------
  */
 
+import React from 'react'
 import { ISkill } from '../../utils/atoms'
-import DraggableSkill from './DraggableSkill'
+import Skill from './Skill'
 
 interface ISkillBoard {
-    position: string;
     skillOfPosition: ISkill[]
 }
 
-export default function SkillBoard({ position, skillOfPosition }: ISkillBoard) {
+function SkillBoard({ skillOfPosition }: ISkillBoard) {
     return (
         <>
-            <p>{position}</p>
+            <p>{skillOfPosition[0].position}</p>
             <div
                 className={`
-                        w-full h-1/3 px-3 py-6 shadow-lg rounded-lg border-2 border-black
-                        flex flex-row flex-wrap justify-center mx-auto
-                    `}
+                    w-full h-1/3 px-3 py-6 shadow-lg rounded-lg border-2 border-black
+                    flex flex-row flex-wrap justify-center mx-auto
+                `}
             >
-                {skillOfPosition?.map((skill, index) => <DraggableSkill key={skill.skill} index={index} {...skill} />)}
+                {skillOfPosition?.map((skill, index) => <Skill key={skill.skill} index={index} {...skill} />)}
             </div>
         </>
     )
 }
+
+export default React.memo(SkillBoard)

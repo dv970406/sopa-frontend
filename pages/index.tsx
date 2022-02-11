@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import SkillBoard from '../components/home/SkillBoard';
+import { useRecoilState } from 'recoil';
+import SkillBoards from '../components/home/SkillBoards';
 import MainLayout from '../components/shared/MainLayout'
 import { client } from '../utils/apollo'
-import { skillsState, tokenState } from '../utils/atoms';
+import { tokenState } from '../utils/atoms';
 
 interface IPost {
   __typename: string;
@@ -36,7 +36,6 @@ const SEE_MY_PROFILE_QUERY = gql`
 
 const Home = ({ posts, myInfoData }: IHome) => {
   const [token, setToken] = useRecoilState(tokenState);
-  const skills = useRecoilValue(skillsState);
 
   useEffect(() => {
     if (!myInfoData) {
@@ -47,13 +46,7 @@ const Home = ({ posts, myInfoData }: IHome) => {
   }, [myInfoData]);
   return (
     <MainLayout title="당신의 소울파트너">
-      <div
-        className={`
-            space-y-4
-        `}
-      >
-        {Object.keys(skills).map((position, index) => <SkillBoard key={index} position={position} skillOfPosition={skills[position]} />)}
-      </div>
+      <SkillBoards />
     </MainLayout>
   )
 }

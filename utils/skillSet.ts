@@ -98,7 +98,9 @@ export const skillSet = {
     ].map(skill => {
         return {
             skill,
-            skillImage: `/frontend/${skill}.png`
+            skillImage: `/frontend/${skill}.png`,
+            isSelected: false,
+            position: "frontend"
         }
     }),
     backend: [
@@ -112,7 +114,9 @@ export const skillSet = {
     ].map(skill => {
         return {
             skill,
-            skillImage: `/backend/${skill}.png`
+            skillImage: `/backend/${skill}.png`,
+            isSelected: false,
+            position: "backend"
         }
     }),
     app: [
@@ -123,14 +127,9 @@ export const skillSet = {
     ].map(skill => {
         return {
             skill,
-            skillImage: `/app/${skill}.png`
+            skillImage: `/app/${skill}.png`,
+            isSelected: false,
+            position: "app"
         }
     })
 }
-
-console.log(["react", "vue", "angular", "javascript", "nextjs", "jquery", "typescript"].map(skill => {
-    return {
-        skill,
-        skillImage: `/frontend/${skill}.png`
-    }
-}))
