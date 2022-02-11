@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.11
  */
 
 interface IFormButton {
@@ -14,7 +14,7 @@ export default function FormButton({ text, onClick }: IFormButton) {
             className="
                 flex items-center justify-center
                 w-full h-4 bg-fuchsia-300 hover:bg-fuchsia-500 
-                rounded-xl px-3 py-5
+                rounded-xl px-3 py-7
                 focus:outline-none
                 focus:ring-2 ring-offset-2 ring-fuchsia-500
                 transition-colors

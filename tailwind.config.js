@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Dongle: ['Dongle', "sans-serif"]
+        Dongle: ['Dongle', "sans-serif"],
+        NotoSans: ['Noto Sans KR', "sans-serif"]
       }
     },
   },

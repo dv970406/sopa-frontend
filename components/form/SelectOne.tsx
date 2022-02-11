@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.11
  */
 
 import { useRecoilState } from 'recoil'
@@ -28,21 +28,21 @@ export default function SelectOne({ leftText, rightText }: ISelectOne) {
         >
             <div
                 className={`
-                    border-b-4 text-center hover:border-b-fuchsia-500 transition-colors w-full cursor-pointer rounded-md
+                    text-2xl border-b-4 text-center hover:border-b-fuchsia-500 transition-colors w-full cursor-pointer rounded-md
                     ${loginMode ? "border-b-fuchsia-500" : "border-b-fuchsia-100"}
                 `}
                 onClick={() => changeLoginMode(true)}
             >
-                {leftText}
+                <p className='mb-2'>{leftText}</p>
             </div>
             <div
                 className={`
-                    border-b-4 text-center hover:border-b-fuchsia-500 transition-colors w-full cursor-pointer rounded-md
+                    text-2xl border-b-4 text-center hover:border-b-fuchsia-500 transition-colors w-full cursor-pointer rounded-md
                     ${loginMode ? "border-b-fuchsia-100" : "border-b-fuchsia-500"}
                 `}
                 onClick={() => changeLoginMode(false)}
             >
-                {rightText}
+                <p className='mb-2'>{rightText}</p>
             </div>
         </div>
     )

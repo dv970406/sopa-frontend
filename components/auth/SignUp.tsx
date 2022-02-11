@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.11
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -74,6 +74,12 @@ export default function SignUp() {
                 type="text"
                 placeholder="이름"
                 required
+                className={`
+                    px-4 py-2 shadow-sm rounded-md w-full text-xl
+                    border-2 border-gray-300  
+                    placeholder:text-lg placeholder-gray-400
+                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
+                `}
             />
             <input
                 {...register("email", {
@@ -86,6 +92,12 @@ export default function SignUp() {
                 type="text"
                 placeholder="이메일"
                 required
+                className={`
+                    px-4 py-2 shadow-sm rounded-md w-full text-xl
+                    border-2 border-gray-300  
+                    placeholder:text-lg placeholder-gray-400
+                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
+                `}
             />
             <input
                 {...register("password", {
@@ -106,6 +118,12 @@ export default function SignUp() {
                 type="password"
                 placeholder="비밀번호"
                 required
+                className={`
+                    px-4 py-2 shadow-sm rounded-md w-full text-xl
+                    border-2 border-gray-300  
+                    placeholder:text-lg placeholder-gray-400
+                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
+                `}
             />
             <input
                 {...register("password2", {
@@ -126,6 +144,12 @@ export default function SignUp() {
                 type="password"
                 placeholder="비밀번호 확인"
                 required
+                className={`
+                    px-4 py-2 shadow-sm rounded-md w-full text-xl
+                    border-2 border-gray-300  
+                    placeholder:text-lg placeholder-gray-400
+                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
+                `}
             />
             <FormButton
                 text='회원가입'

@@ -20,7 +20,7 @@ export default function MainLayout({ title, children }: IMainLayout) {
     return (
         <div
             className={
-                `font-Dongle`
+                `font-NotoSans text-md`
             }
         >
             {loginOrSignUp ? null : <NavBar />}
@@ -29,10 +29,12 @@ export default function MainLayout({ title, children }: IMainLayout) {
             </Head>
             <div
                 className={
-                    `flex flex-col justify-center w-screen h-screen mx-auto px-16
-                    ${loginOrSignUp ? "flex items-center" : ""}
-                    w-full
-                    sm:w-4/5 md:w-3/5`
+                    `
+                        justify-center px-16 py-4 mt-28
+                        ${loginOrSignUp ? "flex items-center" : ""}
+                        w-full
+                    `
+
                 }
             >
                 {children}
