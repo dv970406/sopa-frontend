@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import SkillBoards from '../components/home/SkillBoards';
 import MainLayout from '../components/shared/MainLayout'
 import { client } from '../utils/apollo'
 import { tokenState } from '../utils/atoms';
@@ -35,7 +36,6 @@ const SEE_MY_PROFILE_QUERY = gql`
 
 const Home = ({ posts, myInfoData }: IHome) => {
   const [token, setToken] = useRecoilState(tokenState);
-  console.log("CSR : ", myInfoData);
 
   useEffect(() => {
     if (!myInfoData) {
@@ -46,14 +46,14 @@ const Home = ({ posts, myInfoData }: IHome) => {
   }, [myInfoData]);
   return (
     <MainLayout title="당신의 소울파트너">
-      <div>
-        {posts.map(post => <div key={post.id}>{post.title}</div>)}
-      </div>
+      <SkillBoards />
     </MainLayout>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+
+  // seePosts query 요청부
   const { data } = await client.query({
     query: gql`
       query seePosts{
@@ -65,6 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
     `
   });
 
+  // SSR Authorization 구현부
   const tokenInCookie = ctx.req.headers.cookie
   const token = tokenInCookie?.split("TOKEN=")[1]
 

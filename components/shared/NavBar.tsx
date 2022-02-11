@@ -12,13 +12,12 @@ function NavBar() {
     const token = useRecoilValue(tokenState)
     const router = useRouter();
 
-    console.log(token);
-
     const goToLogin = () => router.push("/auth");
 
     return (
         <div className='
-            flex justify-between items-center px-10 h-20 shadow-xl absolute top-0 w-full
+            flex justify-around items-center px-10 h-20 shadow-xl absolute top-0 w-full
+            bg-fuchsia-400 rounded-b-md
         '>
             <div className='w-8 h-8 rounded-full bg-slate-600' />
             <div

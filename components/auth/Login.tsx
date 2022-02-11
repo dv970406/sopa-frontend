@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.10
+ * 수정일: 2022.02.11
  */
 
 import { useRouter } from 'next/router';
@@ -49,6 +49,12 @@ export default function Login() {
                 type="text"
                 placeholder="이메일"
                 required
+                className={`
+                    px-4 py-2 shadow-sm rounded-md w-full text-xl
+                    border-2 border-gray-300  
+                    placeholder:text-lg placeholder-gray-400
+                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
+                `}
             />
             <input
                 {...register("password", {
@@ -69,6 +75,12 @@ export default function Login() {
                 type="password"
                 placeholder="비밀번호"
                 required
+                className={`
+                    px-4 py-2 shadow-sm rounded-md w-full text-xl
+                    border-2 border-gray-300  
+                    placeholder:text-lg placeholder-gray-400
+                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
+                `}
             />
             <FormButton
                 onClick={() => null}

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.10
+ * 수정일: 2022.02.11
  */
 
 import Head from 'next/head';
@@ -20,7 +20,7 @@ export default function MainLayout({ title, children }: IMainLayout) {
     return (
         <div
             className={
-                `font-Dongle`
+                `font-NotoSans text-md`
             }
         >
             {loginOrSignUp ? null : <NavBar />}
@@ -28,12 +28,11 @@ export default function MainLayout({ title, children }: IMainLayout) {
                 <title>{title} | SOPA</title>
             </Head>
             <div
-                className={
-                    `flex flex-col justify-center w-screen h-screen mx-auto px-16
+                className={`
+                    justify-center p-16 mt-16
                     ${loginOrSignUp ? "flex items-center" : ""}
                     w-full
-                    sm:w-4/5 md:w-3/5`
-                }
+                `}
             >
                 {children}
             </div>
