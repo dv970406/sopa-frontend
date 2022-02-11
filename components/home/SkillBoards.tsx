@@ -20,7 +20,7 @@ export default function SkillBoards() {
                     space-y-4
                 `}
             >
-                {Object.keys(skills).map((position, index) => <SkillBoard key={index} skillOfPosition={skills[position]} />)}
+                {Object.keys(skills).map((position, index) => <SkillBoard key={position} skillOfPosition={skills[position]} />)}
             </div>
 
             <div

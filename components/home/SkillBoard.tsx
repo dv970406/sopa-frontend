@@ -3,6 +3,7 @@
  * 수정일: ------
  */
 
+import { motion } from 'framer-motion'
 import React from 'react'
 import { ISkill } from '../../utils/atoms'
 import Skill from './Skill'
@@ -17,8 +18,8 @@ function SkillBoard({ skillOfPosition }: ISkillBoard) {
             <p>{skillOfPosition[0].position}</p>
             <div
                 className={`
+                    flex flex-row flex-wrap justify-center 
                     w-full h-1/3 px-3 py-6 shadow-lg rounded-lg border-2 border-black
-                    flex flex-row flex-wrap justify-center mx-auto
                 `}
             >
                 {skillOfPosition?.map((skill, index) => <Skill key={skill.skill} index={index} {...skill} />)}

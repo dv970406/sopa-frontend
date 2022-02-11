@@ -3,6 +3,7 @@
  * 수정일: ------
  */
 
+import { motion } from 'framer-motion'
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
 import { selectedSkillsState, skillsState } from '../../utils/atoms'
@@ -13,6 +14,24 @@ interface IDraggableSkill {
     skillImage: string;
     position: string;
     isSelected: boolean;
+}
+
+const skillVar = {
+    start: {
+        opacity: 0,
+    },
+    end: {
+        opacity: 1,
+        transition: {
+            duration: 0.4
+        }
+    },
+    hover: {
+        scale: 1.1,
+        transition: {
+            duration: 0.3
+        }
+    }
 }
 
 function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSkill) {
@@ -58,7 +77,7 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
         })
     }
     return (
-        <div
+        <motion.div
             className={`
                 flex flex-wrap m-3
                 justify-center items-center
@@ -66,14 +85,20 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
                 ${isSelected ? "opacity-20" : "opacity-100"}
             `}
             onClick={() => onClick()}
+            layoutId={skill}
+            variants={skillVar}
+            whileHover="hover"
+            initial="start"
+            animate="end"
+
         >
-            <img
+            <motion.img
                 src={`${skillImage}`}
                 className={`
                     w-14 h-14
                 `}
             />
-        </div>
+        </motion.div>
     )
 }
 

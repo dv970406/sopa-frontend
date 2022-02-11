@@ -121,7 +121,6 @@ export const skillSet = {
     }),
     app: [
         "flutter",
-        "java",
         "kotlin",
         "swift"
     ].map(skill => {

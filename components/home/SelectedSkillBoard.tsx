@@ -3,6 +3,7 @@
  * 수정일: ------
  */
 
+import { motion } from 'framer-motion';
 import { useSetRecoilState } from 'recoil';
 import { ISkill, selectedSkillsState, skillsState } from '../../utils/atoms';
 
@@ -19,7 +20,7 @@ export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoa
         setSelectedSkills(prev => {
             const copiedPrev = [...prev];
             copiedPrev.splice(index, 1);
-
+            console.log(copiedPrev)
             return [
                 ...copiedPrev
             ]
@@ -40,27 +41,32 @@ export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoa
             skillsOfCopiedPosition.splice(targetIndex, 0, unSelect);
             return {
                 ...prev,
-                [selectedSkill.position]: skillsOfCopiedPosition
+                [selectedSkill.position]: skillsOfCopiedPosition,
             }
         })
     }
 
     return (
-        <div
+        <motion.div
             className={`
+                w-full
+                flex flex-wrap mt-10
                 rounded-lg shadow-xl border-2 border-fuchsia-400 bg-fuchsia-300
                 px-6 py-4
+                
             `}
+            layout
         >
             {selectedSkills?.map((selectedSkill, index) =>
-                <div
-                    key={index}
+                <motion.div
+                    key={selectedSkill.skill}
                     className={`
-                    flex flex-wrap m-3
-                    justify-center items-center
-                    cursor-pointer
-                `}
+                        flex flex-wrap m-3
+                        justify-center items-center
+                        cursor-pointer
+                    `}
                     onClick={() => onClick(selectedSkill, index)}
+                    layoutId={selectedSkill.skill}
                 >
                     <img
                         src={`${selectedSkill.skillImage}`}
@@ -69,8 +75,8 @@ export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoa
                         
                     `}
                     />
-                </div>
+                </motion.div>
             )}
-        </div>
+        </motion.div>
     )
 }
