@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.10
+ * 수정일: 2022.02.12
  */
 
 import { useRouter } from 'next/router';
@@ -11,7 +11,6 @@ import Button from './Button';
 function NavBar() {
     const token = useRecoilValue(tokenState)
     const router = useRouter();
-
     const goToLogin = () => router.push("/auth");
 
     return (
