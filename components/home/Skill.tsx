@@ -1,11 +1,13 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: ------
+ * 수정일: 2022.02.12
  */
 
+import { gql } from '@apollo/client'
 import { motion } from 'framer-motion'
-import React from 'react'
-import { useSetRecoilState } from 'recoil'
+import React, { useEffect } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { client } from '../../utils/apollo'
 import { selectedSkillsState, skillsState } from '../../utils/atoms'
 
 interface IDraggableSkill {
@@ -34,8 +36,17 @@ const skillVar = {
     }
 }
 
+const SEE_POSTS_QUERY = gql`
+    query seePosts($skills:String){
+        seePosts(skills:$skills){
+            id
+            title
+        }
+    }
+`
+
 function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSkill) {
-    const setSelectedSkills = useSetRecoilState(selectedSkillsState)
+    const [selectedSkills, setSelectedSkills] = useRecoilState(selectedSkillsState)
     const setSkills = useSetRecoilState(skillsState)
 
     const onClick = () => {
@@ -76,6 +87,25 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
             };
         })
     }
+
+    const getPosts = async () => {
+        const clearedSelectedSkills = selectedSkills.map(skill => {
+            const { isSelected, skillImage, ...skillWithPosition } = skill
+            return skillWithPosition
+        })
+        const { data } = await client.query({
+            query: SEE_POSTS_QUERY,
+            variables: {
+                ...(clearedSelectedSkills.length > 0 && {
+                    skills: JSON.stringify(clearedSelectedSkills)
+                })
+            }
+        })
+        console.log("data : ", data)
+    }
+    useEffect(() => {
+        getPosts()
+    }, [selectedSkills])
     return (
         <motion.div
             className={`

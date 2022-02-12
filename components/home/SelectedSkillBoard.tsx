@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: ------
+ * 수정일: 2022.02.12
  */
 
 import { motion } from 'framer-motion';
@@ -20,7 +20,7 @@ export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoa
         setSelectedSkills(prev => {
             const copiedPrev = [...prev];
             copiedPrev.splice(index, 1);
-            console.log(copiedPrev)
+
             return [
                 ...copiedPrev
             ]
@@ -49,13 +49,14 @@ export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoa
     return (
         <motion.div
             className={`
+                ${selectedSkills.length > 0 ? "" : "opacity-0"} transition-opacity
                 w-full
-                flex flex-wrap mt-10
+                flex flex-wrap mt-10 justify-center
                 rounded-lg shadow-xl border-2 border-fuchsia-400 bg-fuchsia-300
+                h-1/6
                 px-6 py-4
-                
             `}
-            layout
+
         >
             {selectedSkills?.map((selectedSkill, index) =>
                 <motion.div

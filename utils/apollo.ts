@@ -7,12 +7,12 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context"
 
 const authLink = setContext((_, { headers }) => {
-    // 아래 코드는 CSR 방식으로 로컬 스토리지에서 토큰을 가져오는 방식
-    // const token = typeof window !== "undefined" ? localStorage.getItem("TOKEN") : "";
+    // 아래 코드는 CSR 방식으로 쿠키에서 토큰을 가져오는 방식
+    const token = typeof window !== "undefined" ? document.cookie.split("TOKEN=")[1] : "";
     return {
         headers: {
             ...headers,
-            //token
+            token
         }
     }
 });
