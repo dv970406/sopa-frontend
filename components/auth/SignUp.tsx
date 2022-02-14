@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.11
+ * 수정일: 2022.02.14
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -67,40 +67,30 @@ export default function SignUp() {
 
     return (
         <Form onSubmit={handleSubmit(onValid)}>
-            <input
-                {...register("name", {
-                    required: true
+            <Input
+                register={register("name", {
+                    required: true,
+                    minLength: {
+                        value: 2,
+                        message: "이름은 2글자 이상이어야 합니다."
+                    }
                 })}
-                type="text"
-                placeholder="이름"
+                type="name"
                 required
-                className={`
-                    px-4 py-2 shadow-sm rounded-md w-full text-xl
-                    border-2 border-gray-300  
-                    placeholder:text-lg placeholder-gray-400
-                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                `}
             />
-            <input
-                {...register("email", {
+            <Input
+                register={register("email", {
                     required: true,
                     pattern: {
                         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g,
                         message: "이메일 양식을 지켜주세요."
                     }
                 })}
-                type="text"
-                placeholder="이메일"
+                type="email"
                 required
-                className={`
-                    px-4 py-2 shadow-sm rounded-md w-full text-xl
-                    border-2 border-gray-300  
-                    placeholder:text-lg placeholder-gray-400
-                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                `}
             />
-            <input
-                {...register("password", {
+            <Input
+                register={register("password", {
                     required: true,
                     minLength: {
                         value: 8,
@@ -116,17 +106,11 @@ export default function SignUp() {
                     }
                 })}
                 type="password"
-                placeholder="비밀번호"
                 required
-                className={`
-                    px-4 py-2 shadow-sm rounded-md w-full text-xl
-                    border-2 border-gray-300  
-                    placeholder:text-lg placeholder-gray-400
-                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                `}
+
             />
-            <input
-                {...register("password2", {
+            <Input
+                register={register("password2", {
                     required: true,
                     minLength: {
                         value: 8,
@@ -142,14 +126,7 @@ export default function SignUp() {
                     }
                 })}
                 type="password"
-                placeholder="비밀번호 확인"
                 required
-                className={`
-                    px-4 py-2 shadow-sm rounded-md w-full text-xl
-                    border-2 border-gray-300  
-                    placeholder:text-lg placeholder-gray-400
-                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                `}
             />
             <FormButton
                 text='회원가입'

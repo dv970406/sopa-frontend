@@ -106,7 +106,7 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
                     hidden group-hover:block
                     absolute -bottom-3
                     bg-fuchsia-200 
-                    px-1 rounded-md
+                    p-1 rounded-md
                     text-xs tracking-wider
                 `}
             >

@@ -24,6 +24,7 @@ export default function Login() {
 
     const onValid = async (data: IForm) => {
         // 폼 제출시 굳이 API Route로 안보내고 apollo/client의 useMutation hook으로 처리하면 되지만 찍먹은 해보자
+        // 회원가입은 클라이언트 쪽에서 바로 Apollo 서버로 요청 보내게 했다.
         const response = await fetch("/api/login", {
             method: "POST",
             body: JSON.stringify(data),
@@ -50,7 +51,6 @@ export default function Login() {
                         message: "이메일 양식을 지켜주세요."
                     }
                 })}
-                placeholder="이메일"
                 required
             />
             <Input
@@ -70,7 +70,6 @@ export default function Login() {
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
-                placeholder="비밀번호"
                 required
             />
             <FormButton

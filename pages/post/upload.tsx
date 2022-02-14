@@ -3,6 +3,7 @@
  * 수정일: 2022.02.14
  */
 
+import Input from '@components/form/Input';
 import MainLayout from '@components/shared/MainLayout';
 
 export default function PostUpload() {
@@ -18,64 +19,17 @@ export default function PostUpload() {
                         space-y-10
                     `}
                 >
-                    <div
-                        className={`
-                            flex flex-col
-                            space-y-3
-                        `}
-                    >
-                        <label
-                            htmlFor='title'
-                        >
-                            제목
-                        </label>
-                        <input
-                            id='title'
-                            className={`
-                                    border-b-2 border-b-fuchsia-200
-                                `}
-                        />
-                    </div>
+                    <Input
+                        type="title"
+                    />
 
-                    <div
-                        className={`
-                            flex flex-col
-                            space-y-5
-                        `}
-                    >
-                        <label
-                            htmlFor='skills'
-                        >
-                            Skill
-                        </label>
-                        <input
-                            id='skills'
-                            className={`
-                                border-b-2 border-b-fuchsia-200
-                            `}
-                        />
-                    </div>
+                    <Input
+                        type="skills"
+                    />
 
-                    <div
-                        className={`
-                            flex flex-col
-                            space-y-5
-                        `}
-                    >
-                        <label
-                            htmlFor='description'
-                        >
-                            설명
-                        </label>
-                        <textarea
-                            id='description'
-                            className={`
-                                border-b-2 border-b-fuchsia-200
-                            `}
-                        >
-
-                        </textarea>
-                    </div>
+                    <Input
+                        type="description"
+                    />
                 </form>
             </div>
         </MainLayout >

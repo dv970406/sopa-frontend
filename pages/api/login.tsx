@@ -17,7 +17,8 @@ const LOGIN_MUTATION = gql`
     }
 `;
 
-// 굳이 API Route를 사용하지 않고 그냥 apollo/client을 사용해도 되긴 하다.
+// 굳이 API Route를 사용하지 않고 그냥 프론트 측에서 바로 apollo/client로 GraphQL 요청을 보내도 되긴 함
+// 현 프로젝트는 Apollo 서버를 따로 두고 있지만 만약 서버가 없는 상태에서도 Next는 API Route를 서버처럼 사용하여 prisma로 DB와 상호작용하면 된다.
 export default async function Handler(req: NextApiRequest, res: NextApiResponse) {
     const { email, password } = JSON.parse(req.body)
 

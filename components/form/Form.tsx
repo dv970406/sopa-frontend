@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.02.14
  */
 
 import React from 'react';
@@ -15,7 +15,7 @@ export default function Form({ children, onSubmit }: IForm) {
         <form
             onSubmit={onSubmit}
             className='
-                flex flex-col space-y-3
+                flex flex-col space-y-6
                 px-12 pt-16 pb-8
                 max-w-lg w-full
                 border-2 border-gray-300 rounded-xl

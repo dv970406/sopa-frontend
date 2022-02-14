@@ -6,60 +6,69 @@
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface IInput {
-    type: "email" | "password" | "name";
-    register: UseFormRegisterReturn;
+    type: "email" | "password" | "name" | "title" | "skills" | "description";
+    register?: UseFormRegisterReturn;
     [key: string]: any;
 }
 
 export default function Input({ type, register, ...props }: IInput) {
+
+    const typeTranslater = (engVerType: string) => {
+        let korVerType = null;
+        engVerType === "name" ? korVerType = "이름" : null;
+        engVerType === "email" ? korVerType = "이메일" : null;
+        engVerType === "password" ? korVerType = "비밀번호" : null;
+        engVerType === "title" ? korVerType = "제목" : null;
+        engVerType === "skills" ? korVerType = "스킬" : null;
+        engVerType === "description" ? korVerType = "설명" : null;
+
+        return korVerType
+    }
     return (
         <>
-            {type === "email" ? (
-                <input
-                    type="email"
-                    {...register}
-                    className='
-                        px-4 py-2 shadow-sm rounded-md 
-                        border-2 border-gray-300  
-                        placeholder:text-lg placeholder-gray-400
-                        focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                        w-full
-                        text-xl
-                    '
-                    {...props}
-                />
+            {type !== "description" ? (
+                <div>
+                    <label
+                        htmlFor={type}
+                    >
+                        {typeTranslater(type)}
+                    </label>
+                    <input
+                        id={type}
+                        type={type === "name" ? "text" : type}
+                        {...register}
+                        className='
+                            p-2 shadow-sm
+                            border-b-2 border-b-gray-300 
+                            placeholder:text-lg placeholder-gray-400
+                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                            w-full
+                            text-sm
+                        '
+                        {...props}
+                    />
+                </div>
             ) : null}
 
-            {type === "name" ? (
-                <input
-                    type="text"
-                    {...register}
-                    className='
-                        px-4 py-2 shadow-sm rounded-md 
-                        border-2 border-gray-300  
-                        placeholder:text-lg placeholder-gray-400
-                        focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                        w-full
-                        text-xl
-                    '
-                    {...props}
-                />
-            ) : null}
-
-            {type === "password" ? (
-                <input
-                    type="password"
-                    {...register}
-                    className='
-                        px-4 py-2 shadow-sm rounded-md 
-                        border-2 border-gray-300  
-                        placeholder:text-lg placeholder-gray-400
-                        focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                        w-full
-                        text-xl
-                    '
-                    {...props}
-                />
+            {type === "description" ? (
+                <div>
+                    <label
+                        htmlFor={type}
+                    >
+                        설명
+                    </label>
+                    <textarea
+                        id={type}
+                        className={`
+                            p-2 shadow-sm
+                            border-b-2 border-b-gray-300  
+                            placeholder:text-lg placeholder-gray-400
+                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                            w-full
+                            text-sm
+                        `}
+                    />
+                </div>
             ) : null}
         </>
     )
