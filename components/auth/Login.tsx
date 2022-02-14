@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.11
+ * 수정일: 2022.02.14
  */
 
 import { useRouter } from 'next/router';
@@ -10,6 +10,7 @@ import { tokenState } from '../../utils/atoms';
 import Divider from '../form/Divider';
 import Form from '../form/Form';
 import FormButton from '../form/FormButton';
+import Input from '../form/Input';
 
 interface IForm {
     email: string;
@@ -38,26 +39,21 @@ export default function Login() {
 
     return (
         <Form onSubmit={handleSubmit(onValid)}>
-            <input
-                {...register("email", {
+            <Input
+                type="email"
+                register={register("email", {
                     required: true,
                     pattern: {
                         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g,
                         message: "이메일 양식을 지켜주세요."
                     }
                 })}
-                type="text"
                 placeholder="이메일"
                 required
-                className={`
-                    px-4 py-2 shadow-sm rounded-md w-full text-xl
-                    border-2 border-gray-300  
-                    placeholder:text-lg placeholder-gray-400
-                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                `}
             />
-            <input
-                {...register("password", {
+            <Input
+                type="password"
+                register={register("password", {
                     required: true,
                     minLength: {
                         value: 8,
@@ -72,15 +68,8 @@ export default function Login() {
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
-                type="password"
                 placeholder="비밀번호"
                 required
-                className={`
-                    px-4 py-2 shadow-sm rounded-md w-full text-xl
-                    border-2 border-gray-300  
-                    placeholder:text-lg placeholder-gray-400
-                    focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-fuchsia-500
-                `}
             />
             <FormButton
                 onClick={() => null}

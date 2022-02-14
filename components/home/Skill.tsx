@@ -81,7 +81,7 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
     return (
         <motion.div
             className={`
-                flex flex-wrap m-3
+                flex m-3
                 justify-center items-center
                 cursor-pointer
                 group
