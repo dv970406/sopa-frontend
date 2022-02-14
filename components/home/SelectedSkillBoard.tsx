@@ -7,8 +7,8 @@ import { gql } from '@apollo/client';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { client } from '../../utils/apollo';
-import { ISkill, selectedSkillsState, skillsState } from '../../utils/atoms';
+import { client } from '@utils/apollo';
+import { ISkill, selectedSkillsState, skillsState } from '@utils/atoms';
 
 const SEE_POSTS_QUERY = gql`
     query seePosts($skills:String){

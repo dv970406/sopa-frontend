@@ -4,7 +4,7 @@
  */
 
 import React from 'react'
-import { ISkill } from '../../utils/atoms'
+import { ISkill } from '@utils/atoms'
 import Skill from './Skill'
 
 interface ISkillBoard {

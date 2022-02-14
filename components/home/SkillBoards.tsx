@@ -4,7 +4,7 @@
  */
 
 import { useRecoilValue } from 'recoil';
-import { skillsState } from '../../utils/atoms';
+import { skillsState } from '@utils/atoms';
 import SelectedSkillBoard from './SelectedSkillBoard';
 import SkillBoard from './SkillBoard';
 

@@ -6,7 +6,7 @@
 import { gql, useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
-import { loginModeState } from '../../utils/atoms';
+import { loginModeState } from '@utils/atoms';
 import Form from '../form/Form';
 import FormButton from '../form/FormButton';
 import Input from '../form/Input';

@@ -5,7 +5,7 @@
 
 import { gql, useQuery } from '@apollo/client'
 import { useRecoilState } from 'recoil';
-import { tokenState } from '../utils/atoms';
+import { tokenState } from '@utils/atoms';
 
 interface IMyInfo {
     myInfoData: {

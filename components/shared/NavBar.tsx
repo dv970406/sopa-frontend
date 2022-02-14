@@ -5,7 +5,7 @@
 
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
-import { tokenState } from '../../utils/atoms';
+import { tokenState } from '@utils/atoms';
 import Button from './Button';
 
 function NavBar() {

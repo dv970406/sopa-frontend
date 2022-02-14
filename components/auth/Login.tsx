@@ -6,7 +6,7 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
-import { tokenState } from '../../utils/atoms';
+import { tokenState } from '@utils/atoms';
 import Divider from '../form/Divider';
 import Form from '../form/Form';
 import FormButton from '../form/FormButton';
@@ -23,13 +23,15 @@ export default function Login() {
     const router = useRouter();
 
     const onValid = async (data: IForm) => {
+        // 폼 제출시 굳이 API Route로 안보내고 apollo/client의 useMutation hook으로 처리하면 되지만 찍먹은 해보자
         const response = await fetch("/api/login", {
             method: "POST",
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
         const { login } = await response.json();
 
+        // apollo/client useMutation의 onCompleted 역할
         if (login.ok) {
             setToken(login.token);
             document.cookie = `TOKEN=${login.token}`;

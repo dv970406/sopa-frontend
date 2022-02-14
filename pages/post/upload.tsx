@@ -3,7 +3,7 @@
  * 수정일: 2022.02.14
  */
 
-import MainLayout from '../../components/shared/MainLayout';
+import MainLayout from '@components/shared/MainLayout';
 
 export default function PostUpload() {
     return (

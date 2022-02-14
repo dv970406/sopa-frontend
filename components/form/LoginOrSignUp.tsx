@@ -3,8 +3,8 @@
  * 수정일: 2022.02.11
  */
 
+import { loginModeState } from '@utils/atoms';
 import { useRecoilState } from 'recoil'
-import { loginModeState } from '../../utils/atoms'
 
 interface ISelectOne {
     leftText: string;

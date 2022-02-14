@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
-import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import SkillBoards from '../components/home/SkillBoards';
-import MainLayout from '../components/shared/MainLayout'
-import useMyInfo from '../hooks/useMyInfo';
-import { client } from '../utils/apollo'
+import SkillBoards from '@components/home/SkillBoards'
+import MainLayout from '@components/shared/MainLayout'
+import useMyInfo from 'hooks/useMyInfo'
+import type { GetServerSideProps } from 'next'
+import { client } from '@utils/apollo'
 
 interface IPost {
   __typename: string;

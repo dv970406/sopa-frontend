@@ -6,7 +6,7 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
-import { selectedSkillsState, skillsState } from '../../utils/atoms'
+import { selectedSkillsState, skillsState } from '@utils/atoms'
 
 interface IDraggableSkill {
     index: number;
