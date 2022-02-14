@@ -34,7 +34,7 @@ const Home = ({ posts }: IHome) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
   // seePosts query 요청부
   const { data } = await client.query({

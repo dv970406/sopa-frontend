@@ -122,7 +122,7 @@ export const skillSet = {
     app: [
         "flutter",
         "kotlin",
-        "swift"
+        "swift",
     ].map(skill => {
         return {
             skill,

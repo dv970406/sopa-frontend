@@ -1,9 +1,8 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: ------
+ * 수정일: 2022.02.14
  */
 
-import { motion } from 'framer-motion'
 import React from 'react'
 import { ISkill } from '../../utils/atoms'
 import Skill from './Skill'
