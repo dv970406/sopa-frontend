@@ -98,7 +98,7 @@ export default function SelectedSkillBoard() {
                     layoutId={selectedSkill.skill}
                 >
                     <img
-                        src={`${selectedSkill.skillImage}`}
+                        src={selectedSkill.skillImage}
                         className={`
                         w-14 h-14
                         

@@ -84,6 +84,7 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
                 flex flex-wrap m-3
                 justify-center items-center
                 cursor-pointer
+                group
                 ${isSelected ? "opacity-20" : "opacity-100"}
             `}
             onClick={() => onClick()}
@@ -94,12 +95,23 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
             animate="end"
 
         >
-            <motion.img
-                src={`${skillImage}`}
+            <img
+                src={skillImage}
                 className={`
                     w-14 h-14
                 `}
             />
+            <motion.p
+                className={`
+                    hidden group-hover:block
+                    absolute -bottom-3
+                    bg-fuchsia-200 
+                    px-1 rounded-md
+                    text-xs tracking-wider
+                `}
+            >
+                {skill}
+            </motion.p>
         </motion.div>
     )
 }

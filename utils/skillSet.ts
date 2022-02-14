@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.11
+ * 수정일: 2022.02.14
  */
 
 // 스킬셋 종류를 지정하는 파일
@@ -104,13 +104,14 @@ export const skillSet = {
         }
     }),
     backend: [
-        "cshop",
+        "nodejs",
+        "csharp",
         "c++",
         "django",
         "go",
         "java",
         "python",
-        "ruby-on-rails"
+        "ruby"
     ].map(skill => {
         return {
             skill,
@@ -123,6 +124,7 @@ export const skillSet = {
         "flutter",
         "kotlin",
         "swift",
+        "rn",
     ].map(skill => {
         return {
             skill,
