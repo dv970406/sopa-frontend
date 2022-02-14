@@ -1,18 +1,26 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.12
+ * 수정일: 2022.02.14
  */
 
+import { gql } from '@apollo/client';
 import { motion } from 'framer-motion';
-import { useSetRecoilState } from 'recoil';
-import { ISkill, selectedSkillsState, skillsState } from '../../utils/atoms';
+import { useEffect } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { client } from '@utils/apollo';
+import { ISkill, selectedSkillsState, skillsState } from '@utils/atoms';
 
-interface ISelectedSkillBoard {
-    selectedSkills: ISkill[]
-}
+const SEE_POSTS_QUERY = gql`
+    query seePosts($skills:String){
+        seePosts(skills:$skills){
+            id
+            title
+        }
+    }
+`
 
-export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoard) {
-    const setSelectedSkills = useSetRecoilState(selectedSkillsState);
+export default function SelectedSkillBoard() {
+    const [selectedSkills, setSelectedSkills] = useRecoilState(selectedSkillsState);
     const setSkills = useSetRecoilState(skillsState);
 
     const onClick = (selectedSkill: ISkill, index: number): void => {
@@ -46,6 +54,26 @@ export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoa
         })
     }
 
+    const getPosts = async () => {
+        const clearedSelectedSkills = selectedSkills.map(skill => {
+            const { isSelected, skillImage, ...skillWithPosition } = skill
+            return skillWithPosition
+        })
+
+        const { data } = await client.query({
+            query: SEE_POSTS_QUERY,
+            variables: {
+                ...(clearedSelectedSkills.length > 0 && {
+                    skills: JSON.stringify(clearedSelectedSkills)
+                })
+            },
+        })
+        console.log("data : ", data)
+    }
+    useEffect(() => {
+        getPosts()
+    }, [selectedSkills])
+
     return (
         <motion.div
             className={`
@@ -70,7 +98,7 @@ export default function SelectedSkillBoard({ selectedSkills }: ISelectedSkillBoa
                     layoutId={selectedSkill.skill}
                 >
                     <img
-                        src={`${selectedSkill.skillImage}`}
+                        src={selectedSkill.skillImage}
                         className={`
                         w-14 h-14
                         

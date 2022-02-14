@@ -1,17 +1,16 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: ------
+ * 수정일: 2022.02.14
  */
 
 import { useRecoilValue } from 'recoil';
-import { selectedSkillsState, skillsState } from '../../utils/atoms';
+import { skillsState } from '@utils/atoms';
 import SelectedSkillBoard from './SelectedSkillBoard';
 import SkillBoard from './SkillBoard';
 
 
 export default function SkillBoards() {
     const skills = useRecoilValue(skillsState);
-    const selectedSkills = useRecoilValue(selectedSkillsState);
 
     return (
         <>
@@ -20,12 +19,12 @@ export default function SkillBoards() {
                     space-y-4
                 `}
             >
-                {Object.keys(skills).map((position, index) => <SkillBoard key={position} skillOfPosition={skills[position]} />)}
+                {Object.keys(skills).map((position) => <SkillBoard key={position} skillOfPosition={skills[position]} />)}
             </div>
 
             <div
             >
-                <SelectedSkillBoard selectedSkills={selectedSkills} />
+                <SelectedSkillBoard />
             </div>
         </>
     )

@@ -1,9 +1,12 @@
 import { gql } from '@apollo/client'
-import type { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import SkillBoards from '../components/home/SkillBoards';
-import MainLayout from '../components/shared/MainLayout'
-import useMyInfo from '../hooks/useMyInfo';
-import { client } from '../utils/apollo'
+import SkillBoards from '@components/home/SkillBoards'
+import MainLayout from '@components/shared/MainLayout'
+import useMyInfo from 'hooks/useMyInfo'
+import type { GetServerSideProps } from 'next'
+import { client } from '@utils/apollo'
+import { useEffect } from 'react'
+import { useResetRecoilState } from 'recoil'
+import { selectedSkillsState } from '@utils/atoms'
 
 interface IPost {
   __typename: string;
@@ -26,7 +29,11 @@ const SEE_POSTS_QUERY = gql`
 
 const Home = ({ posts }: IHome) => {
   const asd = useMyInfo()
+  const resetSelectedSkill = useResetRecoilState(selectedSkillsState)
 
+  useEffect(() => {
+    resetSelectedSkill()
+  }, [])
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
@@ -34,7 +41,7 @@ const Home = ({ posts }: IHome) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
   // seePosts query 요청부
   const { data } = await client.query({
