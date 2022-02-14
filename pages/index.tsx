@@ -4,6 +4,9 @@ import MainLayout from '@components/shared/MainLayout'
 import useMyInfo from 'hooks/useMyInfo'
 import type { GetServerSideProps } from 'next'
 import { client } from '@utils/apollo'
+import { useEffect } from 'react'
+import { useResetRecoilState } from 'recoil'
+import { selectedSkillsState } from '@utils/atoms'
 
 interface IPost {
   __typename: string;
@@ -26,7 +29,11 @@ const SEE_POSTS_QUERY = gql`
 
 const Home = ({ posts }: IHome) => {
   const asd = useMyInfo()
+  const resetSelectedSkill = useResetRecoilState(selectedSkillsState)
 
+  useEffect(() => {
+    resetSelectedSkill()
+  }, [])
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />

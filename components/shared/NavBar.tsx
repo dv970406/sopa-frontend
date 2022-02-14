@@ -20,7 +20,7 @@ function NavBar() {
             flex justify-around items-center px-10 h-20 shadow-xl absolute top-0 w-full
             bg-fuchsia-400 rounded-b-md
         '>
-            <div className='w-8 h-8 rounded-full bg-slate-600' />
+            <div onClick={() => router.push("/")} className='w-8 h-8 rounded-full bg-slate-600' />
             <div
                 className={`
                     flex items-center

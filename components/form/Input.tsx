@@ -3,6 +3,7 @@
  * 수정일: 2022.02.14
  */
 
+import React from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface IInput {
@@ -11,19 +12,20 @@ interface IInput {
     [key: string]: any;
 }
 
+const typeTranslater = (engVerType: string) => {
+    let korVerType = null;
+    engVerType === "name" ? korVerType = "이름" : null;
+    engVerType === "email" ? korVerType = "이메일" : null;
+    engVerType === "password" ? korVerType = "비밀번호" : null;
+    engVerType === "title" ? korVerType = "제목" : null;
+    engVerType === "skills" ? korVerType = "스킬" : null;
+    engVerType === "description" ? korVerType = "설명" : null;
+
+    return korVerType
+}
+
 export default function Input({ type, register, ...props }: IInput) {
 
-    const typeTranslater = (engVerType: string) => {
-        let korVerType = null;
-        engVerType === "name" ? korVerType = "이름" : null;
-        engVerType === "email" ? korVerType = "이메일" : null;
-        engVerType === "password" ? korVerType = "비밀번호" : null;
-        engVerType === "title" ? korVerType = "제목" : null;
-        engVerType === "skills" ? korVerType = "스킬" : null;
-        engVerType === "description" ? korVerType = "설명" : null;
-
-        return korVerType
-    }
     return (
         <>
             {type !== "description" ? (
@@ -55,12 +57,12 @@ export default function Input({ type, register, ...props }: IInput) {
                     <label
                         htmlFor={type}
                     >
-                        설명
+                        {typeTranslater(type)}
                     </label>
                     <textarea
                         id={type}
                         className={`
-                            p-2 shadow-sm
+                            p-1 shadow-sm
                             border-b-2 border-b-gray-300  
                             placeholder:text-lg placeholder-gray-400
                             focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500

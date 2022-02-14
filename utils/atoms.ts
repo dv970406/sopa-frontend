@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.11
+ * 수정일: 2022.02.14
  */
 
 import { atom, selector } from 'recoil';
@@ -43,4 +43,22 @@ export const skillsState = atom<ISkillPositions>({
 export const selectedSkillsState = atom<ISkill[]>({
     key: "selectedSkillsState",
     default: []
+})
+
+
+export type KindOfPosition = "frontend" | "backend" | "app"
+export const selectedPositionState = atom<KindOfPosition>({
+    key: "selectedPositionState",
+    default: "frontend"
+})
+
+
+export const skillsOfPositionSelector = selector<ISkill[]>({
+    key: "skillsOfPositionSelector",
+    get: ({ get }) => {
+        const selectedPosition = get(selectedPositionState)
+        const skills = get(skillsState)
+
+        return skills[selectedPosition]
+    }
 })

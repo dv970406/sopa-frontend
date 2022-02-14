@@ -8,7 +8,8 @@ import React from 'react'
 import { useSetRecoilState } from 'recoil'
 import { selectedSkillsState, skillsState } from '@utils/atoms'
 
-interface IDraggableSkill {
+interface ISkillInfo {
+    uploadMode?: boolean;
     index: number;
     skill: string;
     skillImage: string;
@@ -36,13 +37,11 @@ const skillVar = {
 
 
 
-function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSkill) {
+function Skill({ uploadMode = false, index, position, skill, skillImage, isSelected }: ISkillInfo) {
     const setSelectedSkills = useSetRecoilState(selectedSkillsState)
     const setSkills = useSetRecoilState(skillsState)
-    const onClick = () => {
-        // 만약 이미 선택된 skill이라면 바로 함수 종료
-        if (isSelected) return;
 
+    const onClick = () => {
         // SkillBoard에서 선택하면 selectedSillsState로 추가시킴
         setSelectedSkills(prev => {
             const newSelectedSkill = {
@@ -51,18 +50,31 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
                 isSelected: true,
                 position
             }
-            return [
-                ...prev,
-                newSelectedSkill
-            ]
+            const targetIndex = prev.findIndex(item => item.skill === newSelectedSkill.skill)
+            const copiedPrev = [...prev]
+
+            if (targetIndex !== -1) copiedPrev.splice(targetIndex, 1)
+            else copiedPrev.splice(-1, 0, newSelectedSkill)
+
+            if (uploadMode) {
+                return [
+                    ...copiedPrev
+                ]
+            } else {
+                return [
+                    ...prev,
+                    newSelectedSkill
+                ]
+            }
         })
+
 
         // SkillBoard에서 선택하면 skillsState의 isSelect를 true로 바꾼다.
         setSkills(prev => {
             const selectedSkill = {
                 skill,
                 skillImage,
-                isSelected: true,
+                isSelected: !isSelected,
                 position
             };
 
@@ -76,6 +88,7 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
                 ]
             };
         })
+
     }
 
     return (
@@ -85,20 +98,19 @@ function Skill({ index, position, skill, skillImage, isSelected }: IDraggableSki
                 justify-center items-center
                 cursor-pointer
                 group
-                ${isSelected ? "opacity-20" : "opacity-100"}
             `}
             onClick={() => onClick()}
-            layoutId={skill}
+            layoutId={uploadMode ? undefined : skill}
             variants={skillVar}
             whileHover="hover"
             initial="start"
             animate="end"
-
         >
             <img
                 src={skillImage}
                 className={`
                     w-14 h-14
+                    ${isSelected ? "opacity-100" : uploadMode ? "opacity-30" : "opacity-100"}
                 `}
             />
             <motion.p
