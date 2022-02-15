@@ -1,10 +1,19 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.10
+ * 수정일: 2022.02.15
  */
+
 
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context"
+import { offsetLimitPagination } from '@apollo/client/utilities';
+
+export interface IMutationResults {
+    [key: string]: {
+        ok: boolean;
+        error?: string;
+    }
+}
 
 const authLink = setContext((_, { headers }) => {
     // 아래 코드는 CSR 방식으로 쿠키에서 토큰을 가져오는 방식

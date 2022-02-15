@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
 import { motion } from 'framer-motion'
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
-import { selectedSkillsState, skillsState } from '@utils/atoms'
+import { selectedSkillsState, selectedSkillsToUploadState, skillsState } from '@utils/atoms'
 
 interface ISkillInfo {
     uploadMode?: boolean;
@@ -18,15 +18,6 @@ interface ISkillInfo {
 }
 
 const skillVar = {
-    start: {
-        opacity: 0,
-    },
-    end: {
-        opacity: 1,
-        transition: {
-            duration: 0.4
-        }
-    },
     hover: {
         scale: 1.1,
         transition: {
@@ -40,35 +31,43 @@ const skillVar = {
 function Skill({ uploadMode = false, index, position, skill, skillImage, isSelected }: ISkillInfo) {
     const setSelectedSkills = useSetRecoilState(selectedSkillsState)
     const setSkills = useSetRecoilState(skillsState)
+    const setSelectedSkillsToUpload = useSetRecoilState(selectedSkillsToUploadState)
 
     const onClick = () => {
-        // SkillBoard에서 선택하면 selectedSillsState로 추가시킴
-        setSelectedSkills(prev => {
-            const newSelectedSkill = {
-                skill,
-                skillImage,
-                isSelected: true,
-                position
-            }
-            const targetIndex = prev.findIndex(item => item.skill === newSelectedSkill.skill)
-            const copiedPrev = [...prev]
+        if (uploadMode) {
+            setSelectedSkillsToUpload(prev => {
+                const newSelectedSkill = {
+                    skill,
+                    skillImage,
+                    isSelected: true,
+                    position
+                }
+                const targetIndex = prev.findIndex(item => item.skill === newSelectedSkill.skill)
+                const copiedPrev = [...prev]
 
-            if (targetIndex !== -1) copiedPrev.splice(targetIndex, 1)
-            else copiedPrev.splice(-1, 0, newSelectedSkill)
+                if (targetIndex !== -1) copiedPrev.splice(targetIndex, 1)
+                else copiedPrev.splice(-1, 0, newSelectedSkill)
 
-            if (uploadMode) {
                 return [
                     ...copiedPrev
                 ]
-            } else {
+            })
+        } else {
+            // SkillBoard에서 선택하면 selectedSillsState로 추가시킴
+            setSelectedSkills(prev => {
+                const newSelectedSkill = {
+                    skill,
+                    skillImage,
+                    isSelected: true,
+                    position
+                }
+
                 return [
                     ...prev,
                     newSelectedSkill
                 ]
-            }
-        })
-
-
+            })
+        }
         // SkillBoard에서 선택하면 skillsState의 isSelect를 true로 바꾼다.
         setSkills(prev => {
             const selectedSkill = {
@@ -88,7 +87,6 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                 ]
             };
         })
-
     }
 
     return (
@@ -103,14 +101,13 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
             layoutId={uploadMode ? undefined : skill}
             variants={skillVar}
             whileHover="hover"
-            initial="start"
-            animate="end"
         >
             <img
                 src={skillImage}
                 className={`
                     w-14 h-14
                     ${isSelected ? "opacity-100" : uploadMode ? "opacity-30" : "opacity-100"}
+                    transition-opacity
                 `}
             />
             <motion.p

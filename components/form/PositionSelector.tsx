@@ -1,28 +1,25 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: ------
+ * 수정일: 2022.02.15
  */
 
 import Skill from '@components/home/Skill';
-import { KindOfPosition, selectedPositionState, selectedSkillsState, skillsOfPositionSelector, skillsState } from '@utils/atoms';
+import { KindOfPosition, selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { useEffect } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 export default function PositionSelector() {
     const setSelectedPosition = useSetRecoilState(selectedPositionState)
     const skillsOfPosition = useRecoilValue(skillsOfPositionSelector)
-    const resetSkills = useResetRecoilState(skillsState)
-    const resetSelectedSkills = useResetRecoilState(selectedSkillsState)
 
-    console.log(skillsOfPosition)
+
     const changePosition = (event: React.FormEvent<HTMLSelectElement>) => {
         const { value } = event.currentTarget;
         setSelectedPosition(value as KindOfPosition);
     }
 
     useEffect(() => {
-        resetSkills()
-        resetSelectedSkills()
+        setSelectedPosition("frontend")
     }, [])
 
     return (
@@ -35,6 +32,10 @@ export default function PositionSelector() {
             <select
                 id="skills"
                 onInput={changePosition}
+                className={`
+                    ml-3 border-fuchsia-300 border-2 rounded-md focus:outline-none
+                    px-2
+                `}
             >
                 <option>frontend</option>
                 <option>backend</option>

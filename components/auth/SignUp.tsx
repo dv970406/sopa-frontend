@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -129,6 +129,7 @@ export default function SignUp() {
                 required
             />
             <FormButton
+                loading={loading}
                 text='회원가입'
                 onClick={() => null}
             />

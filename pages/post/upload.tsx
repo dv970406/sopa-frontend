@@ -1,17 +1,20 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
-import Input from '@components/form/Input';
-import PositionSelector from '@components/form/PositionSelector';
+import CreatePost from '@components/post/CreatePost';
 import MainLayout from '@components/shared/MainLayout';
-import { selectedSkillsState } from '@utils/atoms';
-import { useRecoilValue } from 'recoil';
+import { useResetRecoilState } from "recoil"
+import { skillsState } from "@utils/atoms"
+import { useEffect } from "react"
 
 export default function PostUpload() {
-    const selectedSkills = useRecoilValue(selectedSkillsState)
+    const resetSkillsState = useResetRecoilState(skillsState)
 
+    useEffect(() => {
+        resetSkillsState()
+    }, [])
     return (
         <MainLayout title='게시물 등록'>
             <div
@@ -19,25 +22,8 @@ export default function PostUpload() {
                     lg:px-64
                 `}
             >
-                <form
-                    className={`
-                        space-y-10
-                    `}
-                >
-                    <Input
-                        type="title"
-                    />
-
-                    <PositionSelector
-
-                    />
-
-                    <Input
-                        type="description"
-                    />
-                </form>
+                <CreatePost />
             </div>
         </MainLayout >
-
     )
 }

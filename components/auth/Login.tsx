@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
 import { useRouter } from 'next/router';
@@ -11,6 +11,7 @@ import Divider from '../form/Divider';
 import Form from '../form/Form';
 import FormButton from '../form/FormButton';
 import Input from '../form/Input';
+import { useState } from 'react';
 
 interface IForm {
     email: string;
@@ -19,10 +20,14 @@ interface IForm {
 
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
+    const [loading, setLoading] = useState(false);
     const { register, handleSubmit } = useForm<IForm>();
     const router = useRouter();
 
     const onValid = async (data: IForm) => {
+        // 로딩도 사실 클라이언트 측에서 apollo/client를 바로 사용하면 loading prop을 쓸 수 있으므로 지금처럼 state처리할 필요는 없다.
+        setLoading(true)
+
         // 폼 제출시 굳이 API Route로 안보내고 apollo/client의 useMutation hook으로 처리하면 되지만 찍먹은 해보자
         // 회원가입은 클라이언트 쪽에서 바로 Apollo 서버로 요청 보내게 했다.
         const response = await fetch("/api/login", {
@@ -38,6 +43,7 @@ export default function Login() {
             document.cookie = `TOKEN=${login.token}`;
             router.push("/");
         };
+        setLoading(false);
     };
 
     return (
@@ -73,6 +79,7 @@ export default function Login() {
                 required
             />
             <FormButton
+                loading={loading}
                 onClick={() => null}
                 text="로그인"
             />

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
 import { atom, selector } from 'recoil';
@@ -17,6 +17,18 @@ export const tokenState = atom<string | null>({
     key: "tokenState",
     default: typeof window === "undefined" ? null : document.cookie.split("TOKEN=")[1],
 });
+
+// 게시글
+export interface IPost {
+    __typename: string;
+    id: number;
+    title: string;
+}
+
+export const postsState = atom<IPost[]>({
+    key: "postsState",
+    default: []
+})
 
 
 // 스킬셋 관련 state
@@ -50,6 +62,11 @@ export type KindOfPosition = "frontend" | "backend" | "app"
 export const selectedPositionState = atom<KindOfPosition>({
     key: "selectedPositionState",
     default: "frontend"
+})
+
+export const selectedSkillsToUploadState = atom<ISkill[]>({
+    key: "selectedSkillsToUploadState",
+    default: []
 })
 
 

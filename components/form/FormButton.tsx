@@ -1,14 +1,16 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.11
+ * 수정일: 2022.02.15
  */
 
 interface IFormButton {
     text: string;
-    onClick(): void;
+    loading: boolean;
+    onClick?(): void;
 }
 
-export default function FormButton({ text, onClick }: IFormButton) {
+export default function FormButton({ text, loading, onClick }: IFormButton) {
+
     return (
         <button
             className="
@@ -23,7 +25,7 @@ export default function FormButton({ text, onClick }: IFormButton) {
             onClick={onClick}
         >
             <span className='font-bold text-white'>
-                {text}
+                {loading ? "처리중입니다.." : text}
             </span>
         </button>
     )
