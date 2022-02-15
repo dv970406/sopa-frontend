@@ -4,15 +4,14 @@
  */
 
 import Skill from '@components/home/Skill';
-import { KindOfPosition, selectedPositionState, selectedSkillsState, skillsOfPositionSelector, skillsState } from '@utils/atoms';
+import { KindOfPosition, selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { useEffect } from 'react';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 export default function PositionSelector() {
     const setSelectedPosition = useSetRecoilState(selectedPositionState)
     const skillsOfPosition = useRecoilValue(skillsOfPositionSelector)
-    const resetSkills = useResetRecoilState(skillsState)
-    const resetSelectedSkills = useResetRecoilState(selectedSkillsState)
+
 
     const changePosition = (event: React.FormEvent<HTMLSelectElement>) => {
         const { value } = event.currentTarget;
@@ -20,8 +19,7 @@ export default function PositionSelector() {
     }
 
     useEffect(() => {
-        resetSkills()
-        resetSelectedSkills()
+        setSelectedPosition("frontend")
     }, [])
 
     return (

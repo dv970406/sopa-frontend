@@ -6,7 +6,7 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
-import { selectedSkillsState, skillsState } from '@utils/atoms'
+import { selectedSkillsState, selectedSkillsToUploadState, skillsState } from '@utils/atoms'
 
 interface ISkillInfo {
     uploadMode?: boolean;
@@ -40,35 +40,43 @@ const skillVar = {
 function Skill({ uploadMode = false, index, position, skill, skillImage, isSelected }: ISkillInfo) {
     const setSelectedSkills = useSetRecoilState(selectedSkillsState)
     const setSkills = useSetRecoilState(skillsState)
+    const setSelectedSkillsToUpload = useSetRecoilState(selectedSkillsToUploadState)
 
     const onClick = () => {
-        // SkillBoard에서 선택하면 selectedSillsState로 추가시킴
-        setSelectedSkills(prev => {
-            const newSelectedSkill = {
-                skill,
-                skillImage,
-                isSelected: true,
-                position
-            }
-            const targetIndex = prev.findIndex(item => item.skill === newSelectedSkill.skill)
-            const copiedPrev = [...prev]
+        if (uploadMode) {
+            setSelectedSkillsToUpload(prev => {
+                const newSelectedSkill = {
+                    skill,
+                    skillImage,
+                    isSelected: true,
+                    position
+                }
+                const targetIndex = prev.findIndex(item => item.skill === newSelectedSkill.skill)
+                const copiedPrev = [...prev]
 
-            if (targetIndex !== -1) copiedPrev.splice(targetIndex, 1)
-            else copiedPrev.splice(-1, 0, newSelectedSkill)
+                if (targetIndex !== -1) copiedPrev.splice(targetIndex, 1)
+                else copiedPrev.splice(-1, 0, newSelectedSkill)
 
-            if (uploadMode) {
                 return [
                     ...copiedPrev
                 ]
-            } else {
+            })
+        } else {
+            // SkillBoard에서 선택하면 selectedSillsState로 추가시킴
+            setSelectedSkills(prev => {
+                const newSelectedSkill = {
+                    skill,
+                    skillImage,
+                    isSelected: true,
+                    position
+                }
+
                 return [
                     ...prev,
                     newSelectedSkill
                 ]
-            }
-        })
-
-
+            })
+        }
         // SkillBoard에서 선택하면 skillsState의 isSelect를 true로 바꾼다.
         setSkills(prev => {
             const selectedSkill = {
@@ -88,7 +96,6 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                 ]
             };
         })
-
     }
 
     return (

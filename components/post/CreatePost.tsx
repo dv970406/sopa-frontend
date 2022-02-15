@@ -8,10 +8,10 @@ import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import PositionSelector from '@components/form/PositionSelector';
 import { IMutationResults } from '@utils/apollo';
-import { selectedSkillsState } from '@utils/atoms';
+import { selectedSkillsToUploadState } from '@utils/atoms';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 
 interface IForm {
     title: string;
@@ -30,7 +30,8 @@ const CREATE_POST_MUTATION = gql`
 
 export default function CreatePost() {
     const router = useRouter()
-    const selectedSkills = useRecoilValue(selectedSkillsState);
+    const selectedSkillsToUpload = useRecoilValue(selectedSkillsToUploadState);
+    const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState)
 
     const { register, handleSubmit } = useForm<IForm>();
 
@@ -39,8 +40,10 @@ export default function CreatePost() {
         if (!ok) {
             alert(error);
             return;
-        };
+        }
+        resetSelectedSkillsToUpload();
         router.push("/");
+
     }
     const [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
         onCompleted: createPostCompleted
@@ -48,11 +51,15 @@ export default function CreatePost() {
 
     const onValid = ({ title, description }: IForm) => {
         if (loading) return;
-        const skills = selectedSkills.map(skill => {
+        if (selectedSkillsToUpload.length === 0) {
+            alert("스킬을 하나 이상 선택해주세요!");
+            return;
+        }
+        const skills = selectedSkillsToUpload.map(skill => {
             const { isSelected, skillImage, ...skillInfo } = skill
             return skillInfo
         })
-        console.log(skills)
+
         createPost({
             variables: {
                 title,

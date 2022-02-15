@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
 import { atom, selector } from 'recoil';
@@ -50,6 +50,11 @@ export type KindOfPosition = "frontend" | "backend" | "app"
 export const selectedPositionState = atom<KindOfPosition>({
     key: "selectedPositionState",
     default: "frontend"
+})
+
+export const selectedSkillsToUploadState = atom<ISkill[]>({
+    key: "selectedSkillsToUploadState",
+    default: []
 })
 
 

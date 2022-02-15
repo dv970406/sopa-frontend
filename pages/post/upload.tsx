@@ -5,10 +5,16 @@
 
 import CreatePost from '@components/post/CreatePost';
 import MainLayout from '@components/shared/MainLayout';
-
+import { useResetRecoilState } from "recoil"
+import { skillsState } from "@utils/atoms"
+import { useEffect } from "react"
 
 export default function PostUpload() {
+    const resetSkillsState = useResetRecoilState(skillsState)
 
+    useEffect(() => {
+        resetSkillsState()
+    }, [])
     return (
         <MainLayout title='게시물 등록'>
             <div
@@ -19,6 +25,5 @@ export default function PostUpload() {
                 <CreatePost />
             </div>
         </MainLayout >
-
     )
 }

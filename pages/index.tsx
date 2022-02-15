@@ -37,6 +37,7 @@ const Home = ({ posts }: IHome) => {
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
+      {posts.map(post => <div key={post.id}>{post.title}</div>)}
     </MainLayout>
   )
 }
@@ -45,7 +46,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   // seePosts query 요청부
   const { data } = await client.query({
-    query: SEE_POSTS_QUERY
+    query: SEE_POSTS_QUERY,
+    fetchPolicy: "no-cache"
   });
 
   return {

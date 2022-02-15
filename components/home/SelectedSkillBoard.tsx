@@ -67,7 +67,7 @@ export default function SelectedSkillBoard() {
                 }
             })
         })
-        console.log("data : ", data)
+        console.log("selected : ", data)
     }
     useEffect(() => {
         getPosts()
