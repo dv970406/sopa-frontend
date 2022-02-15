@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
 import { motion } from 'framer-motion'
@@ -24,7 +24,7 @@ const skillVar = {
     end: {
         opacity: 1,
         transition: {
-            duration: 0.4
+            duration: 0.3
         }
     },
     hover: {
@@ -111,6 +111,7 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                 className={`
                     w-14 h-14
                     ${isSelected ? "opacity-100" : uploadMode ? "opacity-30" : "opacity-100"}
+                    transition-opacity
                 `}
             />
             <motion.p

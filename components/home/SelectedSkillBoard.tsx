@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.15
  */
 
 import { gql } from '@apollo/client';
@@ -59,14 +59,13 @@ export default function SelectedSkillBoard() {
             const { isSelected, skillImage, ...skillWithPosition } = skill
             return skillWithPosition
         })
-
         const { data } = await client.query({
             query: SEE_POSTS_QUERY,
-            variables: {
-                ...(clearedSelectedSkills.length > 0 && {
+            ...(clearedSelectedSkills.length > 0 && {
+                variables: {
                     skills: JSON.stringify(clearedSelectedSkills)
-                })
-            },
+                }
+            })
         })
         console.log("data : ", data)
     }

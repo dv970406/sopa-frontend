@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: ------
+ * 수정일: 2022.02.15
  */
 
 import Skill from '@components/home/Skill';
@@ -14,7 +14,6 @@ export default function PositionSelector() {
     const resetSkills = useResetRecoilState(skillsState)
     const resetSelectedSkills = useResetRecoilState(selectedSkillsState)
 
-    console.log(skillsOfPosition)
     const changePosition = (event: React.FormEvent<HTMLSelectElement>) => {
         const { value } = event.currentTarget;
         setSelectedPosition(value as KindOfPosition);
@@ -35,6 +34,10 @@ export default function PositionSelector() {
             <select
                 id="skills"
                 onInput={changePosition}
+                className={`
+                    ml-3 border-fuchsia-300 border-2 rounded-md focus:outline-none
+                    px-2
+                `}
             >
                 <option>frontend</option>
                 <option>backend</option>
