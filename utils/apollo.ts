@@ -6,6 +6,7 @@
 
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context"
+import { offsetLimitPagination } from '@apollo/client/utilities';
 
 export interface IMutationResults {
     [key: string]: {

@@ -18,6 +18,18 @@ export const tokenState = atom<string | null>({
     default: typeof window === "undefined" ? null : document.cookie.split("TOKEN=")[1],
 });
 
+// 게시글
+export interface IPost {
+    __typename: string;
+    id: number;
+    title: string;
+}
+
+export const postsState = atom<IPost[]>({
+    key: "postsState",
+    default: []
+})
+
 
 // 스킬셋 관련 state
 export interface ISkill {

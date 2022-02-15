@@ -18,15 +18,6 @@ interface ISkillInfo {
 }
 
 const skillVar = {
-    start: {
-        opacity: 0,
-    },
-    end: {
-        opacity: 1,
-        transition: {
-            duration: 0.3
-        }
-    },
     hover: {
         scale: 1.1,
         transition: {
@@ -110,8 +101,6 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
             layoutId={uploadMode ? undefined : skill}
             variants={skillVar}
             whileHover="hover"
-            initial="start"
-            animate="end"
         >
             <img
                 src={skillImage}

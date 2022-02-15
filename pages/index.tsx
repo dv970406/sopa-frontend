@@ -5,17 +5,11 @@ import useMyInfo from 'hooks/useMyInfo'
 import type { GetServerSideProps } from 'next'
 import { client } from '@utils/apollo'
 import { useEffect } from 'react'
-import { useResetRecoilState } from 'recoil'
-import { selectedSkillsState } from '@utils/atoms'
-
-interface IPost {
-  __typename: string;
-  id: number;
-  title: string;
-}
+import { useResetRecoilState, useRecoilState } from 'recoil'
+import { selectedSkillsState, postsState, IPost } from '@utils/atoms'
 
 interface IHome {
-  posts: IPost[];
+  requestedPosts: IPost[];
 }
 
 const SEE_POSTS_QUERY = gql`
@@ -27,13 +21,16 @@ const SEE_POSTS_QUERY = gql`
     }
 `
 
-const Home = ({ posts }: IHome) => {
+const Home = ({ requestedPosts }: IHome) => {
+  const [posts, setPosts] = useRecoilState(postsState)
   const asd = useMyInfo()
   const resetSelectedSkill = useResetRecoilState(selectedSkillsState)
 
   useEffect(() => {
-    resetSelectedSkill()
+    resetSelectedSkill();
+    setPosts(requestedPosts)
   }, [])
+
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
@@ -47,12 +44,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
   // seePosts query 요청부
   const { data } = await client.query({
     query: SEE_POSTS_QUERY,
-    fetchPolicy: "no-cache"
   });
 
   return {
     props: {
-      posts: data.seePosts,
+      requestedPosts: data.seePosts,
     }
   }
 }

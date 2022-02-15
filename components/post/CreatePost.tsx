@@ -7,11 +7,10 @@ import { gql, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import PositionSelector from '@components/form/PositionSelector';
-import { IMutationResults } from '@utils/apollo';
-import { selectedSkillsToUploadState } from '@utils/atoms';
+import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 interface IForm {
     title: string;
@@ -21,8 +20,8 @@ interface IForm {
 const CREATE_POST_MUTATION = gql`
     mutation createPost($title:String!,$skills:String!,$description:String){
         createPost(title:$title,skills:$skills,description:$description){
-            ok
-            error
+            id
+            title
         }
     }
 `
@@ -32,21 +31,34 @@ export default function CreatePost() {
     const router = useRouter()
     const selectedSkillsToUpload = useRecoilValue(selectedSkillsToUploadState);
     const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState)
+    const setPosts = useSetRecoilState(postsState)
 
     const { register, handleSubmit } = useForm<IForm>();
 
-    const createPostCompleted = ({ createPost }: IMutationResults) => {
-        const { ok, error } = createPost
-        if (!ok) {
-            alert(error);
-            return;
+    const updateCreatePost = (cache: { modify: (arg0: { id: string; fields: any; }) => void; }, { data }: any) => {
+        const { createPost } = data
+        if (createPost.id) {
+            cache.modify({
+                id: `ROOT_QUERY`,
+                fields: {
+                    seePosts(prev: any) {
+                        return [createPost, ...prev]
+                    }
+                }
+            })
+            console.log("createPost : ", createPost)
+            setPosts(prev => {
+                return [
+                    createPost,
+                    ...prev
+                ]
+            })
+            resetSelectedSkillsToUpload();
+            router.push("/");
         }
-        resetSelectedSkillsToUpload();
-        router.push("/");
-
     }
     const [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
-        onCompleted: createPostCompleted
+        update: updateCreatePost
     })
 
     const onValid = ({ title, description }: IForm) => {

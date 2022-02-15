@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { client } from '@utils/apollo';
-import { ISkill, selectedSkillsState, skillsState } from '@utils/atoms';
+import { ISkill, postsState, selectedSkillsState, skillsState } from '@utils/atoms';
 
 const SEE_POSTS_QUERY = gql`
     query seePosts($skills:String){
@@ -22,6 +22,7 @@ const SEE_POSTS_QUERY = gql`
 export default function SelectedSkillBoard() {
     const [selectedSkills, setSelectedSkills] = useRecoilState(selectedSkillsState);
     const setSkills = useSetRecoilState(skillsState);
+    const setPosts = useSetRecoilState(postsState)
 
     const onClick = (selectedSkill: ISkill, index: number): void => {
         // SelectedSkillBoard에서 선택하면 selectedSkillsState에서 값을 삭제함
@@ -67,7 +68,7 @@ export default function SelectedSkillBoard() {
                 }
             })
         })
-        console.log("selected : ", data)
+        setPosts(data.seePosts)
     }
     useEffect(() => {
         getPosts()
