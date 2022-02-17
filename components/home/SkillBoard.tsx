@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.17
  */
 
 import React from 'react'
@@ -8,22 +8,33 @@ import { ISkill } from '@utils/atoms'
 import Skill from './Skill'
 
 interface ISkillBoard {
-    skillOfPosition: ISkill[]
+    skillsOfPosition: ISkill[]
 }
 
-function SkillBoard({ skillOfPosition }: ISkillBoard) {
+function SkillBoard({ skillsOfPosition }: ISkillBoard) {
     return (
-        <>
-            <p>{skillOfPosition[0].position}</p>
+        <div
+            className={`
+                relative flex flex-col items-center
+            `}
+        >
+            <p
+                className={`
+                    absolute -top-3 px-3 py-1 rounded-md
+                    bg-fuchsia-300
+                `}
+            >
+                {skillsOfPosition[0].position}
+            </p>
             <div
                 className={`
                     flex flex-row flex-wrap justify-center 
                     w-full h-1/3 px-3 py-6 shadow-lg rounded-lg border-2 border-black
                 `}
             >
-                {skillOfPosition?.map((skill, index) => <Skill key={skill.skill} index={index} {...skill} />)}
+                {skillsOfPosition?.map((skill, index) => <Skill key={skill.skill} index={index} {...skill} />)}
             </div>
-        </>
+        </div>
     )
 }
 

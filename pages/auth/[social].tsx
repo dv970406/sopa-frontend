@@ -4,7 +4,7 @@
  */
 
 import { tokenState } from '@utils/atoms';
-import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';

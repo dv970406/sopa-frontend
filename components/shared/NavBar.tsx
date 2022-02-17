@@ -1,18 +1,23 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.17
  */
 
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import Button from './Button';
+import useMyInfo from 'hooks/useMyInfo';
+import { useEffect } from 'react';
 
 function NavBar() {
-    const token = useRecoilValue(tokenState)
+    const token = useRecoilValue(tokenState);
+    const { seeMyProfile } = useMyInfo();
+
     const router = useRouter();
     const goToLogin = () => router.push("/auth");
     const goToCreatePost = () => router.push("/post/upload");
+    const goToEditUser = () => router.push(`/user/${seeMyProfile?.id}`);
 
     return (
         <div className='
@@ -37,7 +42,7 @@ function NavBar() {
                 {token ? (
                     <Button
                         text="프로필"
-                        onClick={() => null}
+                        onClick={goToEditUser}
                     />
                 ) : (
                     <Button

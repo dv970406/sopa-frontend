@@ -11,14 +11,13 @@ interface IFormButton {
 }
 
 export default function FormButton({ disabled = false, text, loading, onClick }: IFormButton) {
-
     return (
         <button
             disabled={disabled}
             className={`
                 flex items-center justify-center
-                w-full h-4 bg-fuchsia-300 hover:${disabled ? "bg-fuchsia-300" : "bg-fuchsia-500 "}
-                rounded-xl px-3 py-7
+                w-full h-4 rounded-xl px-3 py-7
+                ${disabled ? "bg-fuchsia-300" : "bg-fuchsia-500"} 
                 focus:outline-none
                 focus:ring-2 ring-offset-2 ring-fuchsia-500
                 transition-colors

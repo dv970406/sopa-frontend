@@ -23,6 +23,8 @@ export default function Login() {
     const setToken = useSetRecoilState(tokenState);
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, watch, clearErrors } = useForm<IForm>();
+    const checkDisabledStatus = loading || !watch("email") || !watch("password");
+
     const router = useRouter();
 
     const onValid = async (data: IForm) => {
@@ -85,9 +87,8 @@ export default function Login() {
                 required
             />
             <FormButton
-                disabled={loading || !watch("email" || "password")}
+                disabled={checkDisabledStatus}
                 loading={loading}
-                onClick={() => null}
                 text="로그인"
             />
             <Divider text="소셜 로그인" />

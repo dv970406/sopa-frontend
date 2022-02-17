@@ -65,6 +65,8 @@ export default function SignUp() {
         });
     };
 
+    const checkDisabledStatus = loading || !watch("email") || !watch("name") || !watch("password") || !watch("password2")
+
     return (
         <Form onSubmit={handleSubmit(onValid)}>
             <Input
@@ -125,11 +127,11 @@ export default function SignUp() {
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
-                type="password"
+                type="password2"
                 required
             />
             <FormButton
-                disabled={loading || !watch("email" || "password")}
+                disabled={checkDisabledStatus}
                 loading={loading}
                 text='회원가입'
                 onClick={() => null}
