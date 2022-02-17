@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: ------
+ * 수정일: 2022.02.17
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -33,7 +33,7 @@ export default function CreatePost() {
     const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState)
     const setPosts = useSetRecoilState(postsState)
 
-    const { register, handleSubmit } = useForm<IForm>();
+    const { register, handleSubmit, watch } = useForm<IForm>();
 
     const updateCreatePost = (cache: { modify: (arg0: { id: string; fields: any; }) => void; }, { data }: any) => {
         const { createPost } = data
@@ -46,7 +46,7 @@ export default function CreatePost() {
                     }
                 }
             })
-            console.log("createPost : ", createPost)
+
             setPosts(prev => {
                 return [
                     createPost,
@@ -105,7 +105,11 @@ export default function CreatePost() {
                 register={register("description")}
             />
 
-            <FormButton loading={loading} text="게시글 업로드" />
+            <FormButton
+                disabled={loading || !watch("title" || "description")}
+                loading={loading}
+                text="게시글 업로드"
+            />
         </form>
     )
 }

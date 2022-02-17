@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.17
  */
 
 import Head from 'next/head';
@@ -16,21 +16,20 @@ interface IMainLayout {
 export default function MainLayout({ title, children }: IMainLayout) {
     const { pathname } = useRouter();
     const loginOrSignUp = pathname === "/auth";
-
     return (
         <div
-            className={
-                `font-NotoSans text-md`
-            }
+            className={`
+                font-NotoSans text-md
+            `}
         >
             {loginOrSignUp ? null : <NavBar />}
             <Head>
-                <title>{title} | SOPA</title>
+                {title.includes("undefined") ? null : <title>{title} | SOPA</title>}
             </Head>
             <div
                 className={`
                     flex flex-col
-                    justify-center py-16 px-24 mt-16
+                    justify-center py-16 px-6 mt-16
                     ${loginOrSignUp ? "flex items-center" : ""}
                     w-full
                 `}

@@ -4,7 +4,8 @@
  */
 
 import Skill from '@components/home/Skill';
-import { KindOfPosition, selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
+import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
+import { KindOfPosition } from '@utils/types/types';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.17
  */
 
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import Form from '../form/Form';
 import FormButton from '../form/FormButton';
 import Input from '../form/Input';
 import { useState } from 'react';
+import SocialLogin from './SocialLogin';
 
 interface IForm {
     email: string;
@@ -21,7 +22,9 @@ interface IForm {
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
     const [loading, setLoading] = useState(false);
-    const { register, handleSubmit } = useForm<IForm>();
+    const { register, handleSubmit, watch, clearErrors } = useForm<IForm>();
+    const checkDisabledStatus = loading || !watch("email") || !watch("password");
+
     const router = useRouter();
 
     const onValid = async (data: IForm) => {
@@ -38,11 +41,16 @@ export default function Login() {
         const { login } = await response.json();
 
         // apollo/client useMutation의 onCompleted 역할
-        if (login.ok) {
-            setToken(login.token);
-            document.cookie = `TOKEN=${login.token}`;
-            router.push("/");
+        if (!login.ok) {
+            alert(login.error);
+            clearErrors();
+            setLoading(false);
+            return;
         };
+        setToken(login.token);
+        //document.cookie = `TOKEN=${login.token}`;
+        localStorage.setItem("TOKEN", login.token);
+        router.push("/");
         setLoading(false);
     };
 
@@ -79,8 +87,8 @@ export default function Login() {
                 required
             />
             <FormButton
+                disabled={checkDisabledStatus}
                 loading={loading}
-                onClick={() => null}
                 text="로그인"
             />
             <Divider text="소셜 로그인" />
@@ -92,9 +100,9 @@ export default function Login() {
                     items-center
                 `}
             >
-                <img className='w-12 h-12' src="/naver.png" />
-                <img className='w-12 h-12' src="/github.png" />
-                <img className='w-12 h-12' src="/kakaotalk.png" />
+                <SocialLogin social='naver' />
+                <SocialLogin social='github' />
+                <SocialLogin social='kakao' />
             </div>
         </Form>
     )

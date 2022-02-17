@@ -6,7 +6,10 @@ import type { GetServerSideProps } from 'next'
 import { client } from '@utils/apollo'
 import { useEffect } from 'react'
 import { useResetRecoilState, useRecoilState } from 'recoil'
-import { selectedSkillsState, postsState, IPost } from '@utils/atoms'
+import { selectedSkillsState, postsState } from '@utils/atoms'
+import Post from '@components/post/Post'
+import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
+import { IPost } from '@utils/types/interfaces'
 
 interface IHome {
   requestedPosts: IPost[];
@@ -15,37 +18,41 @@ interface IHome {
 const SEE_POSTS_QUERY = gql`
     query seePosts{
         seePosts{
-            id
-            title
+            ...PostDisplayFragment
         }
     }
+    ${POST_DISPLAY_FRAGMENT}
 `
 
 const Home = ({ requestedPosts }: IHome) => {
-  const [posts, setPosts] = useRecoilState(postsState)
-  const asd = useMyInfo()
-  const resetSelectedSkill = useResetRecoilState(selectedSkillsState)
+  const [posts, setPosts] = useRecoilState(postsState);
+  const { seeMyProfile } = useMyInfo();
+  const resetSelectedSkill = useResetRecoilState(selectedSkillsState);
 
   useEffect(() => {
     resetSelectedSkill();
-    setPosts(requestedPosts)
-  }, [])
-
+    setPosts(requestedPosts);
+  }, []);
+  console.log(posts)
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
-      {posts.map(post => <div key={post.id}>{post.title}</div>)}
+      <div
+        className={`
+          flex flex-wrap gap-3
+        `}
+      >
+        {posts.map(post => <Post key={post.id} {...post} />)}
+      </div>
     </MainLayout>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-
   // seePosts query 요청부
   const { data } = await client.query({
     query: SEE_POSTS_QUERY,
   });
-
   return {
     props: {
       requestedPosts: data.seePosts,

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.17
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -34,7 +34,7 @@ const CREATE_USER_MUTATION = gql`
 `
 
 export default function SignUp() {
-    const { register, handleSubmit } = useForm<IForm>();
+    const { register, handleSubmit, watch } = useForm<IForm>();
     const setLoginMode = useSetRecoilState(loginModeState);
 
     const createUserCompleted = ({ createUser }: ICreateUser) => {
@@ -64,6 +64,8 @@ export default function SignUp() {
             }
         });
     };
+
+    const checkDisabledStatus = loading || !watch("email") || !watch("name") || !watch("password") || !watch("password2")
 
     return (
         <Form onSubmit={handleSubmit(onValid)}>
@@ -125,10 +127,11 @@ export default function SignUp() {
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
-                type="password"
+                type="password2"
                 required
             />
             <FormButton
+                disabled={checkDisabledStatus}
                 loading={loading}
                 text='회원가입'
                 onClick={() => null}
