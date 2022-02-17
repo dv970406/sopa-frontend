@@ -29,7 +29,7 @@ export default function MainLayout({ title, children }: IMainLayout) {
             <div
                 className={`
                     flex flex-col
-                    justify-center py-16 px-24 mt-16
+                    justify-center py-16 px-6 mt-16
                     ${loginOrSignUp ? "flex items-center" : ""}
                     w-full
                 `}

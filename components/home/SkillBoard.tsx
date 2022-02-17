@@ -3,8 +3,8 @@
  * 수정일: 2022.02.17
  */
 
+import { ISkill } from '@utils/types/interfaces'
 import React from 'react'
-import { ISkill } from '@utils/atoms'
 import Skill from './Skill'
 
 interface ISkillBoard {

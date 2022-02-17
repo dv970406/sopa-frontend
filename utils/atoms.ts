@@ -5,6 +5,8 @@
 
 import { atom, selector } from 'recoil';
 import { skillSet } from './skillSet';
+import { IPost, ISkill, ISkillPositions } from './types/interfaces';
+import { KindOfPosition } from './types/types';
 
 // LoginOrSignUp Component에서 사용하는 로그인/회원가입 화면 결정
 export const loginModeState = atom<boolean>({
@@ -18,30 +20,13 @@ export const tokenState = atom<string | null>({
     default: typeof window === "undefined" ? null : localStorage.getItem("TOKEN"),
 });
 
-// 게시글
-export interface IPost {
-    __typename: string;
-    id: number;
-    title: string;
-}
-
 export const postsState = atom<IPost[]>({
     key: "postsState",
     default: []
 })
 
 
-// 스킬셋 관련 state
-export interface ISkill {
-    skill: string;
-    skillImage: string;
-    isSelected: boolean;
-    position: string;
-}
 
-interface ISkillPositions {
-    [key: string]: ISkill[]
-}
 
 export const skillsState = atom<ISkillPositions>({
     key: "skillsState",
@@ -57,8 +42,6 @@ export const selectedSkillsState = atom<ISkill[]>({
     default: []
 })
 
-
-export type KindOfPosition = "frontend" | "backend" | "app"
 export const selectedPositionState = atom<KindOfPosition>({
     key: "selectedPositionState",
     default: "frontend"

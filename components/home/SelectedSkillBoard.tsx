@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.17
  */
 
 import { gql } from '@apollo/client';
@@ -8,15 +8,17 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { client } from '@utils/apollo';
-import { ISkill, postsState, selectedSkillsState, skillsState } from '@utils/atoms';
+import { postsState, selectedSkillsState, skillsState } from '@utils/atoms';
+import { ISkill } from '@utils/types/interfaces';
+import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 
 const SEE_POSTS_QUERY = gql`
     query seePosts($skills:String){
         seePosts(skills:$skills){
-            id
-            title
+            ...PostDisplayFragment
         }
     }
+    ${POST_DISPLAY_FRAGMENT}
 `
 
 export default function SelectedSkillBoard() {
