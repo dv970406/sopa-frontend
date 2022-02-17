@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.17
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -34,7 +34,7 @@ const CREATE_USER_MUTATION = gql`
 `
 
 export default function SignUp() {
-    const { register, handleSubmit } = useForm<IForm>();
+    const { register, handleSubmit, watch } = useForm<IForm>();
     const setLoginMode = useSetRecoilState(loginModeState);
 
     const createUserCompleted = ({ createUser }: ICreateUser) => {
@@ -129,6 +129,7 @@ export default function SignUp() {
                 required
             />
             <FormButton
+                disabled={loading || !watch("email" || "password")}
                 loading={loading}
                 text='회원가입'
                 onClick={() => null}

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.17
  */
 
 import { atom, selector } from 'recoil';
@@ -15,7 +15,7 @@ export const loginModeState = atom<boolean>({
 // 앱이 렌더되면 쿠키에서 토큰을 꺼내 state에 저장한다.
 export const tokenState = atom<string | null>({
     key: "tokenState",
-    default: typeof window === "undefined" ? null : document.cookie.split("TOKEN=")[1],
+    default: typeof window === "undefined" ? null : localStorage.getItem("TOKEN"),
 });
 
 // 게시글
