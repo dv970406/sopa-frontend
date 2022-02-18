@@ -19,12 +19,12 @@ export default function MainLayout({ title, children }: IMainLayout) {
     return (
         <div
             className={`
-                font-NotoSans text-md
+                font-NotoSans text-md select-none
             `}
         >
             {loginOrSignUp ? null : <NavBar />}
             <Head>
-                {title.includes("undefined") ? null : <title>{title} | SOPA</title>}
+                <title>{title.includes("undefined") ? "SOPA" : `${title} | SOPA`} </title>
             </Head>
             <div
                 className={`

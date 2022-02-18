@@ -11,6 +11,7 @@ export const POST_DISPLAY_FRAGMENT = gql`
         title
         description
         likeCount
+        isLiked
         commentCount
         readCount
         isExpired
@@ -27,5 +28,45 @@ export const POST_DISPLAY_FRAGMENT = gql`
             skill
         }
         createdAt
+        updatedAt
+    }
+`
+
+export const POST_DETAIL_FRAGMENT = gql`
+    fragment PostDetailFragment on Post{
+        id
+        title
+        description
+        likeCount
+        isLiked
+        commentCount
+        readCount
+        isExpired
+        frontends{
+            id
+            skill
+        }
+        backends{
+            id
+            skill
+        }
+        apps{
+            id
+            skill
+        }
+        createdAt
+        updatedAt
+        user{
+            id
+            name
+        }
+        comments{
+            id
+            comment
+            user{
+                id
+                name
+            }
+        }
     }
 `

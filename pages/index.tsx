@@ -9,10 +9,10 @@ import { useResetRecoilState, useRecoilState } from 'recoil'
 import { selectedSkillsState, postsState } from '@utils/atoms'
 import Post from '@components/post/Post'
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
-import { IPost } from '@utils/types/interfaces'
+import { IPostDisplay } from '@utils/types/interfaces'
 
 interface IHome {
-  requestedPosts: IPost[];
+  requestedPosts: IPostDisplay[];
 }
 
 const SEE_POSTS_QUERY = gql`
@@ -34,12 +34,13 @@ const Home = ({ requestedPosts }: IHome) => {
     setPosts(requestedPosts);
   }, []);
   console.log(posts)
+
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
       <div
         className={`
-          flex flex-wrap gap-3
+          flex flex-wrap gap-5
         `}
       >
         {posts.map(post => <Post key={post.id} {...post} />)}
@@ -53,6 +54,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await client.query({
     query: SEE_POSTS_QUERY,
   });
+
   return {
     props: {
       requestedPosts: data.seePosts,

@@ -19,6 +19,7 @@ function NavBar() {
     const goToCreatePost = () => router.push("/post/upload");
     const goToEditUser = () => router.push(`/user/${seeMyProfile?.id}`);
 
+    console.log(seeMyProfile)
     return (
         <div className='
             flex justify-around items-center px-10 h-20 shadow-xl absolute top-0 w-full

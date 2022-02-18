@@ -5,7 +5,7 @@
 
 import { atom, selector } from 'recoil';
 import { skillSet } from './skillSet';
-import { IPost, ISkill, ISkillPositions } from './types/interfaces';
+import { IPostDisplay, ISkill, ISkillPositions } from './types/interfaces';
 import { KindOfPosition } from './types/types';
 
 // LoginOrSignUp Component에서 사용하는 로그인/회원가입 화면 결정
@@ -20,7 +20,7 @@ export const tokenState = atom<string | null>({
     default: typeof window === "undefined" ? null : localStorage.getItem("TOKEN"),
 });
 
-export const postsState = atom<IPost[]>({
+export const postsState = atom<IPostDisplay[]>({
     key: "postsState",
     default: []
 })

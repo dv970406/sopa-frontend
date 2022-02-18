@@ -1,7 +1,9 @@
 /**
  * 생성일: 2022.02.16
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.18
  */
+
+import { IFetchedSkillsInfo } from './types/interfaces';
 
 
 export const makeSocialLoginReqUrl = (socialSite: string): string => {
@@ -42,4 +44,33 @@ export const makeSocialLoginReqUrl = (socialSite: string): string => {
     const reqUrl = `${baseUrl}?${params}`;
 
     return reqUrl
+}
+
+export const makeSkillImages = (
+    frontends: IFetchedSkillsInfo[],
+    backends: IFetchedSkillsInfo[],
+    apps: IFetchedSkillsInfo[]
+) => {
+    const combineSkills = frontends?.concat(backends)?.concat(apps) || [];
+
+    const skillsInfo = combineSkills?.map(item => {
+        switch (item.__typename) {
+            case "Frontend":
+                return {
+                    name: item.skill,
+                    imgSrc: `/frontend/${item.skill}.png`
+                }
+            case "Backend":
+                return {
+                    name: item.skill,
+                    imgSrc: `/backend/${item.skill}.png`
+                }
+            default:
+                return {
+                    name: item.skill,
+                    imgSrc: `/app/${item.skill}.png`
+                }
+        }
+    })
+    return skillsInfo
 }
