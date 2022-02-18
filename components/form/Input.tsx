@@ -1,13 +1,13 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.18
  */
 
 import React from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface IInput {
-    type: "email" | "password" | "password2" | "name" | "title" | "skills" | "description";
+    type: "email" | "password" | "password2" | "name" | "title" | "skills" | "description" | "link";
     register?: UseFormRegisterReturn;
     required?: boolean;
     disabled?: boolean;
@@ -16,14 +16,24 @@ interface IInput {
 
 const typeTranslater = (engVerType: string) => {
     let korVerType = null;
-    engVerType === "name" ? korVerType = "이름" : null;
-    engVerType === "email" ? korVerType = "이메일" : null;
-    engVerType === "password" ? korVerType = "비밀번호" : null;
-    engVerType === "password2" ? korVerType = "확인 비밀번호" : null;
-    engVerType === "title" ? korVerType = "제목" : null;
-    engVerType === "skills" ? korVerType = "스킬" : null;
-    engVerType === "description" ? korVerType = "설명" : null;
-
+    switch (engVerType) {
+        case "name":
+            return korVerType = "이름";
+        case "email":
+            return korVerType = "이메일";
+        case "password":
+            return korVerType = "비밀번호";
+        case "password2":
+            return korVerType = "확인 비밀번호";
+        case "title":
+            return korVerType = "제목";
+        case "skills":
+            return korVerType = "스킬";
+        case "description":
+            return korVerType = "설명";
+        case "link":
+            return korVerType = "카카오 오픈채팅 링크";
+    }
     return korVerType
 }
 
@@ -35,6 +45,8 @@ export default function Input({ type, register, required, disabled = false, ...p
                 return "text";
             case "password2":
                 return "password";
+            case "link":
+                return "text";
             default:
                 return type;
         };
@@ -76,6 +88,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                             text-sm
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
+
                         {...props}
                     />
                 </div>
@@ -98,6 +111,9 @@ export default function Input({ type, register, required, disabled = false, ...p
                             w-full
                             text-sm
                         `}
+                        rows={10}
+                        cols={50}
+                        {...props}
                     />
                 </div>
             ) : null}

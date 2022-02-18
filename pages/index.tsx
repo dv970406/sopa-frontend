@@ -7,12 +7,13 @@ import { client } from '@utils/apollo'
 import { useEffect } from 'react'
 import { useResetRecoilState, useRecoilState } from 'recoil'
 import { selectedSkillsState, postsState } from '@utils/atoms'
-import Post from '@components/post/Post'
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
-import { IPost } from '@utils/types/interfaces'
+import { IPostDisplay } from '@utils/types/interfaces'
+import PostDisplay from '@components/post/PostDisplay'
+import PostSorting from '@components/post/PostSorting'
 
 interface IHome {
-  requestedPosts: IPost[];
+  requestedPosts: IPostDisplay[];
 }
 
 const SEE_POSTS_QUERY = gql`
@@ -33,16 +34,24 @@ const Home = ({ requestedPosts }: IHome) => {
     resetSelectedSkill();
     setPosts(requestedPosts);
   }, []);
-  console.log(posts)
+
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
       <div
         className={`
-          flex flex-wrap gap-3
+          flex space-x-3
+          mb-8
         `}
       >
-        {posts.map(post => <Post key={post.id} {...post} />)}
+        <PostSorting />
+      </div>
+      <div
+        className={`
+          flex flex-wrap gap-5
+        `}
+      >
+        {posts.map(post => <PostDisplay key={post.id} {...post} />)}
       </div>
     </MainLayout>
   )
@@ -53,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await client.query({
     query: SEE_POSTS_QUERY,
   });
+
   return {
     props: {
       requestedPosts: data.seePosts,

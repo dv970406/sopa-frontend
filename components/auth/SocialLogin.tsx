@@ -3,8 +3,9 @@
  * 수정일: ------
  */
 
-import { makeSocialLoginReqUrl } from '@utils/makeSocialLoginReqUrl'
 import Link from 'next/link'
+import { makeSocialLoginReqUrl } from "@utils/utilFunctions";
+
 
 interface ISocialLogin {
     social: string;

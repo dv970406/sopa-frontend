@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.18
  */
 
-import { gql, useMutation } from '@apollo/client';
+import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import PositionSelector from '@components/form/PositionSelector';
@@ -15,11 +15,12 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 interface IForm {
     title: string;
     description?: string;
+    link?: string;
 }
 
 const CREATE_POST_MUTATION = gql`
-    mutation createPost($title:String!,$skills:String!,$description:String){
-        createPost(title:$title,skills:$skills,description:$description){
+    mutation createPost($title:String!,$skills:String!,$description:String,$openChatLink:String){
+        createPost(title:$title,skills:$skills,description:$description,openChatLink:$openChatLink){
             id
             title
         }
@@ -35,8 +36,8 @@ export default function CreatePost() {
 
     const { register, handleSubmit, watch } = useForm<IForm>();
 
-    const updateCreatePost = (cache: { modify: (arg0: { id: string; fields: any; }) => void; }, { data }: any) => {
-        const { createPost } = data
+    const updateCreatePost: MutationUpdaterFn = (cache, { data }) => {
+        const { createPost }: any = data
         if (createPost.id) {
             cache.modify({
                 id: `ROOT_QUERY`,
@@ -61,7 +62,7 @@ export default function CreatePost() {
         update: updateCreatePost
     })
 
-    const onValid = ({ title, description }: IForm) => {
+    const onValid = ({ title, description, link }: IForm) => {
         if (loading) return;
         if (selectedSkillsToUpload.length === 0) {
             alert("스킬을 하나 이상 선택해주세요!");
@@ -76,7 +77,8 @@ export default function CreatePost() {
             variables: {
                 title,
                 skills: JSON.stringify(skills),
-                description
+                description,
+                openChatLink: link,
             }
         })
     }
@@ -96,6 +98,7 @@ export default function CreatePost() {
                         message: "제목은 2글자 이상이어야 합니다."
                     }
                 })}
+                maxLength={32}
             />
 
             <PositionSelector />
@@ -103,6 +106,23 @@ export default function CreatePost() {
             <Input
                 type="description"
                 register={register("description")}
+                placeholder="설명을 입력하세요."
+                maxLength={600}
+            />
+
+            <Input
+                type="link"
+                register={register("link", {
+                    maxLength: {
+                        value: 70,
+                        message: "링크는 70자 이내여야 합니다."
+                    },
+                    validate: {
+                        checkKakao: (value) => value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
+                    }
+                })}
+                placeholder="https://open.kakao.com/o/sopaisthebest"
+                maxLength={70}
             />
 
             <FormButton
