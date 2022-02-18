@@ -7,9 +7,9 @@ import { client } from '@utils/apollo'
 import { useEffect } from 'react'
 import { useResetRecoilState, useRecoilState } from 'recoil'
 import { selectedSkillsState, postsState } from '@utils/atoms'
-import Post from '@components/post/Post'
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
 import { IPostDisplay } from '@utils/types/interfaces'
+import PostDisplay from '@components/post/PostDisplay'
 
 interface IHome {
   requestedPosts: IPostDisplay[];
@@ -43,7 +43,7 @@ const Home = ({ requestedPosts }: IHome) => {
           flex flex-wrap gap-5
         `}
       >
-        {posts.map(post => <Post key={post.id} {...post} />)}
+        {posts.map(post => <PostDisplay key={post.id} {...post} />)}
       </div>
     </MainLayout>
   )

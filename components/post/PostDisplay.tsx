@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import MetaData from './MetaData';
 import SkillImage from './SkillImage';
 
-export default function Post(
+export default function PostDisplay(
     { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, updatedAt }: IPostDisplay
 ) {
     const router = useRouter();
@@ -28,7 +28,7 @@ export default function Post(
                 flex flex-col justify-center items-center
                 space-y-5 shadow-md
                 hover:scale-105 transition-all duration-300 cursor-pointer
-                hover:border-fuchsia-300
+                hover:border-fuchsia-300 hover:ring-2 ring-fuchsia-400 ring-offset-2
             `}
         >
             <div
@@ -43,13 +43,28 @@ export default function Post(
                 />
             </div>
             <p>{title}</p>
-            <MetaData
-                commentCount={commentCount}
-                isLiked={isLiked}
-                likeCount={likeCount}
-                postId={id}
-                readCount={readCount}
-            />
+            <div
+                className={`
+                    flex justify-between w-full
+                    items-center
+                `}
+            >
+                <MetaData
+                    commentCount={commentCount}
+                    isLiked={isLiked}
+                    likeCount={likeCount}
+                    postId={id}
+                    readCount={readCount}
+                />
+                <p
+                    className={`
+                        text-sm
+                        place-self-end
+                    `}
+                >
+                    {new Date(+updatedAt).toLocaleString().slice(0, -3)}
+                </p>
+            </div>
         </div>
     )
 }
