@@ -42,6 +42,7 @@ export const POST_DETAIL_FRAGMENT = gql`
         commentCount
         readCount
         isExpired
+        openChatLink
         frontends{
             id
             skill

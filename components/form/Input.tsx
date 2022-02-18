@@ -7,7 +7,7 @@ import React from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface IInput {
-    type: "email" | "password" | "password2" | "name" | "title" | "skills" | "description";
+    type: "email" | "password" | "password2" | "name" | "title" | "skills" | "description" | "link";
     register?: UseFormRegisterReturn;
     required?: boolean;
     disabled?: boolean;
@@ -31,6 +31,8 @@ const typeTranslater = (engVerType: string) => {
             return korVerType = "스킬";
         case "description":
             return korVerType = "설명";
+        case "link":
+            return korVerType = "카카오 오픈채팅 링크";
     }
     return korVerType
 }
@@ -43,6 +45,8 @@ export default function Input({ type, register, required, disabled = false, ...p
                 return "text";
             case "password2":
                 return "password";
+            case "link":
+                return "text";
             default:
                 return type;
         };
@@ -84,6 +88,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                             text-sm
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
+
                         {...props}
                     />
                 </div>
@@ -106,6 +111,9 @@ export default function Input({ type, register, required, disabled = false, ...p
                             w-full
                             text-sm
                         `}
+                        rows={10}
+                        cols={50}
+                        {...props}
                     />
                 </div>
             ) : null}

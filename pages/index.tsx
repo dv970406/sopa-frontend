@@ -10,6 +10,7 @@ import { selectedSkillsState, postsState } from '@utils/atoms'
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
 import { IPostDisplay } from '@utils/types/interfaces'
 import PostDisplay from '@components/post/PostDisplay'
+import PostSorting from '@components/post/PostSorting'
 
 interface IHome {
   requestedPosts: IPostDisplay[];
@@ -33,11 +34,18 @@ const Home = ({ requestedPosts }: IHome) => {
     resetSelectedSkill();
     setPosts(requestedPosts);
   }, []);
-  console.log(posts)
 
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
+      <div
+        className={`
+          flex space-x-3
+          mb-8
+        `}
+      >
+        <PostSorting />
+      </div>
       <div
         className={`
           flex flex-wrap gap-5

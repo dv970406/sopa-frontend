@@ -4,7 +4,7 @@
  */
 
 import { gql, useQuery } from '@apollo/client';
-import PostDetail from '@components/post/PostDetail';
+import SeePost from '@components/post/SeePost';
 import MainLayout from '@components/shared/MainLayout';
 import { POST_DETAIL_FRAGMENT } from '@utils/fragments';
 import { useRouter } from 'next/router'
@@ -18,7 +18,7 @@ const SEE_POST_QUERY = gql`
     ${POST_DETAIL_FRAGMENT}
 `
 
-export default function SeePost() {
+export default function PostDetail() {
     const router = useRouter();
     const { id: postId, title: postTitle } = router.query;
 
@@ -36,7 +36,7 @@ export default function SeePost() {
                     space-y-3
                 `}
             >
-                <PostDetail
+                <SeePost
                     postTitle={postTitle}
                     {...data}
                 />

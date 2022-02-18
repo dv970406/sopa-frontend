@@ -35,9 +35,10 @@ export interface IPostDetail extends IPostDisplay {
     comments: {
         id: number;
         comment: string;
-        user: IUserInfo
-    }
-    user: IUserInfo
+        user: IUserInfo;
+    };
+    user: IUserInfo;
+    openChatLink: string;
 }
 
 // 스킬셋 관련 state
