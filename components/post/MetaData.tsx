@@ -4,6 +4,8 @@
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import { client } from '@utils/apollo';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface IMetaData {
     postId: number;
@@ -23,13 +25,14 @@ const TOGGLE_LIKE_MUTATION = gql`
 `;
 
 export default function MetaData({ postId, readCount, commentCount, likeCount, isLiked }: IMetaData) {
-    const afterToggleLike: MutationUpdaterFn = (cache, result) => {
-        const { data: { toggleLike: { ok, error } } }: any = result
+
+    const afterToggleLike: MutationUpdaterFn = (cache, { data }) => {
+        const { toggleLike: { ok, error } }: any = data;
         if (!ok) {
             alert(error);
             return;
         }
-
+        console.log(likeCount, isLiked);
         cache.modify({
             id: `Post:${postId}`,
             fields: {
@@ -37,7 +40,7 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
                     return !prev
                 },
                 likeCount(prev) {
-                    return isLiked ? prev - 1 : prev + 1
+                    return isLiked ? likeCount - 1 : likeCount + 1
                 },
             }
         })
@@ -50,7 +53,11 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
         }
     })
 
-    const executeLikeMutation = () => toggleLike()
+    const executeLikeMutation = (event: React.FormEvent<HTMLDivElement>) => {
+        event.stopPropagation();
+        toggleLike();
+    }
+
     return (
         <div
             className={`
@@ -91,6 +98,7 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
                 </svg>
                 <span>{commentCount}</span>
             </div>
+
             <div
                 className={`
                     flex flex-col items-center
@@ -117,7 +125,9 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 )}
-                <span>{likeCount}</span>
+                <span>
+                    {likeCount}
+                </span>
             </div>
         </div>
     )

@@ -20,6 +20,7 @@ export interface IPostDisplay {
     id: number;
     title: string;
     description: string;
+    user: IUserInfo;
     likeCount: number;
     isLiked: boolean;
     commentCount: number;
@@ -37,7 +38,6 @@ export interface IPostDetail extends IPostDisplay {
         comment: string;
         user: IUserInfo;
     };
-    user: IUserInfo;
     openChatLink: string;
 }
 

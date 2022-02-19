@@ -7,7 +7,7 @@ import { postsState } from '@utils/atoms';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-export default function PostSorting() {
+export default function SortPost() {
     const [focusTab, setFocusTab] = useState(false);
     const setPosts = useSetRecoilState(postsState);
 

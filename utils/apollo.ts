@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.18
  */
 
 
@@ -42,4 +42,3 @@ export const client = new ApolloClient({
     link: authLink.concat(errorInfo).concat(httpLink),
     cache: new InMemoryCache(),
 })
-
