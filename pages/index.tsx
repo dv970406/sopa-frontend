@@ -29,12 +29,10 @@ const Home = ({ requestedPosts }: IHome) => {
   const [posts, setPosts] = useRecoilState(postsState);
   const { seeMyProfile } = useMyInfo();
   const resetSelectedSkill = useResetRecoilState(selectedSkillsState);
-  const { cache } = useApolloClient()
 
   useEffect(() => {
     resetSelectedSkill();
     setPosts(requestedPosts);
-
   }, []);
 
   return (
@@ -50,7 +48,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await client.query({
     query: SEE_POSTS_QUERY,
   });
-  client.cache.extract()
   return {
     props: {
       requestedPosts: data.seePosts,

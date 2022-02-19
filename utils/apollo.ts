@@ -1,10 +1,9 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.18
+ * 수정일: 2022.02.19
  */
 
-
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context"
 import { onError } from "@apollo/client/link/error"
 

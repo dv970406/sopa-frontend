@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: ------
+ * 수정일: 2022.02.19
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
@@ -52,8 +52,8 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                     onClick={() => goToPostDetail()}
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                     className={`
-                        w-8 h-8 cursor-pointer text-fuchsia-200 transition-colors
-                        hover:text-fuchsia-400
+                        w-8 h-8 cursor-pointer text-fuchsia-300 transition-colors
+                        hover:text-fuchsia-500
                     `}
                 >
                     <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z" />
@@ -73,13 +73,18 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                     w-full
                 `}
             >
-                <MetaData
-                    postId={semiDetail?.id}
-                    readCount={semiDetail?.readCount}
-                    commentCount={semiDetail?.commentCount}
-                    likeCount={semiDetail?.likeCount}
-                    isLiked={semiDetail?.isLiked}
-                />
+                <div
+                    className={`
+                        space-x-2
+                        grid grid-cols-4
+                    `}
+                >
+                    <SkillImage
+                        frontends={semiDetail.frontends}
+                        backends={semiDetail.backends}
+                        apps={semiDetail.apps}
+                    />
+                </div>
                 <p
                     className={`
                         text-lg font-semibold
