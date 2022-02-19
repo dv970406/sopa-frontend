@@ -28,7 +28,6 @@ export default function PostDetail() {
             postId: +postId!
         },
     })
-
     return (
         <MainLayout title={`${postTitle || data?.seePost?.title}`}>
             <div

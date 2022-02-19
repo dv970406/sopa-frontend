@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.18
+ * 수정일: 2022.02.19
  */
 
 export interface IFetchedSkillsInfo {
@@ -13,10 +13,15 @@ export interface IUserInfo {
     id: number;
     name: string;
 }
+export interface ICommentInfo {
+    id: number;
+    comment: string;
+    user: IUserInfo;
+}
 
 // 게시글 관련
 export interface IPostDisplay {
-    __typename?: string;
+    //__typename?: string;
     id: number;
     title: string;
     description: string;
@@ -33,11 +38,7 @@ export interface IPostDisplay {
     updatedAt: string;
 }
 export interface IPostDetail extends IPostDisplay {
-    comments: {
-        id: number;
-        comment: string;
-        user: IUserInfo;
-    };
+    comments: ICommentInfo[];
     openChatLink: string;
 }
 

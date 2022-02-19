@@ -4,6 +4,8 @@
  */
 
 import { IPostDetail } from '@utils/types/interfaces';
+import CommentDisplay from './CommentDisplay';
+import Comments from './Comments';
 import MetaData from './MetaData';
 import OpenChatLink from './OpenChatLink';
 import SkillImage from './SkillImage';
@@ -15,7 +17,6 @@ interface IPostDetailComponent {
 
 
 export default function SeePost({ postTitle, seePost }: IPostDetailComponent) {
-
     return (
         <>
             <h1
@@ -60,6 +61,10 @@ export default function SeePost({ postTitle, seePost }: IPostDetailComponent) {
                 </>
             ) : "처리중입니다..."
             }
+            <Comments postId={seePost?.id} />
+            {seePost?.comments?.map(comment =>
+                <CommentDisplay key={comment.id} {...comment} />
+            )}
         </>
     )
 }

@@ -75,3 +75,14 @@ export const POST_DETAIL_FRAGMENT = gql`
         }
     }
 `
+
+export const COMMENT_FRAGMENT = gql`
+    fragment CommentFragment on Comment{
+        id
+        comment
+        user{
+            id
+            name
+        }
+    }
+`
