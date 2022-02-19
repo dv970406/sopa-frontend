@@ -1,12 +1,13 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: ------
+ * 수정일: 2022.02.19
  */
 
 import { IPostDetail } from '@utils/types/interfaces';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import CommentDisplay from './CommentDisplay';
+import Comments from './Comments';
 import MetaData from './MetaData';
+import OpenChatLink from './OpenChatLink';
 import SkillImage from './SkillImage';
 
 interface IPostDetailComponent {
@@ -14,29 +15,8 @@ interface IPostDetailComponent {
     seePost: IPostDetail
 }
 
-const linkVar = {
-    invisible: {
-        x: -200,
-        opacity: 0,
-        scale: 0.2
-    },
-    visible: {
-        x: 0,
-        opacity: 1,
-        scale: 1
-    },
-    exit: {
-        x: -200,
-        opacity: 0,
-        scale: 0.2,
-
-    }
-}
 
 export default function SeePost({ postTitle, seePost }: IPostDetailComponent) {
-    const [showing, setShowing] = useState(false);
-    const getShowing = (bool: boolean) => setShowing(bool);
-
     return (
         <>
             <h1
@@ -64,50 +44,27 @@ export default function SeePost({ postTitle, seePost }: IPostDetailComponent) {
                     <p>{seePost?.description ?? "zz"}</p>
                     <div
                         className={`
-                            flex justify-between
+                            flex 
+                            ${seePost?.openChatLink ? "justify-between" : "justify-end"}
                         `}
                     >
-                        {seePost?.openChatLink ? (
-                            <motion.div
-                                className={`
-                                    flex space-x-2
-                                    w-12 h-12
-                                    hover:scale-110 transition-all
-                                    cursor-pointer 
-                                `}
-                                onHoverStart={() => getShowing(true)}
-                                onHoverEnd={() => getShowing(false)}
-                            >
-                                <img
-                                    src="/kakao.png"
-                                />
-                                <AnimatePresence>
-                                    {showing ? (
-                                        <motion.div
-                                            variants={linkVar}
-                                            initial="invisible"
-                                            animate="visible"
-                                            exit="exit"
-                                        >
-                                            {seePost.openChatLink}
-                                        </motion.div>
-                                    ) : null}
-                                </AnimatePresence>
-                            </motion.div>
-                        ) : null}
+                        {seePost?.openChatLink ? <OpenChatLink openChatLink={seePost?.openChatLink} /> : null}
                         <MetaData
+                            isSeePost={true}
                             postId={seePost?.id}
                             readCount={seePost?.readCount}
                             commentCount={seePost?.commentCount}
                             likeCount={seePost?.likeCount}
                             isLiked={seePost?.isLiked}
                         />
-
                     </div>
-
                 </>
             ) : "처리중입니다..."
             }
+            <Comments postId={seePost?.id} />
+            {seePost?.comments?.map(comment =>
+                <CommentDisplay key={comment.id} {...comment} />
+            )}
         </>
     )
 }

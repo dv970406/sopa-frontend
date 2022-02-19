@@ -4,24 +4,14 @@
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
-import { useRouter } from 'next/router';
 import MetaData from './MetaData';
 import SkillImage from './SkillImage';
 
-export default function PostDisplay(
+export default function DisplayPost(
     { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, updatedAt }: IPostDisplay
 ) {
-    const router = useRouter();
-    const goToPostDetail = () => router.push({
-        pathname: `/post/${id}`,
-        query: {
-            title,
-        }
-    }, `/post/${id}`);
-
     return (
         <div
-            onClick={goToPostDetail}
             className={`
                 border-2 border-fuchsia-100 rounded-lg p-6
                 w-full

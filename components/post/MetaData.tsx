@@ -1,11 +1,13 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: ------
+ * 수정일: 2022.02.19
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import React from 'react';
 
 interface IMetaData {
+    isSeePost?: boolean;
     postId: number;
     readCount: number;
     commentCount: number;
@@ -22,9 +24,9 @@ const TOGGLE_LIKE_MUTATION = gql`
     }
 `;
 
-export default function MetaData({ postId, readCount, commentCount, likeCount, isLiked }: IMetaData) {
-    const afterToggleLike: MutationUpdaterFn = (cache, result) => {
-        const { data: { toggleLike: { ok, error } } }: any = result
+export default function MetaData({ isSeePost = false, postId, readCount, commentCount, likeCount, isLiked }: IMetaData) {
+    const afterToggleLike: MutationUpdaterFn = (cache, { data }) => {
+        const { toggleLike: { ok, error } }: any = data;
         if (!ok) {
             alert(error);
             return;
@@ -41,6 +43,7 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
                 },
             }
         })
+
     };
 
     const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION, {
@@ -50,7 +53,6 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
         }
     })
 
-    const executeLikeMutation = () => toggleLike()
     return (
         <div
             className={`
@@ -91,34 +93,48 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
                 </svg>
                 <span>{commentCount}</span>
             </div>
+
             <div
                 className={`
                     flex flex-col items-center
                 `}
-                onClick={executeLikeMutation}
+                onClick={() => toggleLike()}
             >
-                {isLiked ? (
+                {isSeePost ? (
+                    isLiked ? (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            className={`
+                                w-8 h-8 cursor-pointer text-fuchsia-500 hover:scale-110 transition-all
+                            `}
+                        >
+                            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                        </svg>
+                    ) : (
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            className={`
+                                w-8 h-8 cursor-pointer hover:scale-110 transition-all
+                                stroke-fuchsia-500 stroke-1 hover:stroke-[1.5px]
+                            `}
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    )
+                ) : (
                     <svg
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                         className={`
-                            w-8 h-8 cursor-pointer text-fuchsia-500 hover:scale-110 transition-all
+                            w-8 h-8 text-fuchsia-600
                         `}
                     >
                         <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                     </svg>
-                ) : (
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        className={`
-                            w-8 h-8 cursor-pointer hover:scale-110 transition-all
-                            stroke-fuchsia-500 stroke-1 hover:stroke-[1.5px]
-                        `}
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
                 )}
-                <span>{likeCount}</span>
+                <span>
+                    {likeCount}
+                </span>
             </div>
-        </div>
+        </div >
     )
 }
