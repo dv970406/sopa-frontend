@@ -22,11 +22,11 @@ interface IForm {
     comment: string;
 }
 
-interface ICreateComment {
+interface ICreateCommentComponent {
     postId: number;
 }
 
-export default function CreateComment({ postId }: ICreateComment) {
+export default function CreateComment({ postId }: ICreateCommentComponent) {
     const [checkTextCount, setCheckTextCount] = useState(0);
     const { register, handleSubmit, setValue } = useForm<IForm>();
 

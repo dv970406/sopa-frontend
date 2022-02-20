@@ -3,20 +3,19 @@
  * 수정일: 2022.02.20
  */
 
-import { editCommentIdState } from '@utils/atoms';
 import { ICommentInfo } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
-import React from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { useState } from 'react';
 import DeleteCommentBtn from './DeleteCommentBtn';
 import EditComment from './EditComment';
 import EditCommentBtn from './EditCommentBtn';
 
-export default function DisplayComment({ postId, id, comment, user }: ICommentInfo) {
-    const editCommentId = useRecoilValue(editCommentIdState);
+function DisplayComment({ postId, id, comment, user }: ICommentInfo) {
+    // 전역관리 recoil을 사용하니까 메모이징을 해도 전역적으로 state가 바뀌어서 리렌더가 불필요한 컴포넌트도 리렌더링되므로 그냥 지역관리 state를 사용한다.
+    const [editMode, setEditMode] = useState<boolean>(false);
 
     const { seeMyProfile } = useMyInfo();
-    console.log(editCommentId)
+
     return (
         <div
             className={`
@@ -40,19 +39,21 @@ export default function DisplayComment({ postId, id, comment, user }: ICommentIn
                 {seeMyProfile?.id === user.id ? (
                     <div
                         className={`
-                            lex space-x-3
+                            flex space-x-3
                         `}
                     >
-                        <EditCommentBtn commentId={id} />
+                        <EditCommentBtn setEditMode={setEditMode} />
                         <DeleteCommentBtn postId={postId!} commentId={id} />
                     </div>
                 ) : null}
             </div>
             <div>
-                {id === editCommentId ? (
-                    <EditComment postId={postId!} comment={comment} commentId={id} />
+                {editMode ? (
+                    <EditComment setEditMode={setEditMode} postId={postId!} comment={comment} commentId={id} />
                 ) : comment}
             </div>
         </div>
     )
 }
+
+export default React.memo(DisplayComment)

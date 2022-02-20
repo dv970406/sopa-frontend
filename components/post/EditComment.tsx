@@ -4,15 +4,14 @@
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
-import { editCommentIdState } from '@utils/atoms';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
 
 interface IEditCommentForm {
     editedComment: string;
 }
 interface IEditCommentComponent {
+    setEditMode(current: boolean): void;
     postId: number;
     comment: string;
     commentId: number;
@@ -26,8 +25,7 @@ const EDIT_COMMENT_MUTATION = gql`
         }
     }
 `
-export default function EditComment({ postId, comment, commentId }: IEditCommentComponent) {
-    const setEditCommentId = useSetRecoilState(editCommentIdState);
+export default function EditComment({ setEditMode, comment, commentId }: IEditCommentComponent) {
     const { register, handleSubmit, getValues } = useForm<IEditCommentForm>();
     const updateEditComment: MutationUpdaterFn = (cache, { data }) => {
         const { editComment: { ok, error } }: any = data;
@@ -46,7 +44,7 @@ export default function EditComment({ postId, comment, commentId }: IEditComment
                 }
             }
         })
-        setEditCommentId(0);
+        setEditMode(false);
     }
     const [editCommentMutation, { loading }] = useMutation(EDIT_COMMENT_MUTATION, {
         update: updateEditComment

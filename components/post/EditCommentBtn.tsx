@@ -3,20 +3,17 @@
  * 수정일: ------
  */
 
-import { editCommentIdState } from '@utils/atoms'
 import React from 'react';
-import { useRecoilState } from 'recoil'
 
 interface IEditCommentBtnComponent {
-    commentId: number;
+    setEditMode(current: any): void;
 }
 
-export default function EditCommentBtn({ commentId }: IEditCommentBtnComponent) {
-    const [editCommentId, setEditCommentId] = useRecoilState(editCommentIdState);
+export default function EditCommentBtn({ setEditMode }: IEditCommentBtnComponent) {
 
     return (
         <button
-            onClick={() => editCommentId === 0 ? setEditCommentId(commentId) : setEditCommentId(0)}
+            onClick={() => setEditMode((current: any) => !current)}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"
