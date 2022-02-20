@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.18
+ * 수정일: 2022.02.20
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
@@ -24,6 +24,7 @@ export default function DisplayPost(
             <div
                 className={`
                     flex flex-wrap gap-6
+                    justify-center
                 `}
             >
                 <SkillImage

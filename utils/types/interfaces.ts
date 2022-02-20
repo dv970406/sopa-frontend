@@ -14,6 +14,7 @@ export interface IUserInfo {
     name: string;
 }
 export interface ICommentInfo {
+    postId?: number;
     id: number;
     comment: string;
     user: IUserInfo;

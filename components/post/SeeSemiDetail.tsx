@@ -1,12 +1,11 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.19
+ * 수정일: 2022.02.20
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
-import MetaData from './MetaData';
 import SkillImage from './SkillImage';
 
 interface ISeeSemiDetail {
@@ -77,6 +76,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                     className={`
                         space-x-2
                         grid grid-cols-4
+                        gap-2
                     `}
                 >
                     <SkillImage
