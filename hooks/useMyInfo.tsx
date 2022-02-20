@@ -1,13 +1,12 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.20
  */
 
 import { gql, useQuery } from '@apollo/client'
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 interface IMyInfo {
     seeMyProfile: {
@@ -38,13 +37,19 @@ export default function useMyInfo() {
             //document.cookie = `TOKEN=; expires=${new Date().toUTCString()};`;
             localStorage.removeItem("TOKEN");
             setToken("");
-            router.push("/");
+
+            // push로 뒤로가기 히스토리 스택을 쌓을 필요가 없다.
+            router.replace("/");
         }
     }
 
+    /* 
+        apollo가 알아서 요청 후에는 cache에 있는 데이터를 가져다 쓰는 cache-first가 기본값이므로
+        별다른 fetchPolicy 설정은 필요없는 듯
+    */
     const { data: myInfoData } = useQuery(SEE_MY_PROFILE_QUERY, {
         skip: !token,
-        onCompleted: myInfoDataCompleted
+        onCompleted: myInfoDataCompleted,
     })
 
     return {

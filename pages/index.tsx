@@ -1,15 +1,14 @@
-import { gql, useApolloClient } from '@apollo/client'
+import { gql } from '@apollo/client'
 import SkillBoards from '@components/home/SkillBoards'
 import MainLayout from '@components/shared/MainLayout'
-import useMyInfo from 'hooks/useMyInfo'
 import type { GetServerSideProps } from 'next'
 import { client } from '@utils/apollo'
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
 import { IPostDisplay } from '@utils/types/interfaces'
 import SeePosts from '@components/post/SeePosts'
 import { useEffect } from 'react'
-import { useRecoilState, useResetRecoilState } from 'recoil'
-import { postsState, selectedSkillsState } from '@utils/atoms'
+import { useRecoilState } from 'recoil'
+import { postsState } from '@utils/atoms'
 
 interface IHome {
   requestedPosts: IPostDisplay[];
@@ -27,11 +26,8 @@ const SEE_POSTS_QUERY = gql`
 
 const Home = ({ requestedPosts }: IHome) => {
   const [posts, setPosts] = useRecoilState(postsState);
-  const { seeMyProfile } = useMyInfo();
-  const resetSelectedSkill = useResetRecoilState(selectedSkillsState);
 
   useEffect(() => {
-    resetSelectedSkill();
     setPosts(requestedPosts);
   }, []);
 

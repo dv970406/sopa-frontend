@@ -1,11 +1,11 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.09
+ * 수정일: 2022.02.20
  */
 
 interface IButton {
     text: string;
-    onClick(): void;
+    onClick?(): void;
 };
 
 export default function Button({ text, onClick }: IButton) {
@@ -13,8 +13,9 @@ export default function Button({ text, onClick }: IButton) {
         <button
             className="
                 flex justify-center items-center
-                h-4 bg-fuchsia-500
-                rounded-xl px-5 py-4 
+                bg-fuchsia-400 opacity-60
+                hover:opacity-100 transition
+                rounded-lg px-4 py-2
             "
             onClick={onClick}
         >
@@ -22,5 +23,6 @@ export default function Button({ text, onClick }: IButton) {
                 {text}
             </span>
         </button>
+
     )
 }

@@ -1,14 +1,14 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.19
+ * 수정일: 2022.02.20
  */
 
 import { IPostDetail } from '@utils/types/interfaces';
-import CommentDisplay from './CommentDisplay';
-import Comments from './Comments';
 import MetaData from './MetaData';
 import OpenChatLink from './OpenChatLink';
 import SkillImage from './SkillImage';
+import DisplayComment from './DisplayComment';
+import CreateComment from './CreateComment';
 
 interface IPostDetailComponent {
     postTitle: string;
@@ -61,10 +61,17 @@ export default function SeePost({ postTitle, seePost }: IPostDetailComponent) {
                 </>
             ) : "처리중입니다..."
             }
-            <Comments postId={seePost?.id} />
-            {seePost?.comments?.map(comment =>
-                <CommentDisplay key={comment.id} {...comment} />
-            )}
+
+            <CreateComment postId={seePost?.id} />
+            <div
+                className={`
+                    space-y-4
+                `}
+            >
+                {seePost?.comments?.map(comment =>
+                    <DisplayComment key={comment.id} {...comment} />
+                )}
+            </div>
         </>
     )
 }
