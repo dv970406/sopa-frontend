@@ -15,7 +15,6 @@ function DisplayComment({ postId, id, comment, user }: ICommentInfo) {
     const [editMode, setEditMode] = useState<boolean>(false);
 
     const { seeMyProfile } = useMyInfo();
-
     return (
         <div
             className={`

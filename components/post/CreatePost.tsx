@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.02.20
+ * 수정일: 2022.02.21
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -15,7 +15,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 interface IForm {
     title: string;
     description?: string;
-    link?: string;
+    openChatLink?: string;
 }
 
 const CREATE_POST_MUTATION = gql`
@@ -26,7 +26,6 @@ const CREATE_POST_MUTATION = gql`
         }
     }
 `
-
 
 export default function CreatePost() {
     const router = useRouter()
@@ -61,7 +60,7 @@ export default function CreatePost() {
         update: updateCreatePost
     })
 
-    const onValid = ({ title, description, link }: IForm) => {
+    const onValid = ({ title, description, openChatLink }: IForm) => {
         if (loading) return;
         if (selectedSkillsToUpload.length === 0) {
             alert("스킬을 하나 이상 선택해주세요!");
@@ -77,7 +76,7 @@ export default function CreatePost() {
                 title,
                 skills: JSON.stringify(skills),
                 description,
-                openChatLink: link,
+                openChatLink
             }
         })
     }
@@ -98,6 +97,7 @@ export default function CreatePost() {
                     }
                 })}
                 maxLength={32}
+                required
             />
 
             <PositionSelector />
@@ -111,7 +111,7 @@ export default function CreatePost() {
 
             <Input
                 type="link"
-                register={register("link", {
+                register={register("openChatLink", {
                     maxLength: {
                         value: 70,
                         message: "링크는 70자 이내여야 합니다."
@@ -130,7 +130,7 @@ export default function CreatePost() {
             />
 
             <FormButton
-                disabled={loading || !watch("title" || "description")}
+                disabled={loading || !watch("title") || selectedSkillsToUpload.length === 0}
                 loading={loading}
                 text="게시글 업로드"
             />

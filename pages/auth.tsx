@@ -10,7 +10,7 @@ import SignUp from '@components/auth/SignUp';
 import Login from '@components/auth/Login';
 import LoginOrSignUp from '@components/form/LoginOrSignUp';
 
-export default function Authentication() {
+export default function AuthenticationPage() {
     const loginMode = useRecoilValue(loginModeState);
 
     return (

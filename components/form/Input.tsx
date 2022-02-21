@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.18
+ * 수정일: 2022.02.21
  */
 
 import React from 'react';
@@ -85,7 +85,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                             placeholder:text-lg placeholder-gray-400
                             focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
                             w-full
-                            text-sm
+                            text-md
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
 
@@ -103,6 +103,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                     </label>
                     <textarea
                         id={type}
+                        {...register}
                         className={`
                             p-1 shadow-sm
                             border-b-2 border-b-gray-300  

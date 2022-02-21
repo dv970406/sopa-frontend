@@ -1,14 +1,14 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.20
+ * 수정일: 2022.02.21
  */
 
 import { IPostDetail } from '@utils/types/interfaces';
-import MetaData from './MetaData';
-import OpenChatLink from './OpenChatLink';
-import SkillImage from './SkillImage';
-import DisplayComment from './DisplayComment';
-import CreateComment from './CreateComment';
+import EditPost from './EditPost';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { postEditMode } from '@utils/atoms';
+import { useEffect } from 'react';
+import SeePostDetail from './SeePostDetail';
 
 interface IPostDetailComponent {
     postTitle: string;
@@ -17,61 +17,25 @@ interface IPostDetailComponent {
 
 
 export default function SeePost({ postTitle, seePost }: IPostDetailComponent) {
-    return (
-        <>
-            <h1
-                className={`
-                    text-4xl font-bold
-                    border-b-2 border-b-fuchsia-400 w-full
-                    p-3
-                `}
-            >
-                {postTitle || seePost?.title}
-            </h1>
-            {seePost ? (
-                <>
-                    <div
-                        className={`
-                        flex justify-center gap-5
-                    `}
-                    >
-                        <SkillImage
-                            frontends={seePost?.frontends}
-                            backends={seePost?.backends}
-                            apps={seePost?.apps}
-                        />
-                    </div>
-                    <p>{seePost?.description ?? "zz"}</p>
-                    <div
-                        className={`
-                            flex 
-                            ${seePost?.openChatLink ? "justify-between" : "justify-end"}
-                        `}
-                    >
-                        {seePost?.openChatLink ? <OpenChatLink openChatLink={seePost?.openChatLink} /> : null}
-                        <MetaData
-                            isSeePost={true}
-                            postId={seePost?.id}
-                            readCount={seePost?.readCount}
-                            commentCount={seePost?.commentCount}
-                            likeCount={seePost?.likeCount}
-                            isLiked={seePost?.isLiked}
-                        />
-                    </div>
-                </>
-            ) : "처리중입니다..."
-            }
+    const isPostEditMode = useRecoilValue(postEditMode);
+    const resetIsPostEditMode = useResetRecoilState(postEditMode);
 
-            <CreateComment postId={seePost?.id} />
-            <div
-                className={`
-                    space-y-4
-                `}
-            >
-                {seePost?.comments?.map(comment =>
-                    <DisplayComment key={comment.id} {...comment} />
-                )}
-            </div>
-        </>
+    useEffect(() => {
+        resetIsPostEditMode();
+    }, []);
+    return (
+        isPostEditMode ? (
+            <EditPost
+                postId={seePost?.id}
+                title={seePost?.title}
+                description={seePost?.description}
+                openChatLink={seePost?.openChatLink}
+                frontends={seePost?.frontends}
+                backends={seePost?.backends}
+                apps={seePost?.apps}
+            />
+        ) : (
+            <SeePostDetail pageTitle={postTitle} seePost={seePost} />
+        )
     )
 }

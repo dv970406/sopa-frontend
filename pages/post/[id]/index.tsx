@@ -1,5 +1,5 @@
 /**
- * 생성일: 2022.02.18
+ * 생성일: 2022.02.21
  * 수정일: ------
  */
 
@@ -18,7 +18,7 @@ const SEE_POST_QUERY = gql`
     ${POST_DETAIL_FRAGMENT}
 `
 
-export default function PostDetail() {
+export default function PostDetailPage() {
     const router = useRouter();
     const { id: postId, title: postTitle } = router.query;
 

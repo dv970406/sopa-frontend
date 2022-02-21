@@ -9,7 +9,7 @@ import { useResetRecoilState } from "recoil"
 import { skillsState } from "@utils/atoms"
 import { useEffect } from "react"
 
-export default function PostUpload() {
+export default function PostUploadPage() {
     const resetSkillsState = useResetRecoilState(skillsState)
 
     useEffect(() => {

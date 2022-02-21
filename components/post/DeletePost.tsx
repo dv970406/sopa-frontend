@@ -1,0 +1,61 @@
+/**
+ * 생성일: 2022.02.21
+ * 수정일: ------
+ */
+
+import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import { useRouter } from 'next/router'
+
+const DELETE_POST_MUTATION = gql`
+    mutation deletePost($postId:Int!){
+        deletePost(postId:$postId){
+            ok
+            error
+        }
+    }
+`
+
+interface IDeletePostComponent {
+    postId: number;
+}
+
+export default function DeletePost({ postId }: IDeletePostComponent) {
+    const router = useRouter();
+
+    const updateDeletePost: MutationUpdaterFn = (cache, { data }) => {
+        const { deletePost: { ok, error } }: any = data
+        if (!ok) {
+            alert(error);
+            return;
+        };
+        cache.evict({
+            id: `Post:${postId}`
+        });
+
+        // 삭제 후 이전 페이지로 못돌아 가도록 replace로 설정
+        router.replace("/");
+    }
+    const [deletePostMutation] = useMutation(DELETE_POST_MUTATION, {
+        variables: {
+            postId
+        },
+        update: updateDeletePost
+    })
+    return (
+        <button
+            onClick={() => deletePostMutation()}
+            className={`
+                p-1
+            `}
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                className={`
+                h-5 w-5 text-red-400 hover:text-red-500 transition
+            `}
+            >
+                <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+        </button>
+    )
+}
