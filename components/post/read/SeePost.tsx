@@ -4,7 +4,7 @@
  */
 
 import { IPostDetail } from '@utils/types/interfaces';
-import EditPost from './EditPost';
+import EditPost from '../edit/EditPost';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { postEditMode } from '@utils/atoms';
 import { useEffect } from 'react';

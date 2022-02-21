@@ -4,7 +4,7 @@
  */
 
 import { gql, useQuery } from '@apollo/client';
-import SeePost from '@components/post/SeePost';
+import SeePost from '@components/post/read/SeePost';
 import MainLayout from '@components/shared/MainLayout';
 import { POST_DETAIL_FRAGMENT } from '@utils/fragments';
 import { useRouter } from 'next/router'

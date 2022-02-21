@@ -6,7 +6,7 @@
 import { IPostDisplay } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
-import SkillImage from './SkillImage';
+import SkillImage from '../SkillImage';
 
 interface ISeeSemiDetail {
     semiDetail: IPostDisplay

@@ -10,7 +10,7 @@ import { postEditMode } from '@utils/atoms';
 import { IFetchedSkillsInfo } from '@utils/types/interfaces';
 import { useForm } from 'react-hook-form'
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import SkillImage from './SkillImage';
+import SkillImage from '../SkillImage';
 
 interface IEditPostComponent {
     postId: number;

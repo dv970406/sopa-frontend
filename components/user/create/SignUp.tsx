@@ -7,9 +7,9 @@ import { gql, useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
 import { loginModeState } from '@utils/atoms';
-import Form from '../form/Form';
-import FormButton from '../form/FormButton';
-import Input from '../form/Input';
+import Form from '@components/form/Form';
+import Input from '@components/form/Input';
+import FormButton from '@components/form/FormButton';
 
 interface IForm {
     name: string;

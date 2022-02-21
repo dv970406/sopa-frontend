@@ -3,8 +3,8 @@
  * 수정일: ------
  */
 
-import DisplayPost from '@components/post/DisplayPost'
-import SortPost from '@components/post/SortPost'
+import DisplayPost from '@components/post/read/DisplayPost'
+import SortPost from '@components/post/read/SortPost'
 import { IPostDisplay } from '@utils/types/interfaces';
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState } from 'react';

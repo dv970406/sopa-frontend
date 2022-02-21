@@ -3,8 +3,8 @@
  * 수정일: ------
  */
 
-import DeletePost from './DeletePost'
-import EditPostBtn from './EditPostBtn'
+import DeletePost from './delete/DeletePost'
+import EditPostBtn from './edit/EditPostBtn'
 
 interface IMenuBtnComponent {
     postId: number;

@@ -4,8 +4,8 @@
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
-import MetaData from './MetaData';
-import SkillImage from './SkillImage';
+import MetaData from '../MetaData';
+import SkillImage from '../SkillImage';
 
 export default function DisplayPost(
     { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, updatedAt }: IPostDisplay

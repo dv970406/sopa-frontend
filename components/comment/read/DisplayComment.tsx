@@ -6,9 +6,9 @@
 import { ICommentInfo } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import React, { useState } from 'react';
-import DeleteCommentBtn from './DeleteCommentBtn';
-import EditComment from './EditComment';
-import EditCommentBtn from './EditCommentBtn';
+import DeleteCommentBtn from '../delete/DeleteCommentBtn';
+import EditComment from '../edit/EditComment';
+import EditCommentBtn from '../edit/EditCommentBtn';
 
 function DisplayComment({ postId, id, comment, user }: ICommentInfo) {
     // 전역관리 recoil을 사용하니까 메모이징을 해도 전역적으로 state가 바뀌어서 리렌더가 불필요한 컴포넌트도 리렌더링되므로 그냥 지역관리 state를 사용한다.

@@ -4,7 +4,7 @@
  */
 
 import MainLayout from '@components/shared/MainLayout'
-import EditUser from '@components/user/EditUser'
+import EditUser from '@components/user/edit/EditUser'
 import useMyInfo from 'hooks/useMyInfo';
 
 export default function UserEditPage() {

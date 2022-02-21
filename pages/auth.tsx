@@ -6,9 +6,9 @@
 import MainLayout from '@components/shared/MainLayout';
 import { useRecoilValue } from 'recoil';
 import { loginModeState } from '@utils/atoms';
-import SignUp from '@components/auth/SignUp';
-import Login from '@components/auth/Login';
+import Login from '@components/user/Login';
 import LoginOrSignUp from '@components/form/LoginOrSignUp';
+import SignUp from '@components/user/create/SignUp';
 
 export default function AuthenticationPage() {
     const loginMode = useRecoilValue(loginModeState);

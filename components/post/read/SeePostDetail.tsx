@@ -3,12 +3,12 @@
  * 수정일: ------
  */
 
-import MetaData from './MetaData';
-import OpenChatLink from './OpenChatLink';
-import SkillImage from './SkillImage';
-import DisplayComment from './DisplayComment';
-import CreateComment from './CreateComment';
-import MenuBtn from './MenuBtn';
+import MetaData from '../MetaData';
+import OpenChatLink from '../OpenChatLink';
+import SkillImage from '../SkillImage';
+import DisplayComment from '../../comment/read/DisplayComment';
+import CreateComment from '../../comment/create/CreateComment';
+import MenuBtn from '../MenuBtn';
 import useMyInfo from 'hooks/useMyInfo';
 import { IPostDetail } from '@utils/types/interfaces';
 
