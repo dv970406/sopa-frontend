@@ -3,11 +3,11 @@
  * 수정일: ------
  */
 
-import DisplayPost from '@components/post/DisplayPost'
-import SortPost from '@components/post/SortPost'
+import DisplayPost from '@components/post/read/DisplayPost'
 import { IPostDisplay } from '@utils/types/interfaces';
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState } from 'react';
+import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
 
 const semiDetailVar = {

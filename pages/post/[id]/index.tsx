@@ -1,10 +1,10 @@
 /**
- * 생성일: 2022.02.18
+ * 생성일: 2022.02.21
  * 수정일: ------
  */
 
 import { gql, useQuery } from '@apollo/client';
-import SeePost from '@components/post/SeePost';
+import SeePost from '@components/post/read/SeePost';
 import MainLayout from '@components/shared/MainLayout';
 import { POST_DETAIL_FRAGMENT } from '@utils/fragments';
 import { useRouter } from 'next/router'
@@ -18,7 +18,7 @@ const SEE_POST_QUERY = gql`
     ${POST_DETAIL_FRAGMENT}
 `
 
-export default function PostDetail() {
+export default function PostDetailPage() {
     const router = useRouter();
     const { id: postId, title: postTitle } = router.query;
 

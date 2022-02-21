@@ -84,6 +84,7 @@ export default function EditUser() {
                     },
                 })}
                 defaultValue={seeMyProfile?.name}
+                required
             />
             <Input
                 disabled={true}

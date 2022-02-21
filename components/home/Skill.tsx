@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.21
  */
 
 import { motion } from 'framer-motion'
@@ -25,7 +25,6 @@ const skillVar = {
         }
     }
 }
-
 
 
 function Skill({ uploadMode = false, index, position, skill, skillImage, isSelected }: ISkillInfo) {

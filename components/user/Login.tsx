@@ -12,7 +12,7 @@ import Form from '../form/Form';
 import FormButton from '../form/FormButton';
 import Input from '../form/Input';
 import { useState } from 'react';
-import SocialLogin from './SocialLogin';
+import SocialLogin from './create/SocialLogin';
 
 interface IForm {
     email: string;

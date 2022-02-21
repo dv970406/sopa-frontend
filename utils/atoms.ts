@@ -14,12 +14,10 @@ export const loginModeState = atom<boolean>({
     default: true
 });
 
-// 어떤 comment를 수정할 것인지 판별하기 위한 state
-export const editCommentIdState = atom<number>({
-    key: "editCommentIdState",
-    default: 0
+export const postEditMode = atom<boolean>({
+    key: "isPostEditMode",
+    default: false
 })
-
 
 // 앱이 렌더되면 쿠키에서 토큰을 꺼내 state에 저장한다.
 export const tokenState = atom<string | null>({

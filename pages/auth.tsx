@@ -6,17 +6,17 @@
 import MainLayout from '@components/shared/MainLayout';
 import { useRecoilValue } from 'recoil';
 import { loginModeState } from '@utils/atoms';
-import SignUp from '@components/auth/SignUp';
-import Login from '@components/auth/Login';
+import Login from '@components/user/Login';
 import LoginOrSignUp from '@components/form/LoginOrSignUp';
+import CreateUser from '@components/user/create/CreateUser';
 
-export default function Authentication() {
+export default function AuthenticationPage() {
     const loginMode = useRecoilValue(loginModeState);
 
     return (
         <MainLayout title="로그인">
             <LoginOrSignUp leftText='로그인' rightText='회원가입' />
-            {loginMode ? <Login /> : <SignUp />}
+            {loginMode ? <Login /> : <CreateUser />}
         </MainLayout>
     )
 }
