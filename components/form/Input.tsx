@@ -80,7 +80,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                         {...register}
                         disabled={disabled}
                         className={`
-                            p-2 shadow-sm 
+                            p-2 shadow-sm
                             border-b-2 border-b-gray-300 
                             placeholder:text-lg placeholder-gray-400
                             focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500

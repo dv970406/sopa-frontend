@@ -6,6 +6,7 @@
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
+import Button from '@components/shared/Button';
 import { postEditMode } from '@utils/atoms';
 import { IFetchedSkillsInfo } from '@utils/types/interfaces';
 import { useForm } from 'react-hook-form'
@@ -97,15 +98,10 @@ export default function EditPost({ postId, title, description, openChatLink, app
             `}
             onSubmit={handleSubmit(onValid)}
         >
-            <button
+            <Button
+                text="수정 취소"
                 onClick={resetIsPostEditMode}
-                className={`
-                    bg-fuchsia-300 hover:bg-fuchsia-400 px-3 py-2 rounded-lg transition
-                    text-white font-bold
-                `}
-            >
-                수정 취소
-            </button>
+            />
             <Input
                 type="title"
                 register={register("editedTitle", {

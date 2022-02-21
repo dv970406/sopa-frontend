@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: ------
+ * 수정일: 2022.02.21
  */
 
 import { postsState } from '@utils/atoms';

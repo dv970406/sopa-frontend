@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { loginModeState } from '@utils/atoms';
 import Login from '@components/user/Login';
 import LoginOrSignUp from '@components/form/LoginOrSignUp';
-import SignUp from '@components/user/create/SignUp';
+import CreateUser from '@components/user/create/CreateUser';
 
 export default function AuthenticationPage() {
     const loginMode = useRecoilValue(loginModeState);
@@ -16,7 +16,7 @@ export default function AuthenticationPage() {
     return (
         <MainLayout title="로그인">
             <LoginOrSignUp leftText='로그인' rightText='회원가입' />
-            {loginMode ? <Login /> : <SignUp />}
+            {loginMode ? <Login /> : <CreateUser />}
         </MainLayout>
     )
 }

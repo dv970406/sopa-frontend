@@ -33,7 +33,7 @@ const CREATE_USER_MUTATION = gql`
     }
 `
 
-export default function SignUp() {
+export default function CreateUser() {
     const { register, handleSubmit, watch } = useForm<IForm>();
     const setLoginMode = useSetRecoilState(loginModeState);
 

@@ -4,10 +4,10 @@
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
-import SortPost from '@components/post/read/SortPost'
 import { IPostDisplay } from '@utils/types/interfaces';
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState } from 'react';
+import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
 
 const semiDetailVar = {
