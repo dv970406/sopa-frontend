@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.22
  */
 
 import Head from 'next/head';
@@ -9,11 +9,12 @@ import React from 'react';
 import NavBar from './NavBar';
 
 interface IMainLayout {
+    loading?: boolean;
     title: string;
     children: React.ReactNode;
 }
 
-export default function MainLayout({ title, children }: IMainLayout) {
+export default function MainLayout({ loading, title, children }: IMainLayout) {
     const { pathname } = useRouter();
     const loginOrSignUp = pathname === "/auth";
     return (
@@ -24,7 +25,7 @@ export default function MainLayout({ title, children }: IMainLayout) {
         >
             {loginOrSignUp ? null : <NavBar />}
             <Head>
-                <title>{title.includes("undefined") ? "SOPA" : `${title} | SOPA`} </title>
+                <title>{title?.includes("undefined") || loading ? "SOPA" : `${title} | SOPA`} </title>
             </Head>
             <div
                 className={`

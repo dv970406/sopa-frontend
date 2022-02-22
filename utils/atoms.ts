@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.22
  */
 
 import { atom, selector } from 'recoil';
@@ -15,7 +15,7 @@ export const loginModeState = atom<boolean>({
 });
 
 export const postEditMode = atom<boolean>({
-    key: "isPostEditMode",
+    key: "postEditMode",
     default: false
 })
 

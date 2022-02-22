@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: ------
+ * 수정일: 2022.02.22
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
 import { IPostDisplay } from '@utils/types/interfaces';
 import { AnimatePresence, motion } from 'framer-motion'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
 
@@ -27,7 +27,18 @@ interface SeePosts {
 }
 
 export default function SeePosts({ posts }: SeePosts) {
+    console.log(posts)
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+
+    // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함
+    const [isLoaded, setLoaded] = useState(false);
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
+    if (!isLoaded) {
+        return <></>;
+    }
     return (
         <>
             <div
@@ -43,7 +54,7 @@ export default function SeePosts({ posts }: SeePosts) {
                     flex flex-wrap gap-5
                 `}
             >
-                {posts.map((post, index) =>
+                {posts?.map((post, index) =>
                     <motion.button
                         layoutId={String(index)}
                         onClick={() => setSelectedPostId(index)}

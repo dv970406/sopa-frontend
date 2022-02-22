@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.19
- * 수정일: 2022.02.20
+ * 수정일: 2022.02.22
  */
 
 import { ICommentInfo } from '@utils/types/interfaces';
@@ -18,7 +18,7 @@ function DisplayComment({ postId, id, comment, user }: ICommentInfo) {
     return (
         <div
             className={`
-                p-2
+                p-2 w-full
                 border-b-2 border-b-fuchsia-200
                 space-y-2
             `}
