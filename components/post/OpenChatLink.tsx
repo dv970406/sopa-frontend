@@ -1,11 +1,11 @@
 /**
  * 생성일: 2022.02.19
- * 수정일: 2022.02.21
+ * 수정일: 2022.02.22
  */
 
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const linkVar = {
     invisible: {
@@ -36,6 +36,16 @@ interface IOpenChatLink {
 export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
     const [showing, setShowing] = useState(false);
     const getShowing = (bool: boolean) => setShowing(bool);
+
+    // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함
+    const [isLoaded, setLoaded] = useState(false);
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
+    if (!isLoaded) {
+        return <></>;
+    }
 
     return (
         <Link href={openChatLink}>

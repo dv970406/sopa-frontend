@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: ------
+ * 수정일: 2022.02.22
  */
 
 import { gql, useLazyQuery } from '@apollo/client';
@@ -73,9 +73,8 @@ export default function SearchInput({ setIsSearchMode }: ISearchInputComponent) 
             variants={searchInputVar}
             initial="invisible"
             animate="visible"
-            exit="exit"
             className="
-                flex bg-white rounded-lg px-2 py-1 items-center space-x-2 shadow-lg
+                flex bg-white rounded-xl px-2 py-1 items-center space-x-2 shadow-lg
             "
         >
             <button

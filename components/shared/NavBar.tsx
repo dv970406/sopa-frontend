@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.21
+ * 수정일: 2022.02.22
  */
 
 import { useRouter } from 'next/router';
@@ -15,11 +15,13 @@ function NavBar() {
     const { seeMyProfile } = useMyInfo();
 
     const router = useRouter();
-    const isHome = router.route === "/"
+    const isHome = router.route === "/";
+    const isMyProfile = router.route === "/user/profile";
 
     const goToLogin = () => router.push("/auth");
     const goToCreatePost = () => router.push("/post/upload");
-    const goToEditUser = () => router.push(`/user/${seeMyProfile?.id}`);
+    const goToSeeMyProfile = () => router.push(`/user/profile`);
+    const goToEditUser = () => router.push("/user/edit");
 
     return (
         <div className='
@@ -37,28 +39,37 @@ function NavBar() {
                 {isHome ? (
                     <SearchInputBtn />
                 ) : null}
-                <div
-                    className={`
-                        cursor-pointer
-                    `}
+                <button
                     onClick={token ? goToCreatePost : goToLogin}
                 >
                     글 쓰기
-                </div>
+                </button>
                 {token ? (
-                    <button
-                        className={`
-                            opacity-70 hover:opacity-100 transition
-                            font-bold text-white
-                        `}
-                        onClick={goToEditUser}
-                    >
-                        프로필
-                    </button>
+                    isMyProfile ? (
+                        <button
+                            className={`
+                                opacity-70 hover:opacity-100 transition
+                                font-bold text-white 
+                            `}
+                            onClick={goToEditUser}
+                        >
+                            {`${seeMyProfile?.name} 수정`}
+                        </button>
+                    ) : (
+                        <button
+                            className={`
+                                opacity-70 hover:opacity-100 transition
+                                font-bold text-white 
+                            `}
+                            onClick={goToSeeMyProfile}
+                        >
+                            프로필
+                        </button>
+                    )
                 ) : (
                     <button
                         className={`
-                            font-bold text-white
+                            font-bold text-white 
                         `}
                         onClick={goToLogin}
                     >

@@ -1,12 +1,13 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.02.20
+ * 수정일: 2022.02.22
  */
 
 import { gql, useQuery } from '@apollo/client'
 import { useRecoilState } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import { useRouter } from 'next/router';
+import { USER_SIMPLE_FRAGMENT } from '@utils/fragments';
 
 interface IMyInfo {
     seeMyProfile: {
@@ -16,15 +17,14 @@ interface IMyInfo {
         email: string;
     }
 };
+
 const SEE_MY_PROFILE_QUERY = gql`
     query seeMyProfile{
         seeMyProfile{
-            id
-            socialLogin
-            name
-            email
+            ...UserSimpleFragment
         }
     }
+    ${USER_SIMPLE_FRAGMENT}
 `;
 
 export default function useMyInfo() {
