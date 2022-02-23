@@ -45,8 +45,10 @@ export default function UserProfilePage() {
 
     // onCompleted 없이 data를 setPosts에 넣으니 초기 화면에 그려지지 않는 버그가 있어서 onCompleted를 활용
     const seeMyProfileCompleted = ({ seeMyProfile }: any) => {
-        const postsPressedLike = seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
-        setPosts(postsPressedLike);
+        if (seeMyProfile.id) {
+            const postsPressedLike = seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
+            setPosts(postsPressedLike);
+        }
     }
 
     const { data, loading } = useQuery(SEE_MY_PROFILE_QUERY, {

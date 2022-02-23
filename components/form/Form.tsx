@@ -1,19 +1,18 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.14
+ * 수정일: 2022.02.23
  */
 
 import React from 'react';
 
-interface IForm {
+interface IFormLayoutComponent {
     children: React.ReactNode;
-    onSubmit(): void;
 }
 
-export default function Form({ children, onSubmit }: IForm) {
+export default function FormLayout({ children }: IFormLayoutComponent) {
+    // 버튼 클릭에 의존하게 하려고 form 태그를 쓰지 않음
     return (
-        <form
-            onSubmit={onSubmit}
+        <div
             className='
                 flex flex-col space-y-6
                 px-12 pt-16 pb-8
@@ -24,6 +23,6 @@ export default function Form({ children, onSubmit }: IForm) {
             '
         >
             {children}
-        </form>
+        </div>
     )
 }

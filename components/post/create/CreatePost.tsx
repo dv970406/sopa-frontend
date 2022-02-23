@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.02.21
+ * 수정일: 2022.02.23
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -110,7 +110,7 @@ export default function CreatePost() {
             />
 
             <Input
-                type="link"
+                type="openChatLink"
                 register={register("openChatLink", {
                     maxLength: {
                         value: 70,
