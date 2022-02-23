@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: ------
+ * 수정일: 2022.02.23
  */
 
 import { gql, useMutation } from '@apollo/client'
@@ -28,7 +28,7 @@ const EDIT_USER_MUTATION = gql`
 export default function EditUser() {
     const router = useRouter();
     const { register, handleSubmit, clearErrors, getValues, watch } = useForm<IForm>();
-    const { seeMyProfile } = useMyInfo();
+    const { seeMyInfo } = useMyInfo();
 
     const updateEditUser = (cache: any, { data }: any) => {
         const { editUser: { ok, error } } = data
@@ -39,7 +39,7 @@ export default function EditUser() {
         };
         const { name } = getValues();
         cache.modify({
-            id: `User:${seeMyProfile?.id}`,
+            id: `User:${seeMyInfo?.id}`,
             fields: {
                 name() {
                     return name
@@ -83,16 +83,16 @@ export default function EditUser() {
                         message: "이름은 2글자 이상이어야 합니다."
                     },
                 })}
-                defaultValue={seeMyProfile?.name}
+                defaultValue={seeMyInfo?.name}
                 required
             />
             <Input
                 disabled={true}
                 type="email"
-                defaultValue={seeMyProfile?.email}
+                defaultValue={seeMyInfo?.email}
             />
 
-            {seeMyProfile?.socialLogin ? null : (
+            {seeMyInfo?.socialLogin ? null : (
                 <>
                     <Input
                         type="password"
@@ -137,7 +137,7 @@ export default function EditUser() {
 
             <FormButton
                 disabled={loading || !watch("password" || "password2")}
-                text={`${seeMyProfile?.name}의 프로필 수정`}
+                text={`${seeMyInfo?.name}의 프로필 수정`}
                 loading={loading}
             />
         </form>

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.23
  */
 
 import { gql } from '@apollo/client';
@@ -72,6 +72,8 @@ export const POST_DETAIL_FRAGMENT = gql`
                 id
                 name
             }
+            postId
+            isMine
         }
     }
 `
@@ -85,6 +87,7 @@ export const COMMENT_FRAGMENT = gql`
             name
         }
         postId
+        isMine
     }
 `
 

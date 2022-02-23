@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.23
  */
 
 import Head from 'next/head';
@@ -30,7 +30,7 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
             <div
                 className={`
                     flex flex-col
-                    justify-center py-16 px-6 mt-16
+                    justify-center py-16 px-8 mt-16
                     ${loginOrSignUp ? "flex items-center" : ""}
                     w-full
                 `}

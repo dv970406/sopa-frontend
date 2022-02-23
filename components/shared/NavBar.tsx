@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.23
  */
 
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ import SearchInputBtn from '@components/post/search/SearchInputBtn';
 
 function NavBar() {
     const token = useRecoilValue(tokenState);
-    const { seeMyProfile } = useMyInfo();
+    const { seeMyInfo } = useMyInfo();
 
     const router = useRouter();
     const isHome = router.route === "/";
@@ -53,7 +53,7 @@ function NavBar() {
                             `}
                             onClick={goToEditUser}
                         >
-                            {`${seeMyProfile?.name} 수정`}
+                            {`${seeMyInfo?.name} 수정`}
                         </button>
                     ) : (
                         <button

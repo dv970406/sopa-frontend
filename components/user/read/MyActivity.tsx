@@ -1,32 +1,35 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: ------
+ * 수정일: 2022.02.23
  */
 
 import DisplayComment from '@components/comment/read/DisplayComment';
 import SeePosts from '@components/post/read/SeePosts';
+import { postsState } from '@utils/atoms';
 import { ICommentInfo } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
 
-export default function MyActivity({ tab, seeMyProfile }: any) {
-    const postsPressedLike = seeMyProfile?.likes?.map((like: any) => like.post)
+interface MyActivity {
+    tab: string;
+    comments: ICommentInfo[];
+}
+
+export default function MyActivity({ tab, comments }: MyActivity) {
     const router = useRouter();
+    const posts = useRecoilValue(postsState);
 
     return (
         <div>
-            {tab === "like" ? (
-                <SeePosts posts={postsPressedLike} />
-            ) : null}
-            {tab === "post" ? (
-                <SeePosts posts={seeMyProfile?.posts} />
-            ) : null}
-            {tab === "comment" ? (
+            {tab !== "comment" ? (
+                <SeePosts />
+            ) : (
                 <div
                     className={`
                         flex flex-col space-y-5
                     `}
                 >
-                    {seeMyProfile?.comments?.map((comment: ICommentInfo) =>
+                    {comments?.map((comment: ICommentInfo) =>
                         <div
                             key={comment.id}
                             className="
@@ -47,7 +50,7 @@ export default function MyActivity({ tab, seeMyProfile }: any) {
                         </div>
                     )}
                 </div>
-            ) : null}
+            )}
         </div>
     )
 }

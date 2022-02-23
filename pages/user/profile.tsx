@@ -1,14 +1,17 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: ------
+ * 수정일: 2022.02.23
  */
 
 import { gql, useQuery } from '@apollo/client';
 import MainLayout from '@components/shared/MainLayout';
 import MyActivity from '@components/user/read/MyActivity';
 import Tab from '@components/user/read/Tab';
-import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT, USER_DETAIL_FRAGMENT } from '@utils/fragments';
-import { useState } from 'react';
+import { postsState } from '@utils/atoms';
+import { COMMENT_FRAGMENT, POST_DETAIL_FRAGMENT, POST_DISPLAY_FRAGMENT, USER_DETAIL_FRAGMENT } from '@utils/fragments';
+import { IPostDisplay } from '@utils/types/interfaces';
+import { useEffect, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 const SEE_MY_PROFILE_QUERY = gql`
     query seeMyProfile{
@@ -18,7 +21,7 @@ const SEE_MY_PROFILE_QUERY = gql`
                 ...CommentFragment
             }
             posts{
-                ...PostDisplayFragment
+                ...PostDetailFragment
             }
             likes{
                 post{
@@ -29,14 +32,38 @@ const SEE_MY_PROFILE_QUERY = gql`
     }
     ${USER_DETAIL_FRAGMENT}
     ${COMMENT_FRAGMENT}
+    ${POST_DETAIL_FRAGMENT}
     ${POST_DISPLAY_FRAGMENT}
 `
 
-type kindOfTab = "like" | "post" | "comment"
+export type kindOfTab = "like" | "post" | "comment"
 
 export default function UserProfilePage() {
-    const { data, loading } = useQuery(SEE_MY_PROFILE_QUERY);
+
     const [tab, setTab] = useState<kindOfTab>("like");
+    const setPosts = useSetRecoilState(postsState);
+
+    // onCompleted 없이 data를 setPosts에 넣으니 초기 화면에 그려지지 않는 버그가 있어서 onCompleted를 활용
+    const seeMyProfileCompleted = ({ seeMyProfile }: any) => {
+        const postsPressedLike = seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
+        setPosts(postsPressedLike);
+    }
+
+    const { data, loading } = useQuery(SEE_MY_PROFILE_QUERY, {
+        onCompleted: seeMyProfileCompleted
+    });
+
+    useEffect(() => {
+        switch (tab) {
+            case "like":
+                const postsPressedLike = data?.seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
+                setPosts(postsPressedLike);
+                break;
+            case "post":
+                setPosts(data?.seeMyProfile?.posts);
+                break;
+        }
+    }, [tab]);
 
     return (
         <MainLayout loading={loading} title={data?.seeMyProfile?.name}>
@@ -48,6 +75,7 @@ export default function UserProfilePage() {
                     className='flex justify-between w-full'
                 >
                     <Tab
+                        autoFocus
                         count={data?.seeMyProfile?.likeCount}
                         tab={tab}
                         setTab={setTab}
@@ -89,7 +117,7 @@ export default function UserProfilePage() {
                 </div>
             </div>
 
-            <MyActivity tab={tab} {...data} />
+            <MyActivity tab={tab} comments={data?.seeMyProfile?.comments} />
         </MainLayout >
     )
 }

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.19
+ * 수정일: 2022.02.23
  */
 
 export interface IFetchedSkillsInfo {
@@ -18,6 +18,7 @@ export interface ICommentInfo {
     id: number;
     comment: string;
     user: IUserInfo;
+    isMine: boolean;
 }
 
 // 게시글 관련
