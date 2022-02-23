@@ -1,12 +1,13 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.23
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
-import { IPostDisplay } from '@utils/types/interfaces';
+import { postsState } from '@utils/atoms';
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
 
@@ -22,12 +23,8 @@ const semiDetailVar = {
     }
 }
 
-interface SeePosts {
-    posts: IPostDisplay[]
-}
-
-export default function SeePosts({ posts }: SeePosts) {
-    console.log(posts)
+export default function SeePosts() {
+    const posts = useRecoilValue(postsState)
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
     // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함

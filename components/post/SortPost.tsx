@@ -1,30 +1,40 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.21
+ * 수정일: 2022.02.23
  */
 
 import { postsState } from '@utils/atoms';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
+type kindOfSortingMethod = "new" | "like"
+
 export default function SortPost() {
-    const [focusTab, setFocusTab] = useState(false);
+    const [sortingMethod, setSortingMethod] = useState<kindOfSortingMethod>("new");
     const setPosts = useSetRecoilState(postsState);
 
-    const getSortByLikes = (isSortByLikes: boolean) => {
-        setFocusTab(isSortByLikes)
-        isSortByLikes ? (
-            setPosts(posts => {
-                const copiedPosts = [...posts]
-                return copiedPosts.sort((a, b) => Number(b.likeCount) - Number(a.likeCount))
-            })
-        ) : (
-            setPosts(posts => {
-                const copiedPosts = [...posts]
-                return copiedPosts.sort((a, b) => Number(b.updatedAt) - Number(a.updatedAt))
-            })
-        )
+    const getSortByLikes = (isSortByLikes: kindOfSortingMethod) => {
+        setSortingMethod(isSortByLikes)
+
+        switch (isSortByLikes) {
+            case "like":
+                setPosts(posts => {
+                    const copiedPosts = [...posts]
+                    return copiedPosts.sort((a, b) => Number(b.likeCount) - Number(a.likeCount))
+                })
+                break;
+            case "new":
+                setPosts(posts => {
+                    const copiedPosts = [...posts]
+                    return copiedPosts.sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
+                })
+                break;
+        }
     }
+
+    useEffect(() => {
+        setSortingMethod("new");
+    }, [])
     return (
         <>
             <button
@@ -33,11 +43,20 @@ export default function SortPost() {
                     p-3 border-b-4  w-full
                     hover:border-b-fuchsia-400 transition-colors
                     text-lg
-                    ${focusTab ? "border-b-fuchsia-200" : "border-b-fuchsia-500"}
+                    ${sortingMethod === "new" ? "border-b-fuchsia-500" : "border-b-fuchsia-200"}
                 `}
-                onClick={() => getSortByLikes(false)}
+                onClick={() => getSortByLikes("new")}
             >
-                {focusTab ? (
+                {sortingMethod === "new" ? (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="fuchsia"
+                        className={`
+                                h-6 w-6
+                            `}
+                    >
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
+                ) : (
                     <svg
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="fuchsia"
                         className={`
@@ -45,15 +64,6 @@ export default function SortPost() {
                         `}
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                ) : (
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="fuchsia"
-                        className={`
-                            h-6 w-6
-                        `}
-                    >
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                     </svg>
                 )}
                 <span>최신순</span>
@@ -65,11 +75,11 @@ export default function SortPost() {
                     p-3 border-b-4  w-full
                     hover:border-b-fuchsia-400 transition-colors
                     text-lg
-                    ${focusTab ? "border-b-fuchsia-500" : "border-b-fuchsia-200"}
+                    ${sortingMethod === "like" ? "border-b-fuchsia-500" : "border-b-fuchsia-200"}
                 `}
-                onClick={() => getSortByLikes(true)}
+                onClick={() => getSortByLikes("like")}
             >
-                {focusTab ? (
+                {sortingMethod === "like" ? (
                     <svg
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="fuchsia"
                         className={`

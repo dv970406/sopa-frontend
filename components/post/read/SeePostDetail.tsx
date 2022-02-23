@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: ------
+ * 수정일: 2022.02.23
  */
 
 import MetaData from '../MetaData';
@@ -18,7 +18,7 @@ interface ISeePostDetailComponent {
 }
 
 export default function SeePostDetail({ pageTitle, seePost }: ISeePostDetailComponent) {
-    const { seeMyProfile } = useMyInfo()
+    const { seeMyInfo } = useMyInfo()
 
     return (
         <>
@@ -36,7 +36,7 @@ export default function SeePostDetail({ pageTitle, seePost }: ISeePostDetailComp
                 >
                     {seePost?.title || pageTitle}
                 </h1>
-                {seeMyProfile?.id === seePost?.user?.id ? <MenuBtn postId={seePost?.id} /> : null}
+                {seeMyInfo?.id === seePost?.user?.id ? <MenuBtn postId={seePost?.id} /> : null}
             </div>
             {seePost?.id ? (
                 <>

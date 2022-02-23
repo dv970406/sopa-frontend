@@ -7,7 +7,7 @@ import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
 import { IPostDisplay } from '@utils/types/interfaces'
 import SeePosts from '@components/post/read/SeePosts'
 import { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { postsState } from '@utils/atoms'
 
 interface IHome {
@@ -25,7 +25,7 @@ const SEE_POSTS_QUERY = gql`
 
 
 const Home = ({ requestedPosts }: IHome) => {
-  const [posts, setPosts] = useRecoilState(postsState);
+  const setPosts = useSetRecoilState(postsState);
 
   useEffect(() => {
     setPosts(requestedPosts);
@@ -34,7 +34,7 @@ const Home = ({ requestedPosts }: IHome) => {
   return (
     <MainLayout title="당신의 소울파트너">
       <SkillBoards />
-      <SeePosts posts={posts} />
+      <SeePosts />
     </MainLayout>
   )
 }

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",
+    "@sendgrid/mail": "^7.6.1",
     "framer-motion": "^6.2.6",
     "graphql": "^16.3.0",
     "next": "12.0.10",

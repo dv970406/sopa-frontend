@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.18
+ * 수정일: 2022.02.23
  */
 
 import { useRouter } from 'next/router';
@@ -11,51 +11,71 @@ import Divider from '../form/Divider';
 import Form from '../form/Form';
 import FormButton from '../form/FormButton';
 import Input from '../form/Input';
-import { useState } from 'react';
 import SocialLogin from './create/SocialLogin';
+import { gql, useMutation } from '@apollo/client';
 
 interface IForm {
     email: string;
     password: string;
 };
 
+const LOGIN_MUTATION = gql`
+    mutation login($email:String!,$password:String!){
+        login(email:$email,password:$password){
+            ok
+            token
+            error
+        }
+    }
+`;
+
+interface ILoginCompleted {
+    login: {
+        ok: boolean;
+        token?: string;
+        error?: string;
+    }
+}
+
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
-    const [loading, setLoading] = useState(false);
     const { register, handleSubmit, watch, clearErrors } = useForm<IForm>();
+
+    const loginCompleted = ({ login }: ILoginCompleted) => {
+        const { ok, token, error } = login;
+
+        if (!ok || !token) {
+            alert(error);
+            clearErrors();
+            return;
+        };
+
+        setToken(token);
+        //document.cookie = `TOKEN=${token}`;
+        localStorage.setItem("TOKEN", token);
+        router.push("/");
+    }
+    const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
+        onCompleted: loginCompleted
+    })
     const checkDisabledStatus = loading || !watch("email") || !watch("password");
 
     const router = useRouter();
 
     const onValid = async (data: IForm) => {
-        // 로딩도 사실 클라이언트 측에서 apollo/client를 바로 사용하면 loading prop을 쓸 수 있으므로 지금처럼 state처리할 필요는 없다.
-        setLoading(true)
+        if (loading) return;
+        const { email, password } = data;
 
-        // 폼 제출시 굳이 API Route로 안보내고 apollo/client의 useMutation hook으로 처리하면 되지만 찍먹은 해보자
-        // 회원가입은 클라이언트 쪽에서 바로 Apollo 서버로 요청 보내게 했다.
-        const response = await fetch("/api/login", {
-            method: "POST",
-            body: JSON.stringify(data),
+        loginMutation({
+            variables: {
+                email,
+                password
+            }
         });
-
-        const { login } = await response.json();
-
-        // apollo/client useMutation의 onCompleted 역할
-        if (!login.ok) {
-            alert(login.error);
-            clearErrors();
-            setLoading(false);
-            return;
-        };
-        setToken(login.token);
-        //document.cookie = `TOKEN=${login.token}`;
-        localStorage.setItem("TOKEN", login.token);
-        router.push("/");
-        setLoading(false);
     };
 
     return (
-        <Form onSubmit={handleSubmit(onValid)}>
+        <Form>
             <Input
                 type="email"
                 register={register("email", {
@@ -90,6 +110,7 @@ export default function Login() {
                 disabled={checkDisabledStatus}
                 loading={loading}
                 text="로그인"
+                onClick={handleSubmit(onValid)}
             />
             <Divider text="소셜 로그인" />
             <div

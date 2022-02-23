@@ -16,11 +16,11 @@ const SocialLogin = ({ social }: ISocialLogin) => {
     return (
         <div
             className={`
-                cursor-pointer
+                cursor-pointer w-12 h-12
             `}
         >
             <Link href={makeSocialLoginReqUrl(social)}>
-                <img className='w-12 h-12' src={`/${social}.png`} />
+                <img className='w-full h-full' src={`/${social}.png`} />
             </Link>
         </div>
     )

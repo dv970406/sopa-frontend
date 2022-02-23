@@ -1,13 +1,14 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.21
+ * 수정일: 2022.02.23
  */
 
 import React from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
+type InputType = "email" | "password" | "password2" | "name" | "title" | "skills" | "description" | "openChatLink";
 interface IInput {
-    type: "email" | "password" | "password2" | "name" | "title" | "skills" | "description" | "link";
+    type: InputType;
     register?: UseFormRegisterReturn;
     required?: boolean;
     disabled?: boolean;
@@ -31,7 +32,7 @@ const typeTranslater = (engVerType: string) => {
             return korVerType = "스킬";
         case "description":
             return korVerType = "설명";
-        case "link":
+        case "openChatLink":
             return korVerType = "카카오 오픈채팅 링크";
     }
     return korVerType
@@ -39,22 +40,86 @@ const typeTranslater = (engVerType: string) => {
 
 export default function Input({ type, register, required, disabled = false, ...props }: IInput) {
 
-    const decideType = (type: string) => {
+    const decideType = (type: InputType) => {
         switch (type) {
             case "name":
                 return "text";
             case "password2":
                 return "password";
-            case "link":
+            case "openChatLink":
                 return "text";
             default:
                 return type;
         };
     };
 
-    return (
-        <>
-            {type !== "description" ? (
+    const inputType = (type: InputType) => {
+        if (type === "description") {
+            return (
+                <div>
+                    <label
+                        htmlFor={type}
+                    >
+                        {typeTranslater(type)}
+                    </label>
+                    <textarea
+                        id={type}
+                        {...register}
+                        className={`
+                            p-1 shadow-sm
+                            border-b-2 border-b-gray-300  
+                            placeholder:text-lg placeholder-gray-400
+                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                            w-full
+                            text-sm
+                        `}
+                        rows={10}
+                        cols={50}
+                        {...props}
+                    />
+                </div>
+            )
+        } else if (type === "email") {
+            return (
+                <div>
+                    <label
+                        htmlFor={type}
+                        className={`
+                            flex items-center
+                        `}
+                    >
+                        {typeTranslater(type)}
+                        {required ? (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 ml-1 text-fuchsia-500"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                        ) : null}
+                    </label>
+                    <input
+                        id={type}
+                        type={decideType(type)}
+                        {...register}
+                        disabled={disabled}
+                        className={`
+                                p-2 shadow-sm
+                                border-b-2 border-b-gray-300 
+                                placeholder:text-lg placeholder-gray-400
+                                focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                                w-full
+                                text-md
+                                ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
+                            `}
+                        {...props}
+                    />
+                </div>
+            )
+        } else {
+            return (
                 <div>
                     <label
                         htmlFor={type}
@@ -88,36 +153,16 @@ export default function Input({ type, register, required, disabled = false, ...p
                             text-md
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
-
                         {...props}
                     />
                 </div>
-            ) : null}
-
-            {type === "description" ? (
-                <div>
-                    <label
-                        htmlFor={type}
-                    >
-                        {typeTranslater(type)}
-                    </label>
-                    <textarea
-                        id={type}
-                        {...register}
-                        className={`
-                            p-1 shadow-sm
-                            border-b-2 border-b-gray-300  
-                            placeholder:text-lg placeholder-gray-400
-                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
-                            w-full
-                            text-sm
-                        `}
-                        rows={10}
-                        cols={50}
-                        {...props}
-                    />
-                </div>
-            ) : null}
+            )
+        }
+    }
+    return (
+        <>
+            {inputType(type)}
         </>
     )
+
 }
