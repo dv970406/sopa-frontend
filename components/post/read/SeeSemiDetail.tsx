@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.20
+ * 수정일: 2022.02.24
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
-import SkillImage from '../SkillImage';
+import SkillImage from '../../skill/SkillImage';
 
 interface ISeeSemiDetail {
     semiDetail: IPostDisplay

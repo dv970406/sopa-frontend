@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: 2022.02.21
+ * 수정일: 2022.02.24
  */
 
-import Skill from '@components/home/Skill';
+import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { KindOfPosition } from '@utils/types/types';
 import { useEffect } from 'react';

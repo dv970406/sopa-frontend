@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: ------
+ * 수정일: 2022.02.24
  */
 
 import { IFetchedSkillsInfo } from '@utils/types/interfaces';

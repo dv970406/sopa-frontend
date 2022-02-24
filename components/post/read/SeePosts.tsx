@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -48,7 +48,7 @@ export default function SeePosts() {
             </div>
             <div
                 className={`
-                    flex flex-wrap gap-5
+                    grid gap-5 sm:grid-cols-2 xl:grid-cols-3
                 `}
             >
                 {posts?.map((post, index) =>

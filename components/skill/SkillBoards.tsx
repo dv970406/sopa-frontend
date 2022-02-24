@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.17
+ * 수정일: 2022.02.24
  */
 
 import { useRecoilValue } from 'recoil';
@@ -16,7 +16,8 @@ export default function SkillBoards() {
         <>
             <div
                 className={`
-                    space-y-6
+                    flex flex-col space-y-6 lg:flex-row lg:space-x-6 lg:space-y-0
+                    
                 `}
             >
                 {Object.keys(skills).map((position) => <SkillBoard key={position} skillsOfPosition={skills[position]} />)}

@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import SkillBoards from '@components/home/SkillBoards'
+import SkillBoards from '@components/skill/SkillBoards'
 import MainLayout from '@components/shared/MainLayout'
 import type { GetServerSideProps } from 'next'
 import { client } from '@utils/apollo'

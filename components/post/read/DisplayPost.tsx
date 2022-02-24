@@ -1,11 +1,11 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.20
+ * 수정일: 2022.02.24
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
 import MetaData from '../MetaData';
-import SkillImage from '../SkillImage';
+import SkillImage from '../../skill/SkillImage';
 
 export default function DisplayPost(
     { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, createdAt }: IPostDisplay
@@ -14,9 +14,9 @@ export default function DisplayPost(
         <div
             className={`
                 border-2 border-fuchsia-100 rounded-lg p-6
-                w-full
-                flex flex-col justify-center items-center
-                space-y-5 shadow-md
+                w-full h-full
+                flex flex-col justify-between items-center
+                space-y-5 shadow-xl
                 hover:scale-105 transition-all duration-300 cursor-pointer
                 hover:border-fuchsia-300 hover:ring-2 ring-fuchsia-400 ring-offset-2
             `}
@@ -37,7 +37,7 @@ export default function DisplayPost(
             <div
                 className={`
                     flex justify-between w-full
-                    items-center
+                    items-center place-self-end
                 `}
             >
                 <MetaData
@@ -53,7 +53,7 @@ export default function DisplayPost(
                         place-self-end
                     `}
                 >
-                    {new Date(+createdAt).toLocaleString().slice(0, -3)}
+                    {new Date(+createdAt).toLocaleDateString()}
                 </p>
             </div>
         </div>

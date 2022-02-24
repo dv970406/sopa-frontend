@@ -1,11 +1,11 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import MetaData from '../MetaData';
 import OpenChatLink from '../OpenChatLink';
-import SkillImage from '../SkillImage';
+import SkillImage from '../../skill/SkillImage';
 import DisplayComment from '../../comment/read/DisplayComment';
 import CreateComment from '../../comment/create/CreateComment';
 import MenuBtn from '../MenuBtn';

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: ------
+ * 수정일: 2022.02.24
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -11,7 +11,7 @@ import { postEditMode } from '@utils/atoms';
 import { IFetchedSkillsInfo } from '@utils/types/interfaces';
 import { useForm } from 'react-hook-form'
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
-import SkillImage from '../SkillImage';
+import SkillImage from '../../skill/SkillImage';
 
 interface IEditPostComponent {
     postId: number;
@@ -149,7 +149,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
             />
 
             <Input
-                type="link"
+                type="openChatLink"
                 register={register("editedOpenChatLink", {
                     maxLength: {
                         value: 70,
