@@ -6,6 +6,7 @@
 import { IPostDisplay } from '@utils/types/interfaces';
 import MetaData from '../MetaData';
 import SkillImage from '../../skill/SkillImage';
+import { getUploadedDate } from '@utils/utilFunctions';
 
 export default function DisplayPost(
     { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, createdAt }: IPostDisplay
@@ -33,7 +34,11 @@ export default function DisplayPost(
                     apps={apps}
                 />
             </div>
-            <p>{title}</p>
+            <p
+                className='font-bold text-lg'
+            >
+                {title}
+            </p>
             <div
                 className={`
                     flex justify-between w-full
@@ -49,11 +54,11 @@ export default function DisplayPost(
                 />
                 <p
                     className={`
-                        text-sm
+                        text-md font-semibold
                         place-self-end
                     `}
                 >
-                    {new Date(+createdAt).toLocaleDateString()}
+                    {getUploadedDate(+createdAt)}
                 </p>
             </div>
         </div>

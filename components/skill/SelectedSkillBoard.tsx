@@ -79,34 +79,35 @@ export default function SelectedSkillBoard() {
     return (
         <motion.div
             className={`
-                ${selectedSkills.length > 0 ? "" : "opacity-0"} transition-opacity
-                w-full
-                flex flex-wrap mt-10 justify-center
-                rounded-lg shadow-xl border-2 border-fuchsia-400 bg-fuchsia-300
-                h-1/6
-                px-6 py-4
+                flex flex-wrap justify-center gap-4 shadow-xl border-t-2 border-r-2 border-t-fuchsia-300 border-r-fuchsia-300 bg-fuchsia-400 p-3 rounded-lg
+                lg:flex-col lg:fixed lg:left-0 lg:top-0 lg:h-full lg:justify-center lg:rounded-none lg:rounded-r-2xl
+                ${selectedSkills.length > 9 ? "lg:w-40" : null}
             `}
-
+            initial={{
+                x: -100,
+                opacity: 0
+            }}
+            animate={{
+                x: selectedSkills.length > 0 ? 0 : undefined,
+                opacity: selectedSkills.length > 0 ? 1 : undefined,
+            }}
+            transition={{
+                duration: 0.3,
+            }}
         >
             {selectedSkills?.map((selectedSkill, index) =>
-                <motion.div
+                <motion.button
                     key={selectedSkill.skill}
-                    className={`
-                        flex flex-wrap m-3
-                        justify-center items-center
-                        cursor-pointer
-                    `}
                     onClick={() => onClick(selectedSkill, index)}
                     layoutId={selectedSkill.skill}
                 >
                     <img
                         src={selectedSkill.skillImage}
                         className={`
-                        w-14 h-14
-                        
-                    `}
+                            w-14 h-14
+                        `}
                     />
-                </motion.div>
+                </motion.button>
             )}
         </motion.div>
     )

@@ -26,7 +26,6 @@ const semiDetailVar = {
 export default function SeePosts() {
     const posts = useRecoilValue(postsState)
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
-
     // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함
     const [isLoaded, setLoaded] = useState(false);
     useEffect(() => {
@@ -37,11 +36,12 @@ export default function SeePosts() {
         return <></>;
     }
     return (
-        <>
+        <div
+            className="space-y-8"
+        >
             <div
                 className={`
                     flex space-x-3
-                    mb-8
                 `}
             >
                 <SortPost />
@@ -84,6 +84,6 @@ export default function SeePosts() {
                     </motion.div>
                 ) : null}
             </AnimatePresence>
-        </>
+        </div>
     )
 }

@@ -27,12 +27,12 @@ function NavBar() {
     return (
         <div className='
             flex justify-around items-center px-10 h-24 shadow-xl absolute top-0 w-full
-            bg-fuchsia-400 rounded-b-md
+            bg-fuchsia-200 border-b-2 border-b-fuchsia-300 rounded-b-md
         '>
             <div
                 onClick={() => router.push("/")}
                 className='
-                    w-20 h-20 rounded-full border-opacity-50 cursor-pointer
+                    w-16 h-16 rounded-full border-opacity-50 cursor-pointer
                     hover:scale-110 transition
                 '
             >
@@ -51,6 +51,7 @@ function NavBar() {
 
                 <button
                     onClick={token ? goToCreatePost : goToLogin}
+                    className="font-bold"
                 >
                     글 쓰기
                 </button>
@@ -59,8 +60,8 @@ function NavBar() {
                     isMyProfilePage ? (
                         <button
                             className="
-                                opacity-70 hover:opacity-100 transition
-                                font-bold text-white 
+                                hover:text-fuchsia-500 transition
+                                font-bold text-fuchsia-400 text-lg
                             "
                             onClick={goToEditUser}
                         >
@@ -69,8 +70,8 @@ function NavBar() {
                     ) : (
                         <button
                             className="
-                                opacity-70 hover:opacity-100 transition
-                                font-bold text-white 
+                                hover:text-fuchsia-500 transition
+                                font-bold text-fuchsia-400 text-lg
                             "
                             onClick={goToSeeMyProfile}
                         >
