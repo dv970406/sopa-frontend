@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.23
- * 수정일: ------
+ * 수정일: 2022.02.24
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SocialLogin from '@components/user/create/SocialLogin';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -33,6 +33,16 @@ export default function LoginHoverEvent() {
     const router = useRouter();
     const [showSocialLogin, setShowSocialLogin] = useState(false);
     const goToLogin = () => router.push("/auth");
+
+    // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함
+    const [isLoaded, setLoaded] = useState(false);
+    useEffect(() => {
+        setLoaded(true);
+    }, []);
+
+    if (!isLoaded) {
+        return <></>;
+    }
 
     return (
         <div

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import { useRouter } from 'next/router';
@@ -26,10 +26,18 @@ function NavBar() {
 
     return (
         <div className='
-            flex justify-around items-center px-10 h-20 shadow-xl absolute top-0 w-full
+            flex justify-around items-center px-10 h-24 shadow-xl absolute top-0 w-full
             bg-fuchsia-400 rounded-b-md
         '>
-            <div onClick={() => router.push("/")} className='w-8 h-8 rounded-full bg-slate-600' />
+            <div
+                onClick={() => router.push("/")}
+                className='
+                    w-20 h-20 rounded-full border-opacity-50 cursor-pointer
+                    hover:scale-110 transition
+                '
+            >
+                <img src="/sopa.png" className="w-full h-full" />
+            </div>
 
             <div
                 className={`

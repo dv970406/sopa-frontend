@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import { useRouter } from 'next/router';
@@ -121,9 +121,9 @@ export default function Login() {
                     items-center
                 `}
             >
-                <SocialLogin social='naver' />
-                <SocialLogin social='github' />
-                <SocialLogin social='kakao' />
+                <SocialLogin isLoginPage social='naver' />
+                <SocialLogin isLoginPage social='github' />
+                <SocialLogin isLoginPage social='kakao' />
             </div>
         </Form>
     )

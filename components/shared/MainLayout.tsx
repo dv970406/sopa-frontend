@@ -1,11 +1,12 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+import Loading from './Loading';
 import NavBar from './NavBar';
 
 interface IMainLayout {
@@ -35,7 +36,9 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
                     w-full
                 `}
             >
-                {children}
+                {loading ? (
+                    <Loading />
+                ) : children}
             </div>
         </div>
     )
