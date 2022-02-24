@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import { useRouter } from 'next/router';
@@ -26,10 +26,18 @@ function NavBar() {
 
     return (
         <div className='
-            flex justify-around items-center px-10 h-20 shadow-xl absolute top-0 w-full
-            bg-fuchsia-400 rounded-b-md
+            flex justify-around items-center px-10 h-24 shadow-xl absolute top-0 w-full
+            bg-fuchsia-200 border-b-2 border-b-fuchsia-300 rounded-b-md
         '>
-            <div onClick={() => router.push("/")} className='w-8 h-8 rounded-full bg-slate-600' />
+            <div
+                onClick={() => router.push("/")}
+                className='
+                    w-16 h-16 rounded-full border-opacity-50 cursor-pointer
+                    hover:scale-110 transition
+                '
+            >
+                <img src="/sopa.png" className="w-full h-full" />
+            </div>
 
             <div
                 className={`
@@ -43,6 +51,7 @@ function NavBar() {
 
                 <button
                     onClick={token ? goToCreatePost : goToLogin}
+                    className="font-bold"
                 >
                     글 쓰기
                 </button>
@@ -51,8 +60,8 @@ function NavBar() {
                     isMyProfilePage ? (
                         <button
                             className="
-                                opacity-70 hover:opacity-100 transition
-                                font-bold text-white 
+                                hover:text-fuchsia-500 transition
+                                font-bold text-fuchsia-400 text-lg
                             "
                             onClick={goToEditUser}
                         >
@@ -61,8 +70,8 @@ function NavBar() {
                     ) : (
                         <button
                             className="
-                                opacity-70 hover:opacity-100 transition
-                                font-bold text-white 
+                                hover:text-fuchsia-500 transition
+                                font-bold text-fuchsia-400 text-lg
                             "
                             onClick={goToSeeMyProfile}
                         >

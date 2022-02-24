@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import SkillBoards from '@components/home/SkillBoards'
+import SkillBoards from '@components/skill/SkillBoards'
 import MainLayout from '@components/shared/MainLayout'
 import type { GetServerSideProps } from 'next'
 import { client } from '@utils/apollo'
@@ -9,6 +9,7 @@ import SeePosts from '@components/post/read/SeePosts'
 import { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { postsState } from '@utils/atoms'
+import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
 
 interface IHome {
   requestedPosts: IPostDisplay[];
@@ -33,8 +34,13 @@ const Home = ({ requestedPosts }: IHome) => {
 
   return (
     <MainLayout title="당신의 소울파트너">
-      <SkillBoards />
-      <SeePosts />
+      <div
+        className="space-y-8"
+      >
+        <SkillBoards />
+        <SelectedSkillBoard />
+        <SeePosts />
+      </div>
     </MainLayout>
   )
 }

@@ -1,11 +1,12 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+import Loading from './Loading';
 import NavBar from './NavBar';
 
 interface IMainLayout {
@@ -30,12 +31,14 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
             <div
                 className={`
                     flex flex-col
-                    justify-center py-16 px-8 mt-16
+                    justify-center py-16 mt-16 px-8 sm:px-16 md:px-24 lg:px-40 xl:px-64
                     ${loginOrSignUp ? "flex items-center" : ""}
                     w-full
                 `}
             >
-                {children}
+                {loading ? (
+                    <Loading />
+                ) : children}
             </div>
         </div>
     )

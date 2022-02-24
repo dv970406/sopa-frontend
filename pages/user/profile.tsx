@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.24
  */
 
 import { gql, useQuery } from '@apollo/client';
 import MainLayout from '@components/shared/MainLayout';
 import MyActivity from '@components/user/read/MyActivity';
-import Tab from '@components/user/read/Tab';
+import ProfileTab from '@components/user/read/ProfileTab';
 import { postsState } from '@utils/atoms';
 import { COMMENT_FRAGMENT, POST_DETAIL_FRAGMENT, POST_DISPLAY_FRAGMENT, USER_DETAIL_FRAGMENT } from '@utils/fragments';
 import { IPostDisplay } from '@utils/types/interfaces';
@@ -76,7 +76,7 @@ export default function UserProfilePage() {
                 <div
                     className='flex justify-between w-full'
                 >
-                    <Tab
+                    <ProfileTab
                         autoFocus
                         count={data?.seeMyProfile?.likeCount}
                         tab={tab}
@@ -90,7 +90,7 @@ export default function UserProfilePage() {
                             </svg>
                         }
                     />
-                    <Tab
+                    <ProfileTab
                         count={data?.seeMyProfile?.postCount}
                         tab={tab}
                         setTab={setTab}
@@ -103,7 +103,7 @@ export default function UserProfilePage() {
                             </svg>
                         }
                     />
-                    <Tab
+                    <ProfileTab
                         count={data?.seeMyProfile?.commentCount}
                         tab={tab}
                         setTab={setTab}

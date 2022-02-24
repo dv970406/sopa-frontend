@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.02.15
+ * 수정일: 2022.02.24
  */
 
 import CreatePost from '@components/post/create/CreatePost';
@@ -19,7 +19,7 @@ export default function PostUploadPage() {
         <MainLayout title='게시물 등록'>
             <div
                 className={`
-                    lg:px-64
+                    lg:px-32
                 `}
             >
                 <CreatePost />
