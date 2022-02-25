@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 import React from 'react';
@@ -88,7 +88,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                             flex items-center
                         `}
                     >
-                        {typeTranslater(type)}
+                        <p>{typeTranslater(type)}</p>
                         {required ? (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,6 @@ export default function Input({ type, register, required, disabled = false, ...p
                                 placeholder:text-lg placeholder-gray-400
                                 focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
                                 w-full
-                                text-md
                                 ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                             `}
                         {...props}
@@ -150,7 +149,6 @@ export default function Input({ type, register, required, disabled = false, ...p
                             placeholder:text-lg placeholder-gray-400
                             focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
                             w-full
-                            text-md
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
                         {...props}

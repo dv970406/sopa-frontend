@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -111,6 +111,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                         message: "제목은 2글자 이상이어야 합니다."
                     }
                 })}
+                minLength={2}
                 maxLength={32}
                 defaultValue={title}
                 required

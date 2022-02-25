@@ -28,7 +28,7 @@ function NavBar() {
         <div
             className='
                 flex justify-around items-center px-10 h-24 shadow-xl top-0 w-full
-                bg-fuchsia-200 border-b-2 border-b-fuchsia-300 rounded-b-md
+                bg-fuchsia-200 border-b-2 border-b-fuchsia-300 rounded-b-3xl
             '
         >
             <div

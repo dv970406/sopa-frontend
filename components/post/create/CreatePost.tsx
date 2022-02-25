@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -94,8 +94,13 @@ export default function CreatePost() {
                     minLength: {
                         value: 2,
                         message: "제목은 2글자 이상이어야 합니다."
+                    },
+                    maxLength: {
+                        value: 32,
+                        message: "제목은 32글자 이하여야 합니다."
                     }
                 })}
+                minLength={2}
                 maxLength={32}
                 required
             />
@@ -122,7 +127,6 @@ export default function CreatePost() {
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )
                         }
-
                     }
                 })}
                 placeholder="https://open.kakao.com/o/sopaisthebest"

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import MetaData from '../MetaData';
@@ -9,17 +9,26 @@ import SkillImage from '../../skill/SkillImage';
 import DisplayComment from '../../comment/read/DisplayComment';
 import CreateComment from '../../comment/create/CreateComment';
 import MenuBtn from '../MenuBtn';
-import useMyInfo from 'hooks/useMyInfo';
-import { IPostDetail } from '@utils/types/interfaces';
+import { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import InfiniteScroll from "react-infinite-scroll-component";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useState } from 'react';
 
 interface ISeePostDetailComponent {
     pageTitle: string;
-    seePost: IPostDetail
+    seePost: IPostDetail;
+    fetchMore: any;
+    comments: ICommentInfo[];
 }
 
-export default function SeePostDetail({ pageTitle, seePost }: ISeePostDetailComponent) {
-    const { seeMyInfo } = useMyInfo()
+export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments }: ISeePostDetailComponent) {
+    const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
 
+    const getFetchMore = async () => {
+        setFetchMoreLoading(true);
+        await fetchMore();
+        setFetchMoreLoading(false);
+    }
     return (
         <>
             <div
@@ -36,7 +45,7 @@ export default function SeePostDetail({ pageTitle, seePost }: ISeePostDetailComp
                 >
                     {seePost?.title || pageTitle}
                 </h1>
-                {seeMyInfo?.id === seePost?.user?.id ? <MenuBtn postId={seePost?.id} /> : null}
+                {seePost?.isMine ? <MenuBtn postId={seePost?.id} /> : null}
             </div>
             {seePost?.id ? (
                 <>
@@ -51,7 +60,14 @@ export default function SeePostDetail({ pageTitle, seePost }: ISeePostDetailComp
                             apps={seePost?.apps}
                         />
                     </div>
-                    <p>{seePost?.description}</p>
+                    <p
+                        className='
+                            break-words tracking-wider 
+                            text-sm lg:text-lg
+                        '
+                    >
+                        {seePost?.description}
+                    </p>
                     <div
                         className={`
                             flex 
@@ -72,15 +88,29 @@ export default function SeePostDetail({ pageTitle, seePost }: ISeePostDetailComp
             ) : "처리중입니다..."}
 
             <CreateComment postId={seePost?.id} />
-            <div
-                className={`
+
+            <InfiniteScroll
+                dataLength={18}
+                next={getFetchMore}
+                hasMore={true}
+                loader={fetchMoreLoading ? (
+                    <ClipLoader
+                        size={35}
+                        color={"#E879F9"}
+                    />
+                ) : undefined}
+                className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3 p-4"
+            >
+                <div
+                    className={`
                     space-y-4
                 `}
-            >
-                {seePost?.comments?.map(comment =>
-                    <DisplayComment key={comment.id} {...comment} />
-                )}
-            </div>
+                >
+                    {comments?.map(comment =>
+                        <DisplayComment key={comment.id} {...comment} />
+                    )}
+                </div>
+            </InfiniteScroll>
         </>
     )
 }

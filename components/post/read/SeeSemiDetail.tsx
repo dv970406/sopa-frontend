@@ -42,8 +42,9 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
             >
                 <h1
                     className={`
-                        text-xl font-bold 
+                        text-xl font-bold cursor-pointer
                     `}
+                    onClick={() => goToPostDetail()}
                 >
                     {semiDetail.title}
                 </h1>

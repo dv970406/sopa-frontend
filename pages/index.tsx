@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import SkillBoards from '@components/skill/SkillBoards'
 import MainLayout from '@components/shared/MainLayout'
 import type { GetServerSideProps } from 'next'
@@ -16,8 +16,8 @@ interface IHome {
 }
 
 const SEE_POSTS_QUERY = gql`
-    query seePosts{
-        seePosts{
+    query seePosts($offset:Int){
+        seePosts(offset:$offset){
             ...PostDisplayFragment
         }
     }
@@ -28,19 +28,29 @@ const SEE_POSTS_QUERY = gql`
 const Home = ({ requestedPosts }: IHome) => {
   const setPosts = useSetRecoilState(postsState);
 
+  const { data, fetchMore } = useQuery(SEE_POSTS_QUERY)
   useEffect(() => {
     setPosts(requestedPosts);
   }, []);
 
   return (
-    <MainLayout title="당신의 소울파트너">
-      <div
-        className="space-y-8"
-      >
-        <SkillBoards />
-        <SelectedSkillBoard />
-        <SeePosts />
-      </div>
+    <MainLayout
+      title="당신의 소울파트너"
+    >
+      <SkillBoards />
+      <SelectedSkillBoard />
+      <SeePosts
+        fetchMore={
+          () => fetchMore({
+            variables: { offset: data?.seePosts?.length },
+            updateQuery: (prev, { fetchMoreResult }) => {
+              if (!fetchMoreResult) return prev;
+              setPosts(oldPosts => [...oldPosts, ...fetchMoreResult.seePosts])
+              return;
+            }
+          })
+        }
+      />
     </MainLayout>
   )
 }
@@ -50,6 +60,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await client.query({
     query: SEE_POSTS_QUERY,
   });
+
   return {
     props: {
       requestedPosts: data.seePosts,

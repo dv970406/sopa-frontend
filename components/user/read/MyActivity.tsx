@@ -1,31 +1,49 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 import DisplayComment from '@components/comment/read/DisplayComment';
 import SeePosts from '@components/post/read/SeePosts';
 import { ICommentInfo } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
+import InfiniteScroll from "react-infinite-scroll-component";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface MyActivity {
     tab: string;
     comments: ICommentInfo[];
+    fetchMore?: any;
 }
 
-export default function MyActivity({ tab, comments }: MyActivity) {
+export default function MyActivity({ tab, comments, fetchMore }: MyActivity) {
     const router = useRouter();
+    const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
 
+    const getFetchMore = async () => {
+        setFetchMoreLoading(true);
+        await fetchMore();
+        setFetchMoreLoading(false);
+    }
     return (
         <div>
             {tab !== "comment" ? (
-                <SeePosts />
+                <SeePosts fetchMore={fetchMore} />
             ) : (
-                <div
-                    className={`
-                        flex flex-col space-y-5
-                    `}
+                <InfiniteScroll
+                    dataLength={18}
+                    next={getFetchMore}
+                    hasMore={true}
+                    loader={fetchMoreLoading ? (
+                        <ClipLoader
+                            size={35}
+                            color={"#E879F9"}
+                        />
+                    ) : undefined}
+                    className="flex flex-col space-y-5"
                 >
+
                     {comments?.map((comment: ICommentInfo) =>
                         <div
                             key={comment.id}
@@ -46,7 +64,7 @@ export default function MyActivity({ tab, comments }: MyActivity) {
                             </button>
                         </div>
                     )}
-                </div>
+                </InfiniteScroll>
             )}
         </div>
     )

@@ -16,8 +16,8 @@ interface ISearchInputComponent {
 }
 
 const SEARCH_POSTS_QUERY = gql`
-    query searchPosts($title:String!){
-        searchPosts(title:$title){
+    query searchPosts($title:String!,$offset:Int){
+        searchPosts(title:$title,offset:$offset){
             ...PostDisplayFragment
         }
     }

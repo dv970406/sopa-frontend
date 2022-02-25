@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 export interface IFetchedSkillsInfo {
@@ -42,6 +42,7 @@ export interface IPostDisplay {
 export interface IPostDetail extends IPostDisplay {
     comments: ICommentInfo[];
     openChatLink: string;
+    isMine: boolean;
 }
 
 // 스킬셋 관련 state

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -117,6 +117,8 @@ export default function CreateUser() {
                     })}
                     type="name"
                     required
+                    minLength={2}
+                    maxLength={8}
                 />
                 <Input
                     register={register("email", {
@@ -147,7 +149,8 @@ export default function CreateUser() {
                     })}
                     type="password"
                     required
-
+                    minLength={8}
+                    maxLength={15}
                 />
                 <Input
                     register={register("password2", {
@@ -167,6 +170,8 @@ export default function CreateUser() {
                     })}
                     type="password2"
                     required
+                    minLength={8}
+                    maxLength={15}
                 />
                 {isEmailValidationMode ? (
                     <div
@@ -180,6 +185,8 @@ export default function CreateUser() {
                             })}
                             type="text"
                             placeholder='인증번호를 입력하세요'
+                            minLength={6}
+                            maxLength={6}
                         />
                         <button
                             onClick={handleSubmit(onValid)}

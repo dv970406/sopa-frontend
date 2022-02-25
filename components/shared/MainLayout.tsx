@@ -17,11 +17,28 @@ interface IMainLayout {
 
 export default function MainLayout({ loading, title, children }: IMainLayout) {
     const { pathname } = useRouter();
+
     const loginOrSignUp = pathname === "/auth";
+
+    /*  const scroll = async () => {
+        // Infinite Scroll
+        const scrollHeight = infiniteScrollBox?.current.scrollHeight;
+        const scrollTop = infiniteScrollBox?.current.scrollTop;
+        const clientHeight = infiniteScrollBox?.current.clientHeight;
+        console.log(scrollHeight, scrollTop, clientHeight)
+        if (scrollTop + clientHeight >= scrollHeight && fetching === false) {
+            // 페이지 끝에 도달하면 추가 데이터를 받아온다
+            setFetching(true);
+            await fetchMore();
+            // 추가 데이터 로드 끝
+            setFetching(false);
+        };
+    } */
+
     return (
         <div
             className={`
-                font-NotoSans text-md select-none
+                font-NotoSans select-none
             `}
         >
             {loginOrSignUp ? null : <NavBar />}
