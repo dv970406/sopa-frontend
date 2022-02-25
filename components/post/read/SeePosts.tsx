@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -36,12 +36,10 @@ export default function SeePosts() {
         return <></>;
     }
     return (
-        <div
-            className="space-y-8"
-        >
+        <div>
             <div
                 className={`
-                    flex space-x-3
+                    flex space-x-3 mb-8
                 `}
             >
                 <SortPost />
@@ -67,7 +65,7 @@ export default function SeePosts() {
                     <motion.div
                         className={`
                             flex justify-center items-center px-12
-                            fixed top-0 left-0 right-0 h-screen w-screen
+                            fixed inset-0 h-screen w-screen
                         `}
                         onClick={() => setSelectedPostId(null)}
                         variants={semiDetailVar}

@@ -5,10 +5,8 @@
 
 import DisplayComment from '@components/comment/read/DisplayComment';
 import SeePosts from '@components/post/read/SeePosts';
-import { postsState } from '@utils/atoms';
 import { ICommentInfo } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
 
 interface MyActivity {
     tab: string;
@@ -17,7 +15,6 @@ interface MyActivity {
 
 export default function MyActivity({ tab, comments }: MyActivity) {
     const router = useRouter();
-    const posts = useRecoilValue(postsState);
 
     return (
         <div>

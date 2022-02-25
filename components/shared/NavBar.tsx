@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { useRouter } from 'next/router';
@@ -25,10 +25,12 @@ function NavBar() {
     const goToEditUser = () => router.push("/user/edit");
 
     return (
-        <div className='
-            flex justify-around items-center px-10 h-24 shadow-xl absolute top-0 w-full
-            bg-fuchsia-200 border-b-2 border-b-fuchsia-300 rounded-b-md
-        '>
+        <div
+            className='
+                flex justify-around items-center px-10 h-24 shadow-xl top-0 w-full
+                bg-fuchsia-200 border-b-2 border-b-fuchsia-300 rounded-b-md
+            '
+        >
             <div
                 onClick={() => router.push("/")}
                 className='
