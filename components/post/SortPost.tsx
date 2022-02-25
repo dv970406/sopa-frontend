@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { postsState } from '@utils/atoms';
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import SortingTab from './read/SortingTab';
 
-type kindOfSortingMethod = "new" | "like"
+type kindOfSortingMethod = "new" | "likeCount" | "readCount" | "commentCount"
 
 export default function SortPost() {
     const [sortingMethod, setSortingMethod] = useState<kindOfSortingMethod>("new");
@@ -18,16 +18,28 @@ export default function SortPost() {
         setSortingMethod(isSortByLikes)
 
         switch (isSortByLikes) {
-            case "like":
+            case "new":
+                setPosts(posts => {
+                    const copiedPosts = [...posts]
+                    return copiedPosts.sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
+                })
+                break;
+            case "likeCount":
                 setPosts(posts => {
                     const copiedPosts = [...posts]
                     return copiedPosts.sort((a, b) => Number(b.likeCount) - Number(a.likeCount))
                 })
                 break;
-            case "new":
+            case "readCount":
                 setPosts(posts => {
                     const copiedPosts = [...posts]
-                    return copiedPosts.sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
+                    return copiedPosts.sort((a, b) => Number(b.readCount) - Number(a.readCount))
+                })
+                break;
+            case "commentCount":
+                setPosts(posts => {
+                    const copiedPosts = [...posts]
+                    return copiedPosts.sort((a, b) => Number(b.commentCount) - Number(a.commentCount))
                 })
                 break;
         }
@@ -60,8 +72,8 @@ export default function SortPost() {
                             <svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="fuchsia"
                                 className={`
-                                h-6 w-6
-                            `}
+                                    h-6 w-6
+                                `}
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -72,33 +84,71 @@ export default function SortPost() {
             />
             <SortingTab
                 comparisonTarget={sortingMethod}
-                onClick={() => getSortByLikes("like")}
-                selectedTab="like"
+                onClick={() => getSortByLikes("likeCount")}
+                selectedTab="likeCount"
                 tabName={
-                    sortingMethod === "like" ? (
+                    sortingMethod === "likeCount" ? (
                         <>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="fuchsia"
-                                className={`
-                                    w-6 h-6
-                                `}
-                            >
-                                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
+                                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                             </svg>
-                            <span> 관심순</span>
+                            <span>관심순</span>
                         </>
 
                     ) : (
                         <>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="fuchsia"
-                                className={`
-                                    w-6 h-6
-                                `}
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="fuchsia">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                             </svg>
-                            <span> 관심순</span>
+                            <span>관심순</span>
+                        </>
+                    )
+                }
+            />
+            <SortingTab
+                comparisonTarget={sortingMethod}
+                onClick={() => getSortByLikes("readCount")}
+                selectedTab="readCount"
+                tabName={
+                    sortingMethod === "readCount" ? (
+                        <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                            </svg>
+                            <span>조회순</span>
+                        </>
+
+                    ) : (
+                        <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="fuchsia">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            <span>조회순</span>
+                        </>
+                    )
+                }
+            />
+            <SortingTab
+                comparisonTarget={sortingMethod}
+                onClick={() => getSortByLikes("commentCount")}
+                selectedTab="commentCount"
+                tabName={
+                    sortingMethod === "commentCount" ? (
+                        <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
+                                <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
+                            </svg>
+                            <span>댓글순</span>
+                        </>
+
+                    ) : (
+                        <>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="fuchsia">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            <span>댓글순</span>
                         </>
                     )
                 }

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { motion } from 'framer-motion';
@@ -8,9 +8,9 @@ import { useState } from 'react';
 import SearchInput from './SearchInput';
 
 
-const offVar = {
+const turnOffSearchVariants = {
     invisible: {
-        x: -150,
+        x: 200,
     },
     visible: {
         x: 0,
@@ -26,10 +26,9 @@ export default function SearchInputBtn() {
         isSearchMode ? (
             <SearchInput setIsSearchMode={setIsSearchMode} />
         ) : (
-
             <motion.button
                 onClick={() => setIsSearchMode(true)}
-                variants={offVar}
+                variants={turnOffSearchVariants}
                 initial="invisible"
                 animate="visible"
                 whileHover={{

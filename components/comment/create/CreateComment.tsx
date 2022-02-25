@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: ------
+ * 수정일: 2022.02.25
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -107,10 +107,10 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
             <form
                 onSubmit={handleSubmit(onValid)}
                 className={`
-                flex flex-col
-                w-full border-2 border-fuchsia-200 rounded-lg px-4 py-2 transition
-                focus-within:border-fuchsia-400
-            `}
+                    flex flex-col
+                    w-full border-2 border-fuchsia-200 rounded-lg p-4 transition
+                    focus-within:border-fuchsia-400
+                `}
             >
                 <textarea
                     {...register("comment", {
@@ -121,8 +121,8 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                         }
                     })}
                     className={`
-                    focus:outline-none
-                `}
+                        focus:outline-none
+                    `}
                     rows={5}
                     cols={50}
                     placeholder="댓글을 입력하세요"
@@ -133,15 +133,15 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 </textarea>
                 <div
                     className={`
-                    w-full
-                    border-t-2 border-t-fuchsia-400
-                    flex items-center
-                    space-x-2
-                    pt-2 mt-2
-                    place-content-end
-                `}
+                        w-full
+                        border-t-2 border-t-fuchsia-400
+                        flex items-center
+                        space-x-2
+                        pt-2 mt-2
+                        place-content-end
+                    `}
                 >
-                    <p>{checkTextCount} / 200</p>
+                    <p className='font-bold'>{checkTextCount} / 200</p>
                     <Button text="추가" />
                 </div>
             </form>

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.25
  */
 
 import { gql, useLazyQuery } from '@apollo/client';
@@ -16,8 +16,8 @@ interface ISearchInputComponent {
 }
 
 const SEARCH_POSTS_QUERY = gql`
-    query searchPosts($title:String!){
-        searchPosts(title:$title){
+    query searchPosts($title:String!,$offset:Int){
+        searchPosts(title:$title,offset:$offset){
             ...PostDisplayFragment
         }
     }
@@ -31,14 +31,14 @@ interface ISearchPostsCompleted {
     searchPosts: IPostDisplay[]
 }
 
-const searchInputVar = {
+const searchInputVariants = {
     invisible: {
         opacity: 0,
         x: 70,
     },
     visible: {
         opacity: 1,
-        x: 0,
+        x: -30,
         transition: {
             duration: 0.3
         }
@@ -70,11 +70,11 @@ export default function SearchInput({ setIsSearchMode }: ISearchInputComponent) 
 
     return (
         <motion.div
-            variants={searchInputVar}
+            variants={searchInputVariants}
             initial="invisible"
             animate="visible"
             className="
-                flex bg-white rounded-xl px-2 py-1 items-center space-x-2 shadow-lg
+                absolute flex bg-white rounded-xl px-2 py-1 items-center space-x-2 shadow-lg
             "
         >
             <button

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.23
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { useEffect, useState } from 'react';
@@ -51,7 +51,8 @@ export default function LoginHoverEvent() {
         >
             <button
                 className={`
-                    opacity-70 hover:opacity-100 font-bold text-white
+                    opacity-70 hover:opacity-100 font-bold
+                    hover:text-fuchsia-500 text-fuchsia-400
                 `}
                 onClick={goToLogin}
             >

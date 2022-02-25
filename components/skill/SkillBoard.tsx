@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { ISkill } from '@utils/types/interfaces'
@@ -15,7 +15,7 @@ function SkillBoard({ skillsOfPosition }: ISkillBoard) {
     return (
         <div
             className={`
-                relative flex flex-col items-center border-2 border-black shadow-lg rounded-lg 
+                relative flex flex-col items-center border-2 shadow-lg rounded-lg 
             `}
         >
             <p

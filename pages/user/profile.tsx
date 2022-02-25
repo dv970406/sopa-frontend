@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -9,21 +9,21 @@ import MyActivity from '@components/user/read/MyActivity';
 import ProfileTab from '@components/user/read/ProfileTab';
 import { postsState } from '@utils/atoms';
 import { COMMENT_FRAGMENT, POST_DETAIL_FRAGMENT, POST_DISPLAY_FRAGMENT, USER_DETAIL_FRAGMENT } from '@utils/fragments';
-import { IPostDisplay } from '@utils/types/interfaces';
+import { ICommentInfo, IPostDisplay } from '@utils/types/interfaces';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 const SEE_MY_PROFILE_QUERY = gql`
-    query seeMyProfile{
+    query seeMyProfile($offset:Int){
         seeMyProfile{
             ...UserDetailFragment
-            comments{
+            comments(offset:$offset){
                 ...CommentFragment
             }
-            posts{
+            posts(offset:$offset){
                 ...PostDetailFragment
             }
-            likes{
+            likes(offset:$offset){
                 post{
                     ...PostDisplayFragment
                 }
@@ -39,8 +39,8 @@ const SEE_MY_PROFILE_QUERY = gql`
 export type kindOfTab = "like" | "post" | "comment"
 
 export default function UserProfilePage() {
-
     const [tab, setTab] = useState<kindOfTab>("like");
+    const [comments, setComments] = useState<ICommentInfo[]>([]);
     const setPosts = useSetRecoilState(postsState);
 
     // onCompleted 없이 data를 setPosts에 넣으니 초기 화면에 그려지지 않는 버그가 있어서 onCompleted를 활용
@@ -51,7 +51,7 @@ export default function UserProfilePage() {
         }
     }
 
-    const { data, loading } = useQuery(SEE_MY_PROFILE_QUERY, {
+    const { data, loading, fetchMore } = useQuery(SEE_MY_PROFILE_QUERY, {
         onCompleted: seeMyProfileCompleted
     });
 
@@ -64,8 +64,47 @@ export default function UserProfilePage() {
             case "post":
                 setPosts(data?.seeMyProfile?.posts);
                 break;
+            case "comment":
+                setComments(data?.seeMyProfile?.comments);
+                break;
         }
     }, [tab]);
+
+    const getFetchMore = (tab: string) => {
+        switch (tab) {
+            case "like":
+                return () => fetchMore({
+                    variables: { offset: data?.seeMyProfile?.likes?.length },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev;
+                        const postsPressedLike = fetchMoreResult?.seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
+                        setPosts(oldPosts => [...oldPosts, ...postsPressedLike])
+                        return;
+                    }
+                });
+
+            case "post":
+                return () => fetchMore({
+                    variables: { offset: data?.seeMyProfile?.posts?.length },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev;
+                        setPosts(oldPosts => [...oldPosts, ...fetchMoreResult?.seeMyProfile?.posts])
+                        return;
+                    }
+                });
+
+            case "comment":
+                return () => fetchMore({
+                    variables: { offset: data?.seeMyProfile?.comments?.length },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev;
+                        setComments(oldComments => [...oldComments, ...fetchMoreResult?.seeMyProfile?.comments])
+                        return;
+                    }
+                })
+        }
+
+    }
 
     return (
         <MainLayout loading={loading} title={data?.seeMyProfile?.name}>
@@ -119,7 +158,11 @@ export default function UserProfilePage() {
                 </div>
             </div>
 
-            <MyActivity tab={tab} comments={data?.seeMyProfile?.comments} />
+            <MyActivity
+                tab={tab}
+                comments={comments}
+                fetchMore={getFetchMore(tab)}
+            />
         </MainLayout >
     )
 }

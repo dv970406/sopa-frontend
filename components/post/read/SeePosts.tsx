@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -10,6 +10,8 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
+import InfiniteScroll from "react-infinite-scroll-component";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const semiDetailVar = {
     invisible: {
@@ -23,11 +25,25 @@ const semiDetailVar = {
     }
 }
 
-export default function SeePosts() {
-    const posts = useRecoilValue(postsState)
+interface ISeePostsComponent {
+    fetchMore?: any;
+}
+
+export default function SeePosts({ fetchMore }: ISeePostsComponent) {
+    const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+
+    const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
+
+    const getFetchMore = async () => {
+        setFetchMoreLoading(true);
+        await fetchMore();
+        setFetchMoreLoading(false);
+    }
+
     // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함
     const [isLoaded, setLoaded] = useState(false);
+
     useEffect(() => {
         setLoaded(true);
     }, []);
@@ -36,20 +52,26 @@ export default function SeePosts() {
         return <></>;
     }
     return (
-        <div
-            className="space-y-8"
-        >
+        <div>
             <div
                 className={`
-                    flex space-x-3
+                    flex space-x-3 mb-8
                 `}
             >
                 <SortPost />
             </div>
-            <div
-                className={`
-                    grid gap-5 sm:grid-cols-2 xl:grid-cols-3
-                `}
+
+            <InfiniteScroll
+                dataLength={18}
+                next={getFetchMore}
+                hasMore={true}
+                loader={fetchMoreLoading ? (
+                    <ClipLoader
+                        size={35}
+                        color={"#E879F9"}
+                    />
+                ) : undefined}
+                className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3 p-4"
             >
                 {posts?.map((post, index) =>
                     <motion.button
@@ -61,13 +83,15 @@ export default function SeePosts() {
                         <DisplayPost key={index} {...post} />
                     </motion.button>
                 )}
-            </div>
+            </InfiniteScroll>
+
             <AnimatePresence>
                 {selectedPostId !== null ? (
                     <motion.div
                         className={`
-                            flex justify-center items-center px-12
-                            fixed top-0 left-0 right-0 h-screen w-screen
+                            flex justify-center items-center px-6
+                            sm:px-20 md:px-32 lg:px-48 xl:px-64
+                            fixed inset-0 h-screen w-screen
                         `}
                         onClick={() => setSelectedPostId(null)}
                         variants={semiDetailVar}

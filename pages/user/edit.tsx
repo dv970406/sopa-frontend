@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 import MainLayout from '@components/shared/MainLayout'
@@ -12,7 +12,11 @@ export default function UserEditPage() {
 
     return (
         <MainLayout title={`${seeMyInfo?.name} 수정`}>
-            <div>
+            <div
+                className={`
+                    lg:px-32
+                `}
+            >
                 <EditUser />
             </div>
         </MainLayout>

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
@@ -17,7 +17,7 @@ export default function DisplayPost(
                 border-2 border-fuchsia-100 rounded-lg p-6
                 w-full h-full
                 flex flex-col justify-between items-center
-                space-y-5 shadow-xl
+                space-y-8 shadow-xl
                 hover:scale-105 transition-all duration-300 cursor-pointer
                 hover:border-fuchsia-300 hover:ring-2 ring-fuchsia-400 ring-offset-2
             `}
@@ -29,16 +29,21 @@ export default function DisplayPost(
                 `}
             >
                 <SkillImage
+                    displayMode
                     frontends={frontends}
                     backends={backends}
                     apps={apps}
                 />
             </div>
-            <p
-                className='font-bold text-lg'
+            <h1
+                className='
+                    font-bold
+                    sm:text-ellipsis sm:overflow-hidden sm:whitespace-nowrap sm:w-full
+                    text-lg lg:text-xl
+                '
             >
                 {title}
-            </p>
+            </h1>
             <div
                 className={`
                     flex justify-between w-full
@@ -54,7 +59,7 @@ export default function DisplayPost(
                 />
                 <p
                     className={`
-                        text-md font-semibold
+                        text-sm font-semibold
                         place-self-end
                     `}
                 >

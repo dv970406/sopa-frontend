@@ -1,12 +1,13 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: ------
+ * 수정일: 2022.02.25
  */
 
+import MainLayout from '@components/shared/MainLayout';
 import { tokenState } from '@utils/atoms';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 interface ISocialLogin {
@@ -16,7 +17,7 @@ interface ISocialLogin {
 export default function SocialLogin({ token }: ISocialLogin) {
     const setToken = useSetRecoilState(tokenState);
     const router = useRouter();
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         if (token) {
             //document.cookie = `TOKEN=${token}`;
@@ -24,11 +25,12 @@ export default function SocialLogin({ token }: ISocialLogin) {
             setToken(token);
             router.push("/");
         }
+        setLoading(false);
     }, []);
     return (
-        <div>
-            <p>기다려 주시와용 홍홍</p>
-        </div>
+        <MainLayout loading={loading} title="소셜로그인">
+
+        </MainLayout>
     )
 }
 

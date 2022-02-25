@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
 import { IPostDisplay } from '@utils/types/interfaces';
@@ -15,7 +15,7 @@ interface ISeeSemiDetail {
 export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
     const router = useRouter();
 
-    const preventOff = (event: React.MouseEvent<HTMLDivElement>) => {
+    const preventCloseSemiDetail = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
     }
 
@@ -28,22 +28,23 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
 
     return (
         <div
-            onClick={preventOff}
+            onClick={preventCloseSemiDetail}
             className={`
-                relative
+                relative 
                 bg-white min-h-full rounded-3xl p-4 space-y-2
             `}
         >
             <div
                 className={`
-                    flex justify-between items-center
+                    flex justify-between items-center space-x-6
                     border-b-2 border-b-fuchsia-400 pb-3 px-2
                 `}
             >
                 <h1
                     className={`
-                        text-2xl font-bold 
+                        text-xl font-bold cursor-pointer
                     `}
+                    onClick={() => goToPostDetail()}
                 >
                     {semiDetail.title}
                 </h1>
@@ -51,7 +52,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                     onClick={() => goToPostDetail()}
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                     className={`
-                        w-8 h-8 cursor-pointer text-fuchsia-300 transition-colors
+                        w-16 h-16 sm:w-8 sm:h-8 cursor-pointer text-fuchsia-300 transition-colors
                         hover:text-fuchsia-500
                     `}
                 >
@@ -75,7 +76,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                 <div
                     className={`
                         space-x-2
-                        grid grid-cols-4
+                        flex flex-wrap
                         gap-2
                     `}
                 >

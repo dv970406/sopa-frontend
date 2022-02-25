@@ -1,8 +1,9 @@
 /**
  * 생성일: 2022.02.16
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.25
  */
 
+import React, { Ref } from 'react';
 import { IFetchedSkillsInfo } from './types/interfaces';
 
 
@@ -76,8 +77,17 @@ export const makeSkillImages = (
 }
 
 export const getUploadedDate = (createdAt: number) => {
-    const transformDate = new Date(createdAt).toLocaleDateString().replace(/\./g, " -").slice(0, -1)
+    // "-" Style Date
+    /* const transformDate = new Date(createdAt).toLocaleDateString().replace(/\./g, " -").slice(0, -1)
     const changeDivision = transformDate.split("-");
-    const makeDateFormat = changeDivision.map(item => item.trim().padStart(2, "0")).join("-")
+    const makeDateFormat = changeDivision.map(item => item.trim().padStart(2, "0")).join("-") */
+
+    // Korean Style Date
+    const date = new Date(createdAt);
+    const getYear = date.getFullYear();
+    const getMonth = date.getMonth() + 1;
+    const getDay = date.getDate();
+    const makeDateFormat = `${getYear}년 ${getMonth}월 ${getDay}일`
     return makeDateFormat
 }
+

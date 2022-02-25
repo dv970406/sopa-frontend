@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 import { gql, useMutation } from '@apollo/client'
@@ -85,6 +85,8 @@ export default function EditUser() {
                 })}
                 defaultValue={seeMyInfo?.name}
                 required
+                minLength={2}
+                maxLength={8}
             />
             <Input
                 disabled={true}
@@ -112,6 +114,8 @@ export default function EditUser() {
                             }
                         })}
                         required
+                        minLength={8}
+                        maxLength={15}
                     />
                     <Input
                         type="password2"
@@ -131,6 +135,8 @@ export default function EditUser() {
                             }
                         })}
                         required
+                        minLength={8}
+                        maxLength={15}
                     />
                 </>
             )}

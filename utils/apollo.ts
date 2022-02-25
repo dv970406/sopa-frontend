@@ -6,6 +6,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context"
 import { onError } from "@apollo/client/link/error"
+import { offsetLimitPagination } from '@apollo/client/utilities';
 
 export interface IMutationResults {
     [key: string]: {
@@ -39,5 +40,13 @@ const errorInfo = onError(({ graphQLErrors, networkError }) => {
 
 export const client = new ApolloClient({
     link: authLink.concat(errorInfo).concat(httpLink),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+        typePolicies: {
+            Query: {
+                fields: {
+                    seePosts: offsetLimitPagination()
+                }
+            }
+        }
+    }),
 })

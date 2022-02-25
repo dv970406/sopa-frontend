@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.23
+ * 수정일: 2022.02.25
  */
 
 import { gql } from '@apollo/client';
@@ -65,7 +65,7 @@ export const POST_DETAIL_FRAGMENT = gql`
         }
         createdAt
         updatedAt
-        comments{
+        comments(offset:$offset){
             id
             comment
             user{
@@ -75,6 +75,7 @@ export const POST_DETAIL_FRAGMENT = gql`
             postId
             isMine
         }
+        isMine
     }
 `
 
