@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.26
  */
 
 interface ITabComponent {
@@ -15,7 +15,9 @@ interface ITabComponent {
 export default function ProfileTab({ autoFocus, count, tab, onFocusTab, setTab, svg }: ITabComponent) {
     return (
         <div
-            className='flex flex-col items-center space-y-1'
+            className='
+                flex flex-col items-center space-y-1
+            '
         >
             <button
                 className={`

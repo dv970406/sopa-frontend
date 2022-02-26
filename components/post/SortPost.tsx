@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.26
  */
 
 import { postsState } from '@utils/atoms';
@@ -49,7 +49,9 @@ export default function SortPost() {
         setSortingMethod("new");
     }, [])
     return (
-        <>
+        <div
+            className="flex space-x-3 mb-8"
+        >
             <SortingTab
                 onClick={() => getSortByLikes("new")}
                 comparisonTarget={sortingMethod}
@@ -153,6 +155,6 @@ export default function SortPost() {
                     )
                 }
             />
-        </>
+        </div>
     )
 }

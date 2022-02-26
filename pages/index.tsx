@@ -24,14 +24,16 @@ const SEE_POSTS_QUERY = gql`
     ${POST_DISPLAY_FRAGMENT}
 `
 
-
 const Home = ({ requestedPosts }: IHome) => {
   const setPosts = useSetRecoilState(postsState);
+  const { data, fetchMore } = useQuery(SEE_POSTS_QUERY);
 
-  const { data, fetchMore } = useQuery(SEE_POSTS_QUERY)
   useEffect(() => {
     setPosts(requestedPosts);
   }, []);
+  useEffect(() => {
+    setPosts(data?.seePosts)
+  }, [data])
 
   return (
     <MainLayout
@@ -43,11 +45,6 @@ const Home = ({ requestedPosts }: IHome) => {
         fetchMore={
           () => fetchMore({
             variables: { offset: data?.seePosts?.length },
-            updateQuery: (prev, { fetchMoreResult }) => {
-              if (!fetchMoreResult) return prev;
-              setPosts(oldPosts => [...oldPosts, ...fetchMoreResult.seePosts])
-              return;
-            }
           })
         }
       />

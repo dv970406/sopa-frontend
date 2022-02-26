@@ -1,9 +1,10 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.26
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
+import useMyInfo from 'hooks/useMyInfo';
 
 
 const DELETE_COMMENT_MUTATION = gql`
@@ -20,6 +21,7 @@ interface IDeleteCommentComponent {
 }
 
 export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentComponent) {
+    const { seeMyInfo } = useMyInfo();
 
     const updateDeleteComment: MutationUpdaterFn = (cache, { data }) => {
         const { deleteComment: { ok, error } }: any = data;
@@ -32,6 +34,14 @@ export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentCo
         });
         cache.modify({
             id: `Post:${postId}`,
+            fields: {
+                commentCount(prev) {
+                    return prev - 1
+                }
+            }
+        })
+        cache.modify({
+            id: `User:${seeMyInfo?.id}`,
             fields: {
                 commentCount(prev) {
                     return prev - 1

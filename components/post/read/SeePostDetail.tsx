@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.26
  */
 
 import MetaData from '../MetaData';
@@ -10,9 +10,7 @@ import DisplayComment from '../../comment/read/DisplayComment';
 import CreateComment from '../../comment/create/CreateComment';
 import MenuBtn from '../MenuBtn';
 import { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
-import InfiniteScroll from "react-infinite-scroll-component";
-import ClipLoader from "react-spinners/ClipLoader";
-import { useState } from 'react';
+import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 
 interface ISeePostDetailComponent {
     pageTitle: string;
@@ -22,13 +20,6 @@ interface ISeePostDetailComponent {
 }
 
 export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments }: ISeePostDetailComponent) {
-    const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
-
-    const getFetchMore = async () => {
-        setFetchMoreLoading(true);
-        await fetchMore();
-        setFetchMoreLoading(false);
-    }
     return (
         <>
             <div
@@ -89,28 +80,14 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
 
             <CreateComment postId={seePost?.id} />
 
-            <InfiniteScroll
-                dataLength={18}
-                next={getFetchMore}
-                hasMore={true}
-                loader={fetchMoreLoading ? (
-                    <ClipLoader
-                        size={35}
-                        color={"#E879F9"}
-                    />
-                ) : undefined}
-                className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3 p-4"
+            <InfiniteScrolling
+                css='space-y-4'
+                fetchMore={fetchMore}
             >
-                <div
-                    className={`
-                    space-y-4
-                `}
-                >
-                    {comments?.map(comment =>
-                        <DisplayComment key={comment.id} {...comment} />
-                    )}
-                </div>
-            </InfiniteScroll>
+                {comments?.map(comment =>
+                    <DisplayComment key={comment.id} {...comment} />
+                )}
+            </InfiniteScrolling>
         </>
     )
 }
