@@ -113,7 +113,6 @@ export default function UserProfilePage() {
         }
     }
 
-
     return (
         <MainLayout title={userData?.seeMyInfo?.name}>
             <div

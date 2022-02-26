@@ -1,9 +1,10 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: ------
+ * 수정일: 2022.02.26
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router'
 
 const DELETE_POST_MUTATION = gql`
@@ -21,6 +22,7 @@ interface IDeletePostComponent {
 
 export default function DeletePost({ postId }: IDeletePostComponent) {
     const router = useRouter();
+    const { seeMyInfo } = useMyInfo();
 
     const updateDeletePost: MutationUpdaterFn = (cache, { data }) => {
         const { deletePost: { ok, error } }: any = data
@@ -30,6 +32,14 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
         };
         cache.evict({
             id: `Post:${postId}`
+        });
+        cache.modify({
+            id: `User:${seeMyInfo?.id}`,
+            fields: {
+                postCount(prev) {
+                    return prev - 1
+                }
+            }
         });
 
         // 삭제 후 이전 페이지로 못돌아 가도록 replace로 설정

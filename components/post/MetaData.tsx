@@ -1,9 +1,10 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.26
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import useMyInfo from 'hooks/useMyInfo';
 import React from 'react';
 
 interface IMetaData {
@@ -25,6 +26,8 @@ const TOGGLE_LIKE_MUTATION = gql`
 `;
 
 export default function MetaData({ isSeePost = false, postId, readCount, commentCount, likeCount, isLiked }: IMetaData) {
+    const { seeMyInfo } = useMyInfo();
+
     const afterToggleLike: MutationUpdaterFn = (cache, { data }) => {
         const { toggleLike: { ok, error } }: any = data;
         if (!ok) {
@@ -41,6 +44,25 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
                 likeCount(prev) {
                     return isLiked ? prev - 1 : prev + 1
                 },
+            }
+        })
+        cache.modify({
+            id: `User:${seeMyInfo?.id}`,
+            fields: {
+                likeCount(prev) {
+                    return isLiked ? prev - 1 : prev + 1
+                }
+            }
+        })
+
+        cache.modify({
+            id: `ROOT_QUERY`,
+            fields: {
+                seeMyLikes(prev) {
+                    const findPost = prev.find((like: any) => like.post.__ref === `Post:${postId}`);
+                    const write = cache.extract()[`Post:${postId}`]
+                    return isLiked ? prev.filter((like: any) => like !== findPost) : [write, ...prev]
+                }
             }
         })
 

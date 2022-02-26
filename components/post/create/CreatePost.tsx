@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.26
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -8,6 +8,7 @@ import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import PositionSelector from '@components/form/PositionSelector';
 import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
+import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
@@ -32,8 +33,10 @@ export default function CreatePost() {
     const selectedSkillsToUpload = useRecoilValue(selectedSkillsToUploadState);
     const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState)
     const setPosts = useSetRecoilState(postsState)
+    const { seeMyInfo } = useMyInfo();
 
     const { register, handleSubmit, watch } = useForm<IForm>();
+
     const updateCreatePost: MutationUpdaterFn = (cache, { data }) => {
         const { createPost }: any = data
         if (createPost.id) {
@@ -41,6 +44,22 @@ export default function CreatePost() {
                 id: `ROOT_QUERY`,
                 fields: {
                     seePosts(prev: any) {
+                        return [createPost, ...prev]
+                    }
+                }
+            });
+            cache.modify({
+                id: `User:${seeMyInfo?.id}`,
+                fields: {
+                    postCount(prev) {
+                        return prev + 1
+                    }
+                }
+            });
+            cache.modify({
+                id: `ROOT_QUERY`,
+                fields: {
+                    seeMyPosts(prev) {
                         return [createPost, ...prev]
                     }
                 }
@@ -56,6 +75,7 @@ export default function CreatePost() {
             router.push("/");
         }
     }
+
     const [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
         update: updateCreatePost
     })

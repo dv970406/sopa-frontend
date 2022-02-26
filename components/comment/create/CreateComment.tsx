@@ -1,11 +1,12 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.26
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import Button from '@components/shared/Button';
 import { COMMENT_FRAGMENT } from '@utils/fragments';
+import useMyInfo from 'hooks/useMyInfo';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -29,6 +30,7 @@ interface ICreateCommentComponent {
 export default function CreateComment({ postId }: ICreateCommentComponent) {
     const [checkTextCount, setCheckTextCount] = useState(0);
     const { register, handleSubmit, setValue } = useForm<IForm>();
+    const { seeMyInfo } = useMyInfo();
 
     const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setCheckTextCount(+event.currentTarget.value.length)
@@ -74,6 +76,24 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 }
             }
         });
+
+        cache.modify({
+            id: `User:${seeMyInfo?.id}`,
+            fields: {
+                commentCount(prev) {
+                    return prev + 1
+                }
+            }
+        });
+        cache.modify({
+            id: `ROOT_QUERY`,
+            fields: {
+                seeMyComments(prev) {
+                    return [newComment, ...prev]
+                }
+            }
+        })
+
         setValue("comment", "");
     }
 
