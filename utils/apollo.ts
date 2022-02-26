@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.19
+ * 수정일: 2022.02.26
  */
 
 import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
@@ -44,7 +44,15 @@ export const client = new ApolloClient({
         typePolicies: {
             Query: {
                 fields: {
-                    seePosts: offsetLimitPagination()
+                    seePosts: offsetLimitPagination(),
+                    seeMyComments: offsetLimitPagination(),
+                    seeMyLikes: offsetLimitPagination(),
+                    seeMyPosts: offsetLimitPagination(),
+                }
+            },
+            Post: {
+                fields: {
+                    comments: offsetLimitPagination(),
                 }
             }
         }

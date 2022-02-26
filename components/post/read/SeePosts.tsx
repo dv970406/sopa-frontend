@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.26
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -10,8 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
-import InfiniteScroll from "react-infinite-scroll-component";
-import ClipLoader from "react-spinners/ClipLoader";
+import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 
 const semiDetailVar = {
     invisible: {
@@ -28,18 +27,9 @@ const semiDetailVar = {
 interface ISeePostsComponent {
     fetchMore?: any;
 }
-
 export default function SeePosts({ fetchMore }: ISeePostsComponent) {
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
-
-    const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
-
-    const getFetchMore = async () => {
-        setFetchMoreLoading(true);
-        await fetchMore();
-        setFetchMoreLoading(false);
-    }
 
     // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함
     const [isLoaded, setLoaded] = useState(false);
@@ -53,25 +43,11 @@ export default function SeePosts({ fetchMore }: ISeePostsComponent) {
     }
     return (
         <div>
-            <div
-                className={`
-                    flex space-x-3 mb-8
-                `}
-            >
-                <SortPost />
-            </div>
+            <SortPost />
 
-            <InfiniteScroll
-                dataLength={18}
-                next={getFetchMore}
-                hasMore={true}
-                loader={fetchMoreLoading ? (
-                    <ClipLoader
-                        size={35}
-                        color={"#E879F9"}
-                    />
-                ) : undefined}
-                className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3 p-4"
+            <InfiniteScrolling
+                fetchMore={fetchMore}
+                css="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
             >
                 {posts?.map((post, index) =>
                     <motion.button
@@ -83,7 +59,7 @@ export default function SeePosts({ fetchMore }: ISeePostsComponent) {
                         <DisplayPost key={index} {...post} />
                     </motion.button>
                 )}
-            </InfiniteScroll>
+            </InfiniteScrolling>
 
             <AnimatePresence>
                 {selectedPostId !== null ? (

@@ -1,71 +1,95 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.26
  */
 
 import { gql, useQuery } from '@apollo/client';
+import SeePosts from '@components/post/read/SeePosts';
 import MainLayout from '@components/shared/MainLayout';
-import MyActivity from '@components/user/read/MyActivity';
+import MyComments from '@components/user/read/MyComments';
 import ProfileTab from '@components/user/read/ProfileTab';
-import { postsState } from '@utils/atoms';
-import { COMMENT_FRAGMENT, POST_DETAIL_FRAGMENT, POST_DISPLAY_FRAGMENT, USER_DETAIL_FRAGMENT } from '@utils/fragments';
-import { ICommentInfo, IPostDisplay } from '@utils/types/interfaces';
+import { commentsState, postsState } from '@utils/atoms';
+import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT, USER_DETAIL_FRAGMENT } from '@utils/fragments';
+import { IPostDisplay } from '@utils/types/interfaces';
 import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-const SEE_MY_PROFILE_QUERY = gql`
-    query seeMyProfile($offset:Int){
-        seeMyProfile{
+const SEE_MY_INFO_QUERY = gql`
+    query seeMyInfo{
+        seeMyInfo{
             ...UserDetailFragment
-            comments(offset:$offset){
-                ...CommentFragment
-            }
-            posts(offset:$offset){
-                ...PostDetailFragment
-            }
-            likes(offset:$offset){
-                post{
-                    ...PostDisplayFragment
-                }
-            }
         }
     }
     ${USER_DETAIL_FRAGMENT}
+`
+
+const SEE_MY_COMMENTS_QUERY = gql`
+    query seeMyComments($offset:Int){
+        seeMyComments(offset:$offset){
+            ...CommentFragment
+        }
+    }
     ${COMMENT_FRAGMENT}
-    ${POST_DETAIL_FRAGMENT}
+`
+const SEE_MY_LIKES_QUERY = gql`
+    query seeMyLikes($offset:Int){
+        seeMyLikes(offset:$offset){
+            post{
+                ...PostDisplayFragment
+            }
+        }
+    }
+    ${POST_DISPLAY_FRAGMENT}
+`
+const SEE_MY_POSTS_QUERY = gql`
+    query seeMyPosts($offset:Int){
+        seeMyPosts(offset:$offset){
+            ...PostDisplayFragment
+        }
+    }
     ${POST_DISPLAY_FRAGMENT}
 `
 
+
 export type kindOfTab = "like" | "post" | "comment"
+
 
 export default function UserProfilePage() {
     const [tab, setTab] = useState<kindOfTab>("like");
-    const [comments, setComments] = useState<ICommentInfo[]>([]);
+    const setComments = useSetRecoilState(commentsState);
     const setPosts = useSetRecoilState(postsState);
 
-    // onCompleted 없이 data를 setPosts에 넣으니 초기 화면에 그려지지 않는 버그가 있어서 onCompleted를 활용
-    const seeMyProfileCompleted = ({ seeMyProfile }: any) => {
-        if (seeMyProfile.id) {
-            const postsPressedLike = seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
-            setPosts(postsPressedLike);
-        }
+    // 세 개의 onCompleted 함수로 초기 comments 데이터 세팅 및 인피니티 스크롤링으로 fetchMore 작동 시 가져온 데이터 세팅을 돕는다.
+    const myLikesCompleted = ({ seeMyLikes }: any) => {
+        const postsPressedLike = seeMyLikes?.map((like: { post: IPostDisplay }) => like.post);
+        setPosts(postsPressedLike);
     }
+    const myPostsCompleted = ({ seeMyPosts }: any) => setPosts(seeMyPosts);
+    const myCommentsCompleted = ({ seeMyComments }: any) => setComments(seeMyComments)
 
-    const { data, loading, fetchMore } = useQuery(SEE_MY_PROFILE_QUERY, {
-        onCompleted: seeMyProfileCompleted
+
+    const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
+    const { data: myLikesData, fetchMore: fetchMoreLikes } = useQuery(SEE_MY_LIKES_QUERY, {
+        onCompleted: myLikesCompleted
+    });
+    const { data: myPostsData, fetchMore: fetchMorePosts } = useQuery(SEE_MY_POSTS_QUERY, {
+        onCompleted: myPostsCompleted
+    });
+    const { data: myCommentsData, fetchMore: fetchMoreComments } = useQuery(SEE_MY_COMMENTS_QUERY, {
+        onCompleted: myCommentsCompleted
     });
 
     useEffect(() => {
         switch (tab) {
             case "like":
-                const postsPressedLike = data?.seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
+                const postsPressedLike = myLikesData?.seeMyLikes?.map((like: { post: IPostDisplay }) => like.post)
                 setPosts(postsPressedLike);
                 break;
             case "post":
-                setPosts(data?.seeMyProfile?.posts);
+                setPosts(myPostsData?.seeMyPosts);
                 break;
             case "comment":
-                setComments(data?.seeMyProfile?.comments);
+                setComments(myCommentsData?.seeMyComments);
                 break;
         }
     }, [tab]);
@@ -73,43 +97,30 @@ export default function UserProfilePage() {
     const getFetchMore = (tab: string) => {
         switch (tab) {
             case "like":
-                return () => fetchMore({
-                    variables: { offset: data?.seeMyProfile?.likes?.length },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prev;
-                        const postsPressedLike = fetchMoreResult?.seeMyProfile?.likes?.map((like: { post: IPostDisplay }) => like.post)
-                        setPosts(oldPosts => [...oldPosts, ...postsPressedLike])
-                        return;
-                    }
+                return () => fetchMoreLikes({
+                    variables: { offset: myLikesData?.seeMyLikes?.length },
                 });
 
             case "post":
-                return () => fetchMore({
-                    variables: { offset: data?.seeMyProfile?.posts?.length },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prev;
-                        setPosts(oldPosts => [...oldPosts, ...fetchMoreResult?.seeMyProfile?.posts])
-                        return;
-                    }
+                return () => fetchMorePosts({
+                    variables: { offset: myPostsData?.seeMyPosts?.length },
                 });
 
             case "comment":
-                return () => fetchMore({
-                    variables: { offset: data?.seeMyProfile?.comments?.length },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prev;
-                        setComments(oldComments => [...oldComments, ...fetchMoreResult?.seeMyProfile?.comments])
-                        return;
-                    }
+                return () => fetchMoreComments({
+                    variables: { offset: myCommentsData?.seeMyComments?.length },
                 })
         }
-
     }
 
+
     return (
-        <MainLayout loading={loading} title={data?.seeMyProfile?.name}>
+        <MainLayout title={userData?.seeMyInfo?.name}>
             <div
-                className="relative flex justify-center mb-5"
+                className="
+                    relative flex justify-center mb-5
+                    md:px-12 lg:px-24 xl:px-48
+                "
             >
                 <div className='absolute h-2 w-full bg-fuchsia-300 top-4 -z-10 rounded-full' />
                 <div
@@ -117,7 +128,7 @@ export default function UserProfilePage() {
                 >
                     <ProfileTab
                         autoFocus
-                        count={data?.seeMyProfile?.likeCount}
+                        count={userData?.seeMyInfo?.likeCount}
                         tab={tab}
                         setTab={setTab}
                         onFocusTab="like"
@@ -130,7 +141,7 @@ export default function UserProfilePage() {
                         }
                     />
                     <ProfileTab
-                        count={data?.seeMyProfile?.postCount}
+                        count={userData?.seeMyInfo?.postCount}
                         tab={tab}
                         setTab={setTab}
                         onFocusTab="post"
@@ -143,7 +154,7 @@ export default function UserProfilePage() {
                         }
                     />
                     <ProfileTab
-                        count={data?.seeMyProfile?.commentCount}
+                        count={userData?.seeMyInfo?.commentCount}
                         tab={tab}
                         setTab={setTab}
                         onFocusTab="comment"
@@ -158,11 +169,9 @@ export default function UserProfilePage() {
                 </div>
             </div>
 
-            <MyActivity
-                tab={tab}
-                comments={comments}
-                fetchMore={getFetchMore(tab)}
-            />
+            {tab === "like" ? <SeePosts fetchMore={getFetchMore(tab)} /> : null}
+            {tab === "post" ? <SeePosts fetchMore={getFetchMore(tab)} /> : null}
+            {tab === "comment" ? <MyComments fetchMore={getFetchMore(tab)} /> : null}
         </MainLayout >
     )
 }
