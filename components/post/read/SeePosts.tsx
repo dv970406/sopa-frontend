@@ -8,9 +8,9 @@ import { postsState } from '@utils/atoms';
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
+import ArrangePost from '../ArrangePost';
 
 const semiDetailVar = {
     invisible: {
@@ -25,11 +25,12 @@ const semiDetailVar = {
 }
 
 interface ISeePostsComponent {
+    seePostsRefetch?: any;
     fetchMore?: any;
     howManyData: number;
 }
 
-export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent) {
+export default function SeePosts({ seePostsRefetch, fetchMore, howManyData }: ISeePostsComponent) {
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
@@ -45,7 +46,7 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
     }
     return (
         <div>
-            <SortPost />
+            <ArrangePost refetch={seePostsRefetch} />
 
             <InfiniteScrolling
                 howManyData={howManyData}

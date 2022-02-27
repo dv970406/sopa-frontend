@@ -11,16 +11,13 @@ import { useSetRecoilState } from 'recoil'
 import { postsState } from '@utils/atoms'
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
 
-interface IHome {
-  requestedPosts: IPostDisplay[];
-}
-interface ISeePostsCompleted {
-  seePosts: IPostDisplay[]
-}
+interface ISeePosts {
+  [key: string]: IPostDisplay[];
+};
 
 const SEE_POSTS_QUERY = gql`
-    query seePosts($offset:Int,$skills:String){
-        seePosts(offset:$offset,skills:$skills){
+    query seePosts($offset:Int,$skills:String,$howToArrangement:String){
+        seePosts(offset:$offset,skills:$skills,howToArrangement:$howToArrangement){
           ...PostDisplayFragment
         }
     }
@@ -34,22 +31,23 @@ const SEE_POSTS_COUNT_QUERY = gql`
   }
 `
 
-const Home = ({ requestedPosts }: IHome) => {
+const Home = ({ requestedPosts }: ISeePosts) => {
   const setPosts = useSetRecoilState(postsState);
 
-  const seePostsCompleted = ({ seePosts }: ISeePostsCompleted) => setPosts(seePosts)
+  const seePostsCompleted = ({ seePosts }: ISeePosts) => setPosts(seePosts);
 
   const { data: seePostsData, fetchMore, refetch: seePostsRefetch } = useQuery(SEE_POSTS_QUERY, {
-    onCompleted: seePostsCompleted
+    onCompleted: seePostsCompleted,
   });
-  const { data: seePostsCountData, refetch: seePostsCountRefetch } = useQuery(SEE_POSTS_COUNT_QUERY)
+
+  const { data: seePostsCountData, refetch: seePostsCountRefetch } = useQuery(SEE_POSTS_COUNT_QUERY);
 
   useEffect(() => {
     setPosts(requestedPosts);
   }, []);
   useEffect(() => {
-    setPosts(seePostsData?.seePosts!)
-  }, [seePostsData])
+    setPosts(seePostsData?.seePosts!);
+  }, [seePostsData]);
 
   return (
     <MainLayout
@@ -58,6 +56,7 @@ const Home = ({ requestedPosts }: IHome) => {
       <SkillBoards />
       <SelectedSkillBoard seePostsRefetch={seePostsRefetch} seePostsCountRefetch={seePostsCountRefetch} />
       <SeePosts
+        seePostsRefetch={seePostsRefetch}
         howManyData={seePostsCountData?.seePostsCount?.count}
         fetchMore={
           () => fetchMore({

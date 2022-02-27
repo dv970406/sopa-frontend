@@ -3,8 +3,10 @@
  * 수정일: 2022.02.27
  */
 
+import { postArrangementMethodState, selectedSkillsState } from '@utils/atoms';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useRecoilValue } from 'recoil';
 
 interface IInfiniteScrollingComponent {
     howManyData: number;
@@ -15,7 +17,9 @@ interface IInfiniteScrollingComponent {
 
 export default function InfiniteScrolling({ howManyData, children, fetchMore, css }: IInfiniteScrollingComponent) {
     const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
-    const [countDataLength, setCountDataLength] = useState(0)
+    const [countDataLength, setCountDataLength] = useState(0);
+    const selectedSkills = useRecoilValue(selectedSkillsState);
+    const postArrangementMethod = useRecoilValue(postArrangementMethodState);
 
     const getFetchMore = async () => {
         setFetchMoreLoading(true);
@@ -29,7 +33,8 @@ export default function InfiniteScrolling({ howManyData, children, fetchMore, cs
 
     useEffect(() => {
         setCountDataLength(0);
-    }, [howManyData])
+    }, [selectedSkills, postArrangementMethod])
+
     return (
         <InfiniteScroll
             dataLength={countDataLength * 6}
