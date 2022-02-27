@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.25
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
 import DisplayComment from '@components/comment/read/DisplayComment';
@@ -12,9 +12,10 @@ import { useRecoilValue } from 'recoil';
 
 interface IMyCommentsComponent {
     fetchMore: any;
+    howManyData: number;
 }
 
-export default function MyComments({ fetchMore }: IMyCommentsComponent) {
+export default function MyComments({ fetchMore, howManyData }: IMyCommentsComponent) {
     const router = useRouter();
     const comments = useRecoilValue(commentsState);
 
@@ -23,6 +24,7 @@ export default function MyComments({ fetchMore }: IMyCommentsComponent) {
             className="md:px-12 lg:px-24 xl:px-48"
         >
             <InfiniteScrolling
+                howManyData={howManyData}
                 css="flex flex-col space-y-5"
                 fetchMore={fetchMore}
             >
@@ -30,8 +32,8 @@ export default function MyComments({ fetchMore }: IMyCommentsComponent) {
                     <div
                         key={comment.id}
                         className="
-                        flex space-x-4
-                    "
+                            flex space-x-4
+                        "
                     >
                         <DisplayComment {...comment} />
                         <button

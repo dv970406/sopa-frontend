@@ -14,37 +14,54 @@ import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
 interface IHome {
   requestedPosts: IPostDisplay[];
 }
+interface ISeePostsCompleted {
+  seePosts: IPostDisplay[]
+}
 
 const SEE_POSTS_QUERY = gql`
-    query seePosts($offset:Int){
-        seePosts(offset:$offset){
-            ...PostDisplayFragment
+    query seePosts($offset:Int,$skills:String){
+        seePosts(offset:$offset,skills:$skills){
+          ...PostDisplayFragment
         }
     }
     ${POST_DISPLAY_FRAGMENT}
 `
+const SEE_POSTS_COUNT_QUERY = gql`
+  query seePostsCount($skills:String){
+    seePostsCount(skills:$skills){
+      count
+    }
+  }
+`
 
 const Home = ({ requestedPosts }: IHome) => {
   const setPosts = useSetRecoilState(postsState);
-  const { data, fetchMore } = useQuery(SEE_POSTS_QUERY);
+
+  const seePostsCompleted = ({ seePosts }: ISeePostsCompleted) => setPosts(seePosts)
+
+  const { data: seePostsData, fetchMore, refetch: seePostsRefetch } = useQuery(SEE_POSTS_QUERY, {
+    onCompleted: seePostsCompleted
+  });
+  const { data: seePostsCountData, refetch: seePostsCountRefetch } = useQuery(SEE_POSTS_COUNT_QUERY)
 
   useEffect(() => {
     setPosts(requestedPosts);
   }, []);
   useEffect(() => {
-    setPosts(data?.seePosts)
-  }, [data])
+    setPosts(seePostsData?.seePosts!)
+  }, [seePostsData])
 
   return (
     <MainLayout
       title="당신의 소울파트너"
     >
       <SkillBoards />
-      <SelectedSkillBoard />
+      <SelectedSkillBoard seePostsRefetch={seePostsRefetch} seePostsCountRefetch={seePostsCountRefetch} />
       <SeePosts
+        howManyData={seePostsCountData?.seePostsCount?.count}
         fetchMore={
           () => fetchMore({
-            variables: { offset: data?.seePosts?.length },
+            variables: { offset: seePostsData?.seePosts?.length },
           })
         }
       />

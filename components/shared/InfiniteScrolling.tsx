@@ -1,18 +1,19 @@
 /**
  * 생성일: 2022.02.25
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface IInfiniteScrollingComponent {
+    howManyData: number;
     children: React.ReactNode;
     fetchMore?: any;
     css: string;
 }
 
-export default function InfiniteScrolling({ children, fetchMore, css }: IInfiniteScrollingComponent) {
+export default function InfiniteScrolling({ howManyData, children, fetchMore, css }: IInfiniteScrollingComponent) {
     const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
     const [countDataLength, setCountDataLength] = useState(0)
 
@@ -23,17 +24,23 @@ export default function InfiniteScrolling({ children, fetchMore, css }: IInfinit
         setCountDataLength(prevCount => prevCount + 1)
     }
 
+    // hasMore을 정해주기 위해 likeCount, postCount, commentCount 등을 가져와서 조건식에 활용함
+    const isHasMore = howManyData >= countDataLength * 6
+
+    useEffect(() => {
+        setCountDataLength(0);
+    }, [howManyData])
     return (
         <InfiniteScroll
             dataLength={countDataLength * 6}
             next={getFetchMore}
-            hasMore={true}
+            hasMore={isHasMore}
             loader={fetchMoreLoading ? (
                 <h4 className="text-center text-fuchsia-500 font-bold">가져오는 중입니다.</h4>
             ) : null}
             className={`${css} p-4`}
-            scrollThreshold={1}
-            endMessage={<h4 className="text-center text-fuchsia-500 font-bold">더 이상 없습니다ㅠㅠ</h4>}
+            scrollThreshold={0.95}
+            endMessage={<h4 className="text-center text-fuchsia-500 font-bold">끗!</h4>}
         >
             {children}
         </InfiniteScroll>

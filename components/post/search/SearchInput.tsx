@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.27
  */
 
 import { gql, useLazyQuery } from '@apollo/client';
@@ -16,20 +16,21 @@ interface ISearchInputComponent {
 }
 
 const SEARCH_POSTS_QUERY = gql`
-    query searchPosts($title:String!,$offset:Int){
-        searchPosts(title:$title,offset:$offset){
+    query searchPosts($title:String!){
+        searchPosts(title:$title){
             ...PostDisplayFragment
         }
     }
     ${POST_DISPLAY_FRAGMENT}
-`
+`;
 
 interface IForm {
     title: string;
-}
+};
+
 interface ISearchPostsCompleted {
     searchPosts: IPostDisplay[]
-}
+};
 
 const searchInputVariants = {
     invisible: {
@@ -43,7 +44,7 @@ const searchInputVariants = {
             duration: 0.3
         }
     }
-}
+};
 
 export default function SearchInput({ setIsSearchMode }: ISearchInputComponent) {
     const setPosts = useSetRecoilState(postsState);
@@ -53,10 +54,11 @@ export default function SearchInput({ setIsSearchMode }: ISearchInputComponent) 
     const searchPostsCompleted = ({ searchPosts }: ISearchPostsCompleted) => {
         setPosts(searchPosts);
         setValue("title", "");
-    }
+    };
+
     const [searchPostsMutation, { loading }] = useLazyQuery(SEARCH_POSTS_QUERY, {
         onCompleted: searchPostsCompleted
-    })
+    });
 
     const onValid = ({ title }: IForm) => {
         if (loading) return;
@@ -65,8 +67,8 @@ export default function SearchInput({ setIsSearchMode }: ISearchInputComponent) 
             variables: {
                 title
             }
-        })
-    }
+        });
+    };
 
     return (
         <motion.div

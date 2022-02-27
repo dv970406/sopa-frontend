@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.27
  */
 
 import { IFetchedSkillsInfo } from '@utils/types/interfaces';
@@ -18,7 +18,7 @@ interface IMakeSkillImages {
 }
 
 export default function SkillImage({ displayMode = false, frontends, backends, apps }: ISkillImage) {
-    const skillsInfo = makeSkillImages(frontends, backends, apps)
+    const skillsInfo = makeSkillImages(frontends, backends, apps);
 
     return (
         <>
@@ -50,7 +50,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                         </div>
                     </>
                 ) : (
-                    skillsInfo?.slice(0, 4).map((skill: IMakeSkillImages, index: number) =>
+                    skillsInfo?.map((skill: IMakeSkillImages, index: number) =>
                         <div
                             key={index}
                             className={`
@@ -68,7 +68,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                     )
                 )
             ) : (
-                skillsInfo?.slice(0, 4).map((skill: IMakeSkillImages, index: number) =>
+                skillsInfo?.map((skill: IMakeSkillImages, index: number) =>
                     <div
                         key={index}
                         className={`

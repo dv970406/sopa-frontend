@@ -1,30 +1,22 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.27
  */
 
-import { gql } from '@apollo/client';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { client } from '@utils/apollo';
-import { postsState, selectedSkillsState, skillsState } from '@utils/atoms';
+import { selectedSkillsState, skillsState } from '@utils/atoms';
 import { ISkill } from '@utils/types/interfaces';
-import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 
-const SEE_POSTS_QUERY = gql`
-    query seePosts($skills:String){
-        seePosts(skills:$skills){
-            ...PostDisplayFragment
-        }
-    }
-    ${POST_DISPLAY_FRAGMENT}
-`
+interface ISelectedSkillBoard {
+    seePostsRefetch: any;
+    seePostsCountRefetch: any
+}
 
-export default function SelectedSkillBoard() {
+export default function SelectedSkillBoard({ seePostsRefetch, seePostsCountRefetch }: ISelectedSkillBoard) {
     const [selectedSkills, setSelectedSkills] = useRecoilState(selectedSkillsState);
     const setSkills = useSetRecoilState(skillsState);
-    const setPosts = useSetRecoilState(postsState)
 
     const onClick = (selectedSkill: ISkill, index: number): void => {
         // SelectedSkillBoard에서 선택하면 selectedSkillsState에서 값을 삭제함
@@ -57,23 +49,18 @@ export default function SelectedSkillBoard() {
         })
     }
 
-    const getPosts = async () => {
+    useEffect(() => {
         const clearedSelectedSkills = selectedSkills.map(skill => {
             const { isSelected, skillImage, ...skillWithPosition } = skill
             return skillWithPosition
         })
-        const { data } = await client.query({
-            query: SEE_POSTS_QUERY,
-            ...(clearedSelectedSkills.length > 0 && {
-                variables: {
-                    skills: JSON.stringify(clearedSelectedSkills)
-                }
-            })
+
+        seePostsRefetch({
+            skills: JSON.stringify(clearedSelectedSkills)
+        });
+        seePostsCountRefetch({
+            skills: JSON.stringify(clearedSelectedSkills)
         })
-        setPosts(data.seePosts)
-    }
-    useEffect(() => {
-        getPosts()
     }, [selectedSkills])
 
     return (

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.27
  */
 
 import { atom, selector } from 'recoil';
@@ -14,10 +14,11 @@ export const loginModeState = atom<boolean>({
     default: true
 });
 
-export const postEditMode = atom<boolean>({
+export const postEditModeState = atom<boolean>({
     key: "postEditMode",
     default: false
 })
+
 
 // 앱이 렌더되면 쿠키에서 토큰을 꺼내 state에 저장한다.
 export const tokenState = atom<string | null>({

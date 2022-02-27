@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
 import MetaData from '../MetaData';
@@ -81,6 +81,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             <CreateComment postId={seePost?.id} />
 
             <InfiniteScrolling
+                howManyData={seePost.commentCount}
                 css='space-y-4'
                 fetchMore={fetchMore}
             >

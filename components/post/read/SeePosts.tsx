@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -26,8 +26,10 @@ const semiDetailVar = {
 
 interface ISeePostsComponent {
     fetchMore?: any;
+    howManyData: number;
 }
-export default function SeePosts({ fetchMore }: ISeePostsComponent) {
+
+export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent) {
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
@@ -46,6 +48,7 @@ export default function SeePosts({ fetchMore }: ISeePostsComponent) {
             <SortPost />
 
             <InfiniteScrolling
+                howManyData={howManyData}
                 fetchMore={fetchMore}
                 css="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
             >

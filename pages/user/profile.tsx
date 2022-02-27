@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -69,13 +69,13 @@ export default function UserProfilePage() {
 
 
     const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
-    const { data: myLikesData, fetchMore: fetchMoreLikes } = useQuery(SEE_MY_LIKES_QUERY, {
+    const { data: myLikesData, fetchMore: fetchMoreLikes, loading: getLikesLoading } = useQuery(SEE_MY_LIKES_QUERY, {
         onCompleted: myLikesCompleted
     });
-    const { data: myPostsData, fetchMore: fetchMorePosts } = useQuery(SEE_MY_POSTS_QUERY, {
+    const { data: myPostsData, fetchMore: fetchMorePosts, loading: getPostsLoading } = useQuery(SEE_MY_POSTS_QUERY, {
         onCompleted: myPostsCompleted
     });
-    const { data: myCommentsData, fetchMore: fetchMoreComments } = useQuery(SEE_MY_COMMENTS_QUERY, {
+    const { data: myCommentsData, fetchMore: fetchMoreComments, loading: getCommentsLoading } = useQuery(SEE_MY_COMMENTS_QUERY, {
         onCompleted: myCommentsCompleted
     });
 
@@ -114,7 +114,7 @@ export default function UserProfilePage() {
     }
 
     return (
-        <MainLayout title={userData?.seeMyInfo?.name}>
+        <MainLayout loading={getLikesLoading || getPostsLoading || getCommentsLoading} title={userData?.seeMyInfo?.name}>
             <div
                 className="
                     relative flex justify-center mb-5
@@ -168,9 +168,9 @@ export default function UserProfilePage() {
                 </div>
             </div>
 
-            {tab === "like" ? <SeePosts fetchMore={getFetchMore(tab)} /> : null}
-            {tab === "post" ? <SeePosts fetchMore={getFetchMore(tab)} /> : null}
-            {tab === "comment" ? <MyComments fetchMore={getFetchMore(tab)} /> : null}
+            {tab === "like" ? <SeePosts howManyData={userData?.seeMyInfo?.likeCount} fetchMore={getFetchMore(tab)} /> : null}
+            {tab === "post" ? <SeePosts howManyData={userData?.seeMyInfo?.postCount} fetchMore={getFetchMore(tab)} /> : null}
+            {tab === "comment" ? <MyComments howManyData={userData?.seeMyInfo?.commentCount} fetchMore={getFetchMore(tab)} /> : null}
         </MainLayout >
     )
 }
