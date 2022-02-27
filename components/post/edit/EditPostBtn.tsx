@@ -1,13 +1,13 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: ------
+ * 수정일: 2022.02.27
  */
 
-import { postEditMode } from '@utils/atoms'
+import { postEditModeState } from '@utils/atoms'
 import { useSetRecoilState } from 'recoil'
 
 export default function EditPostBtn() {
-    const isPostEditMode = useSetRecoilState(postEditMode)
+    const isPostEditMode = useSetRecoilState(postEditModeState)
 
     return (
         <button

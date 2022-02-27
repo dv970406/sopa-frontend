@@ -1,17 +1,16 @@
 /**
  * 생성일: 2022.02.24
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.27
  */
 
-interface ISortingTab {
+interface IArrangementTab {
     tabName: string | JSX.Element;
     selectedTab: string;
     comparisonTarget: string;
     onClick(): void;
 }
 
-export default function SortingTab({ tabName, selectedTab, comparisonTarget, onClick }: ISortingTab) {
-
+export default function ArrangementTab({ tabName, selectedTab, comparisonTarget, onClick }: IArrangementTab) {
     return (
         <div
             className={`

@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.22
+ * 수정일: 2022.02.27
  */
 
 import { atom, selector } from 'recoil';
 import { skillSet } from './skillSet';
 import { ICommentInfo, IPostDisplay, ISkill, ISkillPositions } from './types/interfaces';
-import { KindOfPosition } from './types/types';
+import { kindOfArrangementMethod, kindOfMyActivitiesTab, KindOfPosition } from './types/types';
 
 // LoginOrSignUp Component에서 사용하는 로그인/회원가입 화면 결정
 export const loginModeState = atom<boolean>({
@@ -14,12 +14,26 @@ export const loginModeState = atom<boolean>({
     default: true
 });
 
-export const postEditMode = atom<boolean>({
+export const postEditModeState = atom<boolean>({
     key: "postEditMode",
     default: false
 })
+export const searchModeState = atom<boolean>({
+    key: "searchModeState",
+    default: false
+})
 
-// 앱이 렌더되면 쿠키에서 토큰을 꺼내 state에 저장한다.
+export const postArrangementMethodState = atom<kindOfArrangementMethod>({
+    key: "postArrangementMethodState",
+    default: "new"
+})
+export const myActivitiesTabState = atom<kindOfMyActivitiesTab>({
+    key: "myActivitiesTabState",
+    default: "like"
+})
+
+
+// 브라우저가 렌더링되면 쿠키에서 토큰을 꺼내 state에 저장한다.
 export const tokenState = atom<string | null>({
     key: "tokenState",
     default: typeof window === "undefined" ? null : localStorage.getItem("TOKEN"),

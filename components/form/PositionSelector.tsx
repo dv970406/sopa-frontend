@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: 2022.02.24
+ * 수정일: 2022.02.27
  */
 
-import SortingTab from '@components/post/read/SortingTab';
+import ArrangementTab from '@components/post/ArrangementTab';
 import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { useEffect } from 'react';
@@ -40,19 +40,19 @@ export default function PositionSelector() {
                 <div
                     className="flex justify-around space-x-4 ml-7 w-full"
                 >
-                    <SortingTab
+                    <ArrangementTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("frontend")}
                         tabName="frontend"
                         selectedTab='frontend'
                     />
-                    <SortingTab
+                    <ArrangementTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("backend")}
                         tabName="backend"
                         selectedTab='backend'
                     />
-                    <SortingTab
+                    <ArrangementTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("app")}
                         tabName="app"

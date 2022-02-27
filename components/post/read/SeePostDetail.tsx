@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
 import MetaData from '../MetaData';
@@ -20,6 +20,7 @@ interface ISeePostDetailComponent {
 }
 
 export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments }: ISeePostDetailComponent) {
+
     return (
         <>
             <div
@@ -30,8 +31,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             >
                 <h1
                     className={`
-                        text-4xl font-bold
-                        p-3
+                        text-4xl font-bold p-3
                     `}
                 >
                     {seePost?.title || pageTitle}
@@ -81,6 +81,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             <CreateComment postId={seePost?.id} />
 
             <InfiniteScrolling
+                howManyData={seePost.commentCount}
                 css='space-y-4'
                 fetchMore={fetchMore}
             >

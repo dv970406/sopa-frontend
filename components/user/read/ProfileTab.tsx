@@ -1,18 +1,21 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
+
+import { myActivitiesTabState } from '@utils/atoms'
+import { kindOfMyActivitiesTab } from '@utils/types/types';
+import { useRecoilState } from 'recoil'
 
 interface ITabComponent {
     autoFocus?: boolean;
     count: number;
-    tab: string;
-    setTab: any;
-    onFocusTab: string;
+    onFocusTab: kindOfMyActivitiesTab;
     svg: JSX.Element;
 }
 
-export default function ProfileTab({ autoFocus, count, tab, onFocusTab, setTab, svg }: ITabComponent) {
+export default function ProfileTab({ autoFocus, count, onFocusTab, svg }: ITabComponent) {
+    const [myActivitiesTab, setMyActivitiesTab] = useRecoilState(myActivitiesTabState);
     return (
         <div
             className='
@@ -22,7 +25,7 @@ export default function ProfileTab({ autoFocus, count, tab, onFocusTab, setTab, 
             <button
                 className={`
                     p-2 rounded-full border-4 border-fuchsia-300 hover:border-fuchsia-400 transition
-                    ${tab === onFocusTab ? (
+                    ${myActivitiesTab === onFocusTab ? (
                         "text-white bg-fuchsia-500 ring-2 ring-fuchsia-500 ring-offset-2"
                     ) : (
                         "text-fuchsia-500 bg-white"
@@ -30,7 +33,7 @@ export default function ProfileTab({ autoFocus, count, tab, onFocusTab, setTab, 
                     focus:outline-none
                 `}
                 autoFocus={autoFocus}
-                onClick={() => setTab(onFocusTab)}
+                onClick={() => setMyActivitiesTab(onFocusTab)}
             >
                 {svg}
             </button>

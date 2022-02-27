@@ -7,47 +7,74 @@ import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
 import { IPostDisplay } from '@utils/types/interfaces'
 import SeePosts from '@components/post/read/SeePosts'
 import { useEffect } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { postsState } from '@utils/atoms'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { postsState, searchModeState } from '@utils/atoms'
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
+import Loading from '@components/shared/Loading'
+import ArrangePosts from '@components/post/ArrangePosts'
 
-interface IHome {
-  requestedPosts: IPostDisplay[];
-}
+interface ISeePosts {
+  [key: string]: IPostDisplay[];
+};
 
 const SEE_POSTS_QUERY = gql`
-    query seePosts($offset:Int){
-        seePosts(offset:$offset){
-            ...PostDisplayFragment
+    query seePosts($offset:Int,$skills:String,$howToArrangement:String){
+        seePosts(offset:$offset,skills:$skills,howToArrangement:$howToArrangement){
+          ...PostDisplayFragment
         }
     }
     ${POST_DISPLAY_FRAGMENT}
 `
+const SEE_POSTS_COUNT_QUERY = gql`
+  query seePostsCount($skills:String){
+    seePostsCount(skills:$skills){
+      count
+    }
+  }
+`
 
-const Home = ({ requestedPosts }: IHome) => {
+const Home = ({ requestedPosts }: ISeePosts) => {
   const setPosts = useSetRecoilState(postsState);
-  const { data, fetchMore } = useQuery(SEE_POSTS_QUERY);
+  const searchMode = useRecoilValue(searchModeState);
+
+  const seePostsCompleted = ({ seePosts }: ISeePosts) => setPosts(seePosts);
+
+  const { data: seePostsData, loading, fetchMore, refetch: refetchSeePosts } = useQuery(SEE_POSTS_QUERY, {
+    onCompleted: seePostsCompleted,
+  });
+
+  const { data: seePostsCountData, refetch: refetchSeePostsCount } = useQuery(SEE_POSTS_COUNT_QUERY);
 
   useEffect(() => {
     setPosts(requestedPosts);
   }, []);
   useEffect(() => {
-    setPosts(data?.seePosts)
-  }, [data])
+    setPosts(seePostsData?.seePosts!);
+  }, [seePostsData]);
 
   return (
     <MainLayout
       title="당신의 소울파트너"
     >
-      <SkillBoards />
-      <SelectedSkillBoard />
-      <SeePosts
-        fetchMore={
-          () => fetchMore({
-            variables: { offset: data?.seePosts?.length },
-          })
-        }
-      />
+      {searchMode ? null : (
+        <>
+          <SkillBoards />
+          <SelectedSkillBoard refetchSeePosts={refetchSeePosts} refetchSeePostsCount={refetchSeePostsCount} />
+          <ArrangePosts refetchFn={refetchSeePosts} />
+        </>
+      )}
+      {loading ? (
+        <Loading />
+      ) : (
+        <SeePosts
+          howManyData={seePostsCountData?.seePostsCount?.count}
+          fetchMore={
+            () => fetchMore({
+              variables: { offset: seePostsData?.seePosts?.length },
+            })
+          }
+        />
+      )}
     </MainLayout>
   )
 }

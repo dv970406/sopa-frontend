@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -8,7 +8,6 @@ import { postsState } from '@utils/atoms';
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import SortPost from '../SortPost';
 import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 
@@ -26,8 +25,10 @@ const semiDetailVar = {
 
 interface ISeePostsComponent {
     fetchMore?: any;
+    howManyData: number;
 }
-export default function SeePosts({ fetchMore }: ISeePostsComponent) {
+
+export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent) {
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
@@ -43,9 +44,8 @@ export default function SeePosts({ fetchMore }: ISeePostsComponent) {
     }
     return (
         <div>
-            <SortPost />
-
             <InfiniteScrolling
+                howManyData={howManyData}
                 fetchMore={fetchMore}
                 css="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
             >

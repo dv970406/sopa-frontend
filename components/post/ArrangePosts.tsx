@@ -1,63 +1,36 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.26
+ * 수정일: 2022.02.27
  */
 
-import { postsState } from '@utils/atoms';
-import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import SortingTab from './read/SortingTab';
+import { postArrangementMethodState } from '@utils/atoms';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import ArrangementTab from './ArrangementTab';
 
-type kindOfSortingMethod = "new" | "likeCount" | "readCount" | "commentCount"
+interface IArrangePostComponent {
+    refetchFn: any;
+}
 
-export default function SortPost() {
-    const [sortingMethod, setSortingMethod] = useState<kindOfSortingMethod>("new");
-    const setPosts = useSetRecoilState(postsState);
-
-    const getSortByLikes = (isSortByLikes: kindOfSortingMethod) => {
-        setSortingMethod(isSortByLikes)
-
-        switch (isSortByLikes) {
-            case "new":
-                setPosts(posts => {
-                    const copiedPosts = [...posts]
-                    return copiedPosts.sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
-                })
-                break;
-            case "likeCount":
-                setPosts(posts => {
-                    const copiedPosts = [...posts]
-                    return copiedPosts.sort((a, b) => Number(b.likeCount) - Number(a.likeCount))
-                })
-                break;
-            case "readCount":
-                setPosts(posts => {
-                    const copiedPosts = [...posts]
-                    return copiedPosts.sort((a, b) => Number(b.readCount) - Number(a.readCount))
-                })
-                break;
-            case "commentCount":
-                setPosts(posts => {
-                    const copiedPosts = [...posts]
-                    return copiedPosts.sort((a, b) => Number(b.commentCount) - Number(a.commentCount))
-                })
-                break;
-        }
-    }
+export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
+    const [postArrangementMethod, setPostArrangementMethod] = useRecoilState(postArrangementMethodState);
 
     useEffect(() => {
-        setSortingMethod("new");
-    }, [])
+        refetchFn({
+            howToArrangement: postArrangementMethod
+        })
+    }, [postArrangementMethod])
+
     return (
         <div
             className="flex space-x-3 mb-8"
         >
-            <SortingTab
-                onClick={() => getSortByLikes("new")}
-                comparisonTarget={sortingMethod}
+            <ArrangementTab
+                onClick={() => setPostArrangementMethod("new")}
+                comparisonTarget={postArrangementMethod}
                 selectedTab="new"
                 tabName={
-                    sortingMethod === "new" ? (
+                    postArrangementMethod === "new" ? (
                         <>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="fuchsia"
@@ -84,12 +57,12 @@ export default function SortPost() {
                     )
                 }
             />
-            <SortingTab
-                comparisonTarget={sortingMethod}
-                onClick={() => getSortByLikes("likeCount")}
+            <ArrangementTab
+                comparisonTarget={postArrangementMethod}
+                onClick={() => setPostArrangementMethod("likeCount")}
                 selectedTab="likeCount"
                 tabName={
-                    sortingMethod === "likeCount" ? (
+                    postArrangementMethod === "likeCount" ? (
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
                                 <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
@@ -107,12 +80,12 @@ export default function SortPost() {
                     )
                 }
             />
-            <SortingTab
-                comparisonTarget={sortingMethod}
-                onClick={() => getSortByLikes("readCount")}
+            <ArrangementTab
+                comparisonTarget={postArrangementMethod}
+                onClick={() => setPostArrangementMethod("readCount")}
                 selectedTab="readCount"
                 tabName={
-                    sortingMethod === "readCount" ? (
+                    postArrangementMethod === "readCount" ? (
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
                                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -132,12 +105,12 @@ export default function SortPost() {
                     )
                 }
             />
-            <SortingTab
-                comparisonTarget={sortingMethod}
-                onClick={() => getSortByLikes("commentCount")}
+            <ArrangementTab
+                comparisonTarget={postArrangementMethod}
+                onClick={() => setPostArrangementMethod("commentCount")}
                 selectedTab="commentCount"
                 tabName={
-                    sortingMethod === "commentCount" ? (
+                    postArrangementMethod === "commentCount" ? (
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
                                 <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
