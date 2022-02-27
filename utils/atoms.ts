@@ -18,6 +18,10 @@ export const postEditModeState = atom<boolean>({
     key: "postEditMode",
     default: false
 })
+export const searchModeState = atom<boolean>({
+    key: "searchModeState",
+    default: false
+})
 
 export const postArrangementMethodState = atom<kindOfArrangementMethod>({
     key: "postArrangementMethodState",

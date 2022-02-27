@@ -4,6 +4,7 @@
  */
 
 import { gql, useQuery } from '@apollo/client';
+import ArrangePosts from '@components/post/ArrangePosts';
 import SeePosts from '@components/post/read/SeePosts';
 import { myActivitiesTabState, postsState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
@@ -43,15 +44,17 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
 
     return (
         myActivitiesTab === "post" ? (
-            <SeePosts
-                howManyData={seeMyInfo?.postCount}
-                refetchFn={refetchMyPosts}
-                fetchMore={
-                    () => fetchMoreMyPosts({
-                        variables: { offset: myPostsData?.seeMyPosts?.length },
-                    })
-                }
-            />
+            <>
+                <ArrangePosts refetchFn={refetchMyPosts} />
+                <SeePosts
+                    howManyData={seeMyInfo?.postCount}
+                    fetchMore={
+                        () => fetchMoreMyPosts({
+                            variables: { offset: myPostsData?.seeMyPosts?.length },
+                        })
+                    }
+                />
+            </>
         ) : null
     )
 }

@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
-import ArrangePosts from '../ArrangePosts';
 
 const semiDetailVar = {
     invisible: {
@@ -25,12 +24,11 @@ const semiDetailVar = {
 }
 
 interface ISeePostsComponent {
-    refetchFn?: any;
     fetchMore?: any;
     howManyData: number;
 }
 
-export default function SeePosts({ refetchFn, fetchMore, howManyData }: ISeePostsComponent) {
+export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent) {
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
@@ -46,8 +44,6 @@ export default function SeePosts({ refetchFn, fetchMore, howManyData }: ISeePost
     }
     return (
         <div>
-            <ArrangePosts refetchFn={refetchFn} />
-
             <InfiniteScrolling
                 howManyData={howManyData}
                 fetchMore={fetchMore}

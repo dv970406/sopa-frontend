@@ -3,7 +3,7 @@
  * 수정일: 2022.02.27
  */
 
-import ArrangementTab from '@components/post/read/ArrangementTab';
+import ArrangementTab from '@components/post/ArrangementTab';
 import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { useEffect } from 'react';

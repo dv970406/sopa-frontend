@@ -3,7 +3,7 @@
  * 수정일: 2022.02.27
  */
 
-import { postArrangementMethodState, selectedSkillsState } from '@utils/atoms';
+import { postArrangementMethodState, searchModeState, selectedSkillsState } from '@utils/atoms';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRecoilValue } from 'recoil';
@@ -20,6 +20,7 @@ export default function InfiniteScrolling({ howManyData, children, fetchMore, cs
     const [countDataLength, setCountDataLength] = useState(0);
     const selectedSkills = useRecoilValue(selectedSkillsState);
     const postArrangementMethod = useRecoilValue(postArrangementMethodState);
+    const searchMode = useRecoilValue(searchModeState);
 
     const getFetchMore = async () => {
         setFetchMoreLoading(true);
@@ -33,17 +34,17 @@ export default function InfiniteScrolling({ howManyData, children, fetchMore, cs
 
     useEffect(() => {
         setCountDataLength(0);
-    }, [selectedSkills, postArrangementMethod])
+    }, [selectedSkills, postArrangementMethod, searchMode])
 
     return (
         <InfiniteScroll
             dataLength={countDataLength * 6}
             next={getFetchMore}
-            hasMore={isHasMore}
+            hasMore={searchMode ? false : isHasMore}
             loader={fetchMoreLoading ? (
                 <h4 className="text-center text-fuchsia-500 font-bold">가져오는 중입니다.</h4>
             ) : null}
-            className={`${css} p-4`}
+            className={`${css} p-4 w-full h-full`}
             scrollThreshold={0.95}
             endMessage={<h4 className="text-center text-fuchsia-500 font-bold">끗!</h4>}
         >

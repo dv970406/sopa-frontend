@@ -20,6 +20,7 @@ interface ISeePostDetailComponent {
 }
 
 export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments }: ISeePostDetailComponent) {
+
     return (
         <>
             <div
@@ -80,7 +81,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             <CreateComment postId={seePost?.id} />
 
             <InfiniteScrolling
-                howManyData={seePost?.commentCount}
+                howManyData={seePost.commentCount}
                 css='space-y-4'
                 fetchMore={fetchMore}
             >

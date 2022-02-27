@@ -25,10 +25,10 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
                 font-NotoSans select-none
             `}
         >
-            {loginOrSignUp ? null : <NavBar />}
             <Head>
                 <title>{title?.includes("undefined") || loading ? "SOPA" : `${title} | SOPA`} </title>
             </Head>
+            {loginOrSignUp ? null : <NavBar />}
             <div
                 className={`
                     flex flex-col

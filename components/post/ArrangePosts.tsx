@@ -14,11 +14,13 @@ interface IArrangePostComponent {
 
 export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
     const [postArrangementMethod, setPostArrangementMethod] = useRecoilState(postArrangementMethodState);
+
     useEffect(() => {
         refetchFn({
             howToArrangement: postArrangementMethod
         })
     }, [postArrangementMethod])
+
     return (
         <div
             className="flex space-x-3 mb-8"

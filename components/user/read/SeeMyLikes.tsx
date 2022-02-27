@@ -9,6 +9,7 @@ import { myActivitiesTabState, postsState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import ArrangePosts from '@components/post/ArrangePosts';
 
 const SEE_MY_LIKES_QUERY = gql`
     query seeMyLikes($offset:Int,$howToArrangement:String){
@@ -43,15 +44,17 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
 
     return (
         myActivitiesTab === "like" ? (
-            <SeePosts
-                howManyData={seeMyInfo?.likeCount}
-                refetchFn={refetchMyLikes}
-                fetchMore={
-                    () => fetchMoreMyLikes({
-                        variables: { offset: myLikesData?.seeMyLikes?.length },
-                    })
-                }
-            />
+            <>
+                <ArrangePosts refetchFn={refetchMyLikes} />
+                <SeePosts
+                    howManyData={seeMyInfo?.likeCount}
+                    fetchMore={
+                        () => fetchMoreMyLikes({
+                            variables: { offset: myLikesData?.seeMyLikes?.length },
+                        })
+                    }
+                />
+            </>
         ) : null
     )
 }

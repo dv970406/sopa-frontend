@@ -1,10 +1,11 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.25
+ * 수정일: 2022.02.27
  */
 
+import { searchModeState } from '@utils/atoms';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import SearchInput from './SearchInput';
 
 
@@ -20,14 +21,14 @@ const turnOffSearchVariants = {
     }
 }
 export default function SearchInputBtn() {
-    const [isSearchMode, setIsSearchMode] = useState(false);
+    const [searchMode, setSearchMode] = useRecoilState(searchModeState);
 
     return (
-        isSearchMode ? (
-            <SearchInput setIsSearchMode={setIsSearchMode} />
+        searchMode ? (
+            <SearchInput />
         ) : (
             <motion.button
-                onClick={() => setIsSearchMode(true)}
+                onClick={() => setSearchMode(true)}
                 variants={turnOffSearchVariants}
                 initial="invisible"
                 animate="visible"

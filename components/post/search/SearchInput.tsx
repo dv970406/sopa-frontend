@@ -4,16 +4,13 @@
  */
 
 import { gql, useLazyQuery } from '@apollo/client';
-import { postsState } from '@utils/atoms';
+import { postsState, searchModeState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import { IPostDisplay } from '@utils/types/interfaces';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 
-interface ISearchInputComponent {
-    setIsSearchMode(bool: boolean): void;
-}
 
 const SEARCH_POSTS_QUERY = gql`
     query searchPosts($title:String!){
@@ -23,6 +20,7 @@ const SEARCH_POSTS_QUERY = gql`
     }
     ${POST_DISPLAY_FRAGMENT}
 `;
+
 
 interface IForm {
     title: string;
@@ -46,8 +44,9 @@ const searchInputVariants = {
     }
 };
 
-export default function SearchInput({ setIsSearchMode }: ISearchInputComponent) {
+export default function SearchInput() {
     const setPosts = useSetRecoilState(postsState);
+    const resetSearchMode = useResetRecoilState(searchModeState);
 
     const { register, handleSubmit, setValue } = useForm<IForm>();
 
@@ -80,7 +79,7 @@ export default function SearchInput({ setIsSearchMode }: ISearchInputComponent) 
             "
         >
             <button
-                onClick={() => setIsSearchMode(false)}
+                onClick={() => resetSearchMode()}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="fuchsia">
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />

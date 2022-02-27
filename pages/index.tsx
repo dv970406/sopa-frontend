@@ -7,10 +7,11 @@ import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
 import { IPostDisplay } from '@utils/types/interfaces'
 import SeePosts from '@components/post/read/SeePosts'
 import { useEffect } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { postsState } from '@utils/atoms'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { postsState, searchModeState } from '@utils/atoms'
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
 import Loading from '@components/shared/Loading'
+import ArrangePosts from '@components/post/ArrangePosts'
 
 interface ISeePosts {
   [key: string]: IPostDisplay[];
@@ -34,6 +35,7 @@ const SEE_POSTS_COUNT_QUERY = gql`
 
 const Home = ({ requestedPosts }: ISeePosts) => {
   const setPosts = useSetRecoilState(postsState);
+  const searchMode = useRecoilValue(searchModeState);
 
   const seePostsCompleted = ({ seePosts }: ISeePosts) => setPosts(seePosts);
 
@@ -54,13 +56,17 @@ const Home = ({ requestedPosts }: ISeePosts) => {
     <MainLayout
       title="당신의 소울파트너"
     >
-      <SkillBoards />
-      <SelectedSkillBoard refetchSeePosts={refetchSeePosts} refetchSeePostsCount={refetchSeePostsCount} />
+      {searchMode ? null : (
+        <>
+          <SkillBoards />
+          <SelectedSkillBoard refetchSeePosts={refetchSeePosts} refetchSeePostsCount={refetchSeePostsCount} />
+          <ArrangePosts refetchFn={refetchSeePosts} />
+        </>
+      )}
       {loading ? (
         <Loading />
       ) : (
         <SeePosts
-          refetchFn={refetchSeePosts}
           howManyData={seePostsCountData?.seePostsCount?.count}
           fetchMore={
             () => fetchMore({

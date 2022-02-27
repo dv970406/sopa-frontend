@@ -11,7 +11,6 @@ interface IArrangementTab {
 }
 
 export default function ArrangementTab({ tabName, selectedTab, comparisonTarget, onClick }: IArrangementTab) {
-
     return (
         <div
             className={`
