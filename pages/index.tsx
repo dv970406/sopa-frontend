@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { postsState } from '@utils/atoms'
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
+import Loading from '@components/shared/Loading'
 
 interface ISeePosts {
   [key: string]: IPostDisplay[];
@@ -36,11 +37,11 @@ const Home = ({ requestedPosts }: ISeePosts) => {
 
   const seePostsCompleted = ({ seePosts }: ISeePosts) => setPosts(seePosts);
 
-  const { data: seePostsData, fetchMore, refetch: seePostsRefetch } = useQuery(SEE_POSTS_QUERY, {
+  const { data: seePostsData, loading, fetchMore, refetch: refetchSeePosts } = useQuery(SEE_POSTS_QUERY, {
     onCompleted: seePostsCompleted,
   });
 
-  const { data: seePostsCountData, refetch: seePostsCountRefetch } = useQuery(SEE_POSTS_COUNT_QUERY);
+  const { data: seePostsCountData, refetch: refetchSeePostsCount } = useQuery(SEE_POSTS_COUNT_QUERY);
 
   useEffect(() => {
     setPosts(requestedPosts);
@@ -54,16 +55,20 @@ const Home = ({ requestedPosts }: ISeePosts) => {
       title="당신의 소울파트너"
     >
       <SkillBoards />
-      <SelectedSkillBoard seePostsRefetch={seePostsRefetch} seePostsCountRefetch={seePostsCountRefetch} />
-      <SeePosts
-        seePostsRefetch={seePostsRefetch}
-        howManyData={seePostsCountData?.seePostsCount?.count}
-        fetchMore={
-          () => fetchMore({
-            variables: { offset: seePostsData?.seePosts?.length },
-          })
-        }
-      />
+      <SelectedSkillBoard refetchSeePosts={refetchSeePosts} refetchSeePostsCount={refetchSeePostsCount} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <SeePosts
+          refetchFn={refetchSeePosts}
+          howManyData={seePostsCountData?.seePostsCount?.count}
+          fetchMore={
+            () => fetchMore({
+              variables: { offset: seePostsData?.seePosts?.length },
+            })
+          }
+        />
+      )}
     </MainLayout>
   )
 }

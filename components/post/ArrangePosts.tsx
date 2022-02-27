@@ -6,17 +6,16 @@
 import { postArrangementMethodState } from '@utils/atoms';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import ArrangementTab from './read/ArrangementTab';
+import ArrangementTab from './ArrangementTab';
 
 interface IArrangePostComponent {
-    refetch: any;
+    refetchFn: any;
 }
 
-export default function ArrangePost({ refetch }: IArrangePostComponent) {
+export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
     const [postArrangementMethod, setPostArrangementMethod] = useRecoilState(postArrangementMethodState);
-
     useEffect(() => {
-        refetch({
+        refetchFn({
             howToArrangement: postArrangementMethod
         })
     }, [postArrangementMethod])

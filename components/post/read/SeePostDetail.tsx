@@ -30,8 +30,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             >
                 <h1
                     className={`
-                        text-4xl font-bold
-                        p-3
+                        text-4xl font-bold p-3
                     `}
                 >
                     {seePost?.title || pageTitle}
@@ -81,7 +80,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             <CreateComment postId={seePost?.id} />
 
             <InfiniteScrolling
-                howManyData={seePost.commentCount}
+                howManyData={seePost?.commentCount}
                 css='space-y-4'
                 fetchMore={fetchMore}
             >

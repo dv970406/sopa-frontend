@@ -4,15 +4,15 @@
  */
 
 import { gql, useQuery } from '@apollo/client';
-import SeePosts from '@components/post/read/SeePosts';
 import MainLayout from '@components/shared/MainLayout';
-import MyComments from '@components/user/read/MyComments';
 import ProfileTab from '@components/user/read/ProfileTab';
-import { commentsState, postsState } from '@utils/atoms';
-import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT, USER_DETAIL_FRAGMENT } from '@utils/fragments';
-import { IPostDisplay } from '@utils/types/interfaces';
-import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import SeeMyComments from '@components/user/read/SeeMyComments';
+import SeeMyLikes from '@components/user/read/SeeMyLikes';
+import SeeMyPosts from '@components/user/read/SeeMyPosts';
+import { myActivitiesTabState } from '@utils/atoms';
+import { USER_DETAIL_FRAGMENT } from '@utils/fragments';
+import { useRecoilValue } from 'recoil';
+
 
 const SEE_MY_INFO_QUERY = gql`
     query seeMyInfo{
@@ -21,100 +21,14 @@ const SEE_MY_INFO_QUERY = gql`
         }
     }
     ${USER_DETAIL_FRAGMENT}
-`
-
-const SEE_MY_COMMENTS_QUERY = gql`
-    query seeMyComments($offset:Int){
-        seeMyComments(offset:$offset){
-            ...CommentFragment
-        }
-    }
-    ${COMMENT_FRAGMENT}
-`
-const SEE_MY_LIKES_QUERY = gql`
-    query seeMyLikes($offset:Int){
-        seeMyLikes(offset:$offset){
-            post{
-                ...PostDisplayFragment
-            }
-        }
-    }
-    ${POST_DISPLAY_FRAGMENT}
-`
-const SEE_MY_POSTS_QUERY = gql`
-    query seeMyPosts($offset:Int){
-        seeMyPosts(offset:$offset){
-            ...PostDisplayFragment
-        }
-    }
-    ${POST_DISPLAY_FRAGMENT}
-`
-
-
-export type kindOfTab = "like" | "post" | "comment"
-
+`;
 
 export default function UserProfilePage() {
-    const [tab, setTab] = useState<kindOfTab>("like");
-    const setComments = useSetRecoilState(commentsState);
-    const setPosts = useSetRecoilState(postsState);
-
-    // 세 개의 onCompleted 함수로 초기 comments 데이터 세팅 및 인피니티 스크롤링으로 fetchMore 작동 시 가져온 데이터 세팅을 돕는다.
-    const myLikesCompleted = ({ seeMyLikes }: any) => {
-        const postsPressedLike = seeMyLikes?.map((like: { post: IPostDisplay }) => like.post);
-        setPosts(postsPressedLike);
-    }
-    const myPostsCompleted = ({ seeMyPosts }: any) => setPosts(seeMyPosts);
-    const myCommentsCompleted = ({ seeMyComments }: any) => setComments(seeMyComments)
-
-
+    const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
-    const { data: myLikesData, fetchMore: fetchMoreLikes, loading: getLikesLoading } = useQuery(SEE_MY_LIKES_QUERY, {
-        onCompleted: myLikesCompleted
-    });
-    const { data: myPostsData, fetchMore: fetchMorePosts, loading: getPostsLoading } = useQuery(SEE_MY_POSTS_QUERY, {
-        onCompleted: myPostsCompleted
-    });
-    const { data: myCommentsData, fetchMore: fetchMoreComments, loading: getCommentsLoading } = useQuery(SEE_MY_COMMENTS_QUERY, {
-        onCompleted: myCommentsCompleted
-    });
-
-    useEffect(() => {
-        switch (tab) {
-            case "like":
-                const postsPressedLike = myLikesData?.seeMyLikes?.map((like: { post: IPostDisplay }) => like.post)
-                setPosts(postsPressedLike);
-                break;
-            case "post":
-                setPosts(myPostsData?.seeMyPosts);
-                break;
-            case "comment":
-                setComments(myCommentsData?.seeMyComments);
-                break;
-        }
-    }, [tab]);
-
-    const getFetchMore = (tab: string) => {
-        switch (tab) {
-            case "like":
-                return () => fetchMoreLikes({
-                    variables: { offset: myLikesData?.seeMyLikes?.length },
-                });
-
-            case "post":
-                return () => fetchMorePosts({
-                    variables: { offset: myPostsData?.seeMyPosts?.length },
-                });
-
-            case "comment":
-                return () => fetchMoreComments({
-                    variables: { offset: myCommentsData?.seeMyComments?.length },
-                })
-        }
-    }
 
     return (
-        <MainLayout loading={getLikesLoading || getPostsLoading || getCommentsLoading} title={userData?.seeMyInfo?.name}>
+        <MainLayout title={userData?.seeMyInfo?.name}>
             <div
                 className="
                     relative flex justify-center mb-5
@@ -128,8 +42,6 @@ export default function UserProfilePage() {
                     <ProfileTab
                         autoFocus
                         count={userData?.seeMyInfo?.likeCount}
-                        tab={tab}
-                        setTab={setTab}
                         onFocusTab="like"
                         svg={
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,8 +53,6 @@ export default function UserProfilePage() {
                     />
                     <ProfileTab
                         count={userData?.seeMyInfo?.postCount}
-                        tab={tab}
-                        setTab={setTab}
                         onFocusTab="post"
                         svg={
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -154,8 +64,6 @@ export default function UserProfilePage() {
                     />
                     <ProfileTab
                         count={userData?.seeMyInfo?.commentCount}
-                        tab={tab}
-                        setTab={setTab}
                         onFocusTab="comment"
                         svg={
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -167,10 +75,9 @@ export default function UserProfilePage() {
                     />
                 </div>
             </div>
-
-            {tab === "like" ? <SeePosts howManyData={userData?.seeMyInfo?.likeCount} fetchMore={getFetchMore(tab)} /> : null}
-            {tab === "post" ? <SeePosts howManyData={userData?.seeMyInfo?.postCount} fetchMore={getFetchMore(tab)} /> : null}
-            {tab === "comment" ? <MyComments howManyData={userData?.seeMyInfo?.commentCount} fetchMore={getFetchMore(tab)} /> : null}
+            {myActivitiesTab === "like" ? <SeeMyLikes seeMyInfo={userData?.seeMyInfo} /> : null}
+            {myActivitiesTab === "post" ? <SeeMyPosts seeMyInfo={userData?.seeMyInfo} /> : null}
+            {myActivitiesTab === "comment" ? <SeeMyComments seeMyInfo={userData?.seeMyInfo} /> : null}
         </MainLayout >
     )
 }

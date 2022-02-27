@@ -10,11 +10,11 @@ import { selectedSkillsState, skillsState } from '@utils/atoms';
 import { ISkill } from '@utils/types/interfaces';
 
 interface ISelectedSkillBoard {
-    seePostsRefetch: any;
-    seePostsCountRefetch: any
+    refetchSeePosts: any;
+    refetchSeePostsCount: any
 }
 
-export default function SelectedSkillBoard({ seePostsRefetch, seePostsCountRefetch }: ISelectedSkillBoard) {
+export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCount }: ISelectedSkillBoard) {
     const [selectedSkills, setSelectedSkills] = useRecoilState(selectedSkillsState);
     const setSkills = useSetRecoilState(skillsState);
 
@@ -55,10 +55,10 @@ export default function SelectedSkillBoard({ seePostsRefetch, seePostsCountRefet
             return skillWithPosition
         })
 
-        seePostsRefetch({
+        refetchSeePosts({
             skills: JSON.stringify(clearedSelectedSkills)
         });
-        seePostsCountRefetch({
+        refetchSeePostsCount({
             skills: JSON.stringify(clearedSelectedSkills)
         })
     }, [selectedSkills])
