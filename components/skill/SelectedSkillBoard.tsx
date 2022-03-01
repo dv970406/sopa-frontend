@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { selectedSkillsState, skillsState } from '@utils/atoms';
-import { ISkill } from '@utils/types/interfaces';
+import type { ISkill } from '@utils/types/interfaces';
 
 interface ISelectedSkillBoard {
     refetchSeePosts: any;

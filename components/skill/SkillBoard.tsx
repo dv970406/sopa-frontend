@@ -3,7 +3,7 @@
  * 수정일: 2022.03.01
  */
 
-import { ISkill } from '@utils/types/interfaces'
+import type { ISkill } from '@utils/types/interfaces'
 import React from 'react'
 import Skill from './Skill'
 

@@ -1,15 +1,15 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.26
+ * 수정일: 2022.03.01
  */
 
 import { gql, useQuery } from '@apollo/client';
 import SeePost from '@components/post/read/SeePost';
 import MainLayout from '@components/shared/MainLayout';
 import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT } from '@utils/fragments';
-import { ICommentInfo } from '@utils/types/interfaces';
+import type { ICommentInfo } from '@utils/types/interfaces';
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const SEE_POST_QUERY = gql`
     query seePost($postId:Int!,$offset:Int){
@@ -44,7 +44,7 @@ export default function PostDetailPage() {
             <div
                 className={`
                     space-y-3
-                    lg:px-32
+                    md:px-16 lg:px-24 xl:px-36 2xl:px-48
                 `}
             >
                 <SeePost

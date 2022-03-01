@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -119,7 +119,7 @@ export default function CreateUser() {
                     })}
                     type="name"
                     required
-                    error={errors.name?.message!}
+                    error={errors.name?.message}
                 />
                 <Input
                     register={register("email", {
@@ -131,7 +131,7 @@ export default function CreateUser() {
                     })}
                     type="email"
                     required
-                    error={errors.email?.message!}
+                    error={errors.email?.message}
                 />
                 <Input
                     register={register("password", {
@@ -143,7 +143,7 @@ export default function CreateUser() {
                     })}
                     type="password"
                     required
-                    error={errors.password?.message!}
+                    error={errors.password?.message}
                 />
                 <Input
                     register={register("password2", {
@@ -155,7 +155,7 @@ export default function CreateUser() {
                     })}
                     type="password2"
                     required
-                    error={errors.password2?.message!}
+                    error={errors.password2?.message}
                 />
                 {isEmailValidationMode ? (
                     <div

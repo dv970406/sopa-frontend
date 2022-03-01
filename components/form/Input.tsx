@@ -12,7 +12,7 @@ interface IInput {
     register?: UseFormRegisterReturn;
     required?: boolean;
     disabled?: boolean;
-    error: string;
+    error?: string;
     [key: string]: any;
 }
 

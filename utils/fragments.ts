@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.26
+ * 수정일: 2022.03.01
  */
 
 import { gql } from '@apollo/client';
@@ -31,6 +31,7 @@ export const POST_DISPLAY_FRAGMENT = gql`
             id
             skill
         }
+        openChatLink
         createdAt
         updatedAt
         isMine

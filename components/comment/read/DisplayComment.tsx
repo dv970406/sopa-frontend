@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.19
- * 수정일: 2022.02.23
+ * 수정일: 2022.03.01
  */
 
-import { ICommentInfo } from '@utils/types/interfaces';
+import type { ICommentInfo } from '@utils/types/interfaces';
 import React, { useState } from 'react';
 import DeleteCommentBtn from '../delete/DeleteCommentBtn';
 import EditComment from '../edit/EditComment';

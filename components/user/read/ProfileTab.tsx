@@ -1,10 +1,10 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import { myActivitiesTabState } from '@utils/atoms'
-import { kindOfMyActivitiesTab } from '@utils/types/types';
+import type { kindOfMyActivitiesTab } from '@utils/types/types';
 import { useRecoilState } from 'recoil'
 
 interface ITabComponent {

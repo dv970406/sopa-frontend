@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.24
+ * 수정일: 2022.03.01
  */
 
 import { useRouter } from 'next/router';
@@ -85,7 +85,7 @@ export default function Login() {
                         message: "이메일 양식을 지켜주세요."
                     }
                 })}
-                error={errors.email?.message!}
+                error={errors.email?.message}
                 required
             />
             <Input
@@ -97,7 +97,7 @@ export default function Login() {
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
-                error={errors.password?.message!}
+                error={errors.password?.message}
                 required
             />
             <FormButton

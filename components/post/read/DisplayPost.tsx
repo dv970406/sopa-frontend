@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
-import { IPostDisplay } from '@utils/types/interfaces';
+import type { IPostDisplay } from '@utils/types/interfaces';
 import MetaData from '../MetaData';
 import SkillImage from '../../skill/SkillImage';
 import { getUploadedDate } from '@utils/utilFunctions';

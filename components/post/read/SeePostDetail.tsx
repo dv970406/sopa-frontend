@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import MetaData from '../MetaData';
@@ -9,7 +9,7 @@ import SkillImage from '../../skill/SkillImage';
 import DisplayComment from '../../comment/read/DisplayComment';
 import CreateComment from '../../comment/create/CreateComment';
 import MenuBtn from '../MenuBtn';
-import { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 
 interface ISeePostDetailComponent {
@@ -81,7 +81,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             <CreateComment postId={seePost?.id} />
 
             <InfiniteScrolling
-                howManyData={seePost.commentCount}
+                howManyData={seePost?.commentCount}
                 css='space-y-4'
                 fetchMore={fetchMore}
             >
