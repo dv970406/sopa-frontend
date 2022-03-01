@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import React from 'react';
@@ -40,7 +40,6 @@ const typeTranslater = (engVerType: string) => {
 }
 
 export default function Input({ type, register, required, disabled = false, error, ...props }: IInput) {
-    console.log("Received Error : ", error)
     const decideType = (type: InputType) => {
         switch (type) {
             case "name":

@@ -10,6 +10,8 @@ module.exports = {
         NotoSans: ['Noto Sans KR', "sans-serif"]
       },
       colors: {
+        'white': "#FFFFFF",
+        'sopa-ultra': "#C026D3",
         'sopa-default': "#E98BF9",
         'sopa-accent': "#D946EF",
         'sopa-soft': "#F5D0FE",

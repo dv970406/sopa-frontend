@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import Head from 'next/head';
@@ -37,9 +37,7 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
                     w-full
                 `}
             >
-                {loading ? (
-                    <Loading />
-                ) : children}
+                {children}
             </div>
         </div>
     )
