@@ -6,7 +6,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import Loading from './Loading';
 import NavBar from './NavBar';
 
 interface IMainLayout {
@@ -16,24 +15,24 @@ interface IMainLayout {
 }
 
 export default function MainLayout({ loading, title, children }: IMainLayout) {
-    const { pathname } = useRouter();
-    const loginOrSignUp = pathname === "/auth";
+    const { route } = useRouter();
+    const isAuthPage = route === "/auth";
 
     return (
         <div
             className={`
-                font-NotoSans select-none
+                font-NotoSans select-none box-border
             `}
         >
             <Head>
                 <title>{title?.includes("undefined") || loading ? "SOPA" : `${title} | SOPA`} </title>
             </Head>
-            {loginOrSignUp ? null : <NavBar />}
+            {isAuthPage ? null : <NavBar />}
             <div
                 className={`
-                    flex flex-col space-y-8
-                    justify-center py-16 px-8 sm:px-16 md:px-24 lg:px-40 xl:px-48
-                    ${loginOrSignUp ? "flex items-center" : ""}
+                    flex flex-col
+                    justify-center py-16 px-8 
+                    ${isAuthPage ? "flex items-center" : ""}
                     w-full
                 `}
             >

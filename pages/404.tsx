@@ -14,7 +14,6 @@ export default function NoExistsPage() {
     const getScreenWidth = typeof window === "undefined" ? null : document?.body?.clientWidth;
     const halfSizeWidth = getScreenWidth! / 2;
     const xToOpacity = useTransform(x, [-halfSizeWidth, halfSizeWidth * (9.5 / 10), halfSizeWidth], [1, 1, 0])
-
     const router = useRouter();
 
     useEffect(() => {

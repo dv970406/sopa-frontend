@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import MainLayout from '@components/shared/MainLayout';

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.23
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import { useEffect, useState } from 'react';
@@ -19,7 +19,7 @@ const loginTabVariants = {
         opacity: 1,
         scale: 1,
         transition: {
-            duration: 0.4,
+            duration: 0.3,
         }
     },
     exit: {
@@ -51,8 +51,8 @@ export default function LoginHoverEvent() {
         >
             <button
                 className={`
-                    opacity-70 hover:opacity-100 font-bold
-                    hover:text-sopa-accent text-sopa-default
+                    font-bold text-sopa-accent transition
+                    hover:scale-110
                 `}
                 onClick={goToLogin}
             >
@@ -62,8 +62,8 @@ export default function LoginHoverEvent() {
                 {showSocialLogin ? (
                     <motion.div
                         className={`
-                            flex absolute space-x-3 
-                            border-2 border-sopa-pure rounded-lg p-2 
+                            flex absolute space-x-3 shadow-md bg-white
+                            rounded-lg p-2 
                         `}
                         variants={loginTabVariants}
                         initial="invisible"

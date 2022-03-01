@@ -11,23 +11,23 @@ interface ISkillBoard {
     skillsOfPosition: ISkill[]
 }
 
+// 메모이징으로 prop에 변화가 생기는 SkillBoard만 리렌더링
 function SkillBoard({ skillsOfPosition }: ISkillBoard) {
     return (
         <div
             className={`
-                relative flex flex-col items-center border-2 shadow-lg rounded-lg 
+                relative flex flex-col items-center rounded-3xl bg-sopa-soft border-2 border-sopa-pure
+                shadow-lg
             `}
         >
-            <div
+            <p
                 className={`
-                    absolute -top-3 px-3 py-1 rounded-md
-                    bg-sopa-pure
+                    absolute -top-3 px-8 py-1 rounded-md text-base
+                    bg-sopa-accent text-white font-bold
                 `}
             >
-                <span className="text-white">
-                    {skillsOfPosition[0].position}
-                </span>
-            </div>
+                {skillsOfPosition[0].position}
+            </p>
             <div
                 className={`
                     flex flex-row flex-wrap justify-center 

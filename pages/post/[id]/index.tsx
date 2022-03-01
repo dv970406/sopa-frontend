@@ -43,8 +43,7 @@ export default function PostDetailPage() {
         <MainLayout loading={loading} title={`${postTitle || data?.seePost?.title}`}>
             <div
                 className={`
-                    space-y-3
-                    md:px-16 lg:px-24 xl:px-36 2xl:px-48
+                    sm:px-16 md:px-24 lg:px-48 xl:px-96 space-y-8
                 `}
             >
                 <SeePost

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import { useRouter } from 'next/router';
@@ -27,8 +27,8 @@ function NavBar() {
     return (
         <div
             className='
-                flex justify-around items-center px-10 h-24 shadow-xl top-0 w-full
-                bg-sopa-soft border-b-2 border-b-sopa-pure rounded-b-3xl
+                flex justify-around items-center px-10 h-24 shadow-md top-0 w-full
+                rounded-b-3xl
             '
         >
             <div

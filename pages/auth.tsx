@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.11
+ * 수정일: 2022.03.01
  */
 
 import MainLayout from '@components/shared/MainLayout';
@@ -15,8 +15,10 @@ export default function AuthenticationPage() {
 
     return (
         <MainLayout title="로그인">
-            <LoginOrSignUp leftText='로그인' rightText='회원가입' />
-            {loginMode ? <Login /> : <CreateUser />}
+            <div className={`md:px-28 lg:px-52 xl:px-96 space-y-8`}>
+                <LoginOrSignUp leftText='로그인' rightText='회원가입' />
+                {loginMode ? <Login /> : <CreateUser />}
+            </div>
         </MainLayout>
     )
 }

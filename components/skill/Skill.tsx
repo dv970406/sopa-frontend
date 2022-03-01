@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.24
+ * 수정일: 2022.03.01
  */
 
 import { motion } from 'framer-motion'
@@ -27,6 +27,7 @@ const skillVar = {
 }
 
 
+// 해당 포지션 Board에 속해있는 Skill들 중 메모이징으로 변화가 생기는 Skill만 리렌더링
 function Skill({ uploadMode = false, index, position, skill, skillImage, isSelected }: ISkillInfo) {
     const setSelectedSkills = useSetRecoilState(selectedSkillsState)
     const setSkills = useSetRecoilState(skillsState)
@@ -113,9 +114,10 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                 className={`
                     hidden group-hover:block
                     absolute -bottom-3
-                    bg-sopa-soft 
-                    p-1 rounded-md
+                    bg-sopa-default 
+                    py-1.5 px-2 rounded-md
                     text-xs tracking-wider
+                    font-bold
                 `}
             >
                 {skill}

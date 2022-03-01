@@ -1,19 +1,19 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.22
+ * 수정일: 2022.03.01
  */
 
 import React from 'react';
 
 interface IEditCommentBtnComponent {
-    setEditMode(current: any): void;
+    setEditCommentMode(current: any): void;
 }
 
-export default function EditCommentBtn({ setEditMode }: IEditCommentBtnComponent) {
+export default function EditCommentBtn({ setEditCommentMode }: IEditCommentBtnComponent) {
 
     return (
         <button
-            onClick={() => setEditMode((current: any) => !current)}
+            onClick={() => setEditCommentMode((current: any) => !current)}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"

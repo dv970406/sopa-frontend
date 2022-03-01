@@ -38,7 +38,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                         w-12 h-12
                                     `}
                                 />
-                                <p>{skill.name}</p>
+                                <p className="font-bold">{skill.name}</p>
                             </div>
                         )}
                         <div
@@ -63,7 +63,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                 w-12 h-12
                             `}
                             />
-                            <p>{skill.name}</p>
+                            <p className="font-bold">{skill.name}</p>
                         </div>
                     )
                 )
@@ -81,7 +81,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                 w-12 h-12
                             `}
                         />
-                        <p>{skill.name}</p>
+                        <p className="font-bold">{skill.name}</p>
                     </div>
                 )
             )

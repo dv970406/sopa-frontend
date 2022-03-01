@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import ArrangementTab from '@components/post/ArrangementTab';
@@ -25,12 +25,14 @@ export default function PositionSelector() {
                 <div
                     className="flex items-center w-24"
                 >
-                    <label>
+                    <label
+                        className="font-bold"
+                    >
                         스킬
                     </label>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 ml-1 text-fuchsia-500"
+                        className="h-5 w-5 ml-1 text-sopa-accent"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                     >

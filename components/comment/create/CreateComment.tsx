@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.02.26
+ * 수정일: 2022.03.01
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -113,23 +113,17 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
     }
     return (
         <div
-            className={`
-                border-t-2 border-t-sopa-default
-            `}
+            className='space-y-4'
         >
-            <h1
-                className={`
-                    mt-2
-                `}
-            >
-                Comment
+            <h1 className="font-bold text-lg">
+                댓글을 입력하세요.
             </h1>
             <form
                 onSubmit={handleSubmit(onValid)}
                 className={`
                     flex flex-col
-                    w-full border-2 border-sopa-soft rounded-lg p-4 transition
-                    focus-within:border-sopa-default
+                    w-full border-2 border-sopa-default rounded-lg p-4 transition: ;
+                    focus-within:border-[2.5px] focus-within:border-sopa-accent
                 `}
             >
                 <textarea

@@ -58,6 +58,7 @@ export default function Input({ type, register, required, disabled = false, erro
             return (
                 <div>
                     <label
+                        className='font-bold'
                         htmlFor={type}
                     >
                         {typeTranslater(type)}
@@ -85,7 +86,7 @@ export default function Input({ type, register, required, disabled = false, erro
                     <label
                         htmlFor={type}
                         className={`
-                            flex items-center
+                            flex items-center font-bold
                         `}
                     >
                         <p>{typeTranslater(type)}</p>
@@ -117,7 +118,7 @@ export default function Input({ type, register, required, disabled = false, erro
                     />
                     <div
                         className='
-                            p-1 invisible peer-invalid:visible text-error font-bold
+                            p-1 invisible peer-invalid:visible  text-emphasize font-bold
                         '
                     >
                         {error}
@@ -130,7 +131,7 @@ export default function Input({ type, register, required, disabled = false, erro
                     <label
                         htmlFor={type}
                         className={`
-                            flex items-center
+                            flex items-center font-bold
                         `}
                     >
                         {typeTranslater(type)}
@@ -161,7 +162,7 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...props}
                     />
                     <div
-                        className='p-1 text-error font-bold'
+                        className='p-1  text-emphasize font-bold'
                     >
                         {error}
                     </div>

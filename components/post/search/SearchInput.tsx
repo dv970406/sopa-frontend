@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import { gql, useLazyQuery } from '@apollo/client';
@@ -76,6 +76,7 @@ export default function SearchInput() {
             animate="visible"
             className="
                 absolute flex bg-white rounded-xl px-2 py-1 items-center space-x-2 shadow-lg
+                z-50
             "
         >
             <button

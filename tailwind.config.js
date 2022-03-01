@@ -16,7 +16,7 @@ module.exports = {
         'sopa-accent': "#D946EF",
         'sopa-soft': "#F5D0FE",
         'sopa-pure': "#F0ABFC",
-        'error': "#F43F5E"
+        'emphasize': "#F43F5E",
       }
     },
   },
