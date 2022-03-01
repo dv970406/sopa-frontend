@@ -191,7 +191,7 @@ export default function CreateUser() {
                         <button
                             onClick={handleSubmit(onValid)}
                             className='
-                                bg-fuchsia-300 hover:bg-fuchsia-400 transition 
+                                bg-sopa-pure hover:bg-sopa-default transition 
                                 rounded-xl px-4 py-3 text-white font-semibold text-sm
                             '
                         >

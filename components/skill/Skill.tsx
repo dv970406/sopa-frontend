@@ -113,7 +113,7 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                 className={`
                     hidden group-hover:block
                     absolute -bottom-3
-                    bg-fuchsia-200 
+                    bg-sopa-soft 
                     p-1 rounded-md
                     text-xs tracking-wider
                 `}

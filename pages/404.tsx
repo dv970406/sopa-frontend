@@ -32,7 +32,7 @@ export default function NoExistsPage() {
                 <p className='text-xl'>존재하지 않는 페이지입니다</p>
                 <Link href="/">
                     <a>
-                        <p className="text-2xl text-fuchsia-500">홈으로 가기 &rarr;</p>
+                        <p className="text-2xl text-sopa-accent">홈으로 가기 &rarr;</p>
                     </a>
                 </Link>
             </motion.div>

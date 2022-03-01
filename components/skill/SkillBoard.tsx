@@ -21,7 +21,7 @@ function SkillBoard({ skillsOfPosition }: ISkillBoard) {
             <p
                 className={`
                     absolute -top-3 px-3 py-1 rounded-md
-                    bg-fuchsia-300
+                    bg-sopa-pure
                 `}
             >
                 {skillsOfPosition[0].position}

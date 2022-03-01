@@ -69,7 +69,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                             p-1 shadow-sm
                             border-b-2 border-b-gray-300  
                             placeholder:text-lg placeholder-gray-400
-                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
                             w-full
                             text-sm
                         `}
@@ -92,7 +92,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                         {required ? (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5 ml-1 text-fuchsia-500"
+                                className="h-5 w-5 ml-1 text-sopa-accent"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -109,7 +109,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                                 p-2 shadow-sm
                                 border-b-2 border-b-gray-300 
                                 placeholder:text-lg placeholder-gray-400
-                                focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                                focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
                                 w-full
                                 ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                             `}
@@ -130,7 +130,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                         {required ? (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5 ml-1 text-fuchsia-500"
+                                className="h-5 w-5 ml-1 text-sopa-accent"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -147,7 +147,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                             p-2 shadow-sm
                             border-b-2 border-b-gray-300 
                             placeholder:text-lg placeholder-gray-400
-                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
                             w-full
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}

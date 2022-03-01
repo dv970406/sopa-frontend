@@ -71,7 +71,7 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
                                 exit="exit"
                                 className={`
                                 flex flex-col items-center justify-center
-                                bg-fuchsia-300 p-2
+                                bg-sopa-pure p-2
                                 rounded-r-lg text-xs
                             `}
                             >

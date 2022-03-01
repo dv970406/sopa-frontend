@@ -18,7 +18,7 @@ export default function FormLayout({ children }: IFormLayoutComponent) {
                 px-12 pt-16 pb-8
                 max-w-lg w-full
                 border-2 border-gray-300 rounded-xl
-                focus-within:placeholder-fuchsia-500 focus-within:ring-fuchsia-500 focus-within:border-fuchsia-500 focus-within:outline-none 
+                focus-within:placeholder-sopa-accent focus-within:ring-sopa-accent focus-within:border-sopa-accent focus-within:outline-none 
                 shadow-md
             '
         >

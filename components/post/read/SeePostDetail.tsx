@@ -26,7 +26,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             <div
                 className={`
                     flex justify-between items-center
-                    border-b-2 border-b-fuchsia-400 w-full
+                    border-b-2 border-b-sopa-default w-full
                 `}
             >
                 <h1

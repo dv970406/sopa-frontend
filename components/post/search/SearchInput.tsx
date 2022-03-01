@@ -94,7 +94,7 @@ export default function SearchInput() {
                     })}
                     type="text"
                     className="
-                        rounded-r-lg border-l-2 border-l-fuchsia-300
+                        rounded-r-lg border-l-2 border-l-sopa-pure
                         focus:outline-none px-2
                     "
                     placeholder='제목을 입력하세요'

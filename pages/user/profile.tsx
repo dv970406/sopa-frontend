@@ -35,7 +35,7 @@ export default function UserProfilePage() {
                     md:px-12 lg:px-24 xl:px-48
                 "
             >
-                <div className='absolute h-2 w-full bg-fuchsia-300 top-4 -z-10 rounded-full' />
+                <div className='absolute h-2 w-full bg-sopa-pure top-4 -z-10 rounded-full' />
                 <div
                     className='flex justify-between w-full'
                 >

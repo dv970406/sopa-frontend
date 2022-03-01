@@ -66,7 +66,7 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
     return (
         <motion.div
             className={`
-                flex flex-wrap justify-center gap-4 shadow-xl border-t-2 border-r-2 border-t-fuchsia-300 border-r-fuchsia-300 bg-fuchsia-400 p-3 rounded-lg
+                flex flex-wrap justify-center gap-4 shadow-xl border-t-2 border-r-2 border-t-sopa-pure border-r-sopa-pure bg-sopa-default p-3 rounded-lg
                 lg:flex-col lg:fixed lg:left-0 lg:top-0 lg:h-full lg:justify-center lg:rounded-none lg:rounded-r-2xl
                 ${selectedSkills.length > 9 ? "lg:w-40" : null}
             `}

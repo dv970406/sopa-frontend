@@ -114,7 +114,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
     return (
         <div
             className={`
-                border-t-2 border-t-fuchsia-400
+                border-t-2 border-t-sopa-default
             `}
         >
             <h1
@@ -128,8 +128,8 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 onSubmit={handleSubmit(onValid)}
                 className={`
                     flex flex-col
-                    w-full border-2 border-fuchsia-200 rounded-lg p-4 transition
-                    focus-within:border-fuchsia-400
+                    w-full border-2 border-sopa-soft rounded-lg p-4 transition
+                    focus-within:border-sopa-default
                 `}
             >
                 <textarea
@@ -154,7 +154,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 <div
                     className={`
                         w-full
-                        border-t-2 border-t-fuchsia-400
+                        border-t-2 border-t-sopa-default
                         flex items-center
                         space-x-2
                         pt-2 mt-2

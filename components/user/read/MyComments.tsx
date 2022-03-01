@@ -39,7 +39,7 @@ export default function MyComments({ fetchMore, howManyData }: IMyCommentsCompon
                         <button
                             onClick={() => router.push(`/post/${comment?.postId}`)}
                             className={`
-                                    flex justify-center items-center bg-fuchsia-300 hover:bg-fuchsia-400 transition text-white font-bold rounded-lg p-2
+                                    flex justify-center items-center bg-sopa-pure hover:bg-sopa-default transition text-white font-bold rounded-lg p-2
                                 `}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

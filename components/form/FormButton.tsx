@@ -17,9 +17,9 @@ export default function FormButton({ disabled = false, text, loading, onClick }:
             className={`
                 flex items-center justify-center
                 w-full h-4 rounded-xl px-3 py-7
-                ${disabled ? "bg-fuchsia-300" : "bg-fuchsia-500"} 
+                ${disabled ? "bg-sopa-pure" : "bg-sopa-accent"} 
                 focus:outline-none
-                focus:ring-2 ring-offset-2 ring-fuchsia-500
+                focus:ring-2 ring-offset-2 ring-sopa-accent
                 transition-colors
                 shadow-md
                 cursor-pointer

@@ -122,7 +122,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     스킬
                     <span
                         className={`
-                            ml-1 text-fuchsia-400 font-bold
+                            ml-1 text-sopa-default font-bold
                         `}
                     >
                         (수정 불가)

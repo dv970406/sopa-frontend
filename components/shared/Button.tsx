@@ -12,7 +12,7 @@ export default function Button({ text, onClick }: IButton) {
     return (
         <button
             className="
-                flex justify-center items-center bg-fuchsia-300 hover:bg-fuchsia-400 transition text-white font-bold rounded-lg px-3 py-2
+                flex justify-center items-center bg-sopa-pure hover:bg-sopa-default transition text-white font-bold rounded-lg px-3 py-2
             "
             onClick={onClick}
         >

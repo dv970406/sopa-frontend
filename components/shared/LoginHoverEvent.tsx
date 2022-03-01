@@ -52,7 +52,7 @@ export default function LoginHoverEvent() {
             <button
                 className={`
                     opacity-70 hover:opacity-100 font-bold
-                    hover:text-fuchsia-500 text-fuchsia-400
+                    hover:text-sopa-accent text-sopa-default
                 `}
                 onClick={goToLogin}
             >
@@ -63,7 +63,7 @@ export default function LoginHoverEvent() {
                     <motion.div
                         className={`
                             flex absolute space-x-3 
-                            border-2 border-fuchsia-300 rounded-lg p-2 
+                            border-2 border-sopa-pure rounded-lg p-2 
                         `}
                         variants={loginTabVariants}
                         initial="invisible"

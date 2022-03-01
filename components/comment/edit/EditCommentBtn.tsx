@@ -19,7 +19,7 @@ export default function EditCommentBtn({ setEditMode }: IEditCommentBtnComponent
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20" fill="currentColor"
                 className={`
-                    h-6 w-6 text-fuchsia-300 hover:text-fuchsia-500 cursor-pointer transition
+                    h-6 w-6 text-sopa-pure hover:text-sopa-accent cursor-pointer transition
                 `}
             >
                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />

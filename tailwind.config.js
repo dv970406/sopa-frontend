@@ -8,6 +8,12 @@ module.exports = {
       fontFamily: {
         Dongle: ['Dongle', "sans-serif"],
         NotoSans: ['Noto Sans KR', "sans-serif"]
+      },
+      colors: {
+        'sopa-default': "#E98BF9",
+        'sopa-accent': "#D946EF",
+        'sopa-soft': "#F5D0FE",
+        'sopa-pure': "#F0ABFC",
       }
     },
   },

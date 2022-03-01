@@ -31,7 +31,7 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
             {loginOrSignUp ? null : <NavBar />}
             <div
                 className={`
-                    flex flex-col
+                    flex flex-col space-y-8
                     justify-center py-16 px-8 sm:px-16 md:px-24 lg:px-40 xl:px-48
                     ${loginOrSignUp ? "flex items-center" : ""}
                     w-full

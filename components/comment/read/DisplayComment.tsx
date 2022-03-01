@@ -16,7 +16,7 @@ function DisplayComment({ postId, id, comment, user, isMine }: ICommentInfo) {
         <div
             className={`
                 p-2 w-full
-                border-b-2 border-b-fuchsia-200
+                border-b-2 border-b-sopa-soft
                 space-y-2
             `}
         >
