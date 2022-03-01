@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: ------
+ * 수정일: 2022.03.01
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -30,17 +30,16 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const setPosts = useSetRecoilState(postsState);
 
-    const myLikesCompleted = ({ seeMyLikes }: any) => setPosts(seeMyLikes);
-
-    const { data: myLikesData, fetchMore: fetchMoreMyLikes, refetch: refetchMyLikes } = useQuery(SEE_MY_LIKES_QUERY, {
-        onCompleted: myLikesCompleted,
-    });
+    const { data: myLikesData, fetchMore: fetchMoreMyLikes, refetch: refetchMyLikes } = useQuery(SEE_MY_LIKES_QUERY);
 
     useEffect(() => {
         if (myActivitiesTab === "like") {
             setPosts(myLikesData?.seeMyLikes);
         };
     }, [myActivitiesTab]);
+    useEffect(() => {
+        setPosts(myLikesData?.seeMyLikes)
+    }, [myLikesData])
 
     return (
         myActivitiesTab === "like" ? (
