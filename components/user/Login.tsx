@@ -39,7 +39,7 @@ interface ILoginCompleted {
 
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
-    const { register, handleSubmit, watch, clearErrors } = useForm<IForm>();
+    const { register, handleSubmit, watch, clearErrors, formState: { errors } } = useForm<IForm>();
 
     const loginCompleted = ({ login }: ILoginCompleted) => {
         const { ok, token, error } = login;
@@ -85,25 +85,19 @@ export default function Login() {
                         message: "이메일 양식을 지켜주세요."
                     }
                 })}
+                error={errors.email?.message!}
                 required
             />
             <Input
                 type="password"
                 register={register("password", {
                     required: true,
-                    minLength: {
-                        value: 8,
-                        message: "비밀번호는 8자리 이상이어야 합니다."
-                    },
-                    maxLength: {
-                        value: 15,
-                        message: "비밀번호는 15자리 이하이어야 합니다."
-                    },
                     pattern: {
                         value: /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/g,
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
+                error={errors.password?.message!}
                 required
             />
             <FormButton
@@ -121,9 +115,9 @@ export default function Login() {
                     items-center
                 `}
             >
-                <SocialLogin isLoginPage social='naver' />
-                <SocialLogin isLoginPage social='github' />
-                <SocialLogin isLoginPage social='kakao' />
+                <SocialLogin isAuthPage social='naver' />
+                <SocialLogin isAuthPage social='github' />
+                <SocialLogin isAuthPage social='kakao' />
             </div>
         </Form>
     )

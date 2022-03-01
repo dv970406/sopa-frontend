@@ -37,7 +37,7 @@ const CREATE_USER_MUTATION = gql`
 
 export default function CreateUser() {
     const [emailCode, setEmailCode] = useState<number | null>(null)
-    const { register, handleSubmit, watch, getValues } = useForm<IForm>();
+    const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<IForm>();
     const setLoginMode = useSetRecoilState(loginModeState);
 
     const createUserCompleted = ({ createUser }: ICreateUser) => {
@@ -52,9 +52,10 @@ export default function CreateUser() {
         onCompleted: createUserCompleted
     });
 
-    const onValid = ({ name, email, password, sendedCode }: IForm) => {
+    const checkEmailValidation = () => {
         if (loading) return;
 
+        const { name, email, password, sendedCode } = getValues();
         if (emailCode !== Number(sendedCode)) {
             alert("전송된 인증번호와 일치하지 않습니다.");
             return;
@@ -75,7 +76,7 @@ export default function CreateUser() {
 
     const [isEmailValidationMode, setIsEmailValidationMode] = useState(false);
 
-    const checkEmailValidation = async () => {
+    const onValid = async () => {
         const { password, password2 } = getValues();
 
         if (password !== password2) {
@@ -104,6 +105,7 @@ export default function CreateUser() {
         setIsEmailValidationMode(true);
         alert(response.message);
     }
+
     return (
         <>
             <Form>
@@ -117,8 +119,7 @@ export default function CreateUser() {
                     })}
                     type="name"
                     required
-                    minLength={2}
-                    maxLength={8}
+                    error={errors.name?.message!}
                 />
                 <Input
                     register={register("email", {
@@ -130,18 +131,11 @@ export default function CreateUser() {
                     })}
                     type="email"
                     required
+                    error={errors.email?.message!}
                 />
                 <Input
                     register={register("password", {
                         required: true,
-                        minLength: {
-                            value: 8,
-                            message: "비밀번호는 8자리 이상이어야 합니다."
-                        },
-                        maxLength: {
-                            value: 15,
-                            message: "비밀번호는 15자리 이하이어야 합니다."
-                        },
                         pattern: {
                             value: /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/g,
                             message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
@@ -149,20 +143,11 @@ export default function CreateUser() {
                     })}
                     type="password"
                     required
-                    minLength={8}
-                    maxLength={15}
+                    error={errors.password?.message!}
                 />
                 <Input
                     register={register("password2", {
                         required: true,
-                        minLength: {
-                            value: 8,
-                            message: "비밀번호는 8자리 이상이어야 합니다."
-                        },
-                        maxLength: {
-                            value: 15,
-                            message: "비밀번호는 15자리 이하이어야 합니다."
-                        },
                         pattern: {
                             value: /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/g,
                             message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
@@ -170,8 +155,7 @@ export default function CreateUser() {
                     })}
                     type="password2"
                     required
-                    minLength={8}
-                    maxLength={15}
+                    error={errors.password2?.message!}
                 />
                 {isEmailValidationMode ? (
                     <div
@@ -189,7 +173,7 @@ export default function CreateUser() {
                             maxLength={6}
                         />
                         <button
-                            onClick={handleSubmit(onValid)}
+                            onClick={checkEmailValidation}
                             className='
                                 bg-sopa-pure hover:bg-sopa-default transition 
                                 rounded-xl px-4 py-3 text-white font-semibold text-sm
@@ -203,7 +187,7 @@ export default function CreateUser() {
                         disabled={checkDisabledStatus}
                         loading={loading}
                         text='이메일 인증'
-                        onClick={checkEmailValidation}
+                        onClick={handleSubmit(onValid)}
                     />
                 )}
             </Form>

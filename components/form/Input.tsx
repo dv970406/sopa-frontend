@@ -12,6 +12,7 @@ interface IInput {
     register?: UseFormRegisterReturn;
     required?: boolean;
     disabled?: boolean;
+    error: string;
     [key: string]: any;
 }
 
@@ -38,8 +39,8 @@ const typeTranslater = (engVerType: string) => {
     return korVerType
 }
 
-export default function Input({ type, register, required, disabled = false, ...props }: IInput) {
-
+export default function Input({ type, register, required, disabled = false, error, ...props }: IInput) {
+    console.log("Received Error : ", error)
     const decideType = (type: InputType) => {
         switch (type) {
             case "name":
@@ -106,15 +107,22 @@ export default function Input({ type, register, required, disabled = false, ...p
                         {...register}
                         disabled={disabled}
                         className={`
-                                p-2 shadow-sm
-                                border-b-2 border-b-gray-300 
-                                placeholder:text-lg placeholder-gray-400
-                                focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                                w-full
-                                ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
-                            `}
+                            peer p-2 shadow-sm
+                            border-b-2 border-b-gray-300 
+                            placeholder:text-lg placeholder-gray-400
+                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
+                            w-full
+                            ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
+                        `}
                         {...props}
                     />
+                    <div
+                        className='
+                            p-1 invisible peer-invalid:visible text-error font-bold
+                        '
+                    >
+                        {error}
+                    </div>
                 </div>
             )
         } else {
@@ -153,6 +161,11 @@ export default function Input({ type, register, required, disabled = false, ...p
                         `}
                         {...props}
                     />
+                    <div
+                        className='p-1 text-error font-bold'
+                    >
+                        {error}
+                    </div>
                 </div>
             )
         }

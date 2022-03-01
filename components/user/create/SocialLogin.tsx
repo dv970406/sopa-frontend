@@ -9,16 +9,16 @@ import { makeSocialLoginReqUrl } from "@utils/utilFunctions";
 
 interface ISocialLogin {
     social: string;
-    isLoginPage?: boolean;
+    isAuthPage?: boolean;
 }
 
-const SocialLogin = ({ social, isLoginPage = false }: ISocialLogin) => {
+const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
 
     return (
         <div
             className={`
                 cursor-pointer
-                ${isLoginPage ? "w-14 h-14" : "w-10 h-10"}
+                ${isAuthPage ? "w-14 h-14" : "w-10 h-10"}
             `}
         >
             <Link href={makeSocialLoginReqUrl(social)}>
