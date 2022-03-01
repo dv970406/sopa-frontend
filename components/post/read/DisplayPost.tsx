@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
-import { IPostDisplay } from '@utils/types/interfaces';
+import type { IPostDisplay } from '@utils/types/interfaces';
 import MetaData from '../MetaData';
 import SkillImage from '../../skill/SkillImage';
 import { getUploadedDate } from '@utils/utilFunctions';
@@ -19,7 +19,7 @@ export default function DisplayPost(
                 flex flex-col justify-between items-center
                 space-y-8 shadow-xl
                 hover:scale-105 transition-all duration-300 cursor-pointer
-                hover:border-fuchsia-300 hover:ring-2 ring-fuchsia-400 ring-offset-2
+                hover:border-sopa-pure hover:ring-2 ring-sopa-default ring-offset-2
             `}
         >
             <div

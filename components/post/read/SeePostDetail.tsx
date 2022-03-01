@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import MetaData from '../MetaData';
@@ -9,8 +9,11 @@ import SkillImage from '../../skill/SkillImage';
 import DisplayComment from '../../comment/read/DisplayComment';
 import CreateComment from '../../comment/create/CreateComment';
 import MenuBtn from '../MenuBtn';
-import { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
+import { useRecoilValue } from "recoil";
+import { tokenState } from "@utils/atoms";
+import Loading from '@components/shared/Loading';
 
 interface ISeePostDetailComponent {
     pageTitle: string;
@@ -20,13 +23,13 @@ interface ISeePostDetailComponent {
 }
 
 export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments }: ISeePostDetailComponent) {
-
+    const token = useRecoilValue(tokenState)
     return (
         <>
             <div
                 className={`
                     flex justify-between items-center
-                    border-b-2 border-b-fuchsia-400 w-full
+                    border-b-2 border-b-sopa-default w-full                    
                 `}
             >
                 <h1
@@ -39,7 +42,9 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                 {seePost?.isMine ? <MenuBtn postId={seePost?.id} /> : null}
             </div>
             {seePost?.id ? (
-                <>
+                <div
+                    className="border-b-2 border-b-sopa-default w-full py-3"
+                >
                     <div
                         className={`
                             flex justify-center gap-5
@@ -54,7 +59,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                     <p
                         className='
                             break-words tracking-wider 
-                            text-sm lg:text-lg
+                            text-md lg:text-lg py-7
                         '
                     >
                         {seePost?.description}
@@ -75,13 +80,13 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                             isLiked={seePost?.isLiked}
                         />
                     </div>
-                </>
-            ) : "처리중입니다..."}
+                </div>
+            ) : <Loading />}
 
-            <CreateComment postId={seePost?.id} />
+            {token ? <CreateComment postId={seePost?.id} /> : null}
 
             <InfiniteScrolling
-                howManyData={seePost.commentCount}
+                howManyData={seePost?.commentCount}
                 css='space-y-4'
                 fetchMore={fetchMore}
             >

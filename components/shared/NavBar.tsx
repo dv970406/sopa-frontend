@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import { useRouter } from 'next/router';
@@ -27,8 +27,8 @@ function NavBar() {
     return (
         <div
             className='
-                flex justify-around items-center px-10 h-24 shadow-xl top-0 w-full
-                bg-fuchsia-200 border-b-2 border-b-fuchsia-300 rounded-b-3xl
+                flex justify-around items-center px-10 h-24 shadow-md top-0 w-full
+                rounded-b-3xl
             '
         >
             <div
@@ -62,8 +62,8 @@ function NavBar() {
                     isMyProfilePage ? (
                         <button
                             className="
-                                hover:text-fuchsia-500 transition
-                                font-bold text-fuchsia-400 text-lg
+                                hover:text-sopa-accent transition
+                                font-bold text-sopa-default text-lg
                             "
                             onClick={goToEditUser}
                         >
@@ -72,8 +72,8 @@ function NavBar() {
                     ) : (
                         <button
                             className="
-                                hover:text-fuchsia-500 transition
-                                font-bold text-fuchsia-400 text-lg
+                                hover:text-sopa-accent transition 
+                                font-bold text-sopa-default text-lg 
                             "
                             onClick={goToSeeMyProfile}
                         >

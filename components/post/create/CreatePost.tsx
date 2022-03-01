@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.02.26
+ * 수정일: 2022.03.01
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -35,7 +35,7 @@ export default function CreatePost() {
     const setPosts = useSetRecoilState(postsState)
     const { seeMyInfo } = useMyInfo();
 
-    const { register, handleSubmit, watch } = useForm<IForm>();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<IForm>();
 
     const updateCreatePost: MutationUpdaterFn = (cache, { data }) => {
         const { createPost }: any = data
@@ -120,9 +120,8 @@ export default function CreatePost() {
                         message: "제목은 32글자 이하여야 합니다."
                     }
                 })}
-                minLength={2}
-                maxLength={32}
                 required
+                error={errors.title?.message}
             />
 
             <PositionSelector />
@@ -151,6 +150,7 @@ export default function CreatePost() {
                 })}
                 placeholder="https://open.kakao.com/o/sopaisthebest"
                 maxLength={70}
+                error={errors.openChatLink?.message}
             />
 
             <FormButton

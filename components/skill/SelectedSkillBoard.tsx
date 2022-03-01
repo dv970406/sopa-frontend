@@ -1,13 +1,13 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { selectedSkillsState, skillsState } from '@utils/atoms';
-import { ISkill } from '@utils/types/interfaces';
+import type { ISkill } from '@utils/types/interfaces';
 
 interface ISelectedSkillBoard {
     refetchSeePosts: any;
@@ -66,9 +66,9 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
     return (
         <motion.div
             className={`
-                flex flex-wrap justify-center gap-4 shadow-xl border-t-2 border-r-2 border-t-fuchsia-300 border-r-fuchsia-300 bg-fuchsia-400 p-3 rounded-lg
-                lg:flex-col lg:fixed lg:left-0 lg:top-0 lg:h-full lg:justify-center lg:rounded-none lg:rounded-r-2xl
-                ${selectedSkills.length > 9 ? "lg:w-40" : null}
+                flex flex-wrap justify-center gap-4 bg-sopa-default p-3 rounded-lg
+                md:flex-col md:fixed md:left-0 md:top-0 md:h-full md:justify-center md:rounded-none md:rounded-r-2xl
+                ${selectedSkills.length > 9 ? "md:w-40" : null}
             `}
             initial={{
                 x: -100,

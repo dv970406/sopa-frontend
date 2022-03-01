@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
-import { IFetchedSkillsInfo } from '@utils/types/interfaces';
+import type { IFetchedSkillsInfo } from '@utils/types/interfaces';
 import { makeSkillImages } from '@utils/utilFunctions';
 
 interface ISkillImage {
@@ -38,7 +38,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                         w-12 h-12
                                     `}
                                 />
-                                <p>{skill.name}</p>
+                                <p className="font-bold">{skill.name}</p>
                             </div>
                         )}
                         <div
@@ -63,7 +63,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                 w-12 h-12
                             `}
                             />
-                            <p>{skill.name}</p>
+                            <p className="font-bold">{skill.name}</p>
                         </div>
                     )
                 )
@@ -81,7 +81,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                 w-12 h-12
                             `}
                         />
-                        <p>{skill.name}</p>
+                        <p className="font-bold">{skill.name}</p>
                     </div>
                 )
             )

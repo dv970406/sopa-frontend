@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.23
+ * 수정일: 2022.03.01
  */
 
 import Link from 'next/link'
@@ -8,23 +8,22 @@ import { makeSocialLoginReqUrl } from "@utils/utilFunctions";
 
 
 interface ISocialLogin {
-    social: string;
-    isLoginPage?: boolean;
+    social: "naver" | "github" | "kakao";
+    isAuthPage?: boolean;
 }
 
-const SocialLogin = ({ social, isLoginPage = false }: ISocialLogin) => {
+const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
 
     return (
-        <div
+        <button
             className={`
-                cursor-pointer
-                ${isLoginPage ? "w-14 h-14" : "w-10 h-10"}
+                ${isAuthPage ? "w-14 h-14" : "w-10 h-10"}
             `}
         >
             <Link href={makeSocialLoginReqUrl(social)}>
                 <img className='w-full h-full' src={`/${social}.png`} />
             </Link>
-        </div>
+        </button>
     )
 }
 

@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
-import { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
 import EditPost from '../edit/EditPost';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { postEditModeState } from '@utils/atoms';
@@ -21,7 +21,6 @@ interface IPostDetailComponent {
 export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPostDetailComponent) {
     const isPostEditMode = useRecoilValue(postEditModeState);
     const resetIsPostEditMode = useResetRecoilState(postEditModeState);
-
     useEffect(() => {
         resetIsPostEditMode();
     }, []);

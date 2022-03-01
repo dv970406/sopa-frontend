@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import React from 'react';
@@ -12,6 +12,7 @@ interface IInput {
     register?: UseFormRegisterReturn;
     required?: boolean;
     disabled?: boolean;
+    error?: string;
     [key: string]: any;
 }
 
@@ -38,8 +39,7 @@ const typeTranslater = (engVerType: string) => {
     return korVerType
 }
 
-export default function Input({ type, register, required, disabled = false, ...props }: IInput) {
-
+export default function Input({ type, register, required, disabled = false, error, ...props }: IInput) {
     const decideType = (type: InputType) => {
         switch (type) {
             case "name":
@@ -58,6 +58,7 @@ export default function Input({ type, register, required, disabled = false, ...p
             return (
                 <div>
                     <label
+                        className='font-bold'
                         htmlFor={type}
                     >
                         {typeTranslater(type)}
@@ -69,7 +70,7 @@ export default function Input({ type, register, required, disabled = false, ...p
                             p-1 shadow-sm
                             border-b-2 border-b-gray-300  
                             placeholder:text-lg placeholder-gray-400
-                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
                             w-full
                             text-sm
                         `}
@@ -85,14 +86,14 @@ export default function Input({ type, register, required, disabled = false, ...p
                     <label
                         htmlFor={type}
                         className={`
-                            flex items-center
+                            flex items-center font-bold
                         `}
                     >
                         <p>{typeTranslater(type)}</p>
                         {required ? (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5 ml-1 text-fuchsia-500"
+                                className="h-5 w-5 ml-1 text-sopa-accent"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -106,15 +107,22 @@ export default function Input({ type, register, required, disabled = false, ...p
                         {...register}
                         disabled={disabled}
                         className={`
-                                p-2 shadow-sm
-                                border-b-2 border-b-gray-300 
-                                placeholder:text-lg placeholder-gray-400
-                                focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
-                                w-full
-                                ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
-                            `}
+                            peer p-2 shadow-sm
+                            border-b-2 border-b-gray-300 
+                            placeholder:text-lg placeholder-gray-400
+                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
+                            w-full
+                            ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
+                        `}
                         {...props}
                     />
+                    <div
+                        className='
+                            p-1 invisible peer-invalid:visible  text-emphasize font-bold
+                        '
+                    >
+                        {error}
+                    </div>
                 </div>
             )
         } else {
@@ -123,14 +131,14 @@ export default function Input({ type, register, required, disabled = false, ...p
                     <label
                         htmlFor={type}
                         className={`
-                            flex items-center
+                            flex items-center font-bold
                         `}
                     >
                         {typeTranslater(type)}
                         {required ? (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5 ml-1 text-fuchsia-500"
+                                className="h-5 w-5 ml-1 text-sopa-accent"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -147,12 +155,17 @@ export default function Input({ type, register, required, disabled = false, ...p
                             p-2 shadow-sm
                             border-b-2 border-b-gray-300 
                             placeholder:text-lg placeholder-gray-400
-                            focus:placeholder-fuchsia-500 focus:outline-none focus:ring-fuchsia-500 focus:border-b-fuchsia-500
+                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
                             w-full
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
                         {...props}
                     />
+                    <div
+                        className='p-1  text-emphasize font-bold'
+                    >
+                        {error}
+                    </div>
                 </div>
             )
         }

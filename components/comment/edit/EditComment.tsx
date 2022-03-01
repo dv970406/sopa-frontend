@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: ------
+ * 수정일: 2022.03.01
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -11,7 +11,7 @@ interface IEditCommentForm {
     editedComment: string;
 }
 interface IEditCommentComponent {
-    setEditMode(current: boolean): void;
+    setEditCommentMode(current: boolean): void;
     postId: number;
     comment: string;
     commentId: number;
@@ -25,7 +25,7 @@ const EDIT_COMMENT_MUTATION = gql`
         }
     }
 `
-export default function EditComment({ setEditMode, comment, commentId }: IEditCommentComponent) {
+export default function EditComment({ setEditCommentMode, comment, commentId }: IEditCommentComponent) {
     const { register, handleSubmit, getValues } = useForm<IEditCommentForm>();
     const updateEditComment: MutationUpdaterFn = (cache, { data }) => {
         const { editComment: { ok, error } }: any = data;
@@ -44,7 +44,7 @@ export default function EditComment({ setEditMode, comment, commentId }: IEditCo
                 }
             }
         })
-        setEditMode(false);
+        setEditCommentMode(false);
     }
     const [editCommentMutation, { loading }] = useMutation(EDIT_COMMENT_MUTATION, {
         update: updateEditComment

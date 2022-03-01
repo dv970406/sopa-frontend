@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
-import { IPostDisplay } from '@utils/types/interfaces';
+import type { IPostDisplay } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
 import SkillImage from '../../skill/SkillImage';
@@ -37,7 +37,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
             <div
                 className={`
                     flex justify-between items-center space-x-6
-                    border-b-2 border-b-fuchsia-400 pb-3 px-2
+                    border-b-2 border-b-sopa-default pb-3 px-2
                 `}
             >
                 <h1
@@ -52,8 +52,8 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                     onClick={() => goToPostDetail()}
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                     className={`
-                        w-16 h-16 sm:w-8 sm:h-8 cursor-pointer text-fuchsia-300 transition-colors
-                        hover:text-fuchsia-500
+                        w-16 h-16 sm:w-8 sm:h-8 cursor-pointer text-sopa-pure transition-colors
+                        hover:text-sopa-accent
                     `}
                 >
                     <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z" />

@@ -15,6 +15,7 @@ interface IMyInfo {
         socialLogin?: string;
         name: string;
         email: string;
+        isMe: boolean;
     }
 };
 

@@ -1,10 +1,10 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.01
  */
 
 import { myActivitiesTabState } from '@utils/atoms'
-import { kindOfMyActivitiesTab } from '@utils/types/types';
+import type { kindOfMyActivitiesTab } from '@utils/types/types';
 import { useRecoilState } from 'recoil'
 
 interface ITabComponent {
@@ -24,11 +24,11 @@ export default function ProfileTab({ autoFocus, count, onFocusTab, svg }: ITabCo
         >
             <button
                 className={`
-                    p-2 rounded-full border-4 border-fuchsia-300 hover:border-fuchsia-400 transition
+                    p-2 rounded-full border-4 border-sopa-pure hover:border-sopa-default transition
                     ${myActivitiesTab === onFocusTab ? (
-                        "text-white bg-fuchsia-500 ring-2 ring-fuchsia-500 ring-offset-2"
+                        "text-white bg-sopa-accent ring-2 ring-sopa-accent ring-offset-2"
                     ) : (
-                        "text-fuchsia-500 bg-white"
+                        "text-sopa-accent bg-white"
                     )}
                     focus:outline-none
                 `}

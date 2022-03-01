@@ -17,9 +17,9 @@ export default function Divider({ text }: IDivider) {
                 text-center
             `}
         >
-            <div className='h-[2px] bg-fuchsia-300 w-full rounded-full' />
-            <div className='text-fuchsia-400 w-full font-bold'>{text}</div>
-            <div className='h-[2px] bg-fuchsia-300 w-full rounded-full' />
+            <div className='h-[2px] bg-sopa-pure w-full rounded-full' />
+            <div className='text-sopa-default w-full font-bold'>{text}</div>
+            <div className='h-[2px] bg-sopa-pure w-full rounded-full' />
         </div>
     )
 }

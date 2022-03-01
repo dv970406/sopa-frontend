@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.24
- * 수정일: ------
+ * 수정일: 2022.03.01
  */
 
 import { motion } from 'framer-motion';
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export default function Loading() {
     return (
         <motion.div
-            className="absolute place-self-center top-1/2 "
+            className="flex justify-center items-center place-self-center top-1/2 "
             initial={{
                 rotate: -60
             }}

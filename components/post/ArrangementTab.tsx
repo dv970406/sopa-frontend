@@ -15,10 +15,10 @@ export default function ArrangementTab({ tabName, selectedTab, comparisonTarget,
         <div
             className={`
                 border-b-4 flex items-center justify-center space-x-2
-                p-3 w-full hover:border-b-fuchsia-400 transition-colors
+                p-3 w-full hover:border-b-sopa-default transition-colors
                 cursor-pointer font-bold text-xs sm:text-sm md:text-lg
                 tracking-widest
-                ${comparisonTarget === selectedTab ? "border-b-fuchsia-500" : "border-b-fuchsia-200"}
+                ${comparisonTarget === selectedTab ? "border-b-sopa-accent" : "border-b-sopa-soft"}
             `}
             onClick={onClick}
         >

@@ -1,14 +1,14 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import Button from '@components/shared/Button';
-import { postEditMode } from '@utils/atoms';
-import { IFetchedSkillsInfo } from '@utils/types/interfaces';
+import { postEditModeState } from '@utils/atoms';
+import type { IFetchedSkillsInfo } from '@utils/types/interfaces';
 import { useForm } from 'react-hook-form'
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import SkillImage from '../../skill/SkillImage';
@@ -39,10 +39,10 @@ const EDIT_POST_MUTATION = gql`
 `
 
 export default function EditPost({ postId, title, description, openChatLink, apps, backends, frontends }: IEditPostComponent) {
-    const setIsPostEditMode = useSetRecoilState(postEditMode);
-    const resetIsPostEditMode = useResetRecoilState(postEditMode);
+    const setIsPostEditMode = useSetRecoilState(postEditModeState);
+    const resetIsPostEditMode = useResetRecoilState(postEditModeState);
 
-    const { register, handleSubmit, watch, getValues } = useForm<IForm>();
+    const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<IForm>();
 
     const updateEditPost: MutationUpdaterFn = (cache, { data }) => {
         const { editPost: { ok, error } }: any = data;
@@ -109,12 +109,15 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     minLength: {
                         value: 2,
                         message: "제목은 2글자 이상이어야 합니다."
-                    }
+                    },
+                    maxLength: {
+                        value: 32,
+                        message: "제목은 32글자 이하여야 합니다."
+                    },
                 })}
-                minLength={2}
-                maxLength={32}
                 defaultValue={title}
                 required
+                error={errors.editedTitle?.message}
             />
 
             <div>
@@ -122,7 +125,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     스킬
                     <span
                         className={`
-                            ml-1 text-fuchsia-400 font-bold
+                            ml-1 text-sopa-default font-bold
                         `}
                     >
                         (수정 불가)
@@ -147,6 +150,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 placeholder="설명을 입력하세요."
                 maxLength={600}
                 defaultValue={description}
+                error={errors.editedDescription?.message}
             />
 
             <Input
@@ -165,8 +169,8 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     }
                 })}
                 placeholder="https://open.kakao.com/o/sopaisthebest"
-                maxLength={70}
                 defaultValue={openChatLink}
+                error={errors.editedOpenChatLink?.message}
             />
 
             <FormButton

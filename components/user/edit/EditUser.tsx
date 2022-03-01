@@ -8,6 +8,7 @@ import FormButton from '@components/form/FormButton'
 import Input from '@components/form/Input'
 import useMyInfo from 'hooks/useMyInfo'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface IForm {
@@ -27,7 +28,7 @@ const EDIT_USER_MUTATION = gql`
 
 export default function EditUser() {
     const router = useRouter();
-    const { register, handleSubmit, clearErrors, getValues, watch } = useForm<IForm>();
+    const { register, handleSubmit, clearErrors, getValues, watch, formState: { errors } } = useForm<IForm>();
     const { seeMyInfo } = useMyInfo();
 
     const updateEditUser = (cache: any, { data }: any) => {
@@ -68,6 +69,8 @@ export default function EditUser() {
         })
     }
 
+    const checkDisabledStatus = loading || !watch("name") || !watch("password") || !watch("password2");
+
     return (
         <form
             onSubmit={handleSubmit(onValid)}
@@ -85,8 +88,7 @@ export default function EditUser() {
                 })}
                 defaultValue={seeMyInfo?.name}
                 required
-                minLength={2}
-                maxLength={8}
+                error={errors.name?.message}
             />
             <Input
                 disabled={true}
@@ -114,8 +116,7 @@ export default function EditUser() {
                             }
                         })}
                         required
-                        minLength={8}
-                        maxLength={15}
+                        error={errors.password?.message}
                     />
                     <Input
                         type="password2"
@@ -135,14 +136,13 @@ export default function EditUser() {
                             }
                         })}
                         required
-                        minLength={8}
-                        maxLength={15}
+                        error={errors.password2?.message}
                     />
                 </>
             )}
 
             <FormButton
-                disabled={loading || !watch("password" || "password2")}
+                disabled={checkDisabledStatus}
                 text={`${seeMyInfo?.name}의 프로필 수정`}
                 loading={loading}
             />

@@ -1,10 +1,9 @@
 /**
  * 생성일: 2022.02.16
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.01
  */
 
-import React, { Ref } from 'react';
-import { IFetchedSkillsInfo } from './types/interfaces';
+import type { IFetchedSkillsInfo } from './types/interfaces';
 
 
 export const makeSocialLoginReqUrl = (socialSite: string): string => {
