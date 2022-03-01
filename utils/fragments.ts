@@ -57,6 +57,7 @@ export const USER_SIMPLE_FRAGMENT = gql`
         socialLogin
         name
         email
+        isMe
     }
 `
 

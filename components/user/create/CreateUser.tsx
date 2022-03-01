@@ -72,7 +72,7 @@ export default function CreateUser() {
         alert(`${name}님 환영합니다!`);
     };
 
-    const checkDisabledStatus = loading || !watch("email") || !watch("name") || !watch("password") || !watch("password2")
+    const checkDisabledStatus = loading || !watch("email") || !watch("name") || !watch("password") || !watch("password2");
 
     const [isEmailValidationMode, setIsEmailValidationMode] = useState(false);
 

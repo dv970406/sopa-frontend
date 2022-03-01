@@ -15,8 +15,8 @@ interface IMainLayout {
 }
 
 export default function MainLayout({ loading, title, children }: IMainLayout) {
-    const { route } = useRouter();
-    const isAuthPage = route === "/auth";
+    const { pathname } = useRouter();
+    const isAuthPage = pathname === "/auth";
 
     return (
         <div

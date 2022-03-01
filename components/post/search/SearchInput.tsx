@@ -76,7 +76,7 @@ export default function SearchInput() {
             animate="visible"
             className="
                 absolute flex bg-white rounded-xl px-2 py-1 items-center space-x-2 shadow-lg
-                z-50
+                z-50 border-2 border-sopa-pure
             "
         >
             <button
