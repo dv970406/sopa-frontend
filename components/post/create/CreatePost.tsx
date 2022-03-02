@@ -11,6 +11,7 @@ import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
 import { IPostDisplay } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
@@ -101,6 +102,10 @@ export default function CreatePost() {
             }
         })
     }
+
+    useEffect(() => {
+        resetSelectedSkillsToUpload();
+    }, [])
     return (
         <form
             className={`
@@ -111,7 +116,7 @@ export default function CreatePost() {
             <Input
                 type="title"
                 register={register("title", {
-                    required: true,
+                    required: "제목은 필수입니다.",
                     minLength: {
                         value: 2,
                         message: "제목은 2글자 이상이어야 합니다."
@@ -121,8 +126,9 @@ export default function CreatePost() {
                         message: "제목은 32글자 이하여야 합니다."
                     }
                 })}
-                required
                 error={errors.title?.message}
+                required
+                maxLength={32}
             />
 
             <PositionSelector />
@@ -150,8 +156,8 @@ export default function CreatePost() {
                     }
                 })}
                 placeholder="https://open.kakao.com/o/sopaisthebest"
-                maxLength={70}
                 error={errors.openChatLink?.message}
+                maxLength={70}
             />
 
             <FormButton

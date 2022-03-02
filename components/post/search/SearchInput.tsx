@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, useLazyQuery } from '@apollo/client';
@@ -76,7 +76,7 @@ export default function SearchInput() {
             animate="visible"
             className="
                 absolute flex bg-white rounded-xl px-2 py-1 items-center space-x-2 shadow-lg
-                z-50 border-2 border-sopa-pure
+                z-50 border-2 border-sopa-pure dark:bg-dark-default focus-within:border-sopa-accent
             "
         >
             <button
@@ -96,7 +96,7 @@ export default function SearchInput() {
                     type="text"
                     className="
                         rounded-r-lg border-l-2 border-l-sopa-pure
-                        focus:outline-none px-2
+                        focus:outline-none px-2 dark:bg-dark-default
                     "
                     placeholder='제목을 입력하세요'
                     required

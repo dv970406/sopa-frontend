@@ -16,9 +16,18 @@ module.exports = {
         'sopa-accent': "#D946EF",
         'sopa-soft': "#F5D0FE",
         'sopa-pure': "#F0ABFC",
+        'sopa-deepDark': "#86198F",
+        'sopa-lightDark': "#C026D3",
         'emphasize': "#F43F5E",
+        'dark-ultra': "#1E1F21",
+        'dark-default': "#292A2D",
+        'dark-text-color': "#CBD5E1",
+
       }
     },
   },
-  plugins: ["@tailwindcss/forms"],
+  plugins: [
+    "@tailwindcss/forms",
+    require('@tailwindcss/line-clamp'),
+  ],
 }

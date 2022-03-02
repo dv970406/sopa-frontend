@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.19
- * 수정일: 2022.02.22
+ * 수정일: 2022.03.02
  */
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -76,16 +76,16 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
                             `}
                             >
                                 {openChatLink}
-                                <div
+                                <p
                                     className={`
-                                        flex items-center
+                                        flex items-center font-bold text-sm h-full
                                     `}
                                 >
                                     카카오 오픈채팅 바로가기
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
                                     </svg>
-                                </div>
+                                </p>
                             </motion.div>
                         ) : null}
                     </AnimatePresence>

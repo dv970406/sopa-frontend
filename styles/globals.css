@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components{
+    .button-hovering{
+        @apply flex justify-center items-center bg-sopa-pure hover:bg-sopa-default transition text-white font-bold rounded-lg px-3 py-2
+    }
+}
 *{
     box-sizing: border-box;
 }

@@ -79,7 +79,7 @@ export default function Login() {
             <Input
                 type="email"
                 register={register("email", {
-                    required: true,
+                    required: "이메일은 필수입니다.",
                     pattern: {
                         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g,
                         message: "이메일 양식을 지켜주세요."
@@ -91,7 +91,7 @@ export default function Login() {
             <Input
                 type="password"
                 register={register("password", {
-                    required: true,
+                    required: "비밀번호는 필수입니다.",
                     pattern: {
                         value: /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/g,
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
@@ -99,6 +99,8 @@ export default function Login() {
                 })}
                 error={errors.password?.message}
                 required
+                minLength={8}
+                maxLength={15}
             />
             <FormButton
                 disabled={checkDisabledStatus}

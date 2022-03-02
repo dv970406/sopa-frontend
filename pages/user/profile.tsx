@@ -44,12 +44,12 @@ export default function UserProfilePage() {
             <div className={`sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8`}>
                 <div
                     className={`
-                    relative flex justify-center mb-5
-                `}
+                        relative flex justify-center mb-5
+                    `}
                 >
                     <div className='absolute h-2 w-full bg-sopa-pure top-4 -z-10 rounded-full' />
                     <div
-                        className='flex justify-between w-full'
+                        className='flex justify-around w-full'
                     >
                         <ProfileTab
                             autoFocus

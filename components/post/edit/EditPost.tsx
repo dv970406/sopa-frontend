@@ -105,7 +105,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
             <Input
                 type="title"
                 register={register("editedTitle", {
-                    required: true,
+                    required: "제목은 필수입니다.",
                     minLength: {
                         value: 2,
                         message: "제목은 2글자 이상이어야 합니다."
@@ -116,8 +116,9 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     },
                 })}
                 defaultValue={title}
-                required
                 error={errors.editedTitle?.message}
+                required
+                maxLength={32}
             />
 
             <div>
@@ -137,7 +138,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     `}
                 >
                     <SkillImage
-                        frontends={frontends || !watch("editedTitle")}
+                        frontends={frontends}
                         backends={backends}
                         apps={apps}
                     />
@@ -171,6 +172,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 placeholder="https://open.kakao.com/o/sopaisthebest"
                 defaultValue={openChatLink}
                 error={errors.editedOpenChatLink?.message}
+                maxLength={70}
             />
 
             <FormButton

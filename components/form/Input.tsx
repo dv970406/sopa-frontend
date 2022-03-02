@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import React from 'react';
@@ -56,7 +56,7 @@ export default function Input({ type, register, required, disabled = false, erro
     const inputType = (type: InputType) => {
         if (type === "description") {
             return (
-                <div>
+                <div className="space-y-2">
                     <label
                         className='font-bold'
                         htmlFor={type}
@@ -67,11 +67,11 @@ export default function Input({ type, register, required, disabled = false, erro
                         id={type}
                         {...register}
                         className={`
-                            p-1 shadow-sm
+                            shadow-sm
                             border-b-2 border-b-gray-300  
                             placeholder:text-lg placeholder-gray-400
                             focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full
+                            w-full dark:bg-dark-default rounded-t-lg p-4
                             text-sm
                         `}
                         rows={10}
@@ -82,7 +82,7 @@ export default function Input({ type, register, required, disabled = false, erro
             )
         } else if (type === "email") {
             return (
-                <div>
+                <div className="space-y-2">
                     <label
                         htmlFor={type}
                         className={`
@@ -111,8 +111,8 @@ export default function Input({ type, register, required, disabled = false, erro
                             border-b-2 border-b-gray-300 
                             placeholder:text-lg placeholder-gray-400
                             focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full
-                            ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
+                            w-full dark:bg-dark-default rounded-t-lg
+                            ${disabled ? "bg-slate-300 opacity-40 dark:bg-dark-ultra" : null}
                         `}
                         {...props}
                     />
@@ -127,7 +127,7 @@ export default function Input({ type, register, required, disabled = false, erro
             )
         } else {
             return (
-                <div>
+                <div className="space-y-2">
                     <label
                         htmlFor={type}
                         className={`
@@ -156,7 +156,7 @@ export default function Input({ type, register, required, disabled = false, erro
                             border-b-2 border-b-gray-300 
                             placeholder:text-lg placeholder-gray-400
                             focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full
+                            w-full dark:bg-dark-default rounded-t-lg
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
                         {...props}

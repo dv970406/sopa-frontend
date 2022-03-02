@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import type { IPostDisplay } from '@utils/types/interfaces';
@@ -32,6 +32,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
             className={`
                 relative 
                 bg-white min-h-full rounded-3xl p-4 space-y-2
+                dark:bg-dark-default
             `}
         >
             <div
@@ -69,7 +70,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
             </p>
             <div
                 className={`
-                    flex positio justify-between items-center
+                    flex justify-between items-center
                     w-full
                 `}
             >
@@ -88,7 +89,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                 </div>
                 <p
                     className={`
-                        text-lg font-semibold
+                        text-lg font-bold
                     `}
                 >
                     {semiDetail.user.name}

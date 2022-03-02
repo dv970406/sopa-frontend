@@ -69,6 +69,7 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                 flex flex-wrap justify-center gap-4 bg-sopa-default p-3 rounded-lg
                 md:flex-col md:fixed md:left-0 md:top-0 md:h-full md:justify-center md:rounded-none md:rounded-r-2xl
                 ${selectedSkills.length > 9 ? "md:w-40" : null}
+                dark:bg-sopa-lightDark
             `}
             initial={{
                 x: -100,
