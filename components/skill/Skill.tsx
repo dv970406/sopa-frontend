@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { motion } from 'framer-motion'
@@ -118,6 +118,7 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                     py-1.5 px-2 rounded-md
                     text-xs tracking-wider
                     font-bold
+                    dark:text-white
                 `}
             >
                 {skill}

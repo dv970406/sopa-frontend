@@ -1,23 +1,15 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.26
+ * 수정일: 2022.03.02
  */
 
-import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context"
 import { onError } from "@apollo/client/link/error"
 import { offsetLimitPagination } from '@apollo/client/utilities';
 
-export interface IMutationResults {
-    [key: string]: {
-        ok: boolean;
-        error?: string;
-    }
-}
-
 const authLink = setContext((_, { headers }) => {
-    // 아래 코드는 CSR 방식으로 쿠키에서 토큰을 가져오는 방식
-    //const token = typeof window !== "undefined" ? document.cookie.split("TOKEN=")[1] : "";
+    // GraphQL 요청을 보낼 때 마다 클라이언트 측(로컬 스토리지)에 저장한 토큰을 context header에 같이 싣어보낸다.
     const token = typeof window !== "undefined" ? localStorage.getItem("TOKEN") : "";
     return {
         headers: {

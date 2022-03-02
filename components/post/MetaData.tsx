@@ -1,9 +1,10 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import { IMutationResults } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import React from 'react';
 
@@ -68,7 +69,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
 
     };
 
-    const [toggleLike] = useMutation(TOGGLE_LIKE_MUTATION, {
+    const [toggleLike] = useMutation<IMutationResults>(TOGGLE_LIKE_MUTATION, {
         update: afterToggleLike,
         variables: {
             postId

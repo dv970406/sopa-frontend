@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.02
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -24,7 +24,7 @@ const semiDetailVar = {
 }
 
 interface ISeePostsComponent {
-    fetchMore?: any;
+    fetchMore: any;
     howManyData: number;
 }
 
@@ -66,7 +66,7 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
                     <motion.div
                         className={`
                             flex justify-center items-center px-6
-                            sm:px-20 md:px-32 lg:px-48 xl:px-64
+                            sm:px-20 md:px-32 lg:px-48 xl:px-72 2xl:px-96
                             fixed inset-0 h-screen w-screen
                         `}
                         onClick={() => setSelectedPostId(null)}

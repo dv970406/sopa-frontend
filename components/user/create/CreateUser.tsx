@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -11,6 +11,7 @@ import Form from '@components/form/Form';
 import Input from '@components/form/Input';
 import FormButton from '@components/form/FormButton';
 import { useState } from 'react';
+import { IMutationResults } from '@utils/types/interfaces';
 
 interface IForm {
     sendedCode?: number;
@@ -18,12 +19,6 @@ interface IForm {
     email: string;
     password: string;
     password2: string;
-}
-interface ICreateUser {
-    createUser: {
-        ok: boolean;
-        error?: string;
-    }
 }
 
 const CREATE_USER_MUTATION = gql`
@@ -40,7 +35,7 @@ export default function CreateUser() {
     const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<IForm>();
     const setLoginMode = useSetRecoilState(loginModeState);
 
-    const createUserCompleted = ({ createUser }: ICreateUser) => {
+    const createUserCompleted = ({ createUser }: IMutationResults) => {
         const { ok, error } = createUser;
         if (!ok) {
             alert(error);
@@ -48,7 +43,7 @@ export default function CreateUser() {
         };
         setLoginMode(true);
     };
-    const [createUserMutation, { loading }] = useMutation(CREATE_USER_MUTATION, {
+    const [createUserMutation, { loading }] = useMutation<IMutationResults>(CREATE_USER_MUTATION, {
         onCompleted: createUserCompleted
     });
 
@@ -111,51 +106,55 @@ export default function CreateUser() {
             <Form>
                 <Input
                     register={register("name", {
-                        required: true,
+                        required: "이름은 필수입니다.",
                         minLength: {
                             value: 2,
                             message: "이름은 2글자 이상이어야 합니다."
                         }
                     })}
                     type="name"
-                    required
                     error={errors.name?.message}
+                    required
                 />
                 <Input
                     register={register("email", {
-                        required: true,
+                        required: "이메일은 필수입니다.",
                         pattern: {
                             value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g,
                             message: "이메일 양식을 지켜주세요."
                         }
                     })}
                     type="email"
-                    required
                     error={errors.email?.message}
+                    required
                 />
                 <Input
                     register={register("password", {
-                        required: true,
+                        required: "비밀번호는 필수입니다.",
                         pattern: {
                             value: /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/g,
                             message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                         }
                     })}
                     type="password"
-                    required
                     error={errors.password?.message}
+                    required
+                    minLength={8}
+                    maxLength={15}
                 />
                 <Input
                     register={register("password2", {
-                        required: true,
+                        required: "확인 비밀번호는 필수입니다.",
                         pattern: {
                             value: /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/g,
                             message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                         }
                     })}
                     type="password2"
-                    required
                     error={errors.password2?.message}
+                    required
+                    minLength={8}
+                    maxLength={15}
                 />
                 {isEmailValidationMode ? (
                     <div
@@ -171,6 +170,7 @@ export default function CreateUser() {
                             placeholder='인증번호를 입력하세요'
                             minLength={6}
                             maxLength={6}
+                            className="focus:outline-none"
                         />
                         <button
                             onClick={checkEmailValidation}

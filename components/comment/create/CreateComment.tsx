@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -122,7 +122,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 onSubmit={handleSubmit(onValid)}
                 className={`
                     flex flex-col
-                    w-full border-2 border-sopa-default rounded-lg p-4 transition: ;
+                    w-full border-2 border-sopa-default rounded-lg transition
                     focus-within:border-[2.5px] focus-within:border-sopa-accent
                 `}
             >
@@ -135,7 +135,8 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                         }
                     })}
                     className={`
-                        focus:outline-none
+                        focus:outline-none rounded-md p-4
+                        dark:bg-dark-default
                     `}
                     rows={5}
                     cols={50}
@@ -151,7 +152,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                         border-t-2 border-t-sopa-default
                         flex items-center
                         space-x-2
-                        pt-2 mt-2
+                        p-2
                         place-content-end
                     `}
                 >

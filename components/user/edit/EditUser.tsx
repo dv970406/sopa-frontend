@@ -1,14 +1,14 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.02
  */
 
-import { gql, useMutation } from '@apollo/client'
+import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
 import FormButton from '@components/form/FormButton'
 import Input from '@components/form/Input'
+import { IMutationResults } from '@utils/types/interfaces'
 import useMyInfo from 'hooks/useMyInfo'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface IForm {
@@ -31,8 +31,8 @@ export default function EditUser() {
     const { register, handleSubmit, clearErrors, getValues, watch, formState: { errors } } = useForm<IForm>();
     const { seeMyInfo } = useMyInfo();
 
-    const updateEditUser = (cache: any, { data }: any) => {
-        const { editUser: { ok, error } } = data
+    const updateEditUser: MutationUpdaterFn = (cache, { data }) => {
+        const { editUser: { ok, error } }: any = data
         if (!ok) {
             alert(error);
             clearErrors();
@@ -49,7 +49,7 @@ export default function EditUser() {
         })
         router.push("/");
     }
-    const [editUser, { loading }] = useMutation(EDIT_USER_MUTATION, {
+    const [editUser, { loading }] = useMutation<IMutationResults>(EDIT_USER_MUTATION, {
         update: updateEditUser
     })
 
@@ -75,8 +75,8 @@ export default function EditUser() {
         <form
             onSubmit={handleSubmit(onValid)}
             className={`
-                    space-y-10
-                `}
+                space-y-10
+            `}
         >
             <Input
                 type="name"
@@ -87,7 +87,6 @@ export default function EditUser() {
                     },
                 })}
                 defaultValue={seeMyInfo?.name}
-                required
                 error={errors.name?.message}
             />
             <Input
@@ -101,7 +100,7 @@ export default function EditUser() {
                     <Input
                         type="password"
                         register={register("password", {
-                            required: true,
+                            required: "비밀번호는 필수입니다.",
                             minLength: {
                                 value: 8,
                                 message: "비밀번호는 8자리 이상이어야 합니다."
@@ -115,13 +114,12 @@ export default function EditUser() {
                                 message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                             }
                         })}
-                        required
                         error={errors.password?.message}
                     />
                     <Input
                         type="password2"
                         register={register("password2", {
-                            required: true,
+                            required: "확인 비밀번호는 필수입니다.",
                             minLength: {
                                 value: 8,
                                 message: "비밀번호는 8자리 이상이어야 합니다."
@@ -135,7 +133,6 @@ export default function EditUser() {
                                 message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                             }
                         })}
-                        required
                         error={errors.password2?.message}
                     />
                 </>

@@ -1,9 +1,10 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.02.26
+ * 수정일: 2022.03.032
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
+import { IMutationResults } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 
 
@@ -49,7 +50,7 @@ export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentCo
             }
         })
     }
-    const [deleteCommentMutation] = useMutation(DELETE_COMMENT_MUTATION, {
+    const [deleteCommentMutation] = useMutation<IMutationResults>(DELETE_COMMENT_MUTATION, {
         variables: {
             commentId
         },

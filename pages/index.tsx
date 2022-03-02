@@ -13,9 +13,14 @@ import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
 import Loading from '@components/shared/Loading'
 import ArrangePosts from '@components/post/ArrangePosts'
 
-interface ISeePosts {
+interface ISeePostsQuery {
   [key: string]: IPostDisplay[];
 };
+interface ISeePostsCountQuery {
+  seePostsCount: {
+    count: number;
+  };
+}
 
 const SEE_POSTS_QUERY = gql`
     query seePosts($offset:Int,$skills:String,$howToArrangement:String){
@@ -33,17 +38,17 @@ const SEE_POSTS_COUNT_QUERY = gql`
   }
 `
 
-const Home = ({ requestedPosts }: ISeePosts) => {
+const Home = ({ requestedPosts }: ISeePostsQuery) => {
   const setPosts = useSetRecoilState(postsState);
   const searchMode = useRecoilValue(searchModeState);
 
-  const seePostsCompleted = ({ seePosts }: ISeePosts) => setPosts(seePosts);
+  const seePostsCompleted = ({ seePosts }: ISeePostsQuery) => setPosts(seePosts);
 
-  const { data: seePostsData, loading, fetchMore, refetch: refetchSeePosts } = useQuery(SEE_POSTS_QUERY, {
+  const { data: seePostsData, loading, fetchMore, refetch: refetchSeePosts } = useQuery<ISeePostsQuery>(SEE_POSTS_QUERY, {
     onCompleted: seePostsCompleted,
   });
 
-  const { data: seePostsCountData, refetch: refetchSeePostsCount } = useQuery(SEE_POSTS_COUNT_QUERY);
+  const { data: seePostsCountData, refetch: refetchSeePostsCount } = useQuery<ISeePostsCountQuery>(SEE_POSTS_COUNT_QUERY);
 
   useEffect(() => {
     setPosts(requestedPosts);
@@ -70,7 +75,7 @@ const Home = ({ requestedPosts }: ISeePosts) => {
           <Loading />
         ) : (
           <SeePosts
-            howManyData={seePostsCountData?.seePostsCount?.count}
+            howManyData={seePostsCountData?.seePostsCount?.count!}
             fetchMore={
               () => fetchMore({
                 variables: { offset: seePostsData?.seePosts?.length },

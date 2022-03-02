@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -10,6 +10,7 @@ import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import ArrangePosts from '@components/post/ArrangePosts';
+import { IPostDisplay } from '@utils/types/interfaces';
 
 const SEE_MY_LIKES_QUERY = gql`
     query seeMyLikes($offset:Int,$howToArrangement:String){
@@ -25,20 +26,23 @@ interface ISeeMyLikesComponent {
         likeCount: number;
     }
 }
+interface ISeeMyLikesQuery {
+    seeMyLikes: IPostDisplay[]
+}
 
 export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const setPosts = useSetRecoilState(postsState);
 
-    const { data: myLikesData, fetchMore: fetchMoreMyLikes, refetch: refetchMyLikes } = useQuery(SEE_MY_LIKES_QUERY);
+    const { data: myLikesData, fetchMore: fetchMoreMyLikes, refetch: refetchMyLikes } = useQuery<ISeeMyLikesQuery>(SEE_MY_LIKES_QUERY);
 
     useEffect(() => {
         if (myActivitiesTab === "like") {
-            setPosts(myLikesData?.seeMyLikes);
+            setPosts(myLikesData?.seeMyLikes!);
         };
     }, [myActivitiesTab]);
     useEffect(() => {
-        setPosts(myLikesData?.seeMyLikes)
+        setPosts(myLikesData?.seeMyLikes!)
     }, [myLikesData])
 
     return (

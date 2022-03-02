@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import type { IPostDisplay } from '@utils/types/interfaces';
@@ -20,6 +20,7 @@ export default function DisplayPost(
                 space-y-8 shadow-xl
                 hover:scale-105 transition-all duration-300 cursor-pointer
                 hover:border-sopa-pure hover:ring-2 ring-sopa-default ring-offset-2
+                dark:bg-dark-default
             `}
         >
             <div
@@ -37,9 +38,7 @@ export default function DisplayPost(
             </div>
             <h1
                 className='
-                    font-bold
-                    sm:text-ellipsis sm:overflow-hidden sm:whitespace-nowrap sm:w-full
-                    text-lg lg:text-xl
+                    font-bold line-clamp-2 text-lg lg:text-xl
                 '
             >
                 {title}
