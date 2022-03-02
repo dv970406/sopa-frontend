@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.02
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -24,7 +24,7 @@ const semiDetailVar = {
 }
 
 interface ISeePostsComponent {
-    fetchMore?: any;
+    fetchMore: any;
     howManyData: number;
 }
 

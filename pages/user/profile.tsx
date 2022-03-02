@@ -1,13 +1,12 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, useQuery } from '@apollo/client';
 import MainLayout from '@components/shared/MainLayout';
 import ProfileTab from '@components/user/read/ProfileTab';
 import SeeMyComments from '@components/user/read/SeeMyComments';
-import SeeMyLikes from '@components/user/read/SeeMyLikes';
 import SeeMyPosts from '@components/user/read/SeeMyPosts';
 import { myActivitiesTabState, tokenState } from '@utils/atoms';
 import { USER_DETAIL_FRAGMENT } from '@utils/fragments';
@@ -29,7 +28,7 @@ const SEE_MY_INFO_QUERY = gql`
 export default function UserProfilePage() {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
-    const token = useRecoilValue(tokenState)
+    const token = useRecoilValue(tokenState);
     const router = useRouter();
     const NoSsrSeeMyLikes = dynamic(
         () => import('@components/user/read/SeeMyLikes'),

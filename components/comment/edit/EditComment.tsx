@@ -1,9 +1,10 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
+import { IMutationResults } from '@utils/types/interfaces';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -46,7 +47,7 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
         })
         setEditCommentMode(false);
     }
-    const [editCommentMutation, { loading }] = useMutation(EDIT_COMMENT_MUTATION, {
+    const [editCommentMutation, { loading }] = useMutation<IMutationResults>(EDIT_COMMENT_MUTATION, {
         update: updateEditComment
     })
 

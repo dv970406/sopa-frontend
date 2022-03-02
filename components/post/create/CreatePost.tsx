@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -8,6 +8,7 @@ import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import PositionSelector from '@components/form/PositionSelector';
 import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
+import { IPostDisplay } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -43,7 +44,7 @@ export default function CreatePost() {
             cache.modify({
                 id: `ROOT_QUERY`,
                 fields: {
-                    seePosts(prev: any) {
+                    seePosts(prev: IPostDisplay[]) {
                         return [createPost, ...prev]
                     }
                 }
@@ -141,7 +142,7 @@ export default function CreatePost() {
                         message: "링크는 70자 이내여야 합니다."
                     },
                     validate: {
-                        checkKakao: (value: any) => {
+                        checkKakao: (value: any): boolean | string => {
                             return value.length === 0 ? true : (
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )

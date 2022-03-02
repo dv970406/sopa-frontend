@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -11,6 +11,7 @@ import Form from '@components/form/Form';
 import Input from '@components/form/Input';
 import FormButton from '@components/form/FormButton';
 import { useState } from 'react';
+import { IMutationResults } from '@utils/types/interfaces';
 
 interface IForm {
     sendedCode?: number;
@@ -18,12 +19,6 @@ interface IForm {
     email: string;
     password: string;
     password2: string;
-}
-interface ICreateUser {
-    createUser: {
-        ok: boolean;
-        error?: string;
-    }
 }
 
 const CREATE_USER_MUTATION = gql`
@@ -40,7 +35,7 @@ export default function CreateUser() {
     const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<IForm>();
     const setLoginMode = useSetRecoilState(loginModeState);
 
-    const createUserCompleted = ({ createUser }: ICreateUser) => {
+    const createUserCompleted = ({ createUser }: IMutationResults) => {
         const { ok, error } = createUser;
         if (!ok) {
             alert(error);
@@ -48,7 +43,7 @@ export default function CreateUser() {
         };
         setLoginMode(true);
     };
-    const [createUserMutation, { loading }] = useMutation(CREATE_USER_MUTATION, {
+    const [createUserMutation, { loading }] = useMutation<IMutationResults>(CREATE_USER_MUTATION, {
         onCompleted: createUserCompleted
     });
 

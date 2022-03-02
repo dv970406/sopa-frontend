@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -8,7 +8,7 @@ import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import Button from '@components/shared/Button';
 import { postEditModeState } from '@utils/atoms';
-import type { IFetchedSkillsInfo } from '@utils/types/interfaces';
+import type { IFetchedSkillsInfo, IMutationResults } from '@utils/types/interfaces';
 import { useForm } from 'react-hook-form'
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import SkillImage from '../../skill/SkillImage';
@@ -74,7 +74,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
         setIsPostEditMode(false);
     }
 
-    const [editPostMutation, { loading }] = useMutation(EDIT_POST_MUTATION, {
+    const [editPostMutation, { loading }] = useMutation<IMutationResults>(EDIT_POST_MUTATION, {
         update: updateEditPost
     })
 
@@ -161,7 +161,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                         message: "링크는 70자 이내여야 합니다."
                     },
                     validate: {
-                        checkKakao: (value: any) => {
+                        checkKakao: (value: any): boolean | string => {
                             return value.length === 0 ? true : (
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )

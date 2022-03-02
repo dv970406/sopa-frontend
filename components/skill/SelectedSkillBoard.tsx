@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { motion } from 'framer-motion';
@@ -11,7 +11,7 @@ import type { ISkill } from '@utils/types/interfaces';
 
 interface ISelectedSkillBoard {
     refetchSeePosts: any;
-    refetchSeePostsCount: any
+    refetchSeePostsCount: any;
 }
 
 export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCount }: ISelectedSkillBoard) {

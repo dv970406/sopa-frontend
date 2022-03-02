@@ -1,14 +1,14 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.02
  */
 
-import { gql, useMutation } from '@apollo/client'
+import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
 import FormButton from '@components/form/FormButton'
 import Input from '@components/form/Input'
+import { IMutationResults } from '@utils/types/interfaces'
 import useMyInfo from 'hooks/useMyInfo'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 interface IForm {
@@ -31,8 +31,8 @@ export default function EditUser() {
     const { register, handleSubmit, clearErrors, getValues, watch, formState: { errors } } = useForm<IForm>();
     const { seeMyInfo } = useMyInfo();
 
-    const updateEditUser = (cache: any, { data }: any) => {
-        const { editUser: { ok, error } } = data
+    const updateEditUser: MutationUpdaterFn = (cache, { data }) => {
+        const { editUser: { ok, error } }: any = data
         if (!ok) {
             alert(error);
             clearErrors();
@@ -49,7 +49,7 @@ export default function EditUser() {
         })
         router.push("/");
     }
-    const [editUser, { loading }] = useMutation(EDIT_USER_MUTATION, {
+    const [editUser, { loading }] = useMutation<IMutationResults>(EDIT_USER_MUTATION, {
         update: updateEditUser
     })
 

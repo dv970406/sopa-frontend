@@ -1,9 +1,10 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import { IMutationResults } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router'
 
@@ -45,7 +46,7 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
         // 삭제 후 이전 페이지로 못돌아 가도록 replace로 설정
         router.replace("/");
     }
-    const [deletePostMutation] = useMutation(DELETE_POST_MUTATION, {
+    const [deletePostMutation] = useMutation<IMutationResults>(DELETE_POST_MUTATION, {
         variables: {
             postId
         },

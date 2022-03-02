@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.02.23
+ * 수정일: 2022.03.02
  */
 
 import { gql, useQuery } from '@apollo/client'
@@ -9,7 +9,7 @@ import { tokenState } from '@utils/atoms';
 import { useRouter } from 'next/router';
 import { USER_SIMPLE_FRAGMENT } from '@utils/fragments';
 
-interface IMyInfo {
+export interface ISeeMyInfoQuery {
     seeMyInfo: {
         id: number;
         socialLogin?: string;
@@ -32,7 +32,7 @@ export default function useMyInfo() {
     const [token, setToken] = useRecoilState(tokenState);
     const router = useRouter();
 
-    const myInfoDataCompleted = (data: IMyInfo) => {
+    const myInfoDataCompleted = (data: ISeeMyInfoQuery) => {
         // 만약 쿠키에 들어있는 토큰을 변조하여 보낸다면 백엔드에서 null을 보낼 것이므로 그 때는 강제 로그아웃시킨다.
         if (data.seeMyInfo === null) {
             //document.cookie = `TOKEN=; expires=${new Date().toUTCString()};`;
@@ -48,7 +48,7 @@ export default function useMyInfo() {
         apollo가 알아서 요청 후에는 cache에 있는 데이터를 가져다 쓰는 cache-first가 기본값이므로
         별다른 fetchPolicy 설정은 필요없는 듯
     */
-    const { data: myInfoData } = useQuery(SEE_MY_INFO_QUERY, {
+    const { data: myInfoData } = useQuery<ISeeMyInfoQuery>(SEE_MY_INFO_QUERY, {
         skip: !token,
         onCompleted: myInfoDataCompleted,
     })

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -9,7 +9,8 @@ import MainLayout from '@components/shared/MainLayout';
 import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import type { ICommentInfo } from '@utils/types/interfaces';
 import { useRouter } from 'next/router'
-import { useState } from 'react';
+import { ParsedUrlQuery } from 'querystring';
+import { useEffect, useState } from 'react';
 
 const SEE_POST_QUERY = gql`
     query seePost($postId:Int!,$offset:Int){
@@ -26,18 +27,18 @@ const SEE_POST_QUERY = gql`
 
 export default function PostDetailPage() {
     const router = useRouter();
-    const { id: postId, title: postTitle } = router.query;
+    const { id: postId, title: postTitle }: ParsedUrlQuery = router.query;
     const [comments, setComments] = useState<ICommentInfo[]>([]);
-
-    // onCompleted 함수로 초기 comments 데이터 세팅 및 인피니티 스크롤링으로 fetchMore 작동 시 가져온 데이터 세팅을 돕는다.
-    const seePostCompleted = ({ seePost }: any) => setComments(seePost?.comments)
 
     const { data, loading, fetchMore } = useQuery(SEE_POST_QUERY, {
         variables: {
             postId: +postId!
         },
-        onCompleted: seePostCompleted
     })
+
+    useEffect(() => {
+        setComments(data?.seePost?.comments!)
+    }, [data])
 
     return (
         <MainLayout loading={loading} title={`${postTitle || data?.seePost?.title}`}>

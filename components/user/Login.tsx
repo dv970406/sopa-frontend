@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import { useRouter } from 'next/router';
@@ -55,7 +55,7 @@ export default function Login() {
         localStorage.setItem("TOKEN", token);
         router.push("/");
     }
-    const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
+    const [loginMutation, { loading }] = useMutation<ILoginCompleted>(LOGIN_MUTATION, {
         onCompleted: loginCompleted
     })
     const checkDisabledStatus = loading || !watch("email") || !watch("password");
