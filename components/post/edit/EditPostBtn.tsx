@@ -7,11 +7,11 @@ import { postEditModeState } from '@utils/atoms'
 import { useSetRecoilState } from 'recoil'
 
 export default function EditPostBtn() {
-    const isPostEditMode = useSetRecoilState(postEditModeState)
+    const setPostEditMode = useSetRecoilState(postEditModeState)
 
     return (
         <button
-            onClick={() => isPostEditMode(true)}
+            onClick={() => setPostEditMode(true)}
             className={`
                 p-1
             `}

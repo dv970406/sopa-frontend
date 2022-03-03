@@ -1,10 +1,10 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, useQuery } from '@apollo/client';
-import ArrangePosts from '@components/post/ArrangePosts';
+import SortPosts from '@components/post/SortPosts';
 import SeePosts from '@components/post/read/SeePosts';
 import { myActivitiesTabState, postsState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
@@ -49,7 +49,7 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
     return (
         myActivitiesTab === "post" ? (
             <>
-                <ArrangePosts refetchFn={refetchMyPosts} />
+                <SortPosts refetchFn={refetchMyPosts} />
                 <SeePosts
                     howManyData={seeMyInfo?.postCount}
                     fetchMore={

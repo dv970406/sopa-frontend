@@ -39,10 +39,10 @@ const EDIT_POST_MUTATION = gql`
 `
 
 export default function EditPost({ postId, title, description, openChatLink, apps, backends, frontends }: IEditPostComponent) {
-    const setIsPostEditMode = useSetRecoilState(postEditModeState);
-    const resetIsPostEditMode = useResetRecoilState(postEditModeState);
+    const setPostEditMode = useSetRecoilState(postEditModeState);
+    const resetPostEditMode = useResetRecoilState(postEditModeState);
 
-    const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<IForm>();
+    const { register, handleSubmit, getValues, formState: { errors } } = useForm<IForm>();
 
     const updateEditPost: MutationUpdaterFn = (cache, { data }) => {
         const { editPost: { ok, error } }: any = data;
@@ -71,7 +71,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 }
             }
         });
-        setIsPostEditMode(false);
+        setPostEditMode(false);
     }
 
     const [editPostMutation, { loading }] = useMutation<IMutationResults>(EDIT_POST_MUTATION, {
@@ -90,7 +90,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
             }
         })
     };
-
+    console.log(errors)
     return (
         <form
             className={`
@@ -100,7 +100,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
         >
             <Button
                 text="수정 취소"
-                onClick={resetIsPostEditMode}
+                onClick={resetPostEditMode}
             />
             <Input
                 type="title"
@@ -134,7 +134,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 </h1>
                 <div
                     className={`
-                        mt-4 flex space-x-5 flex-wrap justify-center items-center
+                        mt-4 flex gap-5 flex-wrap justify-center items-center
                     `}
                 >
                     <SkillImage

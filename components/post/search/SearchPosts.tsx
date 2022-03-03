@@ -44,7 +44,7 @@ const searchInputVariants = {
     }
 };
 
-export default function SearchInput() {
+export default function SearchPosts() {
     const setPosts = useSetRecoilState(postsState);
     const resetSearchMode = useResetRecoilState(searchModeState);
     const { register, handleSubmit, setValue } = useForm<IForm>();

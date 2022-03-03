@@ -37,7 +37,7 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
             >
                 {children}
                 <footer
-                    className="py-64"
+                    className="py-52"
                 />
             </div>
         </div>

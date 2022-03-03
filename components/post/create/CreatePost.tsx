@@ -6,7 +6,7 @@
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
-import PositionSelector from '@components/form/PositionSelector';
+import UploadSkillsSelector from '@components/form/UploadSkillsSelector';
 import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
 import { IPostDisplay } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
@@ -131,7 +131,7 @@ export default function CreatePost() {
                 maxLength={32}
             />
 
-            <PositionSelector />
+            <UploadSkillsSelector />
 
             <Input
                 type="description"

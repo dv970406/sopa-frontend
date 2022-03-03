@@ -22,7 +22,7 @@ module.exports = {
         'dark-default': "#292A2D",
         'dark-text-color': "#CBD5E1",
         'emphasize': "#F43F5E",
-        'form-gray': "#98A3AF"
+        'form-gray': "#D1D5DB"
       }
     },
   },

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import useMyInfo from 'hooks/useMyInfo';
-import SearchInputBtn from '@components/post/search/SearchInputBtn';
+import SearchPostsBtn from '@components/post/search/SearchPostsBtn';
 import LoginHoverEvent from './LoginHoverEvent';
 
 
@@ -48,7 +48,7 @@ function NavBar() {
                 `}
             >
                 {isHomePage ? (
-                    <SearchInputBtn />
+                    <SearchPostsBtn />
                 ) : null}
 
                 <button

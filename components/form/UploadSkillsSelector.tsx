@@ -3,13 +3,13 @@
  * 수정일: 2022.03.01
  */
 
-import ArrangementTab from '@components/post/ArrangementTab';
+import ArrangementTab from '@components/post/SortTab';
 import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-export default function PositionSelector() {
+export default function UploadSkillsSelector() {
     const [selectedPosition, setSelectedPosition] = useRecoilState(selectedPositionState)
     const skillsOfPosition = useRecoilValue(skillsOfPositionSelector)
 
@@ -45,19 +45,19 @@ export default function PositionSelector() {
                     <ArrangementTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("frontend")}
-                        tabName="frontend"
+                        tabName="프론트엔드"
                         selectedTab='frontend'
                     />
                     <ArrangementTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("backend")}
-                        tabName="backend"
+                        tabName="백엔드"
                         selectedTab='backend'
                     />
                     <ArrangementTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("app")}
-                        tabName="app"
+                        tabName="앱"
                         selectedTab='app'
                     />
                 </div>
@@ -66,6 +66,7 @@ export default function PositionSelector() {
                 className={`
                     flex flex-wrap
                     justify-center mt-6
+                    dark:bg-dark-default rounded-lg
                 `}
             >
                 {skillsOfPosition.map((skill, index) =>

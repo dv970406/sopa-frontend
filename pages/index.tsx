@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { postsState, searchModeState } from '@utils/atoms'
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
-import ArrangePosts from '@components/post/ArrangePosts'
+import SortPosts from '@components/post/SortPosts'
 
 interface ISeePostsQuery {
   [key: string]: IPostDisplay[];
@@ -72,7 +72,7 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
           <>
             <SkillBoards />
             <SelectedSkillBoard refetchSeePosts={refetchSeePosts} refetchSeePostsCount={refetchSeePostsCount} />
-            <ArrangePosts refetchFn={refetchSeePosts} />
+            <SortPosts refetchFn={refetchSeePosts} />
           </>
         )}
         <SeePosts

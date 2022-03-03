@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.24
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.03
  */
 
 interface IArrangementTab {
@@ -10,7 +10,7 @@ interface IArrangementTab {
     onClick(): void;
 }
 
-export default function ArrangementTab({ tabName, selectedTab, comparisonTarget, onClick }: IArrangementTab) {
+export default function SortTab({ tabName, selectedTab, comparisonTarget, onClick }: IArrangementTab) {
     return (
         <div
             className={`

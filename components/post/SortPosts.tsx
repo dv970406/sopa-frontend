@@ -1,18 +1,18 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.03
  */
 
 import { postArrangementMethodState } from '@utils/atoms';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import ArrangementTab from './ArrangementTab';
+import SortTab from './SortTab';
 
 interface IArrangePostComponent {
     refetchFn: any;
 }
 
-export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
+export default function SortPosts({ refetchFn }: IArrangePostComponent) {
     const [postArrangementMethod, setPostArrangementMethod] = useRecoilState(postArrangementMethodState);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
         <div
             className="flex space-x-3 mb-8"
         >
-            <ArrangementTab
+            <SortTab
                 onClick={() => setPostArrangementMethod("new")}
                 comparisonTarget={postArrangementMethod}
                 selectedTab="new"
@@ -57,7 +57,7 @@ export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
                     )
                 }
             />
-            <ArrangementTab
+            <SortTab
                 comparisonTarget={postArrangementMethod}
                 onClick={() => setPostArrangementMethod("likeCount")}
                 selectedTab="likeCount"
@@ -80,7 +80,7 @@ export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
                     )
                 }
             />
-            <ArrangementTab
+            <SortTab
                 comparisonTarget={postArrangementMethod}
                 onClick={() => setPostArrangementMethod("readCount")}
                 selectedTab="readCount"
@@ -105,7 +105,7 @@ export default function ArrangePosts({ refetchFn }: IArrangePostComponent) {
                     )
                 }
             />
-            <ArrangementTab
+            <SortTab
                 comparisonTarget={postArrangementMethod}
                 onClick={() => setPostArrangementMethod("commentCount")}
                 selectedTab="commentCount"

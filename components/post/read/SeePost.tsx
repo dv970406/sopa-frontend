@@ -19,14 +19,14 @@ interface IPostDetailComponent {
 
 
 export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPostDetailComponent) {
-    const isPostEditMode = useRecoilValue(postEditModeState);
-    const resetIsPostEditMode = useResetRecoilState(postEditModeState);
+    const postEditMode = useRecoilValue(postEditModeState);
+    const resetPostEditMode = useResetRecoilState(postEditModeState);
 
     useEffect(() => {
-        resetIsPostEditMode();
+        resetPostEditMode();
     }, []);
     return (
-        isPostEditMode ? (
+        postEditMode ? (
             <EditPost
                 postId={seePost?.id}
                 title={seePost?.title}
