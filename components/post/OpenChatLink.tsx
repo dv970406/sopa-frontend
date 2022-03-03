@@ -34,6 +34,7 @@ interface IOpenChatLink {
 }
 
 export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
+    // 오픈링크 주소를 보여줄 지 말지 분기처리
     const [showing, setShowing] = useState(false);
     const getShowing = (bool: boolean) => setShowing(bool);
 

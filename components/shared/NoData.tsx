@@ -3,6 +3,7 @@
  * 수정일: ------
  */
 
+// SearchPosts의 결과가 없을 때, profile에서 데이터가 없을 때 사용할 Component
 export default function NoData() {
     return (
         <div

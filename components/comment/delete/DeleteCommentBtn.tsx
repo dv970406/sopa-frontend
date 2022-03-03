@@ -7,7 +7,6 @@ import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import { IMutationResults } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 
-
 const DELETE_COMMENT_MUTATION = gql`
     mutation deleteComment($commentId:Int!){
         deleteComment(commentId:$commentId){
@@ -24,15 +23,22 @@ interface IDeleteCommentComponent {
 export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentComponent) {
     const { seeMyInfo } = useMyInfo();
 
+    // deleteComment Mutation 처리 후 cache 수정작업
     const updateDeleteComment: MutationUpdaterFn = (cache, { data }) => {
         const { deleteComment: { ok, error } }: any = data;
+
+        // Mutation 처리 실패한 경우 alert를 띄우고 return
         if (!ok) {
             alert(error);
             return;
         };
+
+        // cache에서 comment 삭제
         cache.evict({
             id: `Comment:${commentId}`
         });
+
+        // 해당 comment가 속한 post의 commentCount를 -1
         cache.modify({
             id: `Post:${postId}`,
             fields: {
@@ -41,6 +47,8 @@ export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentCo
                 }
             }
         })
+
+        // 해당 comment를 단 user의 commentCount를 -1
         cache.modify({
             id: `User:${seeMyInfo?.id}`,
             fields: {
@@ -50,12 +58,14 @@ export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentCo
             }
         })
     }
+
     const [deleteCommentMutation] = useMutation<IMutationResults>(DELETE_COMMENT_MUTATION, {
         variables: {
             commentId
         },
         update: updateDeleteComment
     })
+
     return (
         <button
             onClick={() => deleteCommentMutation()}

@@ -16,6 +16,7 @@ interface IInput {
     [key: string]: any;
 }
 
+// 건네받은 type을 한글로 변경
 const typeTranslater = (engVerType: string) => {
     let korVerType = null;
     switch (engVerType) {
@@ -36,8 +37,10 @@ const typeTranslater = (engVerType: string) => {
         case "openChatLink":
             return korVerType = "카카오 오픈채팅 링크";
     }
-    return korVerType
-}
+    return korVerType;
+};
+
+// 건네받은 type에 따라 input에 지정할 type을 지정
 const decideType = (type: InputType) => {
     switch (type) {
         case "name":
@@ -52,12 +55,14 @@ const decideType = (type: InputType) => {
 };
 
 export default function Input({ type, register, required, disabled = false, error, ...props }: IInput) {
-    const [checkTextCount, setCheckTextCount] = useState(0);
 
+    // 글자수 세는 기능
+    const [checkTextCount, setCheckTextCount] = useState(0);
     const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setCheckTextCount(+event.currentTarget.value.length);
     };
 
+    // input type에 따라 다른 JSX return
     const inputType = (type: InputType) => {
         if (type === "description") {
             return (

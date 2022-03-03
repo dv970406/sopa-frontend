@@ -1,21 +1,23 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.03
  */
 
-import ArrangementTab from '@components/post/SortTab';
+import SortTab from '@components/post/SortTab';
 import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
 export default function UploadSkillsSelector() {
-    const [selectedPosition, setSelectedPosition] = useRecoilState(selectedPositionState)
-    const skillsOfPosition = useRecoilValue(skillsOfPositionSelector)
+    // selector를 이용하여 셀렉한 포지션이 바뀔 때마다 포지션별 스킬셋들을 return하게 함
+    const [selectedPosition, setSelectedPosition] = useRecoilState(selectedPositionState);
+    const skillsOfPosition = useRecoilValue(skillsOfPositionSelector);
 
+    // 초기 포지션은 frontend로 시작
     useEffect(() => {
-        setSelectedPosition("frontend")
-    }, [])
+        setSelectedPosition("frontend");
+    }, []);
 
     return (
         <div>
@@ -42,19 +44,19 @@ export default function UploadSkillsSelector() {
                 <div
                     className="flex justify-around space-x-4 ml-7 w-full"
                 >
-                    <ArrangementTab
+                    <SortTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("frontend")}
                         tabName="프론트엔드"
                         selectedTab='frontend'
                     />
-                    <ArrangementTab
+                    <SortTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("backend")}
                         tabName="백엔드"
                         selectedTab='backend'
                     />
-                    <ArrangementTab
+                    <SortTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("app")}
                         tabName="앱"

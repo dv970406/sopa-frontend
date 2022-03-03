@@ -12,7 +12,7 @@ import { useSetRecoilState } from 'recoil';
 
 interface ISocialLogin {
     token: string;
-}
+};
 
 export default function SocialLogin({ token }: ISocialLogin) {
     const setToken = useSetRecoilState(tokenState);
@@ -24,7 +24,7 @@ export default function SocialLogin({ token }: ISocialLogin) {
             localStorage.setItem("TOKEN", token);
             setToken(token);
             router.push("/");
-        }
+        };
         setLoading(false);
     }, []);
     return (

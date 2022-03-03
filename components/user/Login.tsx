@@ -54,11 +54,11 @@ export default function Login() {
         //document.cookie = `TOKEN=${token}`;
         localStorage.setItem("TOKEN", token);
         router.push("/");
-    }
+    };
     const [loginMutation, { loading }] = useMutation<ILoginCompleted>(LOGIN_MUTATION, {
         onCompleted: loginCompleted
-    })
-    const checkDisabledStatus = loading || !watch("email") || !watch("password");
+    });
+    const checkDisabledStatus = loading || !watch("email") || !watch("password")
 
     const router = useRouter();
 

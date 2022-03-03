@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.03
  */
 
 import { gql } from '@apollo/client';
@@ -21,15 +21,15 @@ export const POST_DISPLAY_FRAGMENT = gql`
         isExpired
         frontends{
             id
-            skill
+            name
         }
         backends{
             id
-            skill
+            name
         }
         apps{
             id
-            skill
+            name
         }
         openChatLink
         createdAt

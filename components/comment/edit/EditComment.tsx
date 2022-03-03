@@ -26,10 +26,15 @@ const EDIT_COMMENT_MUTATION = gql`
         }
     }
 `
+
 export default function EditComment({ setEditCommentMode, comment, commentId }: IEditCommentComponent) {
     const { register, handleSubmit, getValues } = useForm<IEditCommentForm>();
+
+    // editComment Mutation 처리 후 cache 수정작업
     const updateEditComment: MutationUpdaterFn = (cache, { data }) => {
         const { editComment: { ok, error } }: any = data;
+
+        // Mutation 처리 실패한 경우 alert를 띄우고 return
         if (!ok) {
             alert(error);
             return;
@@ -37,6 +42,7 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
 
         const { editedComment } = getValues();
 
+        // 해당 comment의 내용을 react-hook-form에 입력한대로 수정
         cache.modify({
             id: `Comment:${commentId}`,
             fields: {
@@ -45,12 +51,16 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
                 }
             }
         })
+
+        // cache처리가 끝나면 편집모드 종료
         setEditCommentMode(false);
     }
+
     const [editCommentMutation, { loading }] = useMutation<IMutationResults>(EDIT_COMMENT_MUTATION, {
         update: updateEditComment
     })
 
+    // form이 제출되었을 때 실행
     const onValid = ({ editedComment }: IEditCommentForm) => {
         if (loading) return;
 

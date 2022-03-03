@@ -13,8 +13,8 @@ import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 const SEE_MY_POSTS_QUERY = gql`
-    query seeMyPosts($offset:Int,$howToArrangement:String){
-        seeMyPosts(offset:$offset,howToArrangement:$howToArrangement){
+    query seeMyPosts($offset:Int,$howToSort:String){
+        seeMyPosts(offset:$offset,howToSort:$howToSort){
             ...PostDisplayFragment
         }
     }

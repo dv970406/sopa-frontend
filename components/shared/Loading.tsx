@@ -5,6 +5,7 @@
 
 import { motion } from 'framer-motion';
 
+// 로딩 중일 때 쓸 Component
 export default function Loading() {
     return (
         <motion.div

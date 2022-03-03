@@ -22,8 +22,8 @@ interface ISeePostsCountQuery {
 }
 
 const SEE_POSTS_QUERY = gql`
-    query seePosts($offset:Int,$skills:String,$howToArrangement:String){
-        seePosts(offset:$offset,skills:$skills,howToArrangement:$howToArrangement){
+    query seePosts($offset:Int,$skills:String,$howToSort:String){
+        seePosts(offset:$offset,skills:$skills,howToSort:$howToSort){
           ...PostDisplayFragment
         }
     }

@@ -3,34 +3,35 @@
  * 수정일: 2022.03.03
  */
 
-import { postArrangementMethodState } from '@utils/atoms';
+import { postSortMethodState } from '@utils/atoms';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import SortTab from './SortTab';
 
-interface IArrangePostComponent {
+interface ISortPostComponent {
     refetchFn: any;
-}
+};
 
-export default function SortPosts({ refetchFn }: IArrangePostComponent) {
-    const [postArrangementMethod, setPostArrangementMethod] = useRecoilState(postArrangementMethodState);
+export default function SortPosts({ refetchFn }: ISortPostComponent) {
+    const [postSortMethod, setPostSortMethod] = useRecoilState(postSortMethodState);
 
+    // postSortMethod가 변할 때 마다 해당 query에 정렬 방법을 싣어 refetch를 한다.
     useEffect(() => {
         refetchFn({
-            howToArrangement: postArrangementMethod
-        })
-    }, [postArrangementMethod])
+            howToSort: postSortMethod
+        });
+    }, [postSortMethod]);
 
     return (
         <div
             className="flex space-x-3 mb-8"
         >
             <SortTab
-                onClick={() => setPostArrangementMethod("new")}
-                comparisonTarget={postArrangementMethod}
+                onClick={() => setPostSortMethod("new")}
+                comparisonTarget={postSortMethod}
                 selectedTab="new"
                 tabName={
-                    postArrangementMethod === "new" ? (
+                    postSortMethod === "new" ? (
                         <>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="fuchsia"
@@ -58,11 +59,11 @@ export default function SortPosts({ refetchFn }: IArrangePostComponent) {
                 }
             />
             <SortTab
-                comparisonTarget={postArrangementMethod}
-                onClick={() => setPostArrangementMethod("likeCount")}
+                comparisonTarget={postSortMethod}
+                onClick={() => setPostSortMethod("likeCount")}
                 selectedTab="likeCount"
                 tabName={
-                    postArrangementMethod === "likeCount" ? (
+                    postSortMethod === "likeCount" ? (
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
                                 <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
@@ -81,11 +82,11 @@ export default function SortPosts({ refetchFn }: IArrangePostComponent) {
                 }
             />
             <SortTab
-                comparisonTarget={postArrangementMethod}
-                onClick={() => setPostArrangementMethod("readCount")}
+                comparisonTarget={postSortMethod}
+                onClick={() => setPostSortMethod("readCount")}
                 selectedTab="readCount"
                 tabName={
-                    postArrangementMethod === "readCount" ? (
+                    postSortMethod === "readCount" ? (
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
                                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -106,11 +107,11 @@ export default function SortPosts({ refetchFn }: IArrangePostComponent) {
                 }
             />
             <SortTab
-                comparisonTarget={postArrangementMethod}
-                onClick={() => setPostArrangementMethod("commentCount")}
+                comparisonTarget={postSortMethod}
+                onClick={() => setPostSortMethod("commentCount")}
                 selectedTab="commentCount"
                 tabName={
-                    postArrangementMethod === "commentCount" ? (
+                    postSortMethod === "commentCount" ? (
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="fuchsia">
                                 <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />

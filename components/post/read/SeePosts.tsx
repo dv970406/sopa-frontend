@@ -12,7 +12,7 @@ import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import NoData from '@components/shared/NoData';
 
-const semiDetailVar = {
+const semiDetailVariants = {
     invisible: {
         backgroundColor: "rgba(0,0,0,0)"
     },
@@ -33,7 +33,7 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
-    // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 아무것도 반환하지 않게함
+    // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 빈 fragment만 반환
     const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
@@ -75,7 +75,7 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
                             fixed inset-0 h-screen w-screen
                         `}
                         onClick={() => setSelectedPostId(null)}
-                        variants={semiDetailVar}
+                        variants={semiDetailVariants}
                         initial="invisible"
                         animate="visible"
                         exit="exit"

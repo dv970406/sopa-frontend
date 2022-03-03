@@ -11,38 +11,38 @@ export const makeSocialLoginReqUrl = (socialSite: string): string => {
 
     switch (socialSite) {
         case "naver":
-            baseUrl = "https://nid.naver.com/oauth2.0/authorize"
+            baseUrl = "https://nid.naver.com/oauth2.0/authorize";
             config = {
                 response_type: "code",
                 client_id: process.env.NEXT_PUBLIC_SOCIAL_NAVER_KEY,
                 redirect_uri: process.env.NEXT_PUBLIC_SOCIAL_NAVER_CODE_REDIRECT,
                 state: process.env.NEXT_PUBLIC_SOCIAL_NAVER_STATE
-            }
+            };
             break;
         case "kakao":
-            baseUrl = "https://kauth.kakao.com/oauth/authorize"
+            baseUrl = "https://kauth.kakao.com/oauth/authorize";
             config = {
                 client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
                 redirect_uri: process.env.NEXT_PUBLIC_SOCIAL_KAKAO_CODE_REDIRECT,
                 response_type: "code",
                 state: process.env.NEXT_PUBLIC_SOCIAL_KAKAO_STATE
-            }
+            };
             break;
 
         case "github":
-            baseUrl = `https://github.com/login/oauth/authorize`
+            baseUrl = `https://github.com/login/oauth/authorize`;
             config = {
                 client_id: process.env.NEXT_PUBLIC_SOCIAL_GITHUB_KEY,
                 redirect_uri: process.env.NEXT_PUBLIC_SOCIAL_GITHUB_CODE_REDIRECT,
                 state: process.env.NEXT_PUBLIC_SOCIAL_GITHUB_STATE,
                 scope: "read:user user:email"
-            }
+            };
             break;
     };
     const params = new URLSearchParams(config).toString();
     const reqUrl = `${baseUrl}?${params}`;
 
-    return reqUrl
+    return reqUrl;
 }
 
 export const makeSkillImages = (
@@ -51,28 +51,27 @@ export const makeSkillImages = (
     apps: IFetchedSkillsInfo[]
 ) => {
     const combineSkills = frontends?.concat(backends)?.concat(apps) || [];
-
-    const skillsInfo = combineSkills?.map(item => {
-        switch (item.__typename) {
+    const skillsInfo = combineSkills?.map(skill => {
+        switch (skill.__typename) {
             case "Frontend":
                 return {
-                    name: item.skill,
-                    imgSrc: `/frontend/${item.skill}.png`
-                }
+                    name: skill.name,
+                    imgSrc: `/frontend/${skill.name}.png`
+                };
             case "Backend":
                 return {
-                    name: item.skill,
-                    imgSrc: `/backend/${item.skill}.png`
-                }
+                    name: skill.name,
+                    imgSrc: `/backend/${skill.name}.png`
+                };
             default:
                 return {
-                    name: item.skill,
-                    imgSrc: `/app/${item.skill}.png`
-                }
-        }
+                    name: skill.name,
+                    imgSrc: `/app/${skill.name}.png`
+                };
+        };
     })
-    return skillsInfo
-}
+    return skillsInfo;
+};
 
 export const getUploadedDate = (createdAt: number) => {
     // "-" Style Date
@@ -85,6 +84,6 @@ export const getUploadedDate = (createdAt: number) => {
     const getYear = date.getFullYear();
     const getMonth = date.getMonth() + 1;
     const getDay = date.getDate();
-    const makeDateFormat = `${getYear}년 ${getMonth}월 ${getDay}일`
-    return makeDateFormat
+    const makeDateFormat = `${getYear}년 ${getMonth}월 ${getDay}일`;
+    return makeDateFormat;
 };

@@ -15,10 +15,12 @@ interface ISeeSemiDetail {
 export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
     const router = useRouter();
 
-    const preventCloseSemiDetail = (event: React.MouseEvent<HTMLDivElement>) => {
+    // 부모 컴포넌트(seePosts)로부터의 이벤트 캡쳐링을 막아 SemiDetail이 꺼지지 않게 한다.
+    const preventEventCapturing = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
     }
 
+    // SeePostDetail로 보낼 때 title을 url query에 같이 싣어서 보내는데 as로 마스킹하여 보이지는 않게 한다.
     const goToPostDetail = () => router.push({
         pathname: `/post/${semiDetail.id}`,
         query: {
@@ -28,7 +30,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
 
     return (
         <div
-            onClick={preventCloseSemiDetail}
+            onClick={preventEventCapturing}
             className={`
                 relative 
                 bg-white min-h-full rounded-3xl p-4 space-y-2

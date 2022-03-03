@@ -27,10 +27,12 @@ const loginTabVariants = {
         opacity: 0,
         scale: 0
     }
-}
+};
 
 export default function LoginHoverEvent() {
     const router = useRouter();
+
+    // 마우스 호버 여부에 따라 소셜로그인을 보여줄 지 분기 처리
     const [showSocialLogin, setShowSocialLogin] = useState(false);
     const goToLogin = () => router.push("/auth");
 
@@ -42,7 +44,7 @@ export default function LoginHoverEvent() {
 
     if (!isLoaded) {
         return <></>;
-    }
+    };
 
     return (
         <div
@@ -62,7 +64,7 @@ export default function LoginHoverEvent() {
                 {showSocialLogin ? (
                     <motion.div
                         className={`
-                            flex absolute space-x-3 shadow-md bg-white
+                            flex absolute space-x-3 shadow-md bg-white dark:bg-dark-default
                             rounded-lg p-2 
                         `}
                         variants={loginTabVariants}

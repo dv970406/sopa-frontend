@@ -3,14 +3,14 @@
  * 수정일: 2022.03.02
  */
 
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 interface IEditCommentBtnComponent {
-    setEditCommentMode(current: any): boolean;
+    setEditCommentMode: Dispatch<SetStateAction<boolean>>;
 }
 
+// comment 수정 toggle 버튼
 export default function EditCommentBtn({ setEditCommentMode }: IEditCommentBtnComponent) {
-
     return (
         <button
             onClick={() => setEditCommentMode((current: boolean) => !current)}

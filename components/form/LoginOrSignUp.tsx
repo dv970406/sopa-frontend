@@ -13,7 +13,6 @@ interface ISelectOne {
 
 export default function LoginOrSignUp({ leftText, rightText }: ISelectOne) {
     const [loginMode, setLoginMode] = useRecoilState(loginModeState);
-
     const changeLoginMode = (bool: boolean) => setLoginMode(bool);
 
     return (

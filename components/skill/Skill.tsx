@@ -11,7 +11,7 @@ import { selectedSkillsState, selectedSkillsToUploadState, skillsState } from '@
 interface ISkillInfo {
     uploadMode?: boolean;
     index: number;
-    skill: string;
+    name: string;
     skillImage: string;
     position: string;
     isSelected: boolean;
@@ -28,50 +28,52 @@ const skillVar = {
 
 
 // 해당 포지션 Board에 속해있는 Skill들 중 메모이징으로 변화가 생기는 Skill만 리렌더링
-function Skill({ uploadMode = false, index, position, skill, skillImage, isSelected }: ISkillInfo) {
-    const setSelectedSkills = useSetRecoilState(selectedSkillsState)
-    const setSkills = useSetRecoilState(skillsState)
-    const setSelectedSkillsToUpload = useSetRecoilState(selectedSkillsToUploadState)
+function Skill({ uploadMode = false, index, position, name, skillImage, isSelected }: ISkillInfo) {
+    const setSelectedSkills = useSetRecoilState(selectedSkillsState);
+    const setSkills = useSetRecoilState(skillsState);
+    const setSelectedSkillsToUpload = useSetRecoilState(selectedSkillsToUploadState);
 
     const onClick = () => {
         if (uploadMode) {
+            // 만약 CreatePost page라면 셀렉스킬업로드 state에 저장한다.
             setSelectedSkillsToUpload(prev => {
                 const newSelectedSkill = {
-                    skill,
+                    name,
                     skillImage,
                     isSelected: true,
                     position
-                }
-                const targetIndex = prev.findIndex(item => item.skill === newSelectedSkill.skill)
-                const copiedPrev = [...prev]
+                };
+                const targetIndex = prev.findIndex(item => item.name === newSelectedSkill.name);
+                const copiedPrev = [...prev];
 
-                if (targetIndex !== -1) copiedPrev.splice(targetIndex, 1)
-                else copiedPrev.splice(-1, 0, newSelectedSkill)
+                if (targetIndex !== -1) copiedPrev.splice(targetIndex, 1);
+                else copiedPrev.splice(-1, 0, newSelectedSkill);
 
                 return [
                     ...copiedPrev
-                ]
-            })
+                ];
+            });
         } else {
-            // SkillBoard에서 선택하면 selectedSillsState로 추가시킴
+            // 스킬을 셀렉하면 셀렉스킬 state에 추가한다.
             setSelectedSkills(prev => {
                 const newSelectedSkill = {
-                    skill,
+                    name,
                     skillImage,
                     isSelected: true,
                     position
-                }
+                };
 
                 return [
                     ...prev,
                     newSelectedSkill
-                ]
-            })
-        }
-        // SkillBoard에서 선택하면 skillsState의 isSelect를 true로 바꾼다.
+                ];
+            });
+        };
+
+        // 스킬을 선택하면 그 스킬의 isSelect를 true로 바꾼다.
         setSkills(prev => {
             const selectedSkill = {
-                skill,
+                name,
                 skillImage,
                 isSelected: !isSelected,
                 position
@@ -86,7 +88,7 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                     ...selectedPosition.slice(index + 1)
                 ]
             };
-        })
+        });
     }
 
     return (
@@ -98,7 +100,7 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                 group
             `}
             onClick={() => onClick()}
-            layoutId={uploadMode ? undefined : skill}
+            layoutId={uploadMode ? undefined : name}
             variants={skillVar}
             whileHover="hover"
         >
@@ -121,7 +123,7 @@ function Skill({ uploadMode = false, index, position, skill, skillImage, isSelec
                     dark:text-white
                 `}
             >
-                {skill}
+                {name}
             </motion.p>
         </motion.div>
     )

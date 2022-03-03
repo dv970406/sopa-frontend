@@ -6,6 +6,7 @@
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import Button from '@components/shared/Button';
 import { COMMENT_FRAGMENT } from '@utils/fragments';
+import { ICommentInfo } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -22,20 +23,22 @@ const CREATE_COMMENT_MUTATION = gql`
 interface IForm {
     comment: string;
 }
-
 interface ICreateCommentComponent {
     postId: number;
 }
 
 export default function CreateComment({ postId }: ICreateCommentComponent) {
-    const [checkTextCount, setCheckTextCount] = useState(0);
-    const { register, handleSubmit, setValue } = useForm<IForm>();
     const { seeMyInfo } = useMyInfo();
 
+    // 글자수 세는 기능
+    const [checkTextCount, setCheckTextCount] = useState(0);
     const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setCheckTextCount(+event.currentTarget.value.length);
     };
 
+    const { register, handleSubmit, setValue } = useForm<IForm>();
+
+    // createComment Mutation 처리 후 cache 수정작업
     const updateCreateComment: MutationUpdaterFn = (cache, { data }) => {
         const { createComment }: any = data
         if (!createComment.id) {
@@ -65,6 +68,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
             }
         });
 
+        // 추가한 comment를 cache에 반영
         cache.modify({
             id: `Post:${postId}`,
             fields: {
@@ -76,15 +80,6 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 }
             }
         });
-
-        cache.modify({
-            id: `User:${seeMyInfo?.id}`,
-            fields: {
-                commentCount(prev) {
-                    return prev + 1
-                }
-            }
-        });
         cache.modify({
             id: `ROOT_QUERY`,
             fields: {
@@ -93,13 +88,25 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 }
             }
         });
+
+        // user의 commentCount를 +1
+        cache.modify({
+            id: `User:${seeMyInfo?.id}`,
+            fields: {
+                commentCount(prev) {
+                    return prev + 1
+                }
+            }
+        });
+
         setValue("comment", "");
     };
 
-    const [createCommentMutation, { loading }] = useMutation(CREATE_COMMENT_MUTATION, {
+    const [createCommentMutation, { loading }] = useMutation<ICommentInfo>(CREATE_COMMENT_MUTATION, {
         update: updateCreateComment
     });
 
+    // form 제출 시 Mutation이 실행된다.
     const onValid = ({ comment }: IForm) => {
         if (loading) return;
 

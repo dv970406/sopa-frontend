@@ -13,8 +13,8 @@ import SortPosts from '@components/post/SortPosts';
 import { IPostDisplay } from '@utils/types/interfaces';
 
 const SEE_MY_LIKES_QUERY = gql`
-    query seeMyLikes($offset:Int,$howToArrangement:String){
-        seeMyLikes(offset:$offset,howToArrangement:$howToArrangement){
+    query seeMyLikes($offset:Int,$howToSort:String){
+        seeMyLikes(offset:$offset,howToSort:$howToSort){
             ...PostDisplayFragment
         }
     }
@@ -42,8 +42,8 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
         };
     }, [myActivitiesTab]);
     useEffect(() => {
-        setPosts(myLikesData?.seeMyLikes!)
-    }, [myLikesData])
+        setPosts(myLikesData?.seeMyLikes!);
+    }, [myLikesData]);
 
     return (
         myActivitiesTab === "like" ? (
@@ -59,5 +59,5 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
                 />
             </>
         ) : null
-    )
-}
+    );
+};

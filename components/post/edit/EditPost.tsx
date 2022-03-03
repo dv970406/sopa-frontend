@@ -44,6 +44,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
 
     const { register, handleSubmit, getValues, formState: { errors } } = useForm<IForm>();
 
+    // editPost Mutation 처리 후 cache 수정 작업
     const updateEditPost: MutationUpdaterFn = (cache, { data }) => {
         const { editPost: { ok, error } }: any = data;
 
@@ -71,13 +72,15 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 }
             }
         });
+        // cache 수정 후 postEdit 모드 종료
         setPostEditMode(false);
     }
 
     const [editPostMutation, { loading }] = useMutation<IMutationResults>(EDIT_POST_MUTATION, {
         update: updateEditPost
-    })
+    });
 
+    // form이 제출되면 mutation 실행
     const onValid = ({ editedTitle, editedDescription, editedOpenChatLink }: IForm) => {
         if (loading) return;
 
@@ -88,9 +91,9 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 ...(editedDescription && { description: editedDescription }),
                 ...(editedOpenChatLink && { openChatLink: editedOpenChatLink }),
             }
-        })
+        });
     };
-    console.log(errors)
+
     return (
         <form
             className={`
