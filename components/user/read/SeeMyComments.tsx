@@ -24,13 +24,13 @@ interface ISeeMyCommentsComponent {
     seeMyInfo: {
         commentCount: number;
     }
-}
+};
 interface ISeeMyCommentsQuery {
     seeMyComments: ICommentInfo[]
-}
+};
 
 export default function SeeMyComments({ seeMyInfo }: ISeeMyCommentsComponent) {
-    const myActivitiesTab = useRecoilValue(myActivitiesTabState)
+    const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const setComments = useSetRecoilState(commentsState);
 
     const { data: myCommentsData, fetchMore: fetchMoreMyComments } = useQuery<ISeeMyCommentsQuery>(SEE_MY_COMMENTS_QUERY);

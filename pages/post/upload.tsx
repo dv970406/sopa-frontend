@@ -5,9 +5,9 @@
 
 import CreatePost from '@components/post/create/CreatePost';
 import MainLayout from '@components/shared/MainLayout';
-import { useRecoilValue, useResetRecoilState } from "recoil"
-import { skillsState, tokenState } from "@utils/atoms"
-import { useLayoutEffect } from "react"
+import { useRecoilValue, useResetRecoilState } from "recoil";
+import { skillsState, tokenState } from "@utils/atoms";
+import { useLayoutEffect } from "react";
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
@@ -18,7 +18,7 @@ export default function PostUploadPage() {
     const NoSsrCreatePost = dynamic(
         () => import('@components/post/create/CreatePost'),
         { ssr: false }
-    )
+    );
 
     // NoSsr로 화면이 미리 보여지는 것을 막고 useLayoutEffect로 앱 페인트 전에 함수를 실행시킨다고 해서 딱히 유용할지는 모르겠다.
     useLayoutEffect(() => {

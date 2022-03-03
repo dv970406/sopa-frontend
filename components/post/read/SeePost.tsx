@@ -19,14 +19,16 @@ interface IPostDetailComponent {
 
 
 export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPostDetailComponent) {
-    const isPostEditMode = useRecoilValue(postEditModeState);
-    const resetIsPostEditMode = useResetRecoilState(postEditModeState);
+    const postEditMode = useRecoilValue(postEditModeState);
+    const resetPostEditMode = useResetRecoilState(postEditModeState);
 
     useEffect(() => {
-        resetIsPostEditMode();
+        resetPostEditMode();
     }, []);
+
+    // postEditMode로 분기처리하여 edit모드인지 Detail모드인지 나눈다.
     return (
-        isPostEditMode ? (
+        postEditMode ? (
             <EditPost
                 postId={seePost?.id}
                 title={seePost?.title}

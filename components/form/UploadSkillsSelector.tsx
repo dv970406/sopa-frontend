@@ -1,21 +1,23 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.03
  */
 
-import ArrangementTab from '@components/post/ArrangementTab';
+import SortTab from '@components/post/SortTab';
 import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-export default function PositionSelector() {
-    const [selectedPosition, setSelectedPosition] = useRecoilState(selectedPositionState)
-    const skillsOfPosition = useRecoilValue(skillsOfPositionSelector)
+export default function UploadSkillsSelector() {
+    // selector를 이용하여 셀렉한 포지션이 바뀔 때마다 포지션별 스킬셋들을 return하게 함
+    const [selectedPosition, setSelectedPosition] = useRecoilState(selectedPositionState);
+    const skillsOfPosition = useRecoilValue(skillsOfPositionSelector);
 
+    // 초기 포지션은 frontend로 시작
     useEffect(() => {
-        setSelectedPosition("frontend")
-    }, [])
+        setSelectedPosition("frontend");
+    }, []);
 
     return (
         <div>
@@ -42,22 +44,22 @@ export default function PositionSelector() {
                 <div
                     className="flex justify-around space-x-4 ml-7 w-full"
                 >
-                    <ArrangementTab
+                    <SortTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("frontend")}
-                        tabName="frontend"
+                        tabName="프론트엔드"
                         selectedTab='frontend'
                     />
-                    <ArrangementTab
+                    <SortTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("backend")}
-                        tabName="backend"
+                        tabName="백엔드"
                         selectedTab='backend'
                     />
-                    <ArrangementTab
+                    <SortTab
                         comparisonTarget={selectedPosition}
                         onClick={() => setSelectedPosition("app")}
-                        tabName="app"
+                        tabName="앱"
                         selectedTab='app'
                     />
                 </div>
@@ -66,6 +68,7 @@ export default function PositionSelector() {
                 className={`
                     flex flex-wrap
                     justify-center mt-6
+                    dark:bg-dark-default rounded-lg
                 `}
             >
                 {skillsOfPosition.map((skill, index) =>

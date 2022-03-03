@@ -1,10 +1,10 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, useQuery } from '@apollo/client';
-import ArrangePosts from '@components/post/ArrangePosts';
+import SortPosts from '@components/post/SortPosts';
 import SeePosts from '@components/post/read/SeePosts';
 import { myActivitiesTabState, postsState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
@@ -13,8 +13,8 @@ import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 const SEE_MY_POSTS_QUERY = gql`
-    query seeMyPosts($offset:Int,$howToArrangement:String){
-        seeMyPosts(offset:$offset,howToArrangement:$howToArrangement){
+    query seeMyPosts($offset:Int,$howToSort:String){
+        seeMyPosts(offset:$offset,howToSort:$howToSort){
             ...PostDisplayFragment
         }
     }
@@ -49,7 +49,7 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
     return (
         myActivitiesTab === "post" ? (
             <>
-                <ArrangePosts refetchFn={refetchMyPosts} />
+                <SortPosts refetchFn={refetchMyPosts} />
                 <SeePosts
                     howManyData={seeMyInfo?.postCount}
                     fetchMore={

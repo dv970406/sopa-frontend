@@ -20,10 +20,11 @@ interface ISeePostDetailComponent {
     seePost: IPostDetail;
     fetchMore: any;
     comments: ICommentInfo[];
-}
+};
 
 export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments }: ISeePostDetailComponent) {
-    const token = useRecoilValue(tokenState)
+    // 토큰이 있다면 로그인 상태이고 없다면 비로그인 상태이므로 이를 분기처리하여 CreateComment를 제공할 것인지 결정한다.
+    const token = useRecoilValue(tokenState);
     return (
         <>
             <div
@@ -47,7 +48,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                 >
                     <div
                         className={`
-                            flex justify-center gap-5
+                            flex flex-wrap justify-center gap-5
                         `}
                     >
                         <SkillImage

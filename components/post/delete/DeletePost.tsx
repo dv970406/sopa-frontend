@@ -25,15 +25,20 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
     const router = useRouter();
     const { seeMyInfo } = useMyInfo();
 
+    // deletePost Mutation 처리 후 cache 수정작업
     const updateDeletePost: MutationUpdaterFn = (cache, { data }) => {
         const { deletePost: { ok, error } }: any = data
         if (!ok) {
             alert(error);
             return;
         };
+
+        // 해당 post를 cache에서 제거
         cache.evict({
             id: `Post:${postId}`
         });
+
+        // user가 가진 post 개수를 -1
         cache.modify({
             id: `User:${seeMyInfo?.id}`,
             fields: {
@@ -46,6 +51,7 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
         // 삭제 후 이전 페이지로 못돌아 가도록 replace로 설정
         router.replace("/");
     }
+
     const [deletePostMutation] = useMutation<IMutationResults>(DELETE_POST_MUTATION, {
         variables: {
             postId

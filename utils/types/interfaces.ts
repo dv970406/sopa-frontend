@@ -52,7 +52,7 @@ export interface IUserInfo {
 
 // 스킬셋 관련
 export interface ISkill {
-    skill: string;
+    name: string;
     skillImage: string;
     isSelected: boolean;
     position: string;
@@ -65,5 +65,5 @@ export interface ISkillPositions {
 export interface IFetchedSkillsInfo {
     __typename: string;
     id: number;
-    skill: string;
+    name: string;
 }

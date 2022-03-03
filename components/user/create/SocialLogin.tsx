@@ -13,7 +13,6 @@ interface ISocialLogin {
 }
 
 const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
-
     return (
         <button
             className={`

@@ -10,6 +10,7 @@ interface IMenuBtnComponent {
     postId: number;
 }
 
+// SeePostDetail에서 사용하는 post의 소유자만이 접근 가능한 관리 패널
 export default function MenuBtn({ postId }: IMenuBtnComponent) {
     return (
         <div

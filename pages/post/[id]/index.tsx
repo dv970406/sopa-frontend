@@ -23,7 +23,7 @@ const SEE_POST_QUERY = gql`
     }
     ${POST_DISPLAY_FRAGMENT}
     ${COMMENT_FRAGMENT}
-`
+`;
 
 export default function PostDetailPage() {
     const router = useRouter();
@@ -34,11 +34,11 @@ export default function PostDetailPage() {
         variables: {
             postId: +postId!
         },
-    })
+    });
 
     useEffect(() => {
-        setComments(data?.seePost?.comments!)
-    }, [data])
+        setComments(data?.seePost?.comments!);
+    }, [data]);
 
     return (
         <MainLayout loading={loading} title={`${postTitle || data?.seePost?.title}`}>

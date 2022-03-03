@@ -6,7 +6,7 @@
 import { atom, selector } from 'recoil';
 import { skillSet } from './skillSet';
 import type { ICommentInfo, IPostDisplay, ISkill, ISkillPositions } from './types/interfaces';
-import type { kindOfArrangementMethod, kindOfMyActivitiesTab, KindOfPosition } from './types/types';
+import type { kindOfSortMethod, kindOfMyActivitiesTab, KindOfPosition } from './types/types';
 
 // LoginOrSignUp Component에서 사용하는 로그인/회원가입 화면 결정
 export const loginModeState = atom<boolean>({
@@ -23,8 +23,8 @@ export const searchModeState = atom<boolean>({
     default: false
 })
 
-export const postArrangementMethodState = atom<kindOfArrangementMethod>({
-    key: "postArrangementMethodState",
+export const postSortMethodState = atom<kindOfSortMethod>({
+    key: "postSortMethodState",
     default: "new"
 })
 export const myActivitiesTabState = atom<kindOfMyActivitiesTab>({

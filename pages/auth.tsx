@@ -20,7 +20,7 @@ export default function AuthenticationPage() {
     // NoSsr로 화면이 미리 보여지는 것을 막고 useLayoutEffect로 앱 페인트 전에 함수를 실행시킨다고 해서 딱히 유용할지는 모르겠다.
     useLayoutEffect(() => {
         if (token) router.back();
-    }, [])
+    }, []);
     return (
         <MainLayout title="로그인">
             <LoginOrSignUp leftText='로그인' rightText='회원가입' />

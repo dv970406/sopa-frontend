@@ -8,6 +8,7 @@ import MetaData from '../MetaData';
 import SkillImage from '../../skill/SkillImage';
 import { getUploadedDate } from '@utils/utilFunctions';
 
+// index 페이지나 profile페이지에서 게시글의 대략적인 정보를 알려 줄 DisplayPost Component
 export default function DisplayPost(
     { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, createdAt }: IPostDisplay
 ) {

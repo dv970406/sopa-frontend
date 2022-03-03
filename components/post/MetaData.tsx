@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
@@ -29,6 +29,7 @@ const TOGGLE_LIKE_MUTATION = gql`
 export default function MetaData({ isSeePost = false, postId, readCount, commentCount, likeCount, isLiked }: IMetaData) {
     const { seeMyInfo } = useMyInfo();
 
+    // toggleLike Mutation 처리 후 cache 수정 작업
     const afterToggleLike: MutationUpdaterFn = (cache, { data }) => {
         const { toggleLike: { ok, error } }: any = data;
         if (!ok) {
@@ -36,6 +37,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
             return;
         }
 
+        // 해당 게시글에 대한 관심 추가, 삭제 반영
         cache.modify({
             id: `Post:${postId}`,
             fields: {
@@ -47,6 +49,8 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
                 },
             }
         })
+
+        // user가 관심 count 조작
         cache.modify({
             id: `User:${seeMyInfo?.id}`,
             fields: {
@@ -56,13 +60,14 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
             }
         })
 
+        // seeMyLikes query cache에서 추가, 삭제 반영
         cache.modify({
             id: `ROOT_QUERY`,
             fields: {
                 seeMyLikes(prev) {
-                    const findPost = prev.find((like: any) => like.post.__ref === `Post:${postId}`);
-                    const write = cache.extract()[`Post:${postId}`]
-                    return isLiked ? prev.filter((like: any) => like !== findPost) : [write, ...prev]
+                    const findPost = prev.find((like: any) => like?.post?.__ref === `Post:${postId}`);
+                    const write = cache.extract()[`Post:${postId}`];
+                    return isLiked ? prev.filter((like: any) => like !== findPost) : [write, ...prev];
                 }
             }
         })

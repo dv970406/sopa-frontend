@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -39,11 +39,12 @@ const EDIT_POST_MUTATION = gql`
 `
 
 export default function EditPost({ postId, title, description, openChatLink, apps, backends, frontends }: IEditPostComponent) {
-    const setIsPostEditMode = useSetRecoilState(postEditModeState);
-    const resetIsPostEditMode = useResetRecoilState(postEditModeState);
+    const setPostEditMode = useSetRecoilState(postEditModeState);
+    const resetPostEditMode = useResetRecoilState(postEditModeState);
 
-    const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<IForm>();
+    const { register, handleSubmit, getValues, formState: { errors } } = useForm<IForm>();
 
+    // editPost Mutation 처리 후 cache 수정 작업
     const updateEditPost: MutationUpdaterFn = (cache, { data }) => {
         const { editPost: { ok, error } }: any = data;
 
@@ -71,13 +72,15 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 }
             }
         });
-        setIsPostEditMode(false);
+        // cache 수정 후 postEdit 모드 종료
+        setPostEditMode(false);
     }
 
     const [editPostMutation, { loading }] = useMutation<IMutationResults>(EDIT_POST_MUTATION, {
         update: updateEditPost
-    })
+    });
 
+    // form이 제출되면 mutation 실행
     const onValid = ({ editedTitle, editedDescription, editedOpenChatLink }: IForm) => {
         if (loading) return;
 
@@ -88,7 +91,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 ...(editedDescription && { description: editedDescription }),
                 ...(editedOpenChatLink && { openChatLink: editedOpenChatLink }),
             }
-        })
+        });
     };
 
     return (
@@ -100,7 +103,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
         >
             <Button
                 text="수정 취소"
-                onClick={resetIsPostEditMode}
+                onClick={resetPostEditMode}
             />
             <Input
                 type="title"
@@ -134,7 +137,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 </h1>
                 <div
                     className={`
-                        mt-4 flex space-x-5 flex-wrap justify-center items-center
+                        mt-4 flex gap-5 flex-wrap justify-center items-center
                     `}
                 >
                     <SkillImage
@@ -149,9 +152,8 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 type="description"
                 register={register("editedDescription")}
                 placeholder="설명을 입력하세요."
-                maxLength={600}
+                maxLength={1000}
                 defaultValue={description}
-                error={errors.editedDescription?.message}
             />
 
             <Input

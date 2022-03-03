@@ -9,20 +9,24 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
 export default function NoExistsPage() {
+    // 이미지를 screen 안에 가둬 놓을 때 쓰는 div
     const neverGoOutBox = useRef(null);
+
+    // 현재 screen의 width에서 이미지의 드래그 위치에 따라 opacity에 변화를 준다.
     const x = useMotionValue(0);
     const getScreenWidth = typeof window === "undefined" ? null : document?.body?.clientWidth;
     const halfSizeWidth = getScreenWidth! / 2;
-    const xToOpacity = useTransform(x, [-halfSizeWidth, halfSizeWidth * (9.5 / 10), halfSizeWidth], [1, 1, 0])
-    const router = useRouter();
+    const xToOpacity = useTransform(x, [-halfSizeWidth, halfSizeWidth * (9.5 / 10), halfSizeWidth], [1, 1, 0]);
 
+    // 만약 이미지가 드래그되어 특정 위치에 다다르면 router.push가 작동
+    const router = useRouter();
     useEffect(() => {
         x.onChange(() => {
             if (getScreenWidth! * (1 / 2) < x.get()) {
                 router.push("/");
-            }
-        })
-    }, [x])
+            };
+        });
+    }, [x]);
     return (
         <div
             className="h-screen w-screen flex items-center justify-center overflow-hidden space-x-7"

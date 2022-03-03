@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -9,12 +9,12 @@ import { myActivitiesTabState, postsState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import ArrangePosts from '@components/post/ArrangePosts';
+import SortPosts from '@components/post/SortPosts';
 import { IPostDisplay } from '@utils/types/interfaces';
 
 const SEE_MY_LIKES_QUERY = gql`
-    query seeMyLikes($offset:Int,$howToArrangement:String){
-        seeMyLikes(offset:$offset,howToArrangement:$howToArrangement){
+    query seeMyLikes($offset:Int,$howToSort:String){
+        seeMyLikes(offset:$offset,howToSort:$howToSort){
             ...PostDisplayFragment
         }
     }
@@ -42,13 +42,13 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
         };
     }, [myActivitiesTab]);
     useEffect(() => {
-        setPosts(myLikesData?.seeMyLikes!)
-    }, [myLikesData])
+        setPosts(myLikesData?.seeMyLikes!);
+    }, [myLikesData]);
 
     return (
         myActivitiesTab === "like" ? (
             <>
-                <ArrangePosts refetchFn={refetchMyLikes} />
+                <SortPosts refetchFn={refetchMyLikes} />
                 <SeePosts
                     howManyData={seeMyInfo?.likeCount}
                     fetchMore={
@@ -59,5 +59,5 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
                 />
             </>
         ) : null
-    )
-}
+    );
+};

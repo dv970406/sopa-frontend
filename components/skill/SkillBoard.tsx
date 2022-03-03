@@ -13,6 +13,8 @@ interface ISkillBoard {
 
 // 메모이징으로 prop에 변화가 생기는 SkillBoard만 리렌더링
 function SkillBoard({ skillsOfPosition }: ISkillBoard) {
+
+    // 스킬보드의 이름을 한글로 바꾼다
     const BoardName = () => {
         switch (skillsOfPosition[0].position) {
             case "frontend":
@@ -44,7 +46,7 @@ function SkillBoard({ skillsOfPosition }: ISkillBoard) {
                     w-full h-1/3 px-3 py-6 
                 `}
             >
-                {skillsOfPosition?.map((skill, index) => <Skill key={skill.skill} index={index} {...skill} />)}
+                {skillsOfPosition?.map((skill, index) => <Skill key={skill.name} index={index} {...skill} />)}
             </div>
         </div>
     )

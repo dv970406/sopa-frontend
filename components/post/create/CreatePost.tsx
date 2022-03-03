@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
-import PositionSelector from '@components/form/PositionSelector';
+import UploadSkillsSelector from '@components/form/UploadSkillsSelector';
 import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
 import { IPostDisplay } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
@@ -39,9 +39,11 @@ export default function CreatePost() {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<IForm>();
 
+    // createPost Mutation 처리 후 cache 수정작업
     const updateCreatePost: MutationUpdaterFn = (cache, { data }) => {
         const { createPost }: any = data
         if (createPost.id) {
+            // Mutation 처리 후 cache에 추가 
             cache.modify({
                 id: `ROOT_QUERY`,
                 fields: {
@@ -50,6 +52,8 @@ export default function CreatePost() {
                     }
                 }
             });
+
+            // user가 가진 post의 개수 +1
             cache.modify({
                 id: `User:${seeMyInfo?.id}`,
                 fields: {
@@ -58,6 +62,8 @@ export default function CreatePost() {
                     }
                 }
             });
+
+            // seeMyPosts query cache에도 해당 post를 추가한다.
             cache.modify({
                 id: `ROOT_QUERY`,
                 fields: {
@@ -67,12 +73,15 @@ export default function CreatePost() {
                 }
             })
 
+            // 그리고 postsState에 추가하여 리렌더링
             setPosts(prev => {
                 return [
                     createPost,
                     ...prev
                 ]
             })
+
+            // 업로드 후 CreatePost창에서 셀렉했던 skill들을 reset하고 index페이지로 돌려보낸다.
             resetSelectedSkillsToUpload();
             router.push("/");
         }
@@ -82,9 +91,10 @@ export default function CreatePost() {
         update: updateCreatePost
     })
 
+    // form이 제출되면 셀렉한 스킬이 있는지 확인하고 mutation 실행
     const onValid = ({ title, description, openChatLink }: IForm) => {
         if (loading) return;
-        if (selectedSkillsToUpload.length === 0) {
+        if (selectedSkillsToUpload?.length === 0) {
             alert("스킬을 하나 이상 선택해주세요!");
             return;
         }
@@ -103,6 +113,7 @@ export default function CreatePost() {
         })
     }
 
+    // 컴포넌트가 렌더링될 때 마다 셀렉 스킬 리셋
     useEffect(() => {
         resetSelectedSkillsToUpload();
     }, [])
@@ -131,13 +142,13 @@ export default function CreatePost() {
                 maxLength={32}
             />
 
-            <PositionSelector />
+            <UploadSkillsSelector />
 
             <Input
                 type="description"
                 register={register("description")}
                 placeholder="설명을 입력하세요."
-                maxLength={600}
+                maxLength={1000}
             />
 
             <Input
@@ -161,7 +172,7 @@ export default function CreatePost() {
             />
 
             <FormButton
-                disabled={loading || !watch("title") || selectedSkillsToUpload.length === 0}
+                disabled={loading || !watch("title") || selectedSkillsToUpload?.length === 0}
                 loading={loading}
                 text="게시글 업로드"
             />

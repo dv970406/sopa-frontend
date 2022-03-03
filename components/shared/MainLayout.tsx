@@ -1,11 +1,11 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React from 'react';
 import NavBar from './NavBar';
 
 interface IMainLayout {
@@ -33,10 +33,12 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
                     flex flex-col
                     justify-center py-16 px-8 
                     ${isAuthPage ? "flex items-center" : ""}
-                    w-full
                 `}
             >
                 {children}
+                <footer
+                    className="py-52"
+                />
             </div>
         </div>
     )

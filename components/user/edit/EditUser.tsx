@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
@@ -31,6 +31,7 @@ export default function EditUser() {
     const { register, handleSubmit, clearErrors, getValues, watch, formState: { errors } } = useForm<IForm>();
     const { seeMyInfo } = useMyInfo();
 
+    // editUser Mutation 처리 후 cache 수정 작업
     const updateEditUser: MutationUpdaterFn = (cache, { data }) => {
         const { editUser: { ok, error } }: any = data
         if (!ok) {
@@ -53,6 +54,7 @@ export default function EditUser() {
         update: updateEditUser
     })
 
+    // form을 제출하면 비밀번호 일치여부 확인 후 Mutation 실행
     const onValid = ({ name, password, password2 }: IForm) => {
         if (loading) return;
 
@@ -69,7 +71,7 @@ export default function EditUser() {
         })
     }
 
-    const checkDisabledStatus = loading || !watch("name") || !watch("password") || !watch("password2");
+    const checkDisabledStatus = loading || !watch("name", seeMyInfo?.name) || !watch("password") || !watch("password2");
 
     return (
         <form

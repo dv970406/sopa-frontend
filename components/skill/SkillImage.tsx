@@ -23,7 +23,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
     return (
         <>
             {displayMode ? (
-                skillsInfo.length > 3 ? (
+                skillsInfo?.length > 3 ? (
                     <>
                         {skillsInfo?.slice(0, 3).map((skill: IMakeSkillImages, index: number) =>
                             <div

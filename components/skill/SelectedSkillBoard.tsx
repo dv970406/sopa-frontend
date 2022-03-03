@@ -12,14 +12,14 @@ import type { ISkill } from '@utils/types/interfaces';
 interface ISelectedSkillBoard {
     refetchSeePosts: any;
     refetchSeePostsCount: any;
-}
+};
 
 export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCount }: ISelectedSkillBoard) {
     const [selectedSkills, setSelectedSkills] = useRecoilState(selectedSkillsState);
     const setSkills = useSetRecoilState(skillsState);
 
     const onClick = (selectedSkill: ISkill, index: number): void => {
-        // SelectedSkillBoard에서 선택하면 selectedSkillsState에서 값을 삭제함
+        // 셀렉한 스킬을 다시 클릭하면 제거 시킴
         setSelectedSkills(prev => {
             const copiedPrev = [...prev];
             copiedPrev.splice(index, 1);
@@ -27,13 +27,13 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
             return [
                 ...copiedPrev
             ]
-        })
+        });
 
-        // SelectedSkillBoard에서 선택하면 skillsState로 다시 추가시킴
+        // 그리고 원래의 스킬보드로 복귀시킨다.
         setSkills(prev => {
             const skillsOfCopiedPosition = [...prev[selectedSkill.position]];
 
-            const targetIndex = skillsOfCopiedPosition.findIndex(skill => skill.skill === selectedSkill.skill);
+            const targetIndex = skillsOfCopiedPosition.findIndex(skill => skill.name === selectedSkill.name);
 
             const unSelect = {
                 ...selectedSkill,
@@ -45,23 +45,24 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
             return {
                 ...prev,
                 [selectedSkill.position]: skillsOfCopiedPosition,
-            }
-        })
+            };
+        });
     }
 
+    // 셀렉한 스킬이 변경될 때마다 query 요청을 refetch시킨다.
     useEffect(() => {
         const clearedSelectedSkills = selectedSkills.map(skill => {
-            const { isSelected, skillImage, ...skillWithPosition } = skill
-            return skillWithPosition
-        })
+            const { isSelected, skillImage, ...skillWithPosition } = skill;
+            return skillWithPosition;
+        });
 
         refetchSeePosts({
             skills: JSON.stringify(clearedSelectedSkills)
         });
         refetchSeePostsCount({
             skills: JSON.stringify(clearedSelectedSkills)
-        })
-    }, [selectedSkills])
+        });
+    }, [selectedSkills]);
 
     return (
         <motion.div
@@ -85,9 +86,9 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
         >
             {selectedSkills?.map((selectedSkill, index) =>
                 <motion.button
-                    key={selectedSkill.skill}
+                    key={selectedSkill.name}
                     onClick={() => onClick(selectedSkill, index)}
-                    layoutId={selectedSkill.skill}
+                    layoutId={selectedSkill.name}
                 >
                     <img
                         src={selectedSkill.skillImage}

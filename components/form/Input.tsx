@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 type InputType = "email" | "password" | "password2" | "name" | "title" | "skills" | "description" | "openChatLink";
@@ -16,6 +16,7 @@ interface IInput {
     [key: string]: any;
 }
 
+// 건네받은 type을 한글로 변경
 const typeTranslater = (engVerType: string) => {
     let korVerType = null;
     switch (engVerType) {
@@ -36,23 +37,32 @@ const typeTranslater = (engVerType: string) => {
         case "openChatLink":
             return korVerType = "카카오 오픈채팅 링크";
     }
-    return korVerType
-}
+    return korVerType;
+};
+
+// 건네받은 type에 따라 input에 지정할 type을 지정
+const decideType = (type: InputType) => {
+    switch (type) {
+        case "name":
+            return "text";
+        case "password2":
+            return "password";
+        case "openChatLink":
+            return "text";
+        default:
+            return type;
+    };
+};
 
 export default function Input({ type, register, required, disabled = false, error, ...props }: IInput) {
-    const decideType = (type: InputType) => {
-        switch (type) {
-            case "name":
-                return "text";
-            case "password2":
-                return "password";
-            case "openChatLink":
-                return "text";
-            default:
-                return type;
-        };
+
+    // 글자수 세는 기능
+    const [checkTextCount, setCheckTextCount] = useState(0);
+    const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setCheckTextCount(+event.currentTarget.value.length);
     };
 
+    // input type에 따라 다른 JSX return
     const inputType = (type: InputType) => {
         if (type === "description") {
             return (
@@ -68,16 +78,18 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         className={`
                             shadow-sm
-                            border-b-2 border-b-gray-300  
-                            placeholder:text-lg placeholder-gray-400
+                            border-b-2 border-b-form-gray  
+                            placeholder:text-lg
                             focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full dark:bg-dark-default rounded-t-lg p-4
+                            w-full dark:bg-dark-default rounded-t-lg p-3
                             text-sm
                         `}
                         rows={10}
                         cols={50}
                         {...props}
+                        onChange={changeTextCount}
                     />
+                    <p className='font-bold text-right'>{checkTextCount} / 1000</p>
                 </div>
             )
         } else if (type === "email") {
@@ -107,14 +119,15 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         disabled={disabled}
                         className={`
-                            peer p-2 shadow-sm
-                            border-b-2 border-b-gray-300 
-                            placeholder:text-lg placeholder-gray-400
+                            peer p-3 shadow-sm
+                            border-b-2 border-b-form-gray 
+                            placeholder:text-lg placeholder-form-gray
                             focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
                             w-full dark:bg-dark-default rounded-t-lg
                             ${disabled ? "bg-slate-300 opacity-40 dark:bg-dark-ultra" : null}
                         `}
                         {...props}
+                        onChange={changeTextCount}
                     />
                     <div
                         className='
@@ -152,14 +165,15 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         disabled={disabled}
                         className={`
-                            p-2 shadow-sm
-                            border-b-2 border-b-gray-300 
-                            placeholder:text-lg placeholder-gray-400
+                            p-3 shadow-sm
+                            border-b-2 border-b-form-gray 
+                            placeholder:text-lg placeholder-form-gray
                             focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
                             w-full dark:bg-dark-default rounded-t-lg
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                         `}
                         {...props}
+                        onChange={changeTextCount}
                     />
                     <div
                         className='p-1  text-emphasize font-bold'
