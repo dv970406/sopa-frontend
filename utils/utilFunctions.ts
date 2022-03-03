@@ -1,10 +1,9 @@
 /**
  * 생성일: 2022.02.16
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.02
  */
 
 import type { IFetchedSkillsInfo } from './types/interfaces';
-
 
 export const makeSocialLoginReqUrl = (socialSite: string): string => {
     let baseUrl = null;
@@ -88,5 +87,4 @@ export const getUploadedDate = (createdAt: number) => {
     const getDay = date.getDate();
     const makeDateFormat = `${getYear}년 ${getMonth}월 ${getDay}일`
     return makeDateFormat
-}
-
+};

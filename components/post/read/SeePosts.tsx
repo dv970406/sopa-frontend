@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import DisplayPost from '@components/post/read/DisplayPost'
@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
+import NoData from '@components/shared/NoData';
 
 const semiDetailVar = {
     invisible: {
@@ -47,17 +48,21 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
             <InfiniteScrolling
                 howManyData={howManyData}
                 fetchMore={fetchMore}
-                css="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
+                css={`${posts?.length === 0 ? null : "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"}`}
             >
-                {posts?.map((post, index) =>
-                    <motion.button
-                        layoutId={String(index)}
-                        onClick={() => setSelectedPostId(index)}
-                        className={` w-full `}
-                        key={index}
-                    >
-                        <DisplayPost key={index} {...post} />
-                    </motion.button>
+                {posts?.length === 0 ? (
+                    <NoData />
+                ) : (
+                    posts?.map((post, index) =>
+                        <motion.button
+                            layoutId={String(index)}
+                            onClick={() => setSelectedPostId(index)}
+                            className={` w-full `}
+                            key={index}
+                        >
+                            <DisplayPost key={index} {...post} />
+                        </motion.button>
+                    )
                 )}
             </InfiniteScrolling>
 

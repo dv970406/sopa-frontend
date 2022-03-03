@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -149,9 +149,8 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 type="description"
                 register={register("editedDescription")}
                 placeholder="설명을 입력하세요."
-                maxLength={600}
+                maxLength={1000}
                 defaultValue={description}
-                error={errors.editedDescription?.message}
             />
 
             <Input

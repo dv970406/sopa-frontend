@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
@@ -69,7 +69,7 @@ export default function EditUser() {
         })
     }
 
-    const checkDisabledStatus = loading || !watch("name") || !watch("password") || !watch("password2");
+    const checkDisabledStatus = loading || !watch("password") || !watch("password2");
 
     return (
         <form

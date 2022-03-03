@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
@@ -60,7 +60,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
             id: `ROOT_QUERY`,
             fields: {
                 seeMyLikes(prev) {
-                    const findPost = prev.find((like: any) => like.post.__ref === `Post:${postId}`);
+                    const findPost = prev.find((like: any) => like?.post?.__ref === `Post:${postId}`);
                     const write = cache.extract()[`Post:${postId}`]
                     return isLiked ? prev.filter((like: any) => like !== findPost) : [write, ...prev]
                 }

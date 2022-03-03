@@ -18,11 +18,11 @@ module.exports = {
         'sopa-pure': "#F0ABFC",
         'sopa-deepDark': "#86198F",
         'sopa-lightDark': "#C026D3",
-        'emphasize': "#F43F5E",
         'dark-ultra': "#1E1F21",
         'dark-default': "#292A2D",
         'dark-text-color': "#CBD5E1",
-
+        'emphasize': "#F43F5E",
+        'form-gray': "#98A3AF"
       }
     },
   },

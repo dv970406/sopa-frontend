@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.03
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -33,8 +33,8 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
     const { seeMyInfo } = useMyInfo();
 
     const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setCheckTextCount(+event.currentTarget.value.length)
-    }
+        setCheckTextCount(+event.currentTarget.value.length);
+    };
 
     const updateCreateComment: MutationUpdaterFn = (cache, { data }) => {
         const { createComment }: any = data
@@ -63,7 +63,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
             data: {
                 ...createComment
             }
-        })
+        });
 
         cache.modify({
             id: `Post:${postId}`,
@@ -92,14 +92,13 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                     return [newComment, ...prev]
                 }
             }
-        })
-
+        });
         setValue("comment", "");
-    }
+    };
 
     const [createCommentMutation, { loading }] = useMutation(CREATE_COMMENT_MUTATION, {
         update: updateCreateComment
-    })
+    });
 
     const onValid = ({ comment }: IForm) => {
         if (loading) return;
@@ -109,8 +108,9 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 postId,
                 comment
             }
-        })
-    }
+        });
+    };
+
     return (
         <div
             className='space-y-4'
@@ -144,8 +144,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                     maxLength={200}
                     onChange={changeTextCount}
                     required
-                >
-                </textarea>
+                />
                 <div
                     className={`
                         w-full

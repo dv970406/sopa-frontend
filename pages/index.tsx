@@ -10,7 +10,6 @@ import { useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { postsState, searchModeState } from '@utils/atoms'
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
-import Loading from '@components/shared/Loading'
 import ArrangePosts from '@components/post/ArrangePosts'
 
 interface ISeePostsQuery {
@@ -44,7 +43,7 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
 
   const seePostsCompleted = ({ seePosts }: ISeePostsQuery) => setPosts(seePosts);
 
-  const { data: seePostsData, loading, fetchMore, refetch: refetchSeePosts } = useQuery<ISeePostsQuery>(SEE_POSTS_QUERY, {
+  const { data: seePostsData, fetchMore, refetch: refetchSeePosts } = useQuery<ISeePostsQuery>(SEE_POSTS_QUERY, {
     onCompleted: seePostsCompleted,
   });
 
@@ -56,6 +55,11 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
   useEffect(() => {
     setPosts(seePostsData?.seePosts!);
   }, [seePostsData]);
+  useEffect(() => {
+    if (!searchMode) {
+      setPosts(seePostsData?.seePosts!);
+    };
+  }, [searchMode]);
 
   return (
     <MainLayout
@@ -71,18 +75,14 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
             <ArrangePosts refetchFn={refetchSeePosts} />
           </>
         )}
-        {loading ? (
-          <Loading />
-        ) : (
-          <SeePosts
-            howManyData={seePostsCountData?.seePostsCount?.count!}
-            fetchMore={
-              () => fetchMore({
-                variables: { offset: seePostsData?.seePosts?.length },
-              })
-            }
-          />
-        )}
+        <SeePosts
+          howManyData={seePostsCountData?.seePostsCount?.count!}
+          fetchMore={
+            () => fetchMore({
+              variables: { offset: seePostsData?.seePosts?.length },
+            })
+          }
+        />
       </div>
     </MainLayout>
   )

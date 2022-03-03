@@ -80,6 +80,7 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
                 className={`
                     w-full
                     focus:outline-none bg-fuchsia-100 rounded-md px-3 py-2
+                    dark:bg-dark-default
                 `}
             />
         </form>

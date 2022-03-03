@@ -47,7 +47,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                 >
                     <div
                         className={`
-                            flex justify-center gap-5
+                            flex flex-wrap justify-center gap-5
                         `}
                     >
                         <SkillImage
