@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.04
  */
 
 import MetaData from '../MetaData';
@@ -65,7 +65,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                     <p
                         className="
                             py-7
-                            break-words tracking-wider 
+                            break-words whitespace-pre-wrap
                             text-md lg:text-lg 
                         "
                     >

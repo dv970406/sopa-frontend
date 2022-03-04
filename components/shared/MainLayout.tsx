@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.04
  */
 
 import { tokenState } from '@utils/atoms';
@@ -19,7 +19,8 @@ interface IMainLayout {
 export default function MainLayout({ loading, title, children }: IMainLayout) {
     const { pathname, push } = useRouter();
     const isAuthPage = pathname === "/auth";
-    const neededLoginPage = pathname === "/post/upload" || pathname === "/user/profile" || pathname === "/user/edit"
+    const neededLoginPage = pathname === "/post/upload" || pathname === "/user/profile" || pathname === "/user/edit";
+    const usingFormPage = pathname === "/auth" || pathname === "/user/edit" || pathname === "/post/upload" || pathname === "/post/[id]";
     const token = useRecoilValue(tokenState);
 
     useEffect(() => {
@@ -32,7 +33,7 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
     return (
         <div
             className={`
-                font-NotoSans select-none box-border 
+                font-NotoSans select-none box-border
                 dark:bg-dark-ultra dark:text-dark-text-color
             `}
         >
@@ -44,7 +45,8 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
                 className={`
                     flex flex-col justify-center 
                     ${isAuthPage ? "items-center" : ""}
-                    py-16 px-8 
+                    ${usingFormPage ? "md:px-28 lg:px-52 xl:px-96 space-y-8" : "sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8"}
+                    py-14 px-8 
                 `}
             >
                 {children}

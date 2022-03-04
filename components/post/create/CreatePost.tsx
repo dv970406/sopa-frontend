@@ -148,7 +148,7 @@ export default function CreatePost() {
                 type="description"
                 register={register("description")}
                 placeholder="설명을 입력하세요."
-                maxLength={1000}
+                maxLength={600}
             />
 
             <Input

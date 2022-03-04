@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.04
  */
 
 import type { IPostDisplay } from '@utils/types/interfaces';
@@ -67,7 +67,8 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
             </div>
             <p
                 className="
-                    py-2 break-words
+                    py-2 break-words whitespace-pre-wrap
+                    line-clamp-6
                 "
             >
                 {semiDetail.description}

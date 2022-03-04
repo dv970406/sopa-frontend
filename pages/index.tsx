@@ -61,25 +61,21 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
     <MainLayout
       title="당신의 소울파트너"
     >
-      <div
-        className="sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8"
-      >
-        {searchMode ? null : (
-          <>
-            <SkillBoards />
-            <SelectedSkillBoard refetchSeePosts={refetchSeePosts} refetchSeePostsCount={refetchSeePostsCount} />
-            <SortPosts refetchFn={refetchSeePosts} />
-          </>
-        )}
-        <SeePosts
-          howManyData={seePostsCountData?.seePostsCount?.count!}
-          fetchMore={
-            () => fetchMore({
-              variables: { offset: seePostsData?.seePosts?.length },
-            })
-          }
-        />
-      </div>
+      {searchMode ? null : (
+        <>
+          <SkillBoards />
+          <SelectedSkillBoard refetchSeePosts={refetchSeePosts} refetchSeePostsCount={refetchSeePostsCount} />
+          <SortPosts refetchFn={refetchSeePosts} />
+        </>
+      )}
+      <SeePosts
+        howManyData={seePostsCountData?.seePostsCount?.count!}
+        fetchMore={
+          () => fetchMore({
+            variables: { offset: seePostsData?.seePosts?.length },
+          })
+        }
+      />
     </MainLayout>
   )
 }

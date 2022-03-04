@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.04
  */
 
 import React, { useState } from 'react';
@@ -90,7 +90,7 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...props}
                         onChange={changeTextCount}
                     />
-                    <p className='font-bold text-right'>{checkTextCount} / 1000</p>
+                    <p className='font-bold text-right'>{checkTextCount} / 600</p>
                 </div>
             )
         } else if (type === "email") {

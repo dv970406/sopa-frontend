@@ -1,28 +1,35 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.04
  */
 
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import useMyInfo from 'hooks/useMyInfo';
 import SearchPostsBtn from '@components/post/search/SearchPostsBtn';
 import LoginHoverEvent from './LoginHoverEvent';
+import { useEffect } from 'react';
 
 
 function NavBar() {
-    const token = useRecoilValue(tokenState);
+    const [token, setToken] = useRecoilState(tokenState);
     const { seeMyInfo } = useMyInfo();
-
     const router = useRouter();
-    const isHomePage = router.route === "/";
-    const isMyProfilePage = router.route === "/user/profile";
+    const isHomePage = router.pathname === "/";
+    const isMyProfilePage = router.pathname === "/user/profile";
 
     const goToLogin = () => router.push("/auth");
     const goToCreatePost = () => router.push("/post/upload");
     const goToSeeMyProfile = () => router.push(`/user/profile`);
     const goToEditUser = () => router.push("/user/edit");
+
+    useEffect(() => {
+        // token state값이 변경될 때 마다 로컬 스토리지에 저장된 token을 set함
+        if (token) {
+            setToken(localStorage.getItem("TOKEN"));
+        };
+    }, [token]);
 
     return (
         <div
@@ -72,7 +79,7 @@ function NavBar() {
                             "
                             onClick={goToEditUser}
                         >
-                            {`${seeMyInfo?.name} 수정`}
+                            {seeMyInfo?.name}
                         </button>
                     ) : (
                         <button
