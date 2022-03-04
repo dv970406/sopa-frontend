@@ -11,15 +11,14 @@ export default function Divider({ text }: IDivider) {
     return (
         <div
             className={`
-                flex space-x-1
-                my-4
-                items-center justify-center
+                flex items-center justify-center
+                my-4 space-x-1
                 text-center
             `}
         >
-            <div className='h-[2px] bg-sopa-pure w-full rounded-full' />
-            <div className='text-sopa-default w-full font-bold'>{text}</div>
-            <div className='h-[2px] bg-sopa-pure w-full rounded-full' />
+            <div className='rounded-full w-full h-[2px] bg-sopa-pure' />
+            <div className='w-full text-sopa-default font-bold'>{text}</div>
+            <div className='rounded-full w-full h-[2px] bg-sopa-pure' />
         </div>
     )
 }

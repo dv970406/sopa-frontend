@@ -14,11 +14,12 @@ export default function SortTab({ tabName, selectedTab, comparisonTarget, onClic
     return (
         <div
             className={`
-                border-b-4 flex items-center justify-center space-x-2
-                p-3 w-full hover:border-b-sopa-default transition-colors
-                cursor-pointer font-bold text-xs sm:text-sm md:text-lg
-                tracking-widest
-                ${comparisonTarget === selectedTab ? "border-b-sopa-accent" : "border-b-sopa-soft"}
+                flex items-center justify-center 
+                w-full p-3 space-x-2
+                text-xs font-bold border-b-4 ${comparisonTarget === selectedTab ? "border-b-sopa-accent" : "border-b-sopa-soft"}
+                sm:text-sm md:text-lg
+                hover:border-b-sopa-default 
+                transition-colors cursor-pointer tracking-widest
             `}
             onClick={onClick}
         >

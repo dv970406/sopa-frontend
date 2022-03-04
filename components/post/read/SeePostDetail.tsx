@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.04
  */
 
 import MetaData from '../MetaData';
@@ -28,15 +28,17 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
     return (
         <>
             <div
-                className={`
+                className="
                     flex justify-between items-center
-                    border-b-2 border-b-sopa-default w-full                    
-                `}
+                    w-full
+                    border-b-2 border-b-sopa-default                 
+                "
             >
                 <h1
-                    className={`
-                        text-4xl font-bold p-3
-                    `}
+                    className="
+                        p-3
+                        text-4xl font-bold
+                    "
                 >
                     {seePost?.title || pageTitle}
                 </h1>
@@ -44,12 +46,15 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             </div>
             {seePost?.id ? (
                 <div
-                    className="border-b-2 border-b-sopa-default w-full py-3"
+                    className="
+                        w-full py-3
+                        border-b-2 border-b-sopa-default
+                    "
                 >
                     <div
-                        className={`
+                        className="
                             flex flex-wrap justify-center gap-5
-                        `}
+                        "
                     >
                         <SkillImage
                             frontends={seePost?.frontends}
@@ -58,17 +63,17 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                         />
                     </div>
                     <p
-                        className='
-                            break-words tracking-wider 
-                            text-md lg:text-lg py-7
-                        '
+                        className="
+                            py-7
+                            break-words whitespace-pre-wrap
+                            text-md lg:text-lg 
+                        "
                     >
                         {seePost?.description}
                     </p>
                     <div
                         className={`
-                            flex 
-                            ${seePost?.openChatLink ? "justify-between" : "justify-end"}
+                            flex ${seePost?.openChatLink ? "justify-between" : "justify-end"}
                         `}
                     >
                         {seePost?.openChatLink ? <OpenChatLink openChatLink={seePost?.openChatLink} /> : null}

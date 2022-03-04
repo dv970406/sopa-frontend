@@ -25,7 +25,10 @@ export default function UploadSkillsSelector() {
                 className="flex items-center justify-around"
             >
                 <div
-                    className="flex items-center w-24"
+                    className="
+                        flex items-center
+                        w-24
+                    "
                 >
                     <label
                         className="font-bold"
@@ -42,7 +45,10 @@ export default function UploadSkillsSelector() {
                     </svg>
                 </div>
                 <div
-                    className="flex justify-around space-x-4 ml-7 w-full"
+                    className="
+                        flex justify-around 
+                        w-full space-x-4 ml-7
+                    "
                 >
                     <SortTab
                         comparisonTarget={selectedPosition}
@@ -66,9 +72,9 @@ export default function UploadSkillsSelector() {
             </div>
             <div
                 className={`
-                    flex flex-wrap
-                    justify-center mt-6
-                    dark:bg-dark-default rounded-lg
+                    flex flex-wrap justify-center rounded-lg
+                    mt-6
+                    dark:bg-dark-default
                 `}
             >
                 {skillsOfPosition.map((skill, index) =>

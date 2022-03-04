@@ -20,7 +20,7 @@ const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
             `}
         >
             <Link href={makeSocialLoginReqUrl(social)}>
-                <img className='w-full h-full' src={`/${social}.png`} />
+                <img className="w-full h-full" src={`/${social}.png`} />
             </Link>
         </button>
     )

@@ -39,7 +39,10 @@ interface ILoginCompleted {
 
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
-    const { register, handleSubmit, watch, clearErrors, formState: { errors } } = useForm<IForm>();
+    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm<IForm>({
+        mode: "onChange"
+    });
+    const router = useRouter();
 
     const loginCompleted = ({ login }: ILoginCompleted) => {
         const { ok, token, error } = login;
@@ -56,11 +59,8 @@ export default function Login() {
         router.push("/");
     };
     const [loginMutation, { loading }] = useMutation<ILoginCompleted>(LOGIN_MUTATION, {
-        onCompleted: loginCompleted
+        onCompleted: loginCompleted,
     });
-    const checkDisabledStatus = loading || !watch("email") || !watch("password")
-
-    const router = useRouter();
 
     const onValid = async (data: IForm) => {
         if (loading) return;
@@ -85,7 +85,7 @@ export default function Login() {
                         message: "이메일 양식을 지켜주세요."
                     }
                 })}
-                error={errors.email?.message}
+                error={errors?.email?.message}
                 required
             />
             <Input
@@ -97,25 +97,22 @@ export default function Login() {
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
-                error={errors.password?.message}
+                error={errors?.password?.message}
                 required
                 minLength={8}
                 maxLength={15}
             />
             <FormButton
-                disabled={checkDisabledStatus}
                 loading={loading}
                 text="로그인"
                 onClick={handleSubmit(onValid)}
             />
             <Divider text="소셜 로그인" />
             <div
-                className={`
-                    flex space-x-5
+                className="
+                    flex space-x-5 justify-center items-center
                     w-full
-                    justify-center
-                    items-center
-                `}
+                "
             >
                 <SocialLogin isAuthPage social='naver' />
                 <SocialLogin isAuthPage social='github' />

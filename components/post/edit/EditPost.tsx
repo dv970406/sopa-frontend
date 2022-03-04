@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.04
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -96,14 +96,13 @@ export default function EditPost({ postId, title, description, openChatLink, app
 
     return (
         <form
-            className={`
-                space-y-10
-            `}
+            className="space-y-10"
             onSubmit={handleSubmit(onValid)}
         >
             <Button
                 text="수정 취소"
                 onClick={resetPostEditMode}
+                placeRight
             />
             <Input
                 type="title"
@@ -128,17 +127,19 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 <h1>
                     스킬
                     <span
-                        className={`
-                            ml-1 text-sopa-default font-bold
-                        `}
+                        className="
+                            ml-1 
+                            text-sopa-default font-bold
+                        "
                     >
                         (수정 불가)
                     </span>
                 </h1>
                 <div
-                    className={`
-                        mt-4 flex gap-5 flex-wrap justify-center items-center
-                    `}
+                    className="
+                        flex gap-5 flex-wrap justify-center items-center
+                        mt-4 
+                    "
                 >
                     <SkillImage
                         frontends={frontends}
@@ -152,7 +153,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 type="description"
                 register={register("editedDescription")}
                 placeholder="설명을 입력하세요."
-                maxLength={1000}
+                maxLength={600}
                 defaultValue={description}
             />
 
@@ -165,7 +166,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     },
                     validate: {
                         checkKakao: (value: any): boolean | string => {
-                            return value.length === 0 ? true : (
+                            return value?.length === 0 ? true : (
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )
                         }
@@ -178,7 +179,6 @@ export default function EditPost({ postId, title, description, openChatLink, app
             />
 
             <FormButton
-                disabled={loading}
                 loading={loading}
                 text={`게시물 수정`}
             />

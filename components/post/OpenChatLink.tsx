@@ -52,11 +52,12 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
         <Link href={openChatLink}>
             <a target="_blank">
                 <motion.div
-                    className={`
-                        flex h-12
-                        hover:scale-110 transition-all
-                        cursor-pointer 
-                    `}
+                    className="
+                        flex 
+                        h-12
+                        hover:scale-110 
+                        transition-all cursor-pointer 
+                    "
                     onHoverStart={() => getShowing(true)}
                     onHoverEnd={() => getShowing(false)}
                 >
@@ -70,17 +71,20 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
                                 initial="invisible"
                                 animate="visible"
                                 exit="exit"
-                                className={`
-                                flex flex-col items-center justify-center
-                                bg-sopa-pure dark:bg-sopa-lightDark p-2
-                                rounded-r-lg text-xs
-                            `}
+                                className="
+                                    flex flex-col items-center justify-center rounded-r-lg
+                                    p-2
+                                    bg-sopa-pure text-xs
+                                    dark:bg-sopa-lightDark
+                                "
                             >
                                 {openChatLink}
                                 <p
-                                    className={`
-                                        flex items-center font-bold text-sm h-full
-                                    `}
+                                    className="
+                                        flex items-center 
+                                        h-full
+                                        font-bold text-sm 
+                                    "
                                 >
                                     카카오 오픈채팅 바로가기
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">

@@ -7,10 +7,13 @@
 export default function NoData() {
     return (
         <div
-            className='h-screen flex flex-col items-center justify-start rounded-full space-y-2'
+            className="
+                flex flex-col items-center justify-start rounded-full 
+                h-screen space-y-2
+            "
         >
             <img
-                className="w-32 h-32 rounded-full"
+                className="rounded-full w-32 h-32"
                 src="/sopa.png"
             />
             <p className="font-bold text-lg">데이터가 없습니다!</p>

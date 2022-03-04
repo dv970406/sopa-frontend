@@ -1,42 +1,53 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.04
  */
 
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import useMyInfo from 'hooks/useMyInfo';
 import SearchPostsBtn from '@components/post/search/SearchPostsBtn';
 import LoginHoverEvent from './LoginHoverEvent';
+import { useEffect } from 'react';
 
 
 function NavBar() {
-    const token = useRecoilValue(tokenState);
+    const [token, setToken] = useRecoilState(tokenState);
     const { seeMyInfo } = useMyInfo();
-
     const router = useRouter();
-    const isHomePage = router.route === "/";
-    const isMyProfilePage = router.route === "/user/profile";
+    const isHomePage = router.pathname === "/";
+    const isMyProfilePage = router.pathname === "/user/profile";
 
     const goToLogin = () => router.push("/auth");
     const goToCreatePost = () => router.push("/post/upload");
     const goToSeeMyProfile = () => router.push(`/user/profile`);
     const goToEditUser = () => router.push("/user/edit");
 
+    useEffect(() => {
+        // token state값이 변경될 때 마다 로컬 스토리지에 저장된 token을 set함
+        if (token) {
+            setToken(localStorage.getItem("TOKEN"));
+        };
+    }, [token]);
+
     return (
         <div
-            className='
-                flex justify-around items-center px-10 h-24 shadow-md top-0 w-full
-                rounded-b-3xl
-            '
+            className="
+                flex justify-around items-center top-0 rounded-b-3xl
+                w-full h-24 px-10
+                shadow-md
+            "
         >
             <div
                 onClick={() => router.push("/")}
-                className='
-                    w-16 h-16 rounded-full border-opacity-50 cursor-pointer
-                    hover:scale-110 transition
-                '
+                className="
+                    rounded-full
+                    w-16 h-16
+                    border-opacity-50 
+                    hover:scale-110 
+                    transition cursor-pointer
+                "
             >
                 <img src="/sopa.png" className="w-full h-full" />
             </div>
@@ -62,18 +73,20 @@ function NavBar() {
                     isMyProfilePage ? (
                         <button
                             className="
-                                hover:text-sopa-accent transition
                                 font-bold text-sopa-default text-lg
+                                hover:text-sopa-accent 
+                                transition
                             "
                             onClick={goToEditUser}
                         >
-                            {`${seeMyInfo?.name} 수정`}
+                            {seeMyInfo?.name}
                         </button>
                     ) : (
                         <button
                             className="
-                                hover:text-sopa-accent transition 
                                 font-bold text-sopa-default text-lg 
+                                hover:text-sopa-accent 
+                                transition 
                             "
                             onClick={goToSeeMyProfile}
                         >

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.04
  */
 
 import React, { useState } from 'react';
@@ -59,7 +59,7 @@ export default function Input({ type, register, required, disabled = false, erro
     // 글자수 세는 기능
     const [checkTextCount, setCheckTextCount] = useState(0);
     const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setCheckTextCount(+event.currentTarget.value.length);
+        setCheckTextCount(+event.currentTarget.value?.length);
     };
 
     // input type에 따라 다른 JSX return
@@ -76,20 +76,21 @@ export default function Input({ type, register, required, disabled = false, erro
                     <textarea
                         id={type}
                         {...register}
-                        className={`
-                            shadow-sm
-                            border-b-2 border-b-form-gray  
+                        className="
+                            rounded-t-lg 
+                            w-full p-3
+                            border-b-2 border-b-form-gray text-sm shadow-sm
+                            dark:bg-dark-default 
                             placeholder:text-lg
-                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full dark:bg-dark-default rounded-t-lg p-3
-                            text-sm
-                        `}
+                            focus:placeholder-sopa-accent focus:outline-none 
+                            focus:ring-sopa-accent focus:border-b-sopa-accent
+                        "
                         rows={10}
                         cols={50}
                         {...props}
                         onChange={changeTextCount}
                     />
-                    <p className='font-bold text-right'>{checkTextCount} / 1000</p>
+                    <p className='font-bold text-right'>{checkTextCount} / 600</p>
                 </div>
             )
         } else if (type === "email") {
@@ -97,9 +98,9 @@ export default function Input({ type, register, required, disabled = false, erro
                 <div className="space-y-2">
                     <label
                         htmlFor={type}
-                        className={`
+                        className="
                             flex items-center font-bold
-                        `}
+                        "
                     >
                         <p>{typeTranslater(type)}</p>
                         {required ? (
@@ -119,20 +120,22 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         disabled={disabled}
                         className={`
-                            peer p-3 shadow-sm
+                            rounded-t-lg
+                            w-full p-2 
                             border-b-2 border-b-form-gray 
-                            placeholder:text-lg placeholder-form-gray
-                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full dark:bg-dark-default rounded-t-lg
+                            dark:bg-dark-default shadow-sm
                             ${disabled ? "bg-slate-300 opacity-40 dark:bg-dark-ultra" : null}
+                            placeholder:text-lg placeholder-form-gray
+                            focus:placeholder-sopa-accent focus:outline-none 
+                            focus:ring-sopa-accent focus:border-b-sopa-accent
                         `}
                         {...props}
                         onChange={changeTextCount}
                     />
                     <div
-                        className='
-                            p-1 invisible peer-invalid:visible  text-emphasize font-bold
-                        '
+                        className="
+                            text-emphasize font-bold
+                        "
                     >
                         {error}
                     </div>
@@ -143,9 +146,10 @@ export default function Input({ type, register, required, disabled = false, erro
                 <div className="space-y-2">
                     <label
                         htmlFor={type}
-                        className={`
-                            flex items-center font-bold
-                        `}
+                        className="
+                            flex items-center 
+                            font-bold
+                        "
                     >
                         {typeTranslater(type)}
                         {required ? (
@@ -165,18 +169,22 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         disabled={disabled}
                         className={`
-                            p-3 shadow-sm
+                            rounded-t-lg
+                            w-full p-2 
                             border-b-2 border-b-form-gray 
-                            placeholder:text-lg placeholder-form-gray
-                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full dark:bg-dark-default rounded-t-lg
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
+                            dark:bg-dark-default shadow-sm
+                            placeholder:text-lg placeholder-form-gray
+                            focus:placeholder-sopa-accent focus:outline-none 
+                            focus:ring-sopa-accent focus:border-b-sopa-accent
                         `}
                         {...props}
                         onChange={changeTextCount}
                     />
                     <div
-                        className='p-1  text-emphasize font-bold'
+                        className="
+                            text-emphasize font-bold
+                        "
                     >
                         {error}
                     </div>

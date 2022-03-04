@@ -17,18 +17,19 @@ export default function LoginOrSignUp({ leftText, rightText }: ISelectOne) {
 
     return (
         <div
-            className='
+            className="
                 flex align-center justify-around
+                max-w-lg w-full mb-10 space-x-2
                 text-4xl
-                mb-10
-                space-x-2
-                max-w-lg w-full
-            '
+            "
         >
             <div
                 className={`
-                    text-2xl border-b-4 text-center hover:border-b-sopa-accent transition-colors w-full cursor-pointer rounded-md
+                    rounded-md
+                    w-full 
+                    text-2xl border-b-4 text-center hover:border-b-sopa-accent 
                     ${loginMode ? "border-b-sopa-accent" : "border-b-fuchsia-100"}
+                    transition-colors cursor-pointer
                 `}
                 onClick={() => changeLoginMode(true)}
             >
@@ -36,8 +37,11 @@ export default function LoginOrSignUp({ leftText, rightText }: ISelectOne) {
             </div>
             <div
                 className={`
-                    text-2xl border-b-4 text-center hover:border-b-sopa-accent transition-colors w-full cursor-pointer rounded-md
+                    rounded-md
+                    w-full 
+                    text-2xl border-b-4 text-center hover:border-b-sopa-accent
                     ${loginMode ? "border-b-fuchsia-100" : "border-b-sopa-accent"}
+                    transition-colors cursor-pointer 
                 `}
                 onClick={() => changeLoginMode(false)}
             >

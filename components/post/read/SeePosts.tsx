@@ -70,9 +70,10 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
                 {selectedPostId !== null ? (
                     <motion.div
                         className={`
-                            flex justify-center items-center px-6
+                            flex justify-center items-center 
+                            h-screen w-screen px-6 
                             sm:px-20 md:px-32 lg:px-48 xl:px-72 2xl:px-96
-                            fixed inset-0 h-screen w-screen
+                            fixed inset-0
                         `}
                         onClick={() => setSelectedPostId(null)}
                         variants={semiDetailVariants}
@@ -82,7 +83,7 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
                     >
                         <motion.div
                             layoutId={String(selectedPostId)}
-                            className={` w-full `}
+                            className="w-full"
                         >
                             <SeeSemiDetail semiDetail={posts[selectedPostId]} />
                         </motion.div>

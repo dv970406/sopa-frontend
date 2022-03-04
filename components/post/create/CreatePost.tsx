@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.04
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -37,7 +37,7 @@ export default function CreatePost() {
     const setPosts = useSetRecoilState(postsState)
     const { seeMyInfo } = useMyInfo();
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<IForm>();
+    const { register, handleSubmit, formState: { errors } } = useForm<IForm>();
 
     // createPost Mutation 처리 후 cache 수정작업
     const updateCreatePost: MutationUpdaterFn = (cache, { data }) => {
@@ -148,7 +148,7 @@ export default function CreatePost() {
                 type="description"
                 register={register("description")}
                 placeholder="설명을 입력하세요."
-                maxLength={1000}
+                maxLength={600}
             />
 
             <Input
@@ -160,7 +160,7 @@ export default function CreatePost() {
                     },
                     validate: {
                         checkKakao: (value: any): boolean | string => {
-                            return value.length === 0 ? true : (
+                            return value?.length === 0 ? true : (
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )
                         }
@@ -172,7 +172,6 @@ export default function CreatePost() {
             />
 
             <FormButton
-                disabled={loading || !watch("title") || selectedSkillsToUpload?.length === 0}
                 loading={loading}
                 text="게시글 업로드"
             />

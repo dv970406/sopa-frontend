@@ -13,9 +13,9 @@ export default function SkillBoards() {
 
     return (
         <div
-            className={`
+            className="
                 flex flex-col space-y-6 lg:flex-row lg:space-x-6 lg:space-y-0
-            `}
+            "
         >
             {Object.keys(skills).map((position) => <SkillBoard key={position} skillsOfPosition={skills[position]} />)}
         </div>
