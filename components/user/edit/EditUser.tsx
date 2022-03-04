@@ -28,8 +28,13 @@ const EDIT_USER_MUTATION = gql`
 
 export default function EditUser() {
     const router = useRouter();
-    const { register, handleSubmit, clearErrors, getValues, watch, formState: { errors } } = useForm<IForm>();
     const { seeMyInfo } = useMyInfo();
+    const { register, handleSubmit, clearErrors, getValues, formState: { errors, isValid } } = useForm<IForm>({
+        mode: "onChange",
+        defaultValues: {
+            "name": seeMyInfo?.name
+        }
+    });
 
     // editUser Mutation 처리 후 cache 수정 작업
     const updateEditUser: MutationUpdaterFn = (cache, { data }) => {
@@ -71,8 +76,6 @@ export default function EditUser() {
         })
     }
 
-    const checkDisabledStatus = loading || !watch("name", seeMyInfo?.name) || !watch("password") || !watch("password2");
-
     return (
         <form
             onSubmit={handleSubmit(onValid)}
@@ -88,7 +91,6 @@ export default function EditUser() {
                         message: "이름은 2글자 이상이어야 합니다."
                     },
                 })}
-                defaultValue={seeMyInfo?.name}
                 error={errors.name?.message}
             />
             <Input
@@ -141,7 +143,7 @@ export default function EditUser() {
             )}
 
             <FormButton
-                disabled={checkDisabledStatus}
+                disabled={loading || !isValid}
                 text={`${seeMyInfo?.name}의 프로필 수정`}
                 loading={loading}
             />

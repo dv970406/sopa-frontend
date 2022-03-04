@@ -11,7 +11,6 @@ interface IFormButton {
 }
 
 export default function FormButton({ disabled = false, text, loading, onClick }: IFormButton) {
-
     return (
         <button
             disabled={disabled}

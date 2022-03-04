@@ -59,7 +59,7 @@ export default function Input({ type, register, required, disabled = false, erro
     // 글자수 세는 기능
     const [checkTextCount, setCheckTextCount] = useState(0);
     const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        setCheckTextCount(+event.currentTarget.value.length);
+        setCheckTextCount(+event.currentTarget.value?.length);
     };
 
     // input type에 따라 다른 JSX return

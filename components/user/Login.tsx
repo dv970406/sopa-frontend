@@ -39,7 +39,10 @@ interface ILoginCompleted {
 
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
-    const { register, handleSubmit, watch, clearErrors, formState: { errors } } = useForm<IForm>();
+    const { register, handleSubmit, clearErrors, formState: { errors, isValid } } = useForm<IForm>({
+        mode: 'onChange'
+    });
+    const router = useRouter();
 
     const loginCompleted = ({ login }: ILoginCompleted) => {
         const { ok, token, error } = login;
@@ -56,11 +59,8 @@ export default function Login() {
         router.push("/");
     };
     const [loginMutation, { loading }] = useMutation<ILoginCompleted>(LOGIN_MUTATION, {
-        onCompleted: loginCompleted
+        onCompleted: loginCompleted,
     });
-    const checkDisabledStatus = loading || !watch("email") || !watch("password")
-
-    const router = useRouter();
 
     const onValid = async (data: IForm) => {
         if (loading) return;
@@ -103,7 +103,7 @@ export default function Login() {
                 maxLength={15}
             />
             <FormButton
-                disabled={checkDisabledStatus}
+                disabled={loading || !isValid}
                 loading={loading}
                 text="로그인"
                 onClick={handleSubmit(onValid)}

@@ -33,7 +33,9 @@ const CREATE_USER_MUTATION = gql`
 export default function CreateUser() {
     // 이메일로 보내진 코드를 state에 저장한다
     const [emailCode, setEmailCode] = useState<number | null>(null);
-    const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm<IForm>();
+    const { register, handleSubmit, getValues, formState: { errors, isValid } } = useForm<IForm>({
+        mode: "onChange"
+    });
     const setLoginMode = useSetRecoilState(loginModeState);
 
     // createUser Mutation처리 후 로그인 모드로 바꾸기
@@ -70,8 +72,6 @@ export default function CreateUser() {
         alert(`${name}님 환영합니다!`);
     };
 
-    const checkDisabledStatus = loading || !watch("email") || !watch("name") || !watch("password") || !watch("password2")
-
     const [isEmailValidationMode, setIsEmailValidationMode] = useState(false);
 
     // form을 제출하면 비밀번호 일치여부, 이메일로 인증코드 전송을 하고 state에 담은 후 인증코드 입력모드로 바꾼다.
@@ -105,10 +105,6 @@ export default function CreateUser() {
         alert(response.message);
     }
 
-    console.log(watch("email"))
-    console.log(watch("name"))
-    console.log(watch("password"))
-    console.log(watch("password2"))
     return (
         <>
             <Form>
@@ -192,7 +188,7 @@ export default function CreateUser() {
                     </div>
                 ) : (
                     <FormButton
-                        disabled={checkDisabledStatus}
+                        disabled={loading || !isValid}
                         loading={loading}
                         text='이메일 인증'
                         onClick={handleSubmit(onValid)}

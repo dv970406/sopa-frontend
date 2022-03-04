@@ -33,7 +33,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
     // 글자수 세는 기능
     const [checkTextCount, setCheckTextCount] = useState(0);
     const changeTextCount = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setCheckTextCount(+event.currentTarget.value.length);
+        setCheckTextCount(+event.currentTarget.value?.length);
     };
 
     const { register, handleSubmit, setValue } = useForm<IForm>();

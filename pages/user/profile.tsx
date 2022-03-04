@@ -8,11 +8,9 @@ import MainLayout from '@components/shared/MainLayout';
 import ProfileTab from '@components/user/read/ProfileTab';
 import SeeMyComments from '@components/user/read/SeeMyComments';
 import SeeMyPosts from '@components/user/read/SeeMyPosts';
-import { myActivitiesTabState, tokenState } from '@utils/atoms';
+import { myActivitiesTabState } from '@utils/atoms';
 import { USER_DETAIL_FRAGMENT } from '@utils/fragments';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import { useLayoutEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 
@@ -28,17 +26,11 @@ const SEE_MY_INFO_QUERY = gql`
 export default function UserProfilePage() {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
-    const token = useRecoilValue(tokenState);
-    const router = useRouter();
     const NoSsrSeeMyLikes = dynamic(
         () => import('@components/user/read/SeeMyLikes'),
         { ssr: false }
     );
 
-    // NoSsr로 화면이 미리 보여지는 것을 막고 useLayoutEffect로 앱 페인트 전에 함수를 실행시킨다
-    useLayoutEffect(() => {
-        if (!token) router.back();
-    }, []);
     return (
         <MainLayout title={userData?.seeMyInfo?.name}>
             <div className={`sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8`}>

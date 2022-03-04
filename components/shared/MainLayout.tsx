@@ -3,9 +3,11 @@
  * 수정일: 2022.03.03
  */
 
+import { tokenState } from '@utils/atoms';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRecoilValue } from 'recoil';
 import NavBar from './NavBar';
 
 interface IMainLayout {
@@ -15,9 +17,18 @@ interface IMainLayout {
 }
 
 export default function MainLayout({ loading, title, children }: IMainLayout) {
-    const { pathname } = useRouter();
+    const { pathname, push } = useRouter();
     const isAuthPage = pathname === "/auth";
+    const neededLoginPage = pathname === "/post/upload" || pathname === "/user/profile" || pathname === "/user/edit"
+    const token = useRecoilValue(tokenState);
 
+    useEffect(() => {
+        if (neededLoginPage === true) {
+            token ? null : push("/auth");
+        } else if (isAuthPage) {
+            token ? push("/") : null;
+        }
+    }, [pathname]);
     return (
         <div
             className={`
@@ -36,9 +47,11 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
                 `}
             >
                 {children}
-                <footer
-                    className="py-52"
-                />
+                {isAuthPage ? null : (
+                    <footer
+                        className="py-52"
+                    />
+                )}
             </div>
         </div>
     )

@@ -165,7 +165,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                     },
                     validate: {
                         checkKakao: (value: any): boolean | string => {
-                            return value.length === 0 ? true : (
+                            return value?.length === 0 ? true : (
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )
                         }
