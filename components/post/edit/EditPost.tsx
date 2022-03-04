@@ -178,7 +178,6 @@ export default function EditPost({ postId, title, description, openChatLink, app
             />
 
             <FormButton
-                disabled={loading}
                 loading={loading}
                 text={`게시물 수정`}
             />

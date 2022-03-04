@@ -15,7 +15,7 @@ export default function Button({ text, onClick }: IButton) {
                 flex justify-center items-center rounded-lg 
                 px-3 py-2
                 bg-sopa-default text-white font-bold
-                hover:bg-sopa-ultra transition 
+                hover:bg-sopa-accent transition
             "
             onClick={onClick}
         >

@@ -41,11 +41,7 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
   const setPosts = useSetRecoilState(postsState);
   const searchMode = useRecoilValue(searchModeState);
 
-  const seePostsCompleted = ({ seePosts }: ISeePostsQuery) => setPosts(seePosts);
-
-  const { data: seePostsData, fetchMore, refetch: refetchSeePosts } = useQuery<ISeePostsQuery>(SEE_POSTS_QUERY, {
-    onCompleted: seePostsCompleted,
-  });
+  const { data: seePostsData, fetchMore, refetch: refetchSeePosts } = useQuery<ISeePostsQuery>(SEE_POSTS_QUERY);
 
   const { data: seePostsCountData, refetch: refetchSeePostsCount } = useQuery<ISeePostsCountQuery>(SEE_POSTS_COUNT_QUERY);
 

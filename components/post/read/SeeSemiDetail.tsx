@@ -55,11 +55,10 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
                     onClick={() => goToPostDetail()}
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                     className="
-                        w-16 h-16 
-                        sm:w-8 sm:h-8 cursor-pointer 
+                        w-8 h-8
                         text-sopa-pure 
                         hover:text-sopa-accent
-                        transition-colors
+                        transition-colors cursor-pointer 
                     "
                 >
                     <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z" />

@@ -46,7 +46,6 @@ export default function InfiniteScrolling({ howManyData, children, fetchMore, cs
             ) : null}
             className={`${css} p-4 w-full h-full`}
             scrollThreshold={0.9}
-            endMessage={<h4 className="text-center text-sopa-accent font-bold">끗!</h4>}
         >
             {children}
         </InfiniteScroll>

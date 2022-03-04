@@ -39,8 +39,8 @@ interface ILoginCompleted {
 
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
-    const { register, handleSubmit, clearErrors, formState: { errors, isValid } } = useForm<IForm>({
-        mode: 'onChange'
+    const { register, handleSubmit, clearErrors, formState: { errors } } = useForm<IForm>({
+        mode: "onChange"
     });
     const router = useRouter();
 
@@ -85,7 +85,7 @@ export default function Login() {
                         message: "이메일 양식을 지켜주세요."
                     }
                 })}
-                error={errors.email?.message}
+                error={errors?.email?.message}
                 required
             />
             <Input
@@ -97,13 +97,12 @@ export default function Login() {
                         message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                     }
                 })}
-                error={errors.password?.message}
+                error={errors?.password?.message}
                 required
                 minLength={8}
                 maxLength={15}
             />
             <FormButton
-                disabled={loading || !isValid}
                 loading={loading}
                 text="로그인"
                 onClick={handleSubmit(onValid)}

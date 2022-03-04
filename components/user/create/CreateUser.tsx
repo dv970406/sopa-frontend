@@ -33,7 +33,7 @@ const CREATE_USER_MUTATION = gql`
 export default function CreateUser() {
     // 이메일로 보내진 코드를 state에 저장한다
     const [emailCode, setEmailCode] = useState<number | null>(null);
-    const { register, handleSubmit, getValues, formState: { errors, isValid } } = useForm<IForm>({
+    const { register, handleSubmit, getValues, formState: { errors } } = useForm<IForm>({
         mode: "onChange"
     });
     const setLoginMode = useSetRecoilState(loginModeState);
@@ -191,7 +191,6 @@ export default function CreateUser() {
                     </div>
                 ) : (
                     <FormButton
-                        disabled={loading || !isValid}
                         loading={loading}
                         text='이메일 인증'
                         onClick={handleSubmit(onValid)}

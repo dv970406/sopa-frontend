@@ -29,10 +29,10 @@ const EDIT_USER_MUTATION = gql`
 export default function EditUser() {
     const router = useRouter();
     const { seeMyInfo } = useMyInfo();
-    const { register, handleSubmit, clearErrors, getValues, formState: { errors, isValid } } = useForm<IForm>({
+    const { register, handleSubmit, clearErrors, getValues, formState: { errors } } = useForm<IForm>({
         mode: "onChange",
         defaultValues: {
-            "name": seeMyInfo?.name
+            name: seeMyInfo?.name
         }
     });
 
@@ -141,7 +141,6 @@ export default function EditUser() {
             )}
 
             <FormButton
-                disabled={loading || !isValid}
                 text={`${seeMyInfo?.name}의 프로필 수정`}
                 loading={loading}
             />

@@ -79,9 +79,8 @@ export default function Input({ type, register, required, disabled = false, erro
                         className="
                             rounded-t-lg 
                             w-full p-3
-                            shadow-sm
-                            border-b-2 border-b-form-gray  
-                            dark:bg-dark-default text-sm
+                            border-b-2 border-b-form-gray text-sm shadow-sm
+                            dark:bg-dark-default 
                             placeholder:text-lg
                             focus:placeholder-sopa-accent focus:outline-none 
                             focus:ring-sopa-accent focus:border-b-sopa-accent
@@ -121,22 +120,20 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         disabled={disabled}
                         className={`
-                            peer 
-                            w-full p-3 rounded-t-lg
+                            rounded-t-lg
+                            w-full p-2 
                             border-b-2 border-b-form-gray 
-                            dark:bg-dark-default
+                            dark:bg-dark-default shadow-sm
                             ${disabled ? "bg-slate-300 opacity-40 dark:bg-dark-ultra" : null}
                             placeholder:text-lg placeholder-form-gray
                             focus:placeholder-sopa-accent focus:outline-none 
                             focus:ring-sopa-accent focus:border-b-sopa-accent
-                            shadow-sm
                         `}
                         {...props}
                         onChange={changeTextCount}
                     />
                     <div
                         className="
-                            p-1 invisible peer-invalid:visible 
                             text-emphasize font-bold
                         "
                     >
@@ -172,10 +169,11 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         disabled={disabled}
                         className={`
-                            p-3 shadow-sm
-                            w-full border-b-2 border-b-form-gray 
+                            rounded-t-lg
+                            w-full p-2 
+                            border-b-2 border-b-form-gray 
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
-                            dark:bg-dark-default rounded-t-lg
+                            dark:bg-dark-default shadow-sm
                             placeholder:text-lg placeholder-form-gray
                             focus:placeholder-sopa-accent focus:outline-none 
                             focus:ring-sopa-accent focus:border-b-sopa-accent
@@ -185,7 +183,6 @@ export default function Input({ type, register, required, disabled = false, erro
                     />
                     <div
                         className="
-                            p-1 
                             text-emphasize font-bold
                         "
                     >
