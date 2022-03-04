@@ -14,10 +14,9 @@ export default function FormLayout({ children }: IFormLayoutComponent) {
     return (
         <div
             className='
-                flex flex-col space-y-6
-                px-12 pt-16 pb-8
-                max-w-lg w-full
-                border-2 border-form-gray rounded-xl
+                flex flex-col rounded-xl
+                max-w-lg w-full px-12 pt-16 pb-8 space-y-6
+                border-2 border-form-gray 
                 focus-within:placeholder-sopa-accent focus-within:ring-sopa-accent focus-within:border-sopa-accent focus-within:outline-none 
                 shadow-md
             '

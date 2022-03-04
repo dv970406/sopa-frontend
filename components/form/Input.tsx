@@ -76,14 +76,16 @@ export default function Input({ type, register, required, disabled = false, erro
                     <textarea
                         id={type}
                         {...register}
-                        className={`
+                        className="
+                            rounded-t-lg 
+                            w-full p-3
                             shadow-sm
                             border-b-2 border-b-form-gray  
+                            dark:bg-dark-default text-sm
                             placeholder:text-lg
-                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full dark:bg-dark-default rounded-t-lg p-3
-                            text-sm
-                        `}
+                            focus:placeholder-sopa-accent focus:outline-none 
+                            focus:ring-sopa-accent focus:border-b-sopa-accent
+                        "
                         rows={10}
                         cols={50}
                         {...props}
@@ -97,9 +99,9 @@ export default function Input({ type, register, required, disabled = false, erro
                 <div className="space-y-2">
                     <label
                         htmlFor={type}
-                        className={`
+                        className="
                             flex items-center font-bold
-                        `}
+                        "
                     >
                         <p>{typeTranslater(type)}</p>
                         {required ? (
@@ -119,20 +121,24 @@ export default function Input({ type, register, required, disabled = false, erro
                         {...register}
                         disabled={disabled}
                         className={`
-                            peer p-3 shadow-sm
+                            peer 
+                            w-full p-3 rounded-t-lg
                             border-b-2 border-b-form-gray 
-                            placeholder:text-lg placeholder-form-gray
-                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full dark:bg-dark-default rounded-t-lg
+                            dark:bg-dark-default
                             ${disabled ? "bg-slate-300 opacity-40 dark:bg-dark-ultra" : null}
+                            placeholder:text-lg placeholder-form-gray
+                            focus:placeholder-sopa-accent focus:outline-none 
+                            focus:ring-sopa-accent focus:border-b-sopa-accent
+                            shadow-sm
                         `}
                         {...props}
                         onChange={changeTextCount}
                     />
                     <div
-                        className='
-                            p-1 invisible peer-invalid:visible  text-emphasize font-bold
-                        '
+                        className="
+                            p-1 invisible peer-invalid:visible 
+                            text-emphasize font-bold
+                        "
                     >
                         {error}
                     </div>
@@ -143,9 +149,10 @@ export default function Input({ type, register, required, disabled = false, erro
                 <div className="space-y-2">
                     <label
                         htmlFor={type}
-                        className={`
-                            flex items-center font-bold
-                        `}
+                        className="
+                            flex items-center 
+                            font-bold
+                        "
                     >
                         {typeTranslater(type)}
                         {required ? (
@@ -166,17 +173,21 @@ export default function Input({ type, register, required, disabled = false, erro
                         disabled={disabled}
                         className={`
                             p-3 shadow-sm
-                            border-b-2 border-b-form-gray 
-                            placeholder:text-lg placeholder-form-gray
-                            focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent
-                            w-full dark:bg-dark-default rounded-t-lg
+                            w-full border-b-2 border-b-form-gray 
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
+                            dark:bg-dark-default rounded-t-lg
+                            placeholder:text-lg placeholder-form-gray
+                            focus:placeholder-sopa-accent focus:outline-none 
+                            focus:ring-sopa-accent focus:border-b-sopa-accent
                         `}
                         {...props}
                         onChange={changeTextCount}
                     />
                     <div
-                        className='p-1  text-emphasize font-bold'
+                        className="
+                            p-1 
+                            text-emphasize font-bold
+                        "
                     >
                         {error}
                     </div>

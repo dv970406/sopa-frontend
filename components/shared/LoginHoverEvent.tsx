@@ -52,10 +52,11 @@ export default function LoginHoverEvent() {
             onMouseLeave={() => setShowSocialLogin(false)}
         >
             <button
-                className={`
-                    font-bold text-sopa-accent transition
+                className="
+                    font-bold text-sopa-accent 
                     hover:scale-110
-                `}
+                    transition
+                "
                 onClick={goToLogin}
             >
                 로그인
@@ -63,10 +64,12 @@ export default function LoginHoverEvent() {
             <AnimatePresence>
                 {showSocialLogin ? (
                     <motion.div
-                        className={`
-                            flex absolute space-x-3 shadow-md bg-white dark:bg-dark-default
-                            rounded-lg p-2 
-                        `}
+                        className="
+                            flex absolute rounded-lg 
+                            p-2 space-x-3 
+                            bg-white shadow-md
+                            dark:bg-dark-default
+                        "
                         variants={loginTabVariants}
                         initial="invisible"
                         animate="visible"

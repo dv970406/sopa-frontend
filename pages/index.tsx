@@ -66,7 +66,7 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
       title="당신의 소울파트너"
     >
       <div
-        className={`sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8`}
+        className="sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8"
       >
         {searchMode ? null : (
           <>

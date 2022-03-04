@@ -32,7 +32,8 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
     return (
         <div
             className={`
-                font-NotoSans select-none box-border dark:bg-dark-ultra dark:text-dark-text-color
+                font-NotoSans select-none box-border 
+                dark:bg-dark-ultra dark:text-dark-text-color
             `}
         >
             <Head>
@@ -41,9 +42,9 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
             {isAuthPage ? null : <NavBar />}
             <div
                 className={`
-                    flex flex-col
-                    justify-center py-16 px-8 
-                    ${isAuthPage ? "flex items-center" : ""}
+                    flex flex-col justify-center 
+                    ${isAuthPage ? "items-center" : ""}
+                    py-16 px-8 
                 `}
             >
                 {children}

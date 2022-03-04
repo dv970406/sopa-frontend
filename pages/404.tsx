@@ -29,14 +29,20 @@ export default function NoExistsPage() {
     }, [x]);
     return (
         <div
-            className="h-screen w-screen flex items-center justify-center overflow-hidden space-x-7"
+            className="
+                flex items-center justify-center 
+                h-screen w-screen overflow-hidden space-x-7
+            "
             ref={neverGoOutBox}
         >
             <Head>
                 <title>404 NOT FOUND!</title>
             </Head>
             <motion.div
-                className='w-48 h-48 space-y-3 flex flex-col items-center'
+                className="
+                    flex flex-col items-center
+                    w-48 h-48 space-y-3 
+                "
             >
                 <motion.img
                     drag='x'
@@ -52,7 +58,11 @@ export default function NoExistsPage() {
                 />
             </motion.div>
             <motion.div
-                className='text-xl flex items-center space-x-3'
+                className="
+                    flex items-center 
+                    space-x-3
+                    text-xl 
+                "
                 initial={{
                     x: -200,
                     opacity: 0

@@ -23,7 +23,7 @@ export default function PostUploadPage() {
     return (
         <MainLayout title='게시물 등록'>
             <div
-                className={`md:px-28 lg:px-52 xl:px-96 space-y-8`}
+                className="md:px-28 lg:px-52 xl:px-96 space-y-8"
             >
                 <NoSsrCreatePost />
             </div>

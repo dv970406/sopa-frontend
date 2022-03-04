@@ -96,9 +96,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
 
     return (
         <form
-            className={`
-                space-y-10
-            `}
+            className="space-y-10"
             onSubmit={handleSubmit(onValid)}
         >
             <Button
@@ -128,17 +126,19 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 <h1>
                     스킬
                     <span
-                        className={`
-                            ml-1 text-sopa-default font-bold
-                        `}
+                        className="
+                            ml-1 
+                            text-sopa-default font-bold
+                        "
                     >
                         (수정 불가)
                     </span>
                 </h1>
                 <div
-                    className={`
-                        mt-4 flex gap-5 flex-wrap justify-center items-center
-                    `}
+                    className="
+                        flex gap-5 flex-wrap justify-center items-center
+                        mt-4 
+                    "
                 >
                     <SkillImage
                         frontends={frontends}

@@ -14,21 +14,16 @@ export default function DisplayPost(
 ) {
     return (
         <div
-            className={`
-                border-2 border-fuchsia-100 rounded-lg p-6
-                w-full h-full
-                flex flex-col justify-between items-center
-                space-y-8 shadow-xl
+            className="
+                flex flex-col justify-between items-center rounded-lg
+                w-full h-full p-6 space-y-8 
+                border-2 border-fuchsia-100 shadow-xl
+                hover:border-sopa-pure hover:ring-2 ring-sopa-default ring-offset-2 dark:bg-dark-default
                 hover:scale-105 transition-all duration-300 cursor-pointer
-                hover:border-sopa-pure hover:ring-2 ring-sopa-default ring-offset-2
-                dark:bg-dark-default
-            `}
+            "
         >
             <div
-                className={`
-                    flex flex-wrap gap-6
-                    justify-center
-                `}
+                className="flex flex-wrap gap-6 justify-center"
             >
                 <SkillImage
                     displayMode
@@ -38,17 +33,15 @@ export default function DisplayPost(
                 />
             </div>
             <h1
-                className='
-                    font-bold line-clamp-2 text-lg lg:text-xl
-                '
+                className="font-bold line-clamp-2 text-base"
             >
                 {title}
             </h1>
             <div
-                className={`
-                    flex justify-between w-full
-                    items-center place-self-end
-                `}
+                className="
+                    flex justify-between items-center place-self-end
+                    w-full
+                "
             >
                 <MetaData
                     commentCount={commentCount}
@@ -58,10 +51,10 @@ export default function DisplayPost(
                     readCount={readCount}
                 />
                 <p
-                    className={`
-                        text-sm font-semibold
+                    className="
                         place-self-end
-                    `}
+                        text-sm font-semibold
+                    "
                 >
                     {getUploadedDate(+createdAt)}
                 </p>

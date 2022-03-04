@@ -79,9 +79,7 @@ export default function EditUser() {
     return (
         <form
             onSubmit={handleSubmit(onValid)}
-            className={`
-                space-y-10
-            `}
+            className="space-y-10"
         >
             <Input
                 type="name"

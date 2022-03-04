@@ -14,29 +14,28 @@ function DisplayComment({ postId, id, comment, user, isMine }: ICommentInfo) {
     const [editCommentMode, setEditCommentMode] = useState<boolean>(false);
     return (
         <div
-            className={`
-                p-2 w-full
+            className="
+                w-full p-2 space-y-2
                 border-b-2 border-b-sopa-soft
-                space-y-2
-            `}
+            "
         >
             <div
-                className={`
+                className="
                     flex justify-between
-                `}
+                "
             >
                 <h1
-                    className={`
+                    className="
                         font-bold text-lg
-                    `}
+                    "
                 >
                     {user?.name}
                 </h1>
                 {isMine ? (
                     <div
-                        className={`
+                        className="
                             flex space-x-3
-                        `}
+                        "
                     >
                         <EditCommentBtn setEditCommentMode={setEditCommentMode} />
                         <DeleteCommentBtn postId={postId!} commentId={id} />

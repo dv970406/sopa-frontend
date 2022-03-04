@@ -26,17 +26,21 @@ function NavBar() {
 
     return (
         <div
-            className='
-                flex justify-around items-center px-10 h-24 shadow-md top-0 w-full
-                rounded-b-3xl
-            '
+            className="
+                flex justify-around items-center top-0 rounded-b-3xl
+                w-full h-24 px-10
+                shadow-md
+            "
         >
             <div
                 onClick={() => router.push("/")}
-                className='
-                    w-16 h-16 rounded-full border-opacity-50 cursor-pointer
-                    hover:scale-110 transition
-                '
+                className="
+                    rounded-full
+                    w-16 h-16
+                    border-opacity-50 
+                    hover:scale-110 
+                    transition cursor-pointer
+                "
             >
                 <img src="/sopa.png" className="w-full h-full" />
             </div>
@@ -62,8 +66,9 @@ function NavBar() {
                     isMyProfilePage ? (
                         <button
                             className="
-                                hover:text-sopa-accent transition
                                 font-bold text-sopa-default text-lg
+                                hover:text-sopa-accent 
+                                transition
                             "
                             onClick={goToEditUser}
                         >
@@ -72,8 +77,9 @@ function NavBar() {
                     ) : (
                         <button
                             className="
-                                hover:text-sopa-accent transition 
                                 font-bold text-sopa-default text-lg 
+                                hover:text-sopa-accent 
+                                transition 
                             "
                             onClick={goToSeeMyProfile}
                         >

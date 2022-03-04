@@ -87,11 +87,13 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
                 defaultValue={comment}
                 maxLength={200}
                 autoFocus={true}
-                className={`
-                    w-full
-                    focus:outline-none bg-fuchsia-100 rounded-md px-3 py-2
-                    dark:bg-dark-default
-                `}
+                className="
+                    rounded-md 
+                    w-full px-3 py-2
+                    bg-fuchsia-100 
+                    dark:bg-dark-default 
+                    focus:outline-none 
+                "
             />
         </form>
     )

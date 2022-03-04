@@ -15,14 +15,11 @@ export default function FormButton({ disabled = false, text, loading, onClick }:
         <button
             disabled={disabled}
             className={`
-                flex items-center justify-center
-                w-full h-4 rounded-xl px-3 py-7
+                flex items-center justify-center rounded-xl
+                w-full h-4 px-3 py-7
                 ${disabled ? "bg-sopa-pure" : "bg-sopa-accent"} 
-                focus:outline-none
-                focus:ring-2 ring-offset-2 ring-sopa-accent
-                transition-colors
-                shadow-md
-                cursor-pointer
+                focus:ring-2 ring-offset-2 ring-sopa-accent focus:outline-none
+                transition-colors shadow-md cursor-pointer
             `}
             onClick={onClick}
         >

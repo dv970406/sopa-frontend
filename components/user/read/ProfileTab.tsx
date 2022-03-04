@@ -24,13 +24,16 @@ export default function ProfileTab({ autoFocus, count, onFocusTab, svg }: ITabCo
         >
             <button
                 className={`
-                    p-2 rounded-full border-4 border-sopa-pure hover:border-sopa-default transition
+                    rounded-full 
+                    p-2 
+                    border-4 border-sopa-pure hover:border-sopa-default 
                     ${myActivitiesTab === onFocusTab ? (
                         "text-white bg-sopa-accent ring-2 ring-sopa-accent ring-offset-2"
                     ) : (
                         "text-sopa-accent bg-white"
                     )}
                     focus:outline-none
+                    transition
                 `}
                 autoFocus={autoFocus}
                 onClick={() => setMyActivitiesTab(onFocusTab)}

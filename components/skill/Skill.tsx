@@ -93,12 +93,11 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
 
     return (
         <motion.div
-            className={`
-                flex m-3
-                justify-center items-center
+            className="
+                group flex justify-center items-center 
+                m-3
                 cursor-pointer
-                group
-            `}
+            "
             onClick={() => onClick()}
             layoutId={uploadMode ? undefined : name}
             variants={skillVar}
@@ -113,15 +112,13 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
                 `}
             />
             <motion.p
-                className={`
-                    hidden group-hover:block
-                    absolute -bottom-3
-                    bg-sopa-default 
-                    py-1.5 px-2 rounded-md
-                    text-xs tracking-wider
-                    font-bold
+                className="
+                    hidden group-hover:block absolute -bottom-3 rounded-md
+                    py-1.5 px-2 
+                    bg-sopa-default text-xs font-bold
                     dark:text-white
-                `}
+                    tracking-wider
+                "
             >
                 {name}
             </motion.p>

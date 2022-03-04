@@ -178,10 +178,13 @@ export default function CreateUser() {
                         />
                         <button
                             onClick={checkEmailValidation}
-                            className='
-                                bg-sopa-pure hover:bg-sopa-default transition 
-                                rounded-xl px-4 py-3 text-white font-semibold text-sm
-                            '
+                            className="
+                                rounded-xl 
+                                px-4 py-3 
+                                bg-sopa-pure text-white font-semibold text-sm
+                                hover:bg-sopa-default 
+                                transition 
+                            "
                         >
                             회원가입
                         </button>

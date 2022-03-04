@@ -33,15 +33,25 @@ export default function UserProfilePage() {
 
     return (
         <MainLayout title={userData?.seeMyInfo?.name}>
-            <div className={`sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8`}>
+            <div className="sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8">
                 <div
-                    className={`
-                        relative flex justify-center mb-5
-                    `}
+                    className="
+                        relative flex justify-center 
+                        mb-5
+                    "
                 >
-                    <div className='absolute h-2 w-full bg-sopa-pure top-4 -z-10 rounded-full' />
                     <div
-                        className='flex justify-around w-full'
+                        className="
+                            absolute top-4 -z-10 rounded-full
+                            h-2 w-full
+                            bg-sopa-pure  
+                        "
+                    />
+                    <div
+                        className="
+                            flex justify-around 
+                            w-full
+                        "
                     >
                         <ProfileTab
                             autoFocus

@@ -127,11 +127,13 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
             </h1>
             <form
                 onSubmit={handleSubmit(onValid)}
-                className={`
-                    flex flex-col
-                    w-full border-2 border-sopa-default rounded-lg transition
+                className="
+                    flex flex-col rounded-lg
+                    w-full  
+                    border-2 border-sopa-default 
                     focus-within:border-[2.5px] focus-within:border-sopa-accent
-                `}
+                    transition
+                "
             >
                 <textarea
                     {...register("comment", {
@@ -141,10 +143,12 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                             message: "200글자 미만이어야 합니다."
                         }
                     })}
-                    className={`
-                        focus:outline-none rounded-md p-4
+                    className="
+                        rounded-md
+                        p-4
                         dark:bg-dark-default
-                    `}
+                        focus:outline-none
+                    "
                     rows={5}
                     cols={50}
                     placeholder="댓글을 입력하세요"
@@ -154,12 +158,9 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 />
                 <div
                     className={`
-                        w-full
+                        flex items-center place-content-end
+                        w-full p-2 space-x-2
                         border-t-2 border-t-sopa-default
-                        flex items-center
-                        space-x-2
-                        p-2
-                        place-content-end
                     `}
                 >
                     <p className='font-bold'>{checkTextCount} / 200</p>

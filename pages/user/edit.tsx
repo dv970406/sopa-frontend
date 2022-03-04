@@ -18,9 +18,7 @@ export default function UserEditPage() {
     return (
         <MainLayout title={`${seeMyInfo?.name} 수정`}>
             <div
-                className={`
-                    md:px-28 lg:px-52 xl:px-96 space-y-8    
-                `}
+                className="md:px-28 lg:px-52 xl:px-96 space-y-8"
             >
                 <NoSsrEditUser />
             </div>

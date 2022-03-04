@@ -76,8 +76,11 @@ export default function SearchPosts() {
             initial="invisible"
             animate="visible"
             className="
-                absolute flex bg-white rounded-xl px-2 py-1 items-center space-x-2 shadow-lg
-                z-50 border-2 border-sopa-pure dark:bg-dark-default focus-within:border-sopa-accent
+                absolute flex items-center rounded-xl
+                px-2 py-1 space-x-2 
+                bg-white border-2 border-sopa-pure shadow-lg
+                dark:bg-dark-default focus-within:border-sopa-accent
+                z-50  
             "
         >
             <button
@@ -96,8 +99,11 @@ export default function SearchPosts() {
                     })}
                     type="text"
                     className="
-                        rounded-r-lg border-l-2 border-l-sopa-pure
-                        focus:outline-none px-2 dark:bg-dark-default
+                        rounded-r-lg 
+                        px-2 
+                        border-l-2 border-l-sopa-pure
+                        dark:bg-dark-default
+                        focus:outline-none 
                     "
                     placeholder='제목을 입력하세요'
                     required
