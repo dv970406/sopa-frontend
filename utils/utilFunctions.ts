@@ -15,7 +15,7 @@ export const makeSocialLoginReqUrl = (socialSite: string): string => {
             config = {
                 response_type: "code",
                 client_id: process.env.NEXT_PUBLIC_SOCIAL_NAVER_KEY,
-                redirect_uri: process.env.NEXT_PUBLIC_SOCIAL_NAVER_CODE_REDIRECT,
+                redirect_uri: process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_SOCIAL_NAVER_CODE_REDIRECT_PRO : process.env.NEXT_PUBLIC_SOCIAL_NAVER_CODE_REDIRECT_DEV,
                 state: process.env.NEXT_PUBLIC_SOCIAL_NAVER_STATE
             };
             break;
@@ -23,7 +23,7 @@ export const makeSocialLoginReqUrl = (socialSite: string): string => {
             baseUrl = "https://kauth.kakao.com/oauth/authorize";
             config = {
                 client_id: process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY,
-                redirect_uri: process.env.NEXT_PUBLIC_SOCIAL_KAKAO_CODE_REDIRECT,
+                redirect_uri: process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_SOCIAL_KAKAO_CODE_REDIRECT_PRO : process.env.NEXT_PUBLIC_SOCIAL_KAKAO_CODE_REDIRECT_DEV,
                 response_type: "code",
                 state: process.env.NEXT_PUBLIC_SOCIAL_KAKAO_STATE
             };
@@ -33,7 +33,7 @@ export const makeSocialLoginReqUrl = (socialSite: string): string => {
             baseUrl = `https://github.com/login/oauth/authorize`;
             config = {
                 client_id: process.env.NEXT_PUBLIC_SOCIAL_GITHUB_KEY,
-                redirect_uri: process.env.NEXT_PUBLIC_SOCIAL_GITHUB_CODE_REDIRECT,
+                redirect_uri: process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_SOCIAL_GITHUB_CODE_REDIRECT_PRO : process.env.NEXT_PUBLIC_SOCIAL_GITHUB_CODE_REDIRECT_DEV,
                 state: process.env.NEXT_PUBLIC_SOCIAL_GITHUB_STATE,
                 scope: "read:user user:email"
             };
