@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import { useRouter } from 'next/router';
@@ -35,7 +35,7 @@ interface ILoginCompleted {
         token?: string;
         error?: string;
     }
-}
+};
 
 export default function Login() {
     const setToken = useSetRecoilState(tokenState);
@@ -119,5 +119,5 @@ export default function Login() {
                 <SocialLogin isAuthPage social='kakao' />
             </div>
         </Form>
-    )
-}
+    );
+};

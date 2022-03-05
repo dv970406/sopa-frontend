@@ -1,16 +1,15 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
-import Link from 'next/link'
+import Link from 'next/link';
 import { makeSocialLoginReqUrl } from "@utils/utilFunctions";
-
 
 interface ISocialLogin {
     social: "naver" | "github" | "kakao";
     isAuthPage?: boolean;
-}
+};
 
 const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
     return (
@@ -23,7 +22,7 @@ const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
                 <img className="w-full h-full" src={`/${social}.png`} />
             </Link>
         </button>
-    )
-}
+    );
+};
 
-export default SocialLogin
+export default SocialLogin;

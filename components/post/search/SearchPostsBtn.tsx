@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { searchModeState } from '@utils/atoms';
@@ -8,8 +8,7 @@ import { motion } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import SearchPosts from './SearchPosts';
 
-
-const turnOffSearchVariants = {
+const closeSearchInputVariants = {
     invisible: {
         x: 200,
     },
@@ -19,7 +18,8 @@ const turnOffSearchVariants = {
             duration: 0.3
         }
     }
-}
+};
+
 export default function SearchPostsBtn() {
     const [searchMode, setSearchMode] = useRecoilState(searchModeState);
 
@@ -29,7 +29,7 @@ export default function SearchPostsBtn() {
         ) : (
             <motion.button
                 onClick={() => setSearchMode(true)}
-                variants={turnOffSearchVariants}
+                variants={closeSearchInputVariants}
                 initial="invisible"
                 animate="visible"
                 whileHover={{
@@ -45,5 +45,5 @@ export default function SearchPostsBtn() {
                 </svg>
             </motion.button>
         )
-    )
-}
+    );
+};

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import { atom, selector } from 'recoil';
@@ -17,20 +17,20 @@ export const loginModeState = atom<boolean>({
 export const postEditModeState = atom<boolean>({
     key: "postEditMode",
     default: false
-})
+});
 export const searchModeState = atom<boolean>({
     key: "searchModeState",
     default: false
-})
+});
 
 export const postSortMethodState = atom<kindOfSortMethod>({
     key: "postSortMethodState",
     default: "new"
-})
+});
 export const myActivitiesTabState = atom<kindOfMyActivitiesTab>({
     key: "myActivitiesTabState",
     default: "like"
-})
+});
 
 
 // 브라우저가 렌더링되면 쿠키에서 토큰을 꺼내 state에 저장한다.
@@ -42,13 +42,12 @@ export const tokenState = atom<string | null>({
 export const postsState = atom<IPostDisplay[]>({
     key: "postsState",
     default: []
-})
+});
 
 export const commentsState = atom<ICommentInfo[]>({
     key: "commentsState",
     default: []
-})
-
+});
 
 
 export const skillsState = atom<ISkillPositions>({
@@ -58,30 +57,30 @@ export const skillsState = atom<ISkillPositions>({
         "backend": skillSet.backend,
         "app": skillSet.app
     }
-})
+});
 
 export const selectedSkillsState = atom<ISkill[]>({
     key: "selectedSkillsState",
     default: []
-})
+});
 
 export const selectedPositionState = atom<KindOfPosition>({
     key: "selectedPositionState",
     default: "frontend"
-})
+});
 
 export const selectedSkillsToUploadState = atom<ISkill[]>({
     key: "selectedSkillsToUploadState",
     default: []
-})
+});
 
 
 export const skillsOfPositionSelector = selector<ISkill[]>({
     key: "skillsOfPositionSelector",
     get: ({ get }) => {
-        const selectedPosition = get(selectedPositionState)
-        const skills = get(skillsState)
+        const selectedPosition = get(selectedPositionState);
+        const skills = get(skillsState);
 
-        return skills[selectedPosition]
+        return skills[selectedPosition];
     }
-})
+});

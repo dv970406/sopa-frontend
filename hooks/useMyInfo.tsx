@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery } from '@apollo/client';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import { useRouter } from 'next/router';
@@ -56,4 +56,4 @@ export default function useMyInfo() {
     return {
         seeMyInfo: myInfoData?.seeMyInfo
     };
-}
+};

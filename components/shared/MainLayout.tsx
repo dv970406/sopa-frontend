@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import { tokenState } from '@utils/atoms';
@@ -14,7 +14,7 @@ interface IMainLayout {
     loading?: boolean;
     title: string;
     children: React.ReactNode;
-}
+};
 
 export default function MainLayout({ loading, title, children }: IMainLayout) {
     const { pathname, push } = useRouter();
@@ -57,5 +57,5 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
                 )}
             </div>
         </div>
-    )
-}
+    );
+};

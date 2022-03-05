@@ -1,5 +1,5 @@
 /**
- * 생성일: 2022.03.03
+ * 생성일: 2022.03.05
  * 수정일: ------
  */
 
@@ -18,5 +18,5 @@ export default function NoData() {
             />
             <p className="font-bold text-lg">데이터가 없습니다!</p>
         </div>
-    )
-}
+    );
+};

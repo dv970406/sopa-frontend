@@ -1,24 +1,24 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
-import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
-import FormButton from '@components/form/FormButton'
-import Input from '@components/form/Input'
-import Button from '@components/shared/Button'
-import { tokenState } from '@utils/atoms'
-import { IMutationResults } from '@utils/types/interfaces'
-import useMyInfo from 'hooks/useMyInfo'
-import { useRouter } from 'next/router'
-import { useForm } from 'react-hook-form'
-import { useResetRecoilState } from 'recoil'
+import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
+import FormButton from '@components/form/FormButton';
+import Input from '@components/form/Input';
+import Button from '@components/shared/Button';
+import { tokenState } from '@utils/atoms';
+import { IMutationResults } from '@utils/types/interfaces';
+import useMyInfo from 'hooks/useMyInfo';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { useResetRecoilState } from 'recoil';
 
 interface IForm {
     name: string;
     password?: string;
     password2?: string;
-}
+};
 
 const EDIT_USER_MUTATION = gql`
     mutation editUser($name:String,$password:String){
@@ -27,7 +27,7 @@ const EDIT_USER_MUTATION = gql`
             error
         }
     }
-`
+`;
 
 export default function EditUser() {
     const resetToken = useResetRecoilState(tokenState);
@@ -58,10 +58,10 @@ export default function EditUser() {
             }
         })
         router.push("/");
-    }
+    };
     const [editUser, { loading }] = useMutation<IMutationResults>(EDIT_USER_MUTATION, {
         update: updateEditUser
-    })
+    });
 
     // form을 제출하면 비밀번호 일치여부 확인 후 Mutation 실행
     const onValid = ({ name, password, password2 }: IForm) => {
@@ -70,15 +70,15 @@ export default function EditUser() {
         if (password !== password2) {
             alert("비밀번호가 일치하지 않습니다.");
             return;
-        }
+        };
 
         editUser({
             variables: {
                 ...(name && { name }),
                 ...(password && { password }),
             }
-        })
-    }
+        });
+    };
 
     const logOut = () => {
         resetToken();
@@ -162,5 +162,5 @@ export default function EditUser() {
                 />
             </form>
         </>
-    )
-}
+    );
+};

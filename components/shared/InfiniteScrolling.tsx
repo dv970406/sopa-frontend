@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.25
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.05
  */
 
 import { postSortMethodState, searchModeState, selectedSkillsState } from '@utils/atoms';
@@ -13,7 +13,7 @@ interface IInfiniteScrollingComponent {
     children: React.ReactNode;
     fetchMore?: any;
     css: string;
-}
+};
 
 export default function InfiniteScrolling({ howManyData, children, fetchMore, css }: IInfiniteScrollingComponent) {
     const [fetchMoreLoading, setFetchMoreLoading] = useState(false);
@@ -49,5 +49,5 @@ export default function InfiniteScrolling({ howManyData, children, fetchMore, cs
         >
             {children}
         </InfiniteScroll>
-    )
-}
+    );
+};

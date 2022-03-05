@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -19,7 +19,7 @@ interface IForm {
     email: string;
     password: string;
     password2: string;
-}
+};
 
 const CREATE_USER_MUTATION = gql`
     mutation createUser($name:String!,$email:String!,$password:String!){
@@ -28,7 +28,7 @@ const CREATE_USER_MUTATION = gql`
             error
         }
     }
-`
+`;
 
 export default function CreateUser() {
     // 이메일로 보내진 코드를 state에 저장한다
@@ -59,7 +59,7 @@ export default function CreateUser() {
         if (emailCode !== Number(sendedCode)) {
             alert("전송된 인증번호와 일치하지 않습니다.");
             return;
-        }
+        };
         createUserMutation({
             variables: {
                 name,
@@ -93,17 +93,17 @@ export default function CreateUser() {
                 },
                 body: JSON.stringify({ email })
             })
-        ).json()
+        ).json();
 
         if (!response.ok) {
             alert(response.message);
             return;
-        }
+        };
 
         setEmailCode(response.sendedCode);
         setIsEmailValidationMode(true);
         alert(response.message);
-    }
+    };
 
     return (
         <>
@@ -198,5 +198,5 @@ export default function CreateUser() {
                 )}
             </Form>
         </>
-    )
-}
+    );
+};

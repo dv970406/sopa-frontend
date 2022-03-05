@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { gql } from '@apollo/client';
@@ -36,7 +36,7 @@ export const POST_DISPLAY_FRAGMENT = gql`
         updatedAt
         isMine
     }
-`
+`;
 
 export const COMMENT_FRAGMENT = gql`
     fragment CommentFragment on Comment{
@@ -49,7 +49,7 @@ export const COMMENT_FRAGMENT = gql`
         postId
         isMine
     }
-`
+`;
 
 export const USER_SIMPLE_FRAGMENT = gql`
     fragment UserSimpleFragment on User{
@@ -59,7 +59,7 @@ export const USER_SIMPLE_FRAGMENT = gql`
         email
         isMe
     }
-`
+`;
 
 export const USER_DETAIL_FRAGMENT = gql`
     fragment UserDetailFragment on User{
@@ -72,4 +72,4 @@ export const USER_DETAIL_FRAGMENT = gql`
         commentCount
         isMe
     }
-`
+`;

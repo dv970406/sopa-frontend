@@ -1,16 +1,17 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
-import DisplayPost from '@components/post/read/DisplayPost'
+import DisplayPost from '@components/post/read/DisplayPost';
 import { postsState } from '@utils/atoms';
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import NoData from '@components/shared/NoData';
+import { IPostDisplay } from '@utils/types/interfaces';
 
 const semiDetailVariants = {
     invisible: {
@@ -22,12 +23,12 @@ const semiDetailVariants = {
     exit: {
         backgroundColor: "rgba(0,0,0,0)"
     }
-}
+};
 
 interface ISeePostsComponent {
     fetchMore: any;
     howManyData: number;
-}
+};
 
 export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent) {
     const posts = useRecoilValue(postsState);
@@ -42,7 +43,7 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
 
     if (!isLoaded) {
         return <></>;
-    }
+    };
     return (
         <div>
             <InfiniteScrolling
@@ -53,7 +54,7 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
                 {posts?.length === 0 ? (
                     <NoData />
                 ) : (
-                    posts?.map((post, index) =>
+                    posts?.map((post: IPostDisplay, index: number) =>
                         <motion.button
                             layoutId={String(index)}
                             onClick={() => setSelectedPostId(index)}
@@ -91,5 +92,5 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
                 ) : null}
             </AnimatePresence>
         </div>
-    )
-}
+    );
+};

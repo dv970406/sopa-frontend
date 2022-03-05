@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import type { IPostDisplay } from '@utils/types/interfaces';
@@ -10,7 +10,7 @@ import SkillImage from '../../skill/SkillImage';
 
 interface ISeeSemiDetail {
     semiDetail: IPostDisplay
-}
+};
 
 export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
     const router = useRouter();
@@ -18,7 +18,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
     // 부모 컴포넌트(seePosts)로부터의 이벤트 캡쳐링을 막아 SemiDetail이 꺼지지 않게 한다.
     const preventEventCapturing = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
-    }
+    };
 
     // SeePostDetail로 보낼 때 title을 url query에 같이 싣어서 보내는데 as로 마스킹하여 보이지는 않게 한다.
     const goToPostDetail = () => router.push({
@@ -68,7 +68,7 @@ export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
             <p
                 className="
                     py-2 break-words whitespace-pre-wrap
-                    line-clamp-6
+                    overflow-y-scroll h-40
                 "
             >
                 {semiDetail.description}

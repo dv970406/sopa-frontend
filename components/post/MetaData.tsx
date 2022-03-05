@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
-import { gql, MutationUpdaterFn, useMutation } from '@apollo/client'
+import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import { IMutationResults } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import React from 'react';
@@ -35,7 +35,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
         if (!ok) {
             alert(error);
             return;
-        }
+        };
 
         // 해당 게시글에 대한 관심 추가, 삭제 반영
         cache.modify({
@@ -48,7 +48,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
                     return isLiked ? prev - 1 : prev + 1
                 },
             }
-        })
+        });
 
         // user가 관심 count 조작
         cache.modify({
@@ -58,7 +58,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
                     return isLiked ? prev - 1 : prev + 1
                 }
             }
-        })
+        });
 
         // seeMyLikes query cache에서 추가, 삭제 반영
         cache.modify({
@@ -70,8 +70,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
                     return isLiked ? prev.filter((like: any) => like !== findPost) : [write, ...prev];
                 }
             }
-        })
-
+        });
     };
 
     const [toggleLike] = useMutation<IMutationResults>(TOGGLE_LIKE_MUTATION, {
@@ -169,5 +168,5 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
                 <span className='font-bold'>{likeCount}</span>
             </div>
         </div>
-    )
-}
+    );
+};

@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
-import { motion } from 'framer-motion'
-import React from 'react'
-import { useSetRecoilState } from 'recoil'
-import { selectedSkillsState, selectedSkillsToUploadState, skillsState } from '@utils/atoms'
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useSetRecoilState } from 'recoil';
+import { selectedSkillsState, selectedSkillsToUploadState, skillsState } from '@utils/atoms';
 
 interface ISkillInfo {
     uploadMode?: boolean;
@@ -15,7 +15,7 @@ interface ISkillInfo {
     skillImage: string;
     position: string;
     isSelected: boolean;
-}
+};
 
 const skillVar = {
     hover: {
@@ -24,7 +24,7 @@ const skillVar = {
             duration: 0.3
         }
     }
-}
+};
 
 
 // 해당 포지션 Board에 속해있는 Skill들 중 메모이징으로 변화가 생기는 Skill만 리렌더링
@@ -89,7 +89,7 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
                 ]
             };
         });
-    }
+    };
 
     return (
         <motion.div
@@ -123,7 +123,7 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
                 {name}
             </motion.p>
         </motion.div>
-    )
-}
+    );
+};
 
-export default React.memo(Skill)
+export default React.memo(Skill);

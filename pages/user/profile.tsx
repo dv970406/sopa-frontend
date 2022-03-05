@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -96,5 +96,5 @@ export default function UserProfilePage() {
             {myActivitiesTab === "post" ? <SeeMyPosts seeMyInfo={userData?.seeMyInfo} /> : null}
             {myActivitiesTab === "comment" ? <SeeMyComments seeMyInfo={userData?.seeMyInfo} /> : null}
         </MainLayout>
-    )
-}
+    );
+};

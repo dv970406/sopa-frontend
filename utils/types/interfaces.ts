@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 export interface IMutationResults {
@@ -8,7 +8,7 @@ export interface IMutationResults {
         ok: boolean;
         error?: string;
     }
-}
+};
 
 // 게시글 관련
 export interface IPostDisplay {
@@ -27,12 +27,13 @@ export interface IPostDisplay {
     apps: IFetchedSkillsInfo[];
     createdAt: string;
     updatedAt: string;
-}
+};
+
 export interface IPostDetail extends IPostDisplay {
     comments: ICommentInfo[];
     openChatLink: string;
     isMine: boolean;
-}
+};
 
 // 댓글
 export interface ICommentInfo {
@@ -41,13 +42,13 @@ export interface ICommentInfo {
     comment: string;
     user: IUserInfo;
     isMine: boolean;
-}
+};
 
 // 유저 관련
 export interface IUserInfo {
     id: number;
     name: string;
-}
+};
 
 
 // 스킬셋 관련
@@ -56,14 +57,19 @@ export interface ISkill {
     skillImage: string;
     isSelected: boolean;
     position: string;
-}
+};
+
+export interface IMakeSkillImages {
+    name: string;
+    imgSrc: string;
+};
 
 export interface ISkillPositions {
     [key: string]: ISkill[]
-}
+};
 
 export interface IFetchedSkillsInfo {
     __typename: string;
     id: number;
     name: string;
-}
+};

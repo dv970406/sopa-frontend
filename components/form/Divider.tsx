@@ -1,11 +1,11 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: ------
+ * 수정일: 2022.03.05
  */
 
 interface IDivider {
     text: string;
-}
+};
 
 export default function Divider({ text }: IDivider) {
     return (
@@ -20,5 +20,5 @@ export default function Divider({ text }: IDivider) {
             <div className='w-full text-sopa-default font-bold'>{text}</div>
             <div className='rounded-full w-full h-[2px] bg-sopa-pure' />
         </div>
-    )
-}
+    );
+};

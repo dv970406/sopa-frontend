@@ -1,10 +1,10 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.27
+ * 수정일: 2022.03.05
  */
 
-import { postEditModeState } from '@utils/atoms'
-import { useSetRecoilState } from 'recoil'
+import { postEditModeState } from '@utils/atoms';
+import { useSetRecoilState } from 'recoil';
 
 export default function EditPostBtn() {
     const setPostEditMode = useSetRecoilState(postEditModeState);
@@ -28,5 +28,5 @@ export default function EditPostBtn() {
                 <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
             </svg>
         </button>
-    )
-}
+    );
+};

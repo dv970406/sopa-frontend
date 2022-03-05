@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import MetaData from '../MetaData';
@@ -96,10 +96,10 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                 css='space-y-4'
                 fetchMore={fetchMore}
             >
-                {comments?.map(comment =>
+                {comments?.map((comment: ICommentInfo) =>
                     <DisplayComment key={comment.id} {...comment} />
                 )}
             </InfiniteScrolling>
         </>
-    )
-}
+    );
+};

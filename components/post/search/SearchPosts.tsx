@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { gql, useLazyQuery } from '@apollo/client';
@@ -110,5 +110,5 @@ export default function SearchPosts() {
                 />
             </form>
         </motion.div>
-    )
-}
+    );
+};

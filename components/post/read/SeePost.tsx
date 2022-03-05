@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
@@ -15,7 +15,7 @@ interface IPostDetailComponent {
     seePost: IPostDetail;
     fetchMore: any;
     comments: ICommentInfo[];
-}
+};
 
 
 export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPostDetailComponent) {
@@ -41,5 +41,5 @@ export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPo
         ) : (
             <SeePostDetail comments={comments} fetchMore={fetchMore} pageTitle={postTitle} seePost={seePost} />
         )
-    )
-}
+    );
+};

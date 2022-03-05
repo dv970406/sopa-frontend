@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.14
+ * 수정일: 2022.03.05
  */
 
 // 스킬셋 종류를 지정하는 파일
@@ -13,10 +13,10 @@ export const skillSet = {
         "nextjs",
         "jquery",
         "typescript"
-    ].map(skill => {
+    ].map(name => {
         return {
-            name: skill,
-            skillImage: `/frontend/${skill}.png`,
+            name,
+            skillImage: `/frontend/${name}.png`,
             isSelected: false,
             position: "frontend"
         }
@@ -30,10 +30,10 @@ export const skillSet = {
         "java",
         "python",
         "ruby"
-    ].map(skill => {
+    ].map(name => {
         return {
-            name: skill,
-            skillImage: `/backend/${skill}.png`,
+            name,
+            skillImage: `/backend/${name}.png`,
             isSelected: false,
             position: "backend"
         }
@@ -43,12 +43,12 @@ export const skillSet = {
         "kotlin",
         "swift",
         "rn",
-    ].map(skill => {
+    ].map(name => {
         return {
-            name: skill,
-            skillImage: `/app/${skill}.png`,
+            name,
+            skillImage: `/app/${name}.png`,
             isSelected: false,
             position: "app"
         }
     })
-}
+};

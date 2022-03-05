@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -8,7 +8,7 @@ import SeePost from '@components/post/read/SeePost';
 import MainLayout from '@components/shared/MainLayout';
 import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import type { ICommentInfo } from '@utils/types/interfaces';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const SEE_POST_QUERY = gql`
@@ -52,5 +52,5 @@ export default function PostDetailPage() {
                 {...data}
             />
         </MainLayout>
-    )
-}
+    );
+};

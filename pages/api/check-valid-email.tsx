@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.23
- * 수정일: ------
+ * 수정일: 2022.03.05
  */
 
 import mail from '@sendgrid/mail';
@@ -37,5 +37,4 @@ export default function Hanlder(req: NextApiRequest, res: NextApiResponse) {
                 message: "이메일 전송에 실패했습니다."
             });
         });
-
-}
+};

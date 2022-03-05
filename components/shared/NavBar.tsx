@@ -1,10 +1,10 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import { useRouter } from 'next/router';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { tokenState } from '@utils/atoms';
 import useMyInfo from 'hooks/useMyInfo';
 import SearchPostsBtn from '@components/post/search/SearchPostsBtn';
@@ -98,7 +98,7 @@ function NavBar() {
                 )}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

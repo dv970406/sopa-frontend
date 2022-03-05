@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.19
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import type { ICommentInfo } from '@utils/types/interfaces';
@@ -50,7 +50,7 @@ function DisplayComment({ postId, id, comment, user, isMine }: ICommentInfo) {
                 ) : comment}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default React.memo(DisplayComment)
+export default React.memo(DisplayComment);

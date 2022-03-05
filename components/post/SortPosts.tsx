@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { postSortMethodState } from '@utils/atoms';
@@ -130,5 +130,5 @@ export default function SortPosts({ refetchFn }: ISortPostComponent) {
                 }
             />
         </div>
-    )
-}
+    );
+};
