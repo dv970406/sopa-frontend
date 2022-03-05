@@ -48,7 +48,7 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
 
   useEffect(() => {
     setPosts(requestedPosts);
-  }, [requestedPosts]);
+  }, [requestedPosts, setPosts]);
   useEffect(() => {
     setPosts(seePostsData?.seePosts!);
   }, [seePostsData, setPosts]);
@@ -56,7 +56,7 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
     if (!searchMode) {
       setPosts(seePostsData?.seePosts!);
     };
-  }, [searchMode, setPosts]);
+  }, [searchMode, seePostsData, setPosts]);
 
   return (
     <MainLayout
