@@ -10,6 +10,7 @@ import useMyInfo from 'hooks/useMyInfo';
 import SearchPostsBtn from '@components/post/search/SearchPostsBtn';
 import LoginHoverEvent from './LoginHoverEvent';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 
 function NavBar() {
@@ -49,7 +50,12 @@ function NavBar() {
                     transition cursor-pointer
                 "
             >
-                <img src="/sopa.png" className="w-full h-full" />
+                <Image
+                    src="/sopa.png"
+                    width={70}
+                    height={70}
+                    quality={100}
+                />
             </div>
 
             <div

@@ -4,6 +4,7 @@
  */
 
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -61,8 +62,11 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
                     onHoverStart={() => getShowing(true)}
                     onHoverEnd={() => getShowing(false)}
                 >
-                    <img
+                    <Image
                         src="/kakao.png"
+                        width={50}
+                        height={50}
+                        quality={100}
                     />
                     <AnimatePresence>
                         {showing ? (

@@ -5,6 +5,7 @@
 
 import Link from 'next/link';
 import { makeSocialLoginReqUrl } from "@utils/utilFunctions";
+import Image from 'next/image';
 
 interface ISocialLogin {
     social: "naver" | "github" | "kakao";
@@ -13,13 +14,13 @@ interface ISocialLogin {
 
 const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
     return (
-        <button
-            className={`
-                ${isAuthPage ? "w-14 h-14" : "w-10 h-10"}
-            `}
-        >
+        <button>
             <Link href={makeSocialLoginReqUrl(social)}>
-                <img className="w-full h-full" src={`/${social}.png`} />
+                <Image
+                    src={`/${social}.png`}
+                    width={isAuthPage ? 50 : 40}
+                    height={isAuthPage ? 50 : 40}
+                />
             </Link>
         </button>
     );
