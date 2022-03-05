@@ -36,7 +36,7 @@ export default function SocialLogin({ token }: ISocialLogin) {
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     const { code, social } = query;
-    const response = await fetch(`http://localhost:4000/sociallogin/${social}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APOLLO_EXPRESS_URI}/sociallogin/${social}`, {
         method: "POST",
         headers: {
             "Content-type": "application/json"
