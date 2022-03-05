@@ -42,7 +42,7 @@ export default function CreatePost() {
     // createPost Mutation 처리 후 cache 수정작업
     const updateCreatePost: MutationUpdaterFn = (cache, { data }) => {
         const { createPost }: any = data
-        if (createPost.id) {
+        if (createPost?.id) {
             // Mutation 처리 후 cache에 추가 
             cache.modify({
                 id: `ROOT_QUERY`,
