@@ -3,12 +3,13 @@
  * 수정일: 2022.03.05
  */
 
-import { gql, useMutation } from '@apollo/client';
+import { gql, useApolloClient, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import UploadSkillsSelector from '@components/form/UploadSkillsSelector';
 import { selectedSkillsToUploadState } from '@utils/atoms';
 import { IMutationResults, ISkill } from '@utils/types/interfaces';
+import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -33,9 +34,9 @@ export default function CreatePost() {
     const router = useRouter();
     const selectedSkillsToUpload = useRecoilValue(selectedSkillsToUploadState);
     const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState);
-
+    const { seeMyInfo } = useMyInfo();
+    const { cache } = useApolloClient();
     const { register, handleSubmit, formState: { errors } } = useForm<IForm>();
-
     // createPost Mutation 처리 후 cache 수정작업
     const createPostCompleted = ({ createPost }: IMutationResults) => {
         const { ok, error } = createPost;
@@ -45,6 +46,14 @@ export default function CreatePost() {
         };
         // 어차피 index로 보내지면 index Component에서 fetch가 일어나므로 cache 수정할 필요없다.
 
+        cache.modify({
+            id: `User:${seeMyInfo?.id}`,
+            fields: {
+                postCount(prev: number) {
+                    return prev + 1
+                }
+            }
+        });
         // 업로드 후 CreatePost창에서 셀렉했던 skill들을 reset하고 index페이지로 돌려보낸다.
         resetSelectedSkillsToUpload();
         router.push("/");
@@ -53,7 +62,7 @@ export default function CreatePost() {
 
     const [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
         onCompleted: createPostCompleted
-    })
+    });
 
     // form이 제출되면 셀렉한 스킬이 있는지 확인하고 mutation 실행
     const onValid = ({ title, description, openChatLink }: IForm) => {
@@ -63,8 +72,8 @@ export default function CreatePost() {
             return;
         };
         const skills = selectedSkillsToUpload.map((skill: ISkill) => {
-            const { isSelected, skillImage, ...skillInfo } = skill
-            return skillInfo
+            const { isSelected, skillImage, ...skillInfo } = skill;
+            return skillInfo;
         });
 
         createPost({
