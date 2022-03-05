@@ -5,6 +5,7 @@
 
 import type { IFetchedSkillsInfo, IMakeSkillImages } from '@utils/types/interfaces';
 import { makeSkillImages } from '@utils/utilFunctions';
+import Image from 'next/image';
 
 interface ISkillImage {
     displayMode?: boolean;
@@ -30,9 +31,11 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                     text-xs
                                 "
                             >
-                                <img
+                                <Image
                                     src={skill.imgSrc}
-                                    className="w-12 h-12"
+                                    width={50}
+                                    height={50}
+                                    quality={100}
                                 />
                                 <p className="font-bold">{skill.name}</p>
                             </div>
@@ -54,9 +57,11 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                 text-xs
                             "
                         >
-                            <img
+                            <Image
                                 src={skill.imgSrc}
-                                className="w-12 h-12"
+                                width={50}
+                                height={50}
+                                quality={100}
                             />
                             <p className="font-bold">{skill.name}</p>
                         </div>
@@ -71,9 +76,11 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                             text-xs
                         "
                     >
-                        <img
+                        <Image
                             src={skill.imgSrc}
-                            className="w-12 h-12"
+                            width={50}
+                            height={50}
+                            quality={100}
                         />
                         <p className="font-bold">{skill.name}</p>
                     </div>

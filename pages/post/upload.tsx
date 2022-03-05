@@ -12,17 +12,13 @@ import dynamic from 'next/dynamic';
 
 export default function PostUploadPage() {
     const resetSkillsState = useResetRecoilState(skillsState);
-    const NoSsrCreatePost = dynamic(
-        () => import('@components/post/create/CreatePost'),
-        { ssr: false }
-    );
 
     useEffect(() => {
         resetSkillsState();
     }, []);
     return (
         <MainLayout title='게시물 등록'>
-            <NoSsrCreatePost />
+            <CreatePost />
         </MainLayout >
     );
 };

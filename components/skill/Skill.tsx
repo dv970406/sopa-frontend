@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { selectedSkillsState, selectedSkillsToUploadState, skillsState } from '@utils/atoms';
+import Image from 'next/image';
 
 interface ISkillInfo {
     uploadMode?: boolean;
@@ -103,10 +104,12 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
             variants={skillVar}
             whileHover="hover"
         >
-            <img
+            <Image
                 src={skillImage}
+                width={50}
+                height={50}
+                quality={100}
                 className={`
-                    w-14 h-14
                     ${isSelected ? "opacity-100" : uploadMode ? "opacity-30" : "opacity-100"}
                     transition-opacity
                 `}

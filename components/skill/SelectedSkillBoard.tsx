@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { selectedSkillsState, skillsState } from '@utils/atoms';
 import type { ISkill } from '@utils/types/interfaces';
+import Image from 'next/image';
 
 interface ISelectedSkillBoard {
     refetchSeePosts: any;
@@ -91,11 +92,11 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                     onClick={() => onClick(selectedSkill, index)}
                     layoutId={selectedSkill.name}
                 >
-                    <img
+                    <Image
                         src={selectedSkill.skillImage}
-                        className={`
-                            w-14 h-14
-                        `}
+                        width={50}
+                        height={50}
+                        quality={100}
                     />
                 </motion.button>
             )}

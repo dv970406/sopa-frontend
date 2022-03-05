@@ -7,10 +7,10 @@ import { gql, useQuery } from '@apollo/client';
 import MainLayout from '@components/shared/MainLayout';
 import ProfileTab from '@components/user/read/ProfileTab';
 import SeeMyComments from '@components/user/read/SeeMyComments';
+import SeeMyLikes from '@components/user/read/SeeMyLikes';
 import SeeMyPosts from '@components/user/read/SeeMyPosts';
 import { myActivitiesTabState } from '@utils/atoms';
 import { USER_DETAIL_FRAGMENT } from '@utils/fragments';
-import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -27,10 +27,6 @@ const SEE_MY_INFO_QUERY = gql`
 export default function UserProfilePage() {
     const [myActivitiesTab, setMyActivitiesTab] = useRecoilState(myActivitiesTabState);
     const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
-    const NoSsrSeeMyLikes = dynamic(
-        () => import('@components/user/read/SeeMyLikes'),
-        { ssr: false }
-    );
 
     useEffect(() => {
         setMyActivitiesTab("like");
@@ -92,7 +88,7 @@ export default function UserProfilePage() {
                     />
                 </div>
             </div>
-            {myActivitiesTab === "like" ? <NoSsrSeeMyLikes seeMyInfo={userData?.seeMyInfo} /> : null}
+            {myActivitiesTab === "like" ? <SeeMyLikes seeMyInfo={userData?.seeMyInfo} /> : null}
             {myActivitiesTab === "post" ? <SeeMyPosts seeMyInfo={userData?.seeMyInfo} /> : null}
             {myActivitiesTab === "comment" ? <SeeMyComments seeMyInfo={userData?.seeMyInfo} /> : null}
         </MainLayout>
