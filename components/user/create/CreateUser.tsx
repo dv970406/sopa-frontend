@@ -167,14 +167,12 @@ export default function CreateUser() {
                         <input
                             {...register("sendedCode", {
                                 required: true,
-                                minLength: 6,
                                 maxLength: 6
                             })}
                             type="text"
                             placeholder='인증번호를 입력하세요'
-                            minLength={6}
                             maxLength={6}
-                            className="focus:outline-none"
+                            className="focus:outline-none dark:bg-dark-default"
                         />
                         <button
                             onClick={checkEmailValidation}

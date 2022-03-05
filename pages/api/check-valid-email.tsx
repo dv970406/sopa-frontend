@@ -11,7 +11,7 @@ mail.setApiKey(process.env.SENDGRID_API_KEY!);
 export default function Hanlder(req: NextApiRequest, res: NextApiResponse) {
     const { email } = req.body;
 
-    // 6자리 랜덤코드 생성
+    // 5~6자리 랜덤코드 생성
     const sendedCode = Number(String(Math.floor(Math.random() * 1000000)).padStart(6, "0"));
 
     const sendEmail = {
