@@ -20,18 +20,11 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql",
-});
-const errorInfo = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors) {
-        console.log("graphQLErrors : ", graphQLErrors);
-    } else {
-        console.log("networkError : ", networkError);
-    };
+    uri: process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_BACKEND_URI : "http://localhost:4000/graphql",
 });
 
 export const client = new ApolloClient({
-    link: authLink.concat(errorInfo).concat(httpLink),
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
