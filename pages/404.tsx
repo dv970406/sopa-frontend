@@ -26,7 +26,7 @@ export default function NoExistsPage() {
                 router.push("/");
             };
         });
-    }, [x]);
+    }, [x, getScreenWidth, router]);
     return (
         <div
             className="

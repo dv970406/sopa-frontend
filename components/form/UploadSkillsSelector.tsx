@@ -18,7 +18,7 @@ export default function UploadSkillsSelector() {
     // 초기 포지션은 frontend로 시작
     useEffect(() => {
         setSelectedPosition("frontend");
-    }, []);
+    }, [setSelectedPosition]);
 
     return (
         <div>

@@ -89,7 +89,7 @@ export default function CreatePost() {
     // 컴포넌트가 렌더링될 때 마다 셀렉 스킬 리셋
     useEffect(() => {
         resetSelectedSkillsToUpload();
-    }, []);
+    }, [resetSelectedSkillsToUpload]);
     return (
         <form
             className={`

@@ -106,6 +106,7 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
         >
             <Image
                 src={skillImage}
+                alt=""
                 width={50}
                 height={50}
                 quality={100}

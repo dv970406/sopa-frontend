@@ -41,10 +41,10 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
         if (myActivitiesTab === "post") {
             setPosts(myPostsData?.seeMyPosts!);
         };
-    }, [myActivitiesTab]);
+    }, [myActivitiesTab, setPosts]);
     useEffect(() => {
         setPosts(myPostsData?.seeMyPosts!);
-    }, [myPostsData]);
+    }, [myPostsData, setPosts]);
 
     return (
         myActivitiesTab === "post" ? (

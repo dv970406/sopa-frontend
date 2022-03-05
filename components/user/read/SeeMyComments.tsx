@@ -39,10 +39,10 @@ export default function SeeMyComments({ seeMyInfo }: ISeeMyCommentsComponent) {
         if (myActivitiesTab === "comment") {
             setComments(myCommentsData?.seeMyComments!);
         };
-    }, [myActivitiesTab]);
+    }, [myActivitiesTab, setComments]);
     useEffect(() => {
         setComments(myCommentsData?.seeMyComments!);
-    }, [myCommentsData]);
+    }, [myCommentsData, setComments]);
 
     return (
         myActivitiesTab === "comment" ? (

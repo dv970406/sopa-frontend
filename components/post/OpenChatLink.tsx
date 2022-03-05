@@ -64,6 +64,7 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
                 >
                     <Image
                         src="/kakao.png"
+                        alt=""
                         width={50}
                         height={50}
                         quality={100}

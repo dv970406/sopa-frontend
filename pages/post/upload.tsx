@@ -8,14 +8,13 @@ import MainLayout from '@components/shared/MainLayout';
 import { useResetRecoilState } from "recoil";
 import { skillsState } from "@utils/atoms";
 import { useEffect } from "react";
-import dynamic from 'next/dynamic';
 
 export default function PostUploadPage() {
     const resetSkillsState = useResetRecoilState(skillsState);
 
     useEffect(() => {
         resetSkillsState();
-    }, []);
+    }, [resetSkillsState]);
     return (
         <MainLayout title='게시물 등록'>
             <CreatePost />

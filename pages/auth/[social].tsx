@@ -26,7 +26,7 @@ export default function SocialLogin({ token }: ISocialLogin) {
             router.push("/");
         };
         setLoading(false);
-    }, []);
+    }, [router, token, setToken]);
     return (
         <MainLayout loading={loading} title="소셜로그인">
 

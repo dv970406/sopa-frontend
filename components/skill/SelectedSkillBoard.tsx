@@ -63,7 +63,7 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
         refetchSeePostsCount({
             skills: JSON.stringify(clearedSelectedSkills)
         });
-    }, [selectedSkills]);
+    }, [selectedSkills, refetchSeePosts, refetchSeePostsCount]);
 
     return (
         <motion.div
@@ -94,6 +94,7 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                 >
                     <Image
                         src={selectedSkill.skillImage}
+                        alt=""
                         width={50}
                         height={50}
                         quality={100}
