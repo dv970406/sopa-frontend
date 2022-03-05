@@ -24,7 +24,7 @@ export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPo
 
     useEffect(() => {
         resetPostEditMode();
-    }, []);
+    }, [resetPostEditMode]);
 
     // postEditMode로 분기처리하여 edit모드인지 Detail모드인지 나눈다.
     return (

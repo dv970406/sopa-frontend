@@ -29,7 +29,7 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
         } else if (isAuthPage) {
             token ? push("/") : null;
         }
-    }, [pathname]);
+    }, [pathname, isAuthPage, neededLoginPage, token, push]);
     return (
         <div
             className={`

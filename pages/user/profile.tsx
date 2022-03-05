@@ -30,7 +30,7 @@ export default function UserProfilePage() {
 
     useEffect(() => {
         setMyActivitiesTab("like");
-    }, []);
+    }, [setMyActivitiesTab]);
     return (
         <MainLayout title={userData?.seeMyInfo?.name}>
             <div

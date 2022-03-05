@@ -20,7 +20,7 @@ export default function SortPosts({ refetchFn }: ISortPostComponent) {
         refetchFn({
             howToSort: postSortMethod
         });
-    }, [postSortMethod]);
+    }, [postSortMethod, refetchFn]);
 
     return (
         <div

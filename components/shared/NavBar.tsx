@@ -30,7 +30,7 @@ function NavBar() {
         if (token) {
             setToken(localStorage.getItem("TOKEN"));
         };
-    }, [token]);
+    }, [token, setToken]);
 
     return (
         <div
@@ -52,6 +52,7 @@ function NavBar() {
             >
                 <Image
                     src="/sopa.png"
+                    alt=""
                     width={70}
                     height={70}
                     quality={100}

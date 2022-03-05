@@ -33,6 +33,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                             >
                                 <Image
                                     src={skill.imgSrc}
+                                    alt=""
                                     width={50}
                                     height={50}
                                     quality={100}
@@ -59,6 +60,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                         >
                             <Image
                                 src={skill.imgSrc}
+                                alt=""
                                 width={50}
                                 height={50}
                                 quality={100}
@@ -78,6 +80,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                     >
                         <Image
                             src={skill.imgSrc}
+                            alt=""
                             width={50}
                             height={50}
                             quality={100}
