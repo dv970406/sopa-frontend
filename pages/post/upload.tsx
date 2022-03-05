@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import CreatePost from '@components/post/create/CreatePost';
@@ -19,10 +19,10 @@ export default function PostUploadPage() {
 
     useEffect(() => {
         resetSkillsState();
-    }, [])
+    }, []);
     return (
         <MainLayout title='게시물 등록'>
             <NoSsrCreatePost />
         </MainLayout >
-    )
-}
+    );
+};

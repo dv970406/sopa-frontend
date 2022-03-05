@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.24
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import { motion, useMotionValue, useTransform } from 'framer-motion';
@@ -81,5 +81,5 @@ export default function NoExistsPage() {
                 </svg>
             </motion.div>
         </div>
-    )
-}
+    );
+};

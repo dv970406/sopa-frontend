@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.24
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 interface ISortTab {
@@ -8,7 +8,7 @@ interface ISortTab {
     selectedTab: string;
     comparisonTarget: string;
     onClick(): void;
-}
+};
 
 export default function SortTab({ tabName, selectedTab, comparisonTarget, onClick }: ISortTab) {
     return (
@@ -25,5 +25,5 @@ export default function SortTab({ tabName, selectedTab, comparisonTarget, onClic
         >
             {tabName}
         </div>
-    )
-}
+    );
+};

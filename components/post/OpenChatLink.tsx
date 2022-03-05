@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.19
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -27,11 +27,11 @@ const linkVar = {
         scale: 0.2,
 
     }
-}
+};
 
 interface IOpenChatLink {
     openChatLink: string;
-}
+};
 
 export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
     // 오픈링크 주소를 보여줄 지 말지 분기처리
@@ -46,7 +46,7 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
 
     if (!isLoaded) {
         return <></>;
-    }
+    };
 
     return (
         <Link href={openChatLink}>
@@ -97,5 +97,5 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLink) {
                 </motion.div>
             </a>
         </Link>
-    )
-}
+    );
+};

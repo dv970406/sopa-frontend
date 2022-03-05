@@ -1,13 +1,14 @@
 /**
  * 생성일: 2022.02.14
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import SortTab from '@components/post/SortTab';
 import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
+import { ISkill } from '@utils/types/interfaces';
 import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 
 export default function UploadSkillsSelector() {
     // selector를 이용하여 셀렉한 포지션이 바뀔 때마다 포지션별 스킬셋들을 return하게 함
@@ -77,10 +78,10 @@ export default function UploadSkillsSelector() {
                     dark:bg-dark-default
                 `}
             >
-                {skillsOfPosition.map((skill, index) =>
+                {skillsOfPosition?.map((skill: ISkill, index: number) =>
                     <Skill uploadMode={true} key={index} index={index} {...skill} />
                 )}
             </div>
         </div>
-    )
-}
+    );
+};

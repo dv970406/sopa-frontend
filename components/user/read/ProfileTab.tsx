@@ -1,18 +1,18 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
-import { myActivitiesTabState } from '@utils/atoms'
+import { myActivitiesTabState } from '@utils/atoms';
 import type { kindOfMyActivitiesTab } from '@utils/types/types';
-import { useRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil';
 
 interface ITabComponent {
     autoFocus?: boolean;
     count: number;
     onFocusTab: kindOfMyActivitiesTab;
     svg: JSX.Element;
-}
+};
 
 export default function ProfileTab({ autoFocus, count, onFocusTab, svg }: ITabComponent) {
     const [myActivitiesTab, setMyActivitiesTab] = useRecoilState(myActivitiesTabState);
@@ -42,5 +42,5 @@ export default function ProfileTab({ autoFocus, count, onFocusTab, svg }: ITabCo
             </button>
             <p>{count}개</p>
         </div>
-    )
-}
+    );
+};

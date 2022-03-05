@@ -1,9 +1,9 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
-import type { IFetchedSkillsInfo } from '@utils/types/interfaces';
+import type { IFetchedSkillsInfo, IMakeSkillImages } from '@utils/types/interfaces';
 import { makeSkillImages } from '@utils/utilFunctions';
 
 interface ISkillImage {
@@ -11,11 +11,8 @@ interface ISkillImage {
     frontends: IFetchedSkillsInfo[];
     backends: IFetchedSkillsInfo[];
     apps: IFetchedSkillsInfo[];
-}
-interface IMakeSkillImages {
-    name: string;
-    imgSrc: string;
-}
+};
+
 
 export default function SkillImage({ displayMode = false, frontends, backends, apps }: ISkillImage) {
     const skillsInfo = makeSkillImages(frontends, backends, apps);
@@ -84,5 +81,5 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
             )
             }
         </>
-    )
-}
+    );
+};

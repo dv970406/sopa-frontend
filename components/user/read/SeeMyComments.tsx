@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -55,5 +55,5 @@ export default function SeeMyComments({ seeMyInfo }: ISeeMyCommentsComponent) {
                 }
             />
         ) : null
-    )
-}
+    );
+};

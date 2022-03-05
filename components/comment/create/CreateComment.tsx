@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -168,6 +168,5 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                 </div>
             </form>
         </div>
-
-    )
-}
+    );
+};

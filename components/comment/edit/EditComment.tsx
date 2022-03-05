@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -10,13 +10,13 @@ import { useForm } from 'react-hook-form';
 
 interface IEditCommentForm {
     editedComment: string;
-}
+};
 interface IEditCommentComponent {
     setEditCommentMode(current: boolean): void;
     postId: number;
     comment: string;
     commentId: number;
-}
+};
 
 const EDIT_COMMENT_MUTATION = gql`
     mutation editComment($commentId:Int!,$comment:String!){
@@ -25,7 +25,7 @@ const EDIT_COMMENT_MUTATION = gql`
             error
         }
     }
-`
+`;
 
 export default function EditComment({ setEditCommentMode, comment, commentId }: IEditCommentComponent) {
     const { register, handleSubmit, getValues } = useForm<IEditCommentForm>();
@@ -50,15 +50,15 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
                     return editedComment
                 }
             }
-        })
+        });
 
         // cache처리가 끝나면 편집모드 종료
         setEditCommentMode(false);
-    }
+    };
 
     const [editCommentMutation, { loading }] = useMutation<IMutationResults>(EDIT_COMMENT_MUTATION, {
         update: updateEditComment
-    })
+    });
 
     // form이 제출되었을 때 실행
     const onValid = ({ editedComment }: IEditCommentForm) => {
@@ -69,8 +69,8 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
                 commentId,
                 comment: editedComment
             }
-        })
-    }
+        });
+    };
     return (
         <form
             onSubmit={handleSubmit(onValid)}
@@ -96,6 +96,6 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
                 "
             />
         </form>
-    )
-}
+    );
+};
 

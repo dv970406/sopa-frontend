@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -8,7 +8,7 @@ import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import UploadSkillsSelector from '@components/form/UploadSkillsSelector';
 import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
-import { IPostDisplay } from '@utils/types/interfaces';
+import { IPostDisplay, ISkill } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -19,7 +19,7 @@ interface IForm {
     title: string;
     description?: string;
     openChatLink?: string;
-}
+};
 
 const CREATE_POST_MUTATION = gql`
     mutation createPost($title:String!,$skills:String!,$description:String,$openChatLink:String){
@@ -28,13 +28,13 @@ const CREATE_POST_MUTATION = gql`
             title
         }
     }
-`
+`;
 
 export default function CreatePost() {
-    const router = useRouter()
+    const router = useRouter();
     const selectedSkillsToUpload = useRecoilValue(selectedSkillsToUploadState);
-    const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState)
-    const setPosts = useSetRecoilState(postsState)
+    const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState);
+    const setPosts = useSetRecoilState(postsState);
     const { seeMyInfo } = useMyInfo();
 
     const { register, handleSubmit, formState: { errors } } = useForm<IForm>();
@@ -97,11 +97,11 @@ export default function CreatePost() {
         if (selectedSkillsToUpload?.length === 0) {
             alert("스킬을 하나 이상 선택해주세요!");
             return;
-        }
-        const skills = selectedSkillsToUpload.map(skill => {
+        };
+        const skills = selectedSkillsToUpload.map((skill: ISkill) => {
             const { isSelected, skillImage, ...skillInfo } = skill
             return skillInfo
-        })
+        });
 
         createPost({
             variables: {
@@ -110,13 +110,13 @@ export default function CreatePost() {
                 description,
                 openChatLink
             }
-        })
-    }
+        });
+    };
 
     // 컴포넌트가 렌더링될 때 마다 셀렉 스킬 리셋
     useEffect(() => {
         resetSelectedSkillsToUpload();
-    }, [])
+    }, []);
     return (
         <form
             className={`
@@ -176,5 +176,5 @@ export default function CreatePost() {
                 text="게시글 업로드"
             />
         </form>
-    )
-}
+    );
+};

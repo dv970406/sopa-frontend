@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import { motion } from 'framer-motion';
@@ -47,11 +47,11 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                 [selectedSkill.position]: skillsOfCopiedPosition,
             };
         });
-    }
+    };
 
     // 셀렉한 스킬이 변경될 때마다 query 요청을 refetch시킨다.
     useEffect(() => {
-        const clearedSelectedSkills = selectedSkills.map(skill => {
+        const clearedSelectedSkills = selectedSkills.map((skill: ISkill) => {
             const { isSelected, skillImage, ...skillWithPosition } = skill;
             return skillWithPosition;
         });
@@ -85,7 +85,7 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                 duration: 0.3,
             }}
         >
-            {selectedSkills?.map((selectedSkill, index) =>
+            {selectedSkills?.map((selectedSkill: ISkill, index: number) =>
                 <motion.button
                     key={selectedSkill.name}
                     onClick={() => onClick(selectedSkill, index)}
@@ -100,5 +100,5 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                 </motion.button>
             )}
         </motion.div>
-    )
-}
+    );
+};

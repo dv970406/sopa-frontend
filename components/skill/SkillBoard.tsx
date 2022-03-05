@@ -1,15 +1,15 @@
 /**
  * 생성일: 2022.02.11
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
-import type { ISkill } from '@utils/types/interfaces'
-import React from 'react'
-import Skill from './Skill'
+import type { ISkill } from '@utils/types/interfaces';
+import React from 'react';
+import Skill from './Skill';
 
 interface ISkillBoard {
     skillsOfPosition: ISkill[]
-}
+};
 
 // 메모이징으로 prop에 변화가 생기는 SkillBoard만 리렌더링
 function SkillBoard({ skillsOfPosition }: ISkillBoard) {
@@ -23,8 +23,8 @@ function SkillBoard({ skillsOfPosition }: ISkillBoard) {
                 return "백엔드"
             case "app":
                 return "앱"
-        }
-    }
+        };
+    };
     return (
         <div
             className="
@@ -48,10 +48,10 @@ function SkillBoard({ skillsOfPosition }: ISkillBoard) {
                     w-full h-1/3 px-3 py-6 
                 "
             >
-                {skillsOfPosition?.map((skill, index) => <Skill key={skill.name} index={index} {...skill} />)}
+                {skillsOfPosition?.map((skill: ISkill, index: number) => <Skill key={skill.name} index={index} {...skill} />)}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default React.memo(SkillBoard)
+export default React.memo(SkillBoard);

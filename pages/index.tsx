@@ -1,16 +1,16 @@
-import { gql, useQuery } from '@apollo/client'
-import SkillBoards from '@components/skill/SkillBoards'
-import MainLayout from '@components/shared/MainLayout'
-import type { GetServerSideProps } from 'next'
-import { client } from '@utils/apollo'
-import { POST_DISPLAY_FRAGMENT } from '@utils/fragments'
-import type { IPostDisplay } from '@utils/types/interfaces'
-import SeePosts from '@components/post/read/SeePosts'
-import { useEffect } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { postsState, searchModeState } from '@utils/atoms'
-import SelectedSkillBoard from '@components/skill/SelectedSkillBoard'
-import SortPosts from '@components/post/SortPosts'
+import { gql, useQuery } from '@apollo/client';
+import SkillBoards from '@components/skill/SkillBoards';
+import MainLayout from '@components/shared/MainLayout';
+import type { GetServerSideProps } from 'next';
+import { client } from '@utils/apollo';
+import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
+import type { IPostDisplay } from '@utils/types/interfaces';
+import SeePosts from '@components/post/read/SeePosts';
+import { useEffect } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { postsState, searchModeState } from '@utils/atoms';
+import SelectedSkillBoard from '@components/skill/SelectedSkillBoard';
+import SortPosts from '@components/post/SortPosts';
 
 interface ISeePostsQuery {
   [key: string]: IPostDisplay[];
@@ -19,7 +19,7 @@ interface ISeePostsCountQuery {
   seePostsCount: {
     count: number;
   };
-}
+};
 
 const SEE_POSTS_QUERY = gql`
     query seePosts($offset:Int,$skills:String,$howToSort:String){
@@ -28,14 +28,15 @@ const SEE_POSTS_QUERY = gql`
         }
     }
     ${POST_DISPLAY_FRAGMENT}
-`
+`;
+
 const SEE_POSTS_COUNT_QUERY = gql`
   query seePostsCount($skills:String){
     seePostsCount(skills:$skills){
       count
     }
   }
-`
+`;
 
 const Home = ({ requestedPosts }: ISeePostsQuery) => {
   const setPosts = useSetRecoilState(postsState);
@@ -77,20 +78,23 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
         }
       />
     </MainLayout>
-  )
-}
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = async () => {
   // seePosts query 요청부
   const { data } = await client.query({
     query: SEE_POSTS_QUERY,
+    variables: {
+      howToSort: "new"
+    }
   });
 
   return {
     props: {
       requestedPosts: data.seePosts,
     }
-  }
-}
+  };
+};
 
-export default Home
+export default Home;

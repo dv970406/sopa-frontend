@@ -1,14 +1,14 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.02.25
+ * 수정일: 2022.03.05
  */
 
-import DeletePost from './delete/DeletePost'
-import EditPostBtn from './edit/EditPostBtn'
+import DeletePost from './delete/DeletePost';
+import EditPostBtn from './edit/EditPostBtn';
 
 interface IMenuBtnComponent {
     postId: number;
-}
+};
 
 // SeePostDetail에서 사용하는 post의 소유자만이 접근 가능한 관리 패널
 export default function MenuBtn({ postId }: IMenuBtnComponent) {
@@ -44,5 +44,5 @@ export default function MenuBtn({ postId }: IMenuBtnComponent) {
                 <DeletePost postId={postId} />
             </div>
         </div>
-    )
-}
+    );
+};

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.25
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import DisplayComment from '@components/comment/read/DisplayComment';
@@ -13,7 +13,7 @@ import { useRecoilValue } from 'recoil';
 interface IMyCommentsComponent {
     fetchMore: any;
     howManyData: number;
-}
+};
 
 export default function MyComments({ fetchMore, howManyData }: IMyCommentsComponent) {
     const router = useRouter();
@@ -52,5 +52,5 @@ export default function MyComments({ fetchMore, howManyData }: IMyCommentsCompon
                 )}
             </InfiniteScrolling>
         </div>
-    )
-}
+    );
+};

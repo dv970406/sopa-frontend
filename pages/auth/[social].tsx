@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import MainLayout from '@components/shared/MainLayout';
@@ -31,8 +31,8 @@ export default function SocialLogin({ token }: ISocialLogin) {
         <MainLayout loading={loading} title="소셜로그인">
 
         </MainLayout>
-    )
-}
+    );
+};
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     const { code, social } = query;
@@ -42,12 +42,12 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
             "Content-type": "application/json"
         },
         body: JSON.stringify({ code })
-    })
+    });
 
     const { jwtToken } = await response.json();
     return {
         props: {
             token: jwtToken
         }
-    }
-}
+    };
+};

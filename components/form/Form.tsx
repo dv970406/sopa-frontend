@@ -1,13 +1,13 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.23
+ * 수정일: 2022.03.05
  */
 
 import React from 'react';
 
 interface IFormLayoutComponent {
     children: React.ReactNode;
-}
+};
 
 export default function FormLayout({ children }: IFormLayoutComponent) {
     // 버튼 클릭에 의존하게 하려고 form 태그를 쓰지 않음
@@ -23,5 +23,5 @@ export default function FormLayout({ children }: IFormLayoutComponent) {
         >
             {children}
         </div>
-    )
-}
+    );
+};

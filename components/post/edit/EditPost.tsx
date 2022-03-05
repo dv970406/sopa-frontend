@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -21,13 +21,13 @@ interface IEditPostComponent {
     frontends: IFetchedSkillsInfo[];
     backends: IFetchedSkillsInfo[];
     apps: IFetchedSkillsInfo[];
-}
+};
 
 interface IForm {
     editedTitle: string;
     editedDescription?: string;
     editedOpenChatLink?: string;
-}
+};
 
 const EDIT_POST_MUTATION = gql`
     mutation editPost($postId:Int!,$title:String!,$description:String,$openChatLink:String){
@@ -36,7 +36,7 @@ const EDIT_POST_MUTATION = gql`
             error
         }
     }
-`
+`;
 
 export default function EditPost({ postId, title, description, openChatLink, apps, backends, frontends }: IEditPostComponent) {
     const setPostEditMode = useSetRecoilState(postEditModeState);
@@ -74,7 +74,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
         });
         // cache 수정 후 postEdit 모드 종료
         setPostEditMode(false);
-    }
+    };
 
     const [editPostMutation, { loading }] = useMutation<IMutationResults>(EDIT_POST_MUTATION, {
         update: updateEditPost
@@ -183,5 +183,5 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 text={`게시물 수정`}
             />
         </form>
-    )
-}
+    );
+};

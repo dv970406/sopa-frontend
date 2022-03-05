@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.04
+ * 수정일: 2022.03.05
  */
 
 import React, { useState } from 'react';
@@ -81,12 +81,11 @@ export default function Input({ type, register, required, disabled = false, erro
                             w-full p-3
                             border-b-2 border-b-form-gray text-sm shadow-sm
                             dark:bg-dark-default 
-                            placeholder:text-lg
+                            placeholder:text-base placeholder-form-gray dark:placeholder-dark-form-gray
                             focus:placeholder-sopa-accent focus:outline-none 
                             focus:ring-sopa-accent focus:border-b-sopa-accent
                         "
                         rows={10}
-                        cols={50}
                         {...props}
                         onChange={changeTextCount}
                     />
@@ -125,7 +124,7 @@ export default function Input({ type, register, required, disabled = false, erro
                             border-b-2 border-b-form-gray 
                             dark:bg-dark-default shadow-sm
                             ${disabled ? "bg-slate-300 opacity-40 dark:bg-dark-ultra" : null}
-                            placeholder:text-lg placeholder-form-gray
+                            placeholder:text-base placeholder-form-gray dark:placeholder-dark-form-gray
                             focus:placeholder-sopa-accent focus:outline-none 
                             focus:ring-sopa-accent focus:border-b-sopa-accent
                         `}
@@ -174,7 +173,7 @@ export default function Input({ type, register, required, disabled = false, erro
                             border-b-2 border-b-form-gray 
                             ${disabled ? "rounded-md bg-slate-300 opacity-50" : null}
                             dark:bg-dark-default shadow-sm
-                            placeholder:text-lg placeholder-form-gray
+                            placeholder:text-base placeholder-form-gray dark:placeholder-dark-form-gray
                             focus:placeholder-sopa-accent focus:outline-none 
                             focus:ring-sopa-accent focus:border-b-sopa-accent
                         `}
@@ -190,12 +189,11 @@ export default function Input({ type, register, required, disabled = false, erro
                     </div>
                 </div>
             )
-        }
-    }
+        };
+    };
     return (
         <>
             {inputType(type)}
         </>
-    )
-
-}
+    );
+};

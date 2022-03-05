@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import type { IPostDisplay } from '@utils/types/interfaces';
@@ -60,5 +60,5 @@ export default function DisplayPost(
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};

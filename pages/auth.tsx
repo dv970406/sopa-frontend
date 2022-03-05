@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import MainLayout from '@components/shared/MainLayout';
@@ -18,5 +18,5 @@ export default function AuthenticationPage() {
             <LoginOrSignUp leftText='로그인' rightText='회원가입' />
             {loginMode ? <Login /> : <CreateUser />}
         </MainLayout>
-    )
-}
+    );
+};

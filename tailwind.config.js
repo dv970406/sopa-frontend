@@ -22,7 +22,8 @@ module.exports = {
         'dark-default': "#292A2D",
         'dark-text-color': "#CBD5E1",
         'emphasize': "#F43F5E",
-        'form-gray': "#D1D5DB"
+        'form-gray': "#D1D5DB",
+        'dark-form-gray': "#6B7280"
       }
     },
   },

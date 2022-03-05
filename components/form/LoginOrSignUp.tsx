@@ -1,15 +1,15 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.02.11
+ * 수정일: 2022.03.05
  */
 
 import { loginModeState } from '@utils/atoms';
-import { useRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil';
 
 interface ISelectOne {
     leftText: string;
     rightText: string;
-}
+};
 
 export default function LoginOrSignUp({ leftText, rightText }: ISelectOne) {
     const [loginMode, setLoginMode] = useRecoilState(loginModeState);
@@ -48,5 +48,5 @@ export default function LoginOrSignUp({ leftText, rightText }: ISelectOne) {
                 <p className='mb-2'>{rightText}</p>
             </div>
         </div>
-    )
-}
+    );
+};

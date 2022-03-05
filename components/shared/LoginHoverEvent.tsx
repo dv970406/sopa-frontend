@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.23
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import { useEffect, useState } from 'react';
@@ -82,5 +82,5 @@ export default function LoginHoverEvent() {
                 ) : null}
             </AnimatePresence>
         </div>
-    )
-}
+    );
+};

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.24
- * 수정일: 2022.03.01
+ * 수정일: 2022.03.05
  */
 
 import { motion } from 'framer-motion';
@@ -28,5 +28,5 @@ export default function Loading() {
                 className="rounded-full w-40 h-40"
             />
         </motion.div>
-    )
-}
+    );
+};

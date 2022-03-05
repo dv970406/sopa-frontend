@@ -1,11 +1,11 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.02
+ * 수정일: 2022.03.05
  */
 
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
-import { setContext } from "@apollo/client/link/context"
-import { onError } from "@apollo/client/link/error"
+import { setContext } from "@apollo/client/link/context";
+import { onError } from "@apollo/client/link/error";
 import { offsetLimitPagination } from '@apollo/client/utilities';
 
 const authLink = setContext((_, { headers }) => {
@@ -16,7 +16,7 @@ const authLink = setContext((_, { headers }) => {
             ...headers,
             token
         }
-    }
+    };
 });
 
 const httpLink = createHttpLink({
@@ -24,11 +24,11 @@ const httpLink = createHttpLink({
 });
 const errorInfo = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
-        console.log("graphQLErrors : ", graphQLErrors)
+        console.log("graphQLErrors : ", graphQLErrors);
     } else {
-        console.log("networkError : ", networkError)
-    }
-})
+        console.log("networkError : ", networkError);
+    };
+});
 
 export const client = new ApolloClient({
     link: authLink.concat(errorInfo).concat(httpLink),
@@ -49,4 +49,4 @@ export const client = new ApolloClient({
             }
         }
     }),
-})
+});

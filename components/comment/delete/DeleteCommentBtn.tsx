@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -14,11 +14,11 @@ const DELETE_COMMENT_MUTATION = gql`
             error
         }
     }
-`
+`;
 interface IDeleteCommentComponent {
     postId: number;
     commentId: number;
-}
+};
 
 export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentComponent) {
     const { seeMyInfo } = useMyInfo();
@@ -46,7 +46,7 @@ export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentCo
                     return prev - 1
                 }
             }
-        })
+        });
 
         // 해당 comment를 단 user의 commentCount를 -1
         cache.modify({
@@ -56,15 +56,15 @@ export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentCo
                     return prev - 1
                 }
             }
-        })
-    }
+        });
+    };
 
     const [deleteCommentMutation] = useMutation<IMutationResults>(DELETE_COMMENT_MUTATION, {
         variables: {
             commentId
         },
         update: updateDeleteComment
-    })
+    });
 
     return (
         <button

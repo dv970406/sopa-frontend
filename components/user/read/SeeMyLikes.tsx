@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -25,10 +25,10 @@ interface ISeeMyLikesComponent {
     seeMyInfo: {
         likeCount: number;
     }
-}
+};
 interface ISeeMyLikesQuery {
     seeMyLikes: IPostDisplay[]
-}
+};
 
 export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);

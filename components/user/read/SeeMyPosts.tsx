@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.03
+ * 수정일: 2022.03.05
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -25,7 +25,7 @@ interface ISeeMyPostsComponent {
     seeMyInfo: {
         postCount: number;
     }
-}
+};
 interface ISeeMyPostsQuery {
     seeMyPosts: IPostDisplay[]
 };
@@ -44,7 +44,7 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
     }, [myActivitiesTab]);
     useEffect(() => {
         setPosts(myPostsData?.seeMyPosts!);
-    }, [myPostsData])
+    }, [myPostsData]);
 
     return (
         myActivitiesTab === "post" ? (
@@ -60,5 +60,5 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
                 />
             </>
         ) : null
-    )
-}
+    );
+};
