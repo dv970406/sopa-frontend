@@ -3,17 +3,16 @@
  * 수정일: 2022.03.05
  */
 
-import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import UploadSkillsSelector from '@components/form/UploadSkillsSelector';
-import { selectedSkillsToUploadState, postsState } from '@utils/atoms';
-import { IPostDisplay, ISkill } from '@utils/types/interfaces';
-import useMyInfo from 'hooks/useMyInfo';
+import { selectedSkillsToUploadState } from '@utils/atoms';
+import { IMutationResults, ISkill } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 
 interface IForm {
     title: string;
@@ -24,8 +23,8 @@ interface IForm {
 const CREATE_POST_MUTATION = gql`
     mutation createPost($title:String!,$skills:String!,$description:String,$openChatLink:String){
         createPost(title:$title,skills:$skills,description:$description,openChatLink:$openChatLink){
-            id
-            title
+            ok
+            error
         }
     }
 `;
@@ -34,61 +33,26 @@ export default function CreatePost() {
     const router = useRouter();
     const selectedSkillsToUpload = useRecoilValue(selectedSkillsToUploadState);
     const resetSelectedSkillsToUpload = useResetRecoilState(selectedSkillsToUploadState);
-    const setPosts = useSetRecoilState(postsState);
-    const { seeMyInfo } = useMyInfo();
 
     const { register, handleSubmit, formState: { errors } } = useForm<IForm>();
 
     // createPost Mutation 처리 후 cache 수정작업
-    const updateCreatePost: MutationUpdaterFn = (cache, { data }) => {
-        const { createPost }: any = data
-        if (createPost?.id) {
-            // Mutation 처리 후 cache에 추가 
-            cache.modify({
-                id: `ROOT_QUERY`,
-                fields: {
-                    seePosts(prev: IPostDisplay[]) {
-                        return [createPost, ...prev]
-                    }
-                }
-            });
+    const createPostCompleted = ({ createPost }: IMutationResults) => {
+        const { ok, error } = createPost;
+        if (!ok) {
+            alert(error);
+            return;
+        };
+        // 어차피 index로 보내지면 index Component에서 fetch가 일어나므로 cache 수정할 필요없다.
 
-            // user가 가진 post의 개수 +1
-            cache.modify({
-                id: `User:${seeMyInfo?.id}`,
-                fields: {
-                    postCount(prev) {
-                        return prev + 1
-                    }
-                }
-            });
+        // 업로드 후 CreatePost창에서 셀렉했던 skill들을 reset하고 index페이지로 돌려보낸다.
+        resetSelectedSkillsToUpload();
+        router.push("/");
+    };
 
-            // seeMyPosts query cache에도 해당 post를 추가한다.
-            cache.modify({
-                id: `ROOT_QUERY`,
-                fields: {
-                    seeMyPosts(prev) {
-                        return [createPost, ...prev]
-                    }
-                }
-            })
-
-            // 그리고 postsState에 추가하여 리렌더링
-            setPosts(prev => {
-                return [
-                    createPost,
-                    ...prev
-                ]
-            })
-
-            // 업로드 후 CreatePost창에서 셀렉했던 skill들을 reset하고 index페이지로 돌려보낸다.
-            resetSelectedSkillsToUpload();
-            router.push("/");
-        }
-    }
 
     const [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
-        update: updateCreatePost
+        onCompleted: createPostCompleted
     })
 
     // form이 제출되면 셀렉한 스킬이 있는지 확인하고 mutation 실행
