@@ -34,7 +34,7 @@ export default function SocialLogin() {
 
     useEffect(() => {
         getSocialLogin();
-    }, [getSocialLogin]);
+    });
     return (
         <Loading />
     );
