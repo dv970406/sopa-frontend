@@ -4,7 +4,6 @@
  */
 
 import Loading from '@components/shared/Loading';
-import MainLayout from '@components/shared/MainLayout';
 import { tokenState } from '@utils/atoms';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -16,7 +15,6 @@ export default function SocialLogin() {
 
     const getSocialLogin = async () => {
         const { code, social } = router.query;
-        console.log(process.env.NEXT_PUBLIC_APOLLO_EXPRESS_URI)
         const response = await fetch(`${process.env.NEXT_PUBLIC_APOLLO_EXPRESS_URI}/sociallogin/${social}`, {
             method: "POST",
             headers: {
@@ -24,7 +22,6 @@ export default function SocialLogin() {
             },
             body: JSON.stringify({ code })
         });
-        console.log(response)
 
         const { jwtToken } = await response.json();
 
@@ -39,8 +36,6 @@ export default function SocialLogin() {
         getSocialLogin();
     }, [getSocialLogin]);
     return (
-        <MainLayout title="소셜로그인">
-            <Loading />
-        </MainLayout>
+        <Loading />
     );
 };
