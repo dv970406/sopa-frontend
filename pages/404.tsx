@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.24
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.06
  */
 
 import { motion, useMotionValue, useTransform } from 'framer-motion';
@@ -28,7 +28,7 @@ export default function NoExistsPage() {
         });
     }, [x, getScreenWidth, router]);
     return (
-        <div
+        <motion.div
             className="
                 flex items-center justify-center 
                 h-screen w-screen overflow-hidden space-x-7
@@ -80,6 +80,6 @@ export default function NoExistsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                 </svg>
             </motion.div>
-        </div>
+        </motion.div>
     );
 };
