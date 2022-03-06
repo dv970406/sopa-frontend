@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.06
  */
 
 import DisplayPost from '@components/post/read/DisplayPost';
@@ -55,14 +55,14 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
                     <NoData />
                 ) : (
                     posts?.map((post: IPostDisplay, index: number) =>
-                        <motion.button
+                        <motion.div
                             layoutId={String(index)}
                             onClick={() => setSelectedPostId(index)}
-                            className={` w-full `}
+                            className="w-full"
                             key={index}
                         >
                             <DisplayPost key={index} {...post} />
-                        </motion.button>
+                        </motion.div>
                     )
                 )}
             </InfiniteScrolling>

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.06
  */
 
 import { gql, useMutation } from '@apollo/client';
@@ -12,6 +12,7 @@ import Input from '@components/form/Input';
 import FormButton from '@components/form/FormButton';
 import { useState } from 'react';
 import { IMutationResults } from '@utils/types/interfaces';
+import Button from '@components/shared/Button';
 
 interface IForm {
     sendedCode?: number;
@@ -21,6 +22,14 @@ interface IForm {
     password2: string;
 };
 
+const CHECK_EXIST_USER_MUTATION = gql`
+    mutation checkExistUser($name:String!,$email:String!){
+        checkExistUser(name:$name,email:$email){
+            ok
+            error
+        }
+    }
+`;
 const CREATE_USER_MUTATION = gql`
     mutation createUser($name:String!,$email:String!,$password:String!){
         createUser(name:$name,email:$email,password:$password){
@@ -33,10 +42,12 @@ const CREATE_USER_MUTATION = gql`
 export default function CreateUser() {
     // 이메일로 보내진 코드를 state에 저장한다
     const [emailCode, setEmailCode] = useState<number | null>(null);
-    const { register, handleSubmit, getValues, formState: { errors } } = useForm<IForm>({
+    const [sendCodeLoading, setSendCodeLoading] = useState(false);
+    const setLoginMode = useSetRecoilState(loginModeState);
+
+    const { register, handleSubmit, getValues, clearErrors, formState: { errors } } = useForm<IForm>({
         mode: "onChange"
     });
-    const setLoginMode = useSetRecoilState(loginModeState);
 
     // createUser Mutation처리 후 로그인 모드로 바꾸기
     const createUserCompleted = ({ createUser }: IMutationResults) => {
@@ -47,13 +58,48 @@ export default function CreateUser() {
         };
         setLoginMode(true);
     };
-    const [createUserMutation, { loading }] = useMutation<IMutationResults>(CREATE_USER_MUTATION, {
+    const [createUserMutation, { loading: createUserLoading }] = useMutation<IMutationResults>(CREATE_USER_MUTATION, {
         onCompleted: createUserCompleted
     });
 
+    const checkExistUserCompleted = async ({ checkExistUser }: IMutationResults) => {
+        const { ok, error } = checkExistUser;
+        if (!ok) {
+            alert(error);
+            clearErrors();
+            return;
+        };
+        const { email } = getValues();
+
+        setSendCodeLoading(true);
+        const response = await (
+            await fetch("/api/check-valid-email", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({ email })
+            })
+        ).json();
+        setSendCodeLoading(false);
+
+        if (!response.ok) {
+            alert(response.message);
+            return;
+        };
+
+        setEmailCode(response.sendedCode);
+        setIsEmailValidationMode(true);
+        alert(response.message);
+    }
+
+    const [checkExistUser, { loading: checkExistUserLoading }] = useMutation<IMutationResults>(CHECK_EXIST_USER_MUTATION, {
+        onCompleted: checkExistUserCompleted
+    })
+
     // 이메일로 보내진 인증코드를 보고 입력한 코드와 state에 담겨진 코드가 일치하면 Mutation을 실행시킨다.
     const checkEmailValidation = () => {
-        if (loading) return;
+        if (createUserLoading) return;
 
         const { name, email, password, sendedCode } = getValues();
         if (emailCode !== Number(sendedCode)) {
@@ -83,26 +129,14 @@ export default function CreateUser() {
             return;
         };
 
-        const { email } = getValues();
+        const { name, email } = getValues();
 
-        const response = await (
-            await fetch("/api/check-valid-email", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({ email })
-            })
-        ).json();
-
-        if (!response.ok) {
-            alert(response.message);
-            return;
-        };
-
-        setEmailCode(response.sendedCode);
-        setIsEmailValidationMode(true);
-        alert(response.message);
+        checkExistUser({
+            variables: {
+                name,
+                email
+            }
+        })
     };
 
     return (
@@ -162,7 +196,7 @@ export default function CreateUser() {
                 />
                 {isEmailValidationMode ? (
                     <div
-                        className="flex m-auto"
+                        className="flex m-auto space-x-3"
                     >
                         <input
                             {...register("sendedCode", {
@@ -172,24 +206,17 @@ export default function CreateUser() {
                             type="text"
                             placeholder='인증번호를 입력하세요'
                             maxLength={6}
-                            className="focus:outline-none dark:bg-dark-default"
+                            className="focus:outline-none dark:bg-dark-default p-2 rounded-lg"
                         />
-                        <button
+                        <FormButton
+                            text='회원가입'
+                            loading={createUserLoading}
                             onClick={checkEmailValidation}
-                            className="
-                                rounded-xl 
-                                px-4 py-3 
-                                bg-sopa-pure text-white font-semibold text-sm
-                                hover:bg-sopa-default 
-                                transition 
-                            "
-                        >
-                            회원가입
-                        </button>
+                        />
                     </div>
                 ) : (
                     <FormButton
-                        loading={loading}
+                        loading={checkExistUserLoading || sendCodeLoading}
                         text='이메일 인증'
                         onClick={handleSubmit(onValid)}
                     />

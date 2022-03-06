@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.06
  */
 
 import MainLayout from '@components/shared/MainLayout';
@@ -36,13 +36,14 @@ export default function SocialLogin({ token }: ISocialLogin) {
 
 export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     const { code, social } = query;
-    const response = await fetch(`http://localhost:4000/sociallogin/${social}`, {
+    const response = await fetch(`${process.env.APOLLO_EXPRESS_URI}/sociallogin/${social}`, {
         method: "POST",
         headers: {
             "Content-type": "application/json"
         },
         body: JSON.stringify({ code })
     });
+    console.log(response)
 
     const { jwtToken } = await response.json();
     return {
