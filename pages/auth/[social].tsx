@@ -3,53 +3,44 @@
  * 수정일: 2022.03.06
  */
 
+import Loading from '@components/shared/Loading';
 import MainLayout from '@components/shared/MainLayout';
 import { tokenState } from '@utils/atoms';
-import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-interface ISocialLogin {
-    token: string;
-};
-
-export default function SocialLogin({ token }: ISocialLogin) {
+export default function SocialLogin() {
     const setToken = useSetRecoilState(tokenState);
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        if (token) {
-            //document.cookie = `TOKEN=${token}`;
-            localStorage.setItem("TOKEN", token);
-            setToken(token);
+
+    const getSocialLogin = async () => {
+        const { code, social } = router.query;
+        console.log(process.env.NEXT_PUBLIC_APOLLO_EXPRESS_URI)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_APOLLO_EXPRESS_URI}/sociallogin/${social}`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({ code })
+        });
+        console.log(response)
+
+        const { jwtToken } = await response.json();
+
+        if (jwtToken) {
+            localStorage.setItem("TOKEN", jwtToken);
+            setToken(jwtToken);
             router.push("/");
         };
-        setLoading(false);
-    }, [router, token, setToken]);
-    return (
-        <MainLayout loading={loading} title="소셜로그인">
+    }
 
+    useEffect(() => {
+        getSocialLogin();
+    }, [getSocialLogin]);
+    return (
+        <MainLayout title="소셜로그인">
+            <Loading />
         </MainLayout>
     );
-};
-
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
-    const { code, social } = query;
-    console.log(process.env.NEXT_PUBLIC_APOLLO_EXPRESS_URI)
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APOLLO_EXPRESS_URI}/sociallogin/${social}`, {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json"
-        },
-        body: JSON.stringify({ code })
-    });
-    console.log(response)
-
-    const { jwtToken } = await response.json();
-    return {
-        props: {
-            token: jwtToken
-        }
-    };
 };
