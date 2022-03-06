@@ -4,6 +4,7 @@
  */
 
 import Loading from '@components/shared/Loading';
+import MainLayout from '@components/shared/MainLayout';
 import { tokenState } from '@utils/atoms';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -36,12 +37,8 @@ export default function SocialLogin() {
         getSocialLogin();
     });
     return (
-        <div
-            className="
-                flex items-center justify-center
-            "
-        >
+        <MainLayout title='소셜로그인'>
             <Loading />
-        </div>
+        </MainLayout>
     );
 };
