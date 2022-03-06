@@ -38,7 +38,7 @@ const SEE_POSTS_COUNT_QUERY = gql`
   }
 `;
 
-const Home = ({ requestedPosts }: ISeePostsQuery) => {
+const Home = () => {
   const setPosts = useSetRecoilState(postsState);
   const searchMode = useRecoilValue(searchModeState);
 
@@ -46,9 +46,6 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
 
   const { data: seePostsCountData, refetch: refetchSeePostsCount } = useQuery<ISeePostsCountQuery>(SEE_POSTS_COUNT_QUERY);
 
-  useEffect(() => {
-    setPosts(requestedPosts);
-  }, [requestedPosts, setPosts]);
   useEffect(() => {
     setPosts(seePostsData?.seePosts!);
   }, [seePostsData, setPosts]);
@@ -81,7 +78,7 @@ const Home = ({ requestedPosts }: ISeePostsQuery) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+/* export const getServerSideProps: GetServerSideProps = async () => {
   // seePosts query 요청부
   // 클라이언트 측에서 다시 요청을 하므로 크게 필요는 없는데 SEO목적 때문에 놔둠
   const { data } = await client.query({
@@ -96,6 +93,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
       requestedPosts: data.seePosts,
     }
   };
-};
+}; */
 
 export default Home;

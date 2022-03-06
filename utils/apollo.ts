@@ -20,7 +20,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const httpLink = createHttpLink({
-    uri: process.env.VERCEL_ENV === "production" ? process.env.NEXT_PUBLIC_APOLLO_GRAPHQL_URI : "http://localhost:4000/graphql",
+    uri: process.env.NODE_ENV === "development" ? "http://localhost:4000/graphql" : process.env.NEXT_PUBLIC_APOLLO_GRAPHQL_URI,
 });
 
 export const client = new ApolloClient({
