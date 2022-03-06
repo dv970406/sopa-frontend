@@ -45,13 +45,13 @@ export default function MainLayout({ title, children }: IMainLayout) {
                     flex flex-col justify-center 
                     ${isAuthPage ? "items-center" : ""}
                     ${usingFormPage ? "md:px-28 lg:px-52 xl:px-96 space-y-8" : "sm:px-16 md:px-24 lg:px-28 xl:px-48 space-y-8"}
-                    py-14 px-8 
+                    pt-14 pb-20 px-8 
                 `}
             >
                 {children}
                 {isAuthPage ? null : (
                     <footer
-                        className="py-52"
+                        className="py-40"
                     />
                 )}
             </div>
