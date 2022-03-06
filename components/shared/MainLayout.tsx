@@ -17,7 +17,7 @@ interface IMainLayout {
 
 export default function MainLayout({ title, children }: IMainLayout) {
     const { pathname, push } = useRouter();
-    const isAuthPage = pathname === "/auth";
+    const isAuthPage = pathname === "/auth" || pathname === "/auth/[social]";
     const neededLoginPage = pathname === "/post/upload" || pathname === "/user/profile" || pathname === "/user/edit";
     const usingFormPage = pathname === "/auth" || pathname === "/user/edit" || pathname === "/post/upload" || pathname === "/post/[id]";
     const token = useRecoilValue(tokenState);
