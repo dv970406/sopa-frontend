@@ -40,7 +40,7 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
         if (myActivitiesTab === "like") {
             setPosts(myLikesData?.seeMyLikes!);
         };
-    }, [myActivitiesTab, setPosts]);
+    }, [myActivitiesTab, myLikesData, setPosts]);
     useEffect(() => {
         setPosts(myLikesData?.seeMyLikes!);
     }, [myLikesData, setPosts]);
