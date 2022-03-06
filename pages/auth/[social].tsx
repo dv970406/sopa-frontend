@@ -36,6 +36,12 @@ export default function SocialLogin() {
         getSocialLogin();
     });
     return (
-        <Loading />
+        <div
+            className="
+                flex items-center justify-center
+            "
+        >
+            <Loading />
+        </div>
     );
 };
