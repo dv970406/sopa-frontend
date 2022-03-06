@@ -34,7 +34,7 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const setPosts = useSetRecoilState(postsState);
 
-    const { data: myLikesData, fetchMore: fetchMoreMyLikes, refetch: refetchMyLikes } = useQuery<ISeeMyLikesQuery>(SEE_MY_LIKES_QUERY);
+    const { data: myLikesData, loading, fetchMore: fetchMoreMyLikes, refetch: refetchMyLikes } = useQuery<ISeeMyLikesQuery>(SEE_MY_LIKES_QUERY);
 
     useEffect(() => {
         if (myActivitiesTab === "like") {
@@ -50,6 +50,7 @@ export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {
             <>
                 <SortPosts refetchFn={refetchMyLikes} />
                 <SeePosts
+                    loading={loading}
                     howManyData={seeMyInfo?.likeCount}
                     fetchMore={
                         () => fetchMoreMyLikes({

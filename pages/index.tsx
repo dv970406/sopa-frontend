@@ -1,8 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import SkillBoards from '@components/skill/SkillBoards';
 import MainLayout from '@components/shared/MainLayout';
-import type { GetServerSideProps } from 'next';
-import { client } from '@utils/apollo';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import type { IPostDisplay } from '@utils/types/interfaces';
 import SeePosts from '@components/post/read/SeePosts';
@@ -42,7 +40,7 @@ const Home = () => {
   const setPosts = useSetRecoilState(postsState);
   const searchMode = useRecoilValue(searchModeState);
 
-  const { data: seePostsData, fetchMore, refetch: refetchSeePosts } = useQuery<ISeePostsQuery>(SEE_POSTS_QUERY);
+  const { data: seePostsData, loading, fetchMore, refetch: refetchSeePosts } = useQuery<ISeePostsQuery>(SEE_POSTS_QUERY);
 
   const { data: seePostsCountData, refetch: refetchSeePostsCount } = useQuery<ISeePostsCountQuery>(SEE_POSTS_COUNT_QUERY);
 
@@ -67,6 +65,7 @@ const Home = () => {
         </>
       )}
       <SeePosts
+        loading={loading}
         howManyData={seePostsCountData?.seePostsCount?.count!}
         fetchMore={
           () => fetchMore({
