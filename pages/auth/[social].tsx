@@ -38,7 +38,11 @@ export default function SocialLogin() {
     });
     return (
         <MainLayout title='소셜로그인'>
-            <Loading />
+            <div
+                className="w-screen h-screen"
+            >
+                <Loading />
+            </div>
         </MainLayout>
     );
 };
