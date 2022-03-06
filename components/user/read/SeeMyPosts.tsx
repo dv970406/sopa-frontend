@@ -35,7 +35,7 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);
     const setPosts = useSetRecoilState(postsState);
 
-    const { data: myPostsData, fetchMore: fetchMoreMyPosts, refetch: refetchMyPosts } = useQuery<ISeeMyPostsQuery>(SEE_MY_POSTS_QUERY);
+    const { data: myPostsData, loading, fetchMore: fetchMoreMyPosts, refetch: refetchMyPosts } = useQuery<ISeeMyPostsQuery>(SEE_MY_POSTS_QUERY);
 
     useEffect(() => {
         if (myActivitiesTab === "post") {
@@ -51,6 +51,7 @@ export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
             <>
                 <SortPosts refetchFn={refetchMyPosts} />
                 <SeePosts
+                    loading={loading}
                     howManyData={seeMyInfo?.postCount}
                     fetchMore={
                         () => fetchMoreMyPosts({

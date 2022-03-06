@@ -12,6 +12,7 @@ import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import NoData from '@components/shared/NoData';
 import { IPostDisplay } from '@utils/types/interfaces';
+import Loading from '@components/shared/Loading';
 
 const semiDetailVariants = {
     invisible: {
@@ -26,11 +27,12 @@ const semiDetailVariants = {
 };
 
 interface ISeePostsComponent {
+    loading?: boolean;
     fetchMore: any;
     howManyData: number;
 };
 
-export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent) {
+export default function SeePosts({ loading, fetchMore, howManyData }: ISeePostsComponent) {
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
@@ -46,51 +48,57 @@ export default function SeePosts({ fetchMore, howManyData }: ISeePostsComponent)
     };
     return (
         <div>
-            <InfiniteScrolling
-                howManyData={howManyData}
-                fetchMore={fetchMore}
-                css={`${posts?.length === 0 ? null : "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"}`}
-            >
-                {posts?.length === 0 ? (
-                    <NoData />
-                ) : (
-                    posts?.map((post: IPostDisplay, index: number) =>
-                        <motion.div
-                            layoutId={String(index)}
-                            onClick={() => setSelectedPostId(index)}
-                            className="w-full"
-                            key={index}
-                        >
-                            <DisplayPost key={index} {...post} />
-                        </motion.div>
-                    )
-                )}
-            </InfiniteScrolling>
+            {loading ? (
+                <Loading />
+            ) : (
+                <>
+                    <InfiniteScrolling
+                        howManyData={howManyData}
+                        fetchMore={fetchMore}
+                        css={`${posts?.length === 0 ? null : "grid gap-5 sm:grid-cols-2 xl:grid-cols-3"}`}
+                    >
+                        {posts?.length === 0 ? (
+                            <NoData />
+                        ) : (
+                            posts?.map((post: IPostDisplay, index: number) =>
+                                <motion.div
+                                    layoutId={String(index)}
+                                    onClick={() => setSelectedPostId(index)}
+                                    className="w-full"
+                                    key={index}
+                                >
+                                    <DisplayPost key={index} {...post} />
+                                </motion.div>
+                            )
+                        )}
+                    </InfiniteScrolling>
 
-            <AnimatePresence>
-                {selectedPostId !== null ? (
-                    <motion.div
-                        className={`
+                    <AnimatePresence>
+                        {selectedPostId !== null ? (
+                            <motion.div
+                                className={`
                             flex justify-center items-center 
                             h-screen w-screen px-6 
                             sm:px-20 md:px-32 lg:px-48 xl:px-72 2xl:px-96
                             fixed inset-0
                         `}
-                        onClick={() => setSelectedPostId(null)}
-                        variants={semiDetailVariants}
-                        initial="invisible"
-                        animate="visible"
-                        exit="exit"
-                    >
-                        <motion.div
-                            layoutId={String(selectedPostId)}
-                            className="w-full"
-                        >
-                            <SeeSemiDetail semiDetail={posts[selectedPostId]} />
-                        </motion.div>
-                    </motion.div>
-                ) : null}
-            </AnimatePresence>
+                                onClick={() => setSelectedPostId(null)}
+                                variants={semiDetailVariants}
+                                initial="invisible"
+                                animate="visible"
+                                exit="exit"
+                            >
+                                <motion.div
+                                    layoutId={String(selectedPostId)}
+                                    className="w-full"
+                                >
+                                    <SeeSemiDetail semiDetail={posts[selectedPostId]} />
+                                </motion.div>
+                            </motion.div>
+                        ) : null}
+                    </AnimatePresence>
+                </>
+            )}
         </div>
     );
 };

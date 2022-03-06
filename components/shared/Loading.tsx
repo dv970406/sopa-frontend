@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 export default function Loading() {
     return (
         <motion.div
-            className="flex justify-center items-center place-self-center top-1/2 "
+            className="flex justify-center items-center place-self-center top-1/2 rounded-full "
             initial={{
                 rotate: -60
             }}
