@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.06
  */
 
 import { tokenState } from '@utils/atoms';
@@ -11,12 +11,11 @@ import { useRecoilValue } from 'recoil';
 import NavBar from './NavBar';
 
 interface IMainLayout {
-    loading?: boolean;
     title: string;
     children: React.ReactNode;
 };
 
-export default function MainLayout({ loading, title, children }: IMainLayout) {
+export default function MainLayout({ title, children }: IMainLayout) {
     const { pathname, push } = useRouter();
     const isAuthPage = pathname === "/auth";
     const neededLoginPage = pathname === "/post/upload" || pathname === "/user/profile" || pathname === "/user/edit";
@@ -38,7 +37,7 @@ export default function MainLayout({ loading, title, children }: IMainLayout) {
             `}
         >
             <Head>
-                <title>{title?.includes("undefined") || loading ? "SOPA" : `${title} | SOPA`} </title>
+                <title>{title?.includes("undefined") || undefined ? "SOPA" : `${title} | SOPA`} </title>
             </Head>
             {isAuthPage ? null : <NavBar />}
             <div

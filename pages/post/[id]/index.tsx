@@ -40,7 +40,7 @@ export default function PostDetailPage() {
     }, [data]);
 
     return (
-        <MainLayout loading={loading} title={`${postTitle || data?.seePost?.title}`}>
+        <MainLayout title={`${postTitle || data?.seePost?.title}`}>
             <SeePost
                 fetchMore={
                     () => fetchMore({
