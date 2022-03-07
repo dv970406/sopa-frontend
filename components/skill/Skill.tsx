@@ -110,6 +110,8 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
                 width={50}
                 height={50}
                 quality={100}
+                placeholder="blur"
+                blurDataURL={skillImage}
                 className={`
                     ${isSelected ? "opacity-100" : uploadMode ? "opacity-30" : "opacity-100"}
                     transition-opacity

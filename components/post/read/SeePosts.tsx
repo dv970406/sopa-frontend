@@ -13,6 +13,7 @@ import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import NoData from '@components/shared/NoData';
 import { IPostDisplay } from '@utils/types/interfaces';
 import Loading from '@components/shared/Loading';
+import { ApolloQueryResult } from '@apollo/client';
 
 const semiDetailVariants = {
     invisible: {
@@ -28,7 +29,7 @@ const semiDetailVariants = {
 
 interface ISeePostsComponent {
     loading?: boolean;
-    fetchMore: any;
+    fetchMore: () => Promise<ApolloQueryResult<unknown>>;
     howManyData: number;
 };
 

@@ -14,11 +14,12 @@ import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import { useRecoilValue } from "recoil";
 import { tokenState } from "@utils/atoms";
 import Loading from '@components/shared/Loading';
+import { ApolloQueryResult } from '@apollo/client';
 
 interface ISeePostDetailComponent {
     pageTitle: string;
     seePost: IPostDetail;
-    fetchMore: any;
+    fetchMore: () => Promise<ApolloQueryResult<unknown>>;
     comments: ICommentInfo[];
 };
 

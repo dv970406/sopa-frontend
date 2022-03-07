@@ -52,15 +52,20 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
         router.replace("/");
     };
 
-    const [deletePostMutation] = useMutation<IMutationResults>(DELETE_POST_MUTATION, {
+    const [deletePostMutation, { loading }] = useMutation<IMutationResults>(DELETE_POST_MUTATION, {
         variables: {
             postId
         },
         update: updateDeletePost
     });
+
+    const onClick = () => {
+        if (loading) return;
+        deletePostMutation();
+    }
     return (
         <button
-            onClick={() => deletePostMutation()}
+            onClick={onClick}
             className="p-1"
         >
             <svg

@@ -3,6 +3,7 @@
  * 수정일: 2022.03.05
  */
 
+import { ApolloQueryResult } from '@apollo/client';
 import DisplayComment from '@components/comment/read/DisplayComment';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import { commentsState } from '@utils/atoms';
@@ -11,7 +12,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
 interface IMyCommentsComponent {
-    fetchMore: any;
+    fetchMore: () => Promise<ApolloQueryResult<unknown>>;
     howManyData: number;
 };
 

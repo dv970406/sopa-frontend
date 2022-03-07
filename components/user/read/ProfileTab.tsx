@@ -40,7 +40,7 @@ export default function ProfileTab({ autoFocus, count, onFocusTab, svg }: ITabCo
             >
                 {svg}
             </button>
-            <p>{count}개</p>
+            <p>{count < 0 ? 0 : count}개</p>
         </div>
     );
 };

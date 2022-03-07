@@ -32,7 +32,7 @@ export default function MainLayout({ title, children }: IMainLayout) {
     return (
         <div
             className={`
-                font-NotoSans select-none box-border
+                font-NotoSans box-border
                 dark:bg-dark-ultra dark:text-dark-text-color
             `}
         >

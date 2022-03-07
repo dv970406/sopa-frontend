@@ -59,16 +59,21 @@ export default function DeleteCommentBtn({ postId, commentId }: IDeleteCommentCo
         });
     };
 
-    const [deleteCommentMutation] = useMutation<IMutationResults>(DELETE_COMMENT_MUTATION, {
+    const [deleteCommentMutation, { loading }] = useMutation<IMutationResults>(DELETE_COMMENT_MUTATION, {
         variables: {
             commentId
         },
         update: updateDeleteComment
     });
 
+    const onClick = () => {
+        if (loading) return;
+        deleteCommentMutation();
+    }
+
     return (
         <button
-            onClick={() => deleteCommentMutation()}
+            onClick={onClick}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
