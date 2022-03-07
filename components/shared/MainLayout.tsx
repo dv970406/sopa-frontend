@@ -24,7 +24,7 @@ export default function MainLayout({ title, children }: IMainLayout) {
 
     useEffect(() => {
         if (neededLoginPage === true) {
-            token ? null : push("/auth");
+            token ? null : push("/");
         } else if (isAuthPage) {
             token ? push("/") : null;
         }
