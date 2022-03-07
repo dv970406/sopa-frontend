@@ -9,11 +9,12 @@ import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { postEditModeState } from '@utils/atoms';
 import { useEffect } from 'react';
 import SeePostDetail from './SeePostDetail';
+import { ApolloQueryResult } from '@apollo/client';
 
 interface IPostDetailComponent {
     postTitle: string;
     seePost: IPostDetail;
-    fetchMore: any;
+    fetchMore: () => Promise<ApolloQueryResult<unknown>>;
     comments: ICommentInfo[];
 };
 

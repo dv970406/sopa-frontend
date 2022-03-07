@@ -72,7 +72,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
         });
     };
 
-    const [toggleLike] = useMutation<IMutationResults>(TOGGLE_LIKE_MUTATION, {
+    const [toggleLike, { loading }] = useMutation<IMutationResults>(TOGGLE_LIKE_MUTATION, {
         update: afterToggleLike,
         variables: {
             postId
@@ -81,6 +81,7 @@ export default function MetaData({ isSeePost = false, postId, readCount, comment
 
     const onClick = (event: React.FormEvent<HTMLButtonElement>) => {
         event.stopPropagation();
+        if (loading) return;
         toggleLike();
     }
 

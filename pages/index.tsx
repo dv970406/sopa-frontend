@@ -77,21 +77,4 @@ const Home = () => {
   );
 };
 
-/* export const getServerSideProps: GetServerSideProps = async () => {
-  // seePosts query 요청부
-  // 클라이언트 측에서 다시 요청을 하므로 크게 필요는 없는데 SEO목적 때문에 놔둠
-  const { data } = await client.query({
-    query: SEE_POSTS_QUERY,
-    variables: {
-      howToSort: "new"
-    }
-  });
-
-  return {
-    props: {
-      requestedPosts: data.seePosts,
-    }
-  };
-}; */
-
 export default Home;

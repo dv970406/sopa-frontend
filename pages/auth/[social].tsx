@@ -34,8 +34,10 @@ export default function SocialLogin() {
     }
 
     useEffect(() => {
-        getSocialLogin();
-    });
+        if (router) {
+            getSocialLogin();
+        }
+    }, [router]);
     return (
         <MainLayout title='소셜로그인'>
             <div
