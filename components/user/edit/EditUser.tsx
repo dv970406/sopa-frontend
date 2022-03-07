@@ -81,9 +81,9 @@ export default function EditUser() {
     };
 
     const logOut = () => {
-        resetToken();
-        localStorage.removeItem("TOKEN");
         router.replace("/");
+        localStorage.removeItem("TOKEN");
+        resetToken();
     };
 
     return (
