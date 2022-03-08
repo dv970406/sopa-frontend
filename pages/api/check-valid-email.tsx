@@ -31,7 +31,7 @@ export default function Hanlder(req: NextApiRequest, res: NextApiResponse) {
                 sendedCode,
             });
         })
-        .catch((error) => {
+        .catch(() => {
             return res.status(404).json({
                 ok: false,
                 message: "이메일 전송에 실패했습니다."
