@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.09
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -16,13 +16,14 @@ import { useResetRecoilState } from 'recoil';
 
 interface IForm {
     name: string;
+    githubURL?: string;
     password?: string;
     password2?: string;
 };
 
 const EDIT_USER_MUTATION = gql`
-    mutation editUser($name:String,$password:String){
-        editUser(name:$name,password:$password){
+    mutation editUser($name:String,$githubURL:String,$password:String){
+        editUser(name:$name,githubURL:$githubURL,password:$password){
             ok
             error
         }
@@ -36,7 +37,8 @@ export default function EditUser() {
     const { register, handleSubmit, clearErrors, getValues, formState: { errors } } = useForm<IForm>({
         mode: "onChange",
         defaultValues: {
-            name: seeMyInfo?.name
+            name: seeMyInfo?.name,
+            githubURL: seeMyInfo?.githubURL
         }
     });
 
@@ -64,7 +66,7 @@ export default function EditUser() {
     });
 
     // form을 제출하면 비밀번호 일치여부 확인 후 Mutation 실행
-    const onValid = ({ name, password, password2 }: IForm) => {
+    const onValid = ({ name, password, password2, githubURL }: IForm) => {
         if (loading) return;
 
         if (password !== password2) {
@@ -76,6 +78,7 @@ export default function EditUser() {
             variables: {
                 ...(name && { name }),
                 ...(password && { password }),
+                ...(githubURL && { githubURL })
             }
         });
     };
@@ -106,11 +109,29 @@ export default function EditUser() {
                         },
                     })}
                     error={errors.name?.message}
+                    placeholder="https://github.com/sopaisthebest"
                 />
                 <Input
                     disabled={true}
                     type="email"
                     defaultValue={seeMyInfo?.email}
+                />
+                <Input
+                    type="githubURL"
+                    register={register("githubURL", {
+                        maxLength: {
+                            value: 70,
+                            message: "링크는 70자 이내여야 합니다."
+                        },
+                        validate: {
+                            githubURLFormat: (value: any): boolean | string => {
+                                return value?.length === 0 ? true : (
+                                    value?.includes("https://github.com/") ? true : "깃허브 링크 형식을 확인해주세요."
+                                )
+                            }
+                        }
+                    })}
+                    error={errors.githubURL?.message}
                 />
 
                 {seeMyInfo?.socialLogin ? null : (

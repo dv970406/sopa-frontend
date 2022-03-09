@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.12
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.09
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -12,6 +12,7 @@ import { USER_SIMPLE_FRAGMENT } from '@utils/fragments';
 export interface ISeeMyInfoQuery {
     seeMyInfo: {
         id: number;
+        githubURL?: string;
         socialLogin?: string;
         name: string;
         email: string;

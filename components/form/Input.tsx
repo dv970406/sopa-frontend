@@ -1,12 +1,12 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.09
  */
 
 import React, { useState } from 'react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
-type InputType = "email" | "password" | "password2" | "name" | "title" | "skills" | "description" | "openChatLink";
+type InputType = "name" | "githubURL" | "email" | "password" | "password2" | "title" | "skills" | "description" | "openChatLink";
 interface IInput {
     type: InputType;
     register?: UseFormRegisterReturn;
@@ -36,6 +36,8 @@ const typeTranslater = (engVerType: string) => {
             return korVerType = "설명";
         case "openChatLink":
             return korVerType = "카카오 오픈채팅 링크";
+        case "githubURL":
+            return korVerType = "깃허브 링크";
     }
     return korVerType;
 };
@@ -48,6 +50,8 @@ const decideType = (type: InputType) => {
         case "password2":
             return "password";
         case "openChatLink":
+            return "text";
+        case "githubURL":
             return "text";
         default:
             return type;

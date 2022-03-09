@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.09
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -119,9 +119,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
     };
 
     return (
-        <div
-            className='space-y-4'
-        >
+        <div>
             <h1 className="font-bold text-lg">
                 댓글을 입력하세요.
             </h1>

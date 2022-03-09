@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.09
  */
 
 export interface IMutationResults {
@@ -15,7 +15,7 @@ export interface IPostDisplay {
     //__typename?: string;
     id: number;
     title: string;
-    description: string;
+    description?: string;
     user: IUserInfo;
     likeCount: number;
     isLiked: boolean;
@@ -48,6 +48,7 @@ export interface ICommentInfo {
 export interface IUserInfo {
     id: number;
     name: string;
+    githubURL?: string;
 };
 
 

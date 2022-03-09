@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.09
  */
 
 import { gql } from '@apollo/client';
@@ -13,6 +13,7 @@ export const POST_DISPLAY_FRAGMENT = gql`
         user{
             id
             name
+            githubURL
         }
         likeCount
         isLiked
@@ -54,6 +55,7 @@ export const COMMENT_FRAGMENT = gql`
 export const USER_SIMPLE_FRAGMENT = gql`
     fragment UserSimpleFragment on User{
         id
+        githubURL
         socialLogin
         name
         email
