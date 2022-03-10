@@ -132,6 +132,7 @@ export default function EditUser() {
                         }
                     })}
                     error={errors.githubURL?.message}
+                    placeholder="https://github.com/sopaisthebest"
                 />
 
                 {seeMyInfo?.socialLogin ? null : (
