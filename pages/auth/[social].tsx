@@ -28,11 +28,8 @@ export default function SocialLogin() {
         const { jwtToken, error } = await response.json();
 
         if (error) {
-            confirm(`${error} 다시 요청하시겠습니까?`) ? (
-                makeSocialLoginReqUrl({ socialSite: "naver", reprompt: true })
-            ) : (
-                router.replace("/")
-            );
+            const checkAgain = confirm(`${error} 다시 요청하시겠습니까?`)
+            checkAgain ? window.location.href = makeSocialLoginReqUrl({ socialSite: "naver", reprompt: true }) : router.replace("/");
             return;
         };
 
