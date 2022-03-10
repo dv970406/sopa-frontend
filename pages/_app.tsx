@@ -8,7 +8,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <RecoilRoot>
-        <div className="h-screen">
+        <div
+          className="
+            font-NotoSans box-border
+            dark:bg-dark-ultra dark:text-dark-text-color
+          "
+        >
           <Component {...pageProps} />
         </div>
       </RecoilRoot>
