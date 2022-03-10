@@ -5,7 +5,11 @@
 
 import type { IFetchedSkillsInfo, IMakeSkillImages } from './types/interfaces';
 
-export const makeSocialLoginReqUrl = (socialSite: string): string => {
+interface IMakeSocialLoginReqUrl {
+    socialSite: string;
+    reprompt?: boolean;
+}
+export const makeSocialLoginReqUrl = ({ socialSite, reprompt }: IMakeSocialLoginReqUrl) => {
     let baseUrl = null;
     let config = {};
 
@@ -16,7 +20,8 @@ export const makeSocialLoginReqUrl = (socialSite: string): string => {
                 response_type: "code",
                 client_id: process.env.NEXT_PUBLIC_SOCIAL_NAVER_KEY,
                 redirect_uri: process.env.NEXT_PUBLIC_SOCIAL_NAVER_CODE_REDIRECT,
-                state: process.env.NEXT_PUBLIC_SOCIAL_NAVER_STATE
+                state: process.env.NEXT_PUBLIC_SOCIAL_NAVER_STATE,
+                auth_type: reprompt ? "reprompt" : undefined
             };
             break;
         case "kakao":

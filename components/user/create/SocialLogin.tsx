@@ -15,7 +15,7 @@ interface ISocialLogin {
 const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
     return (
         <button>
-            <Link href={makeSocialLoginReqUrl(social)} passHref>
+            <Link href={makeSocialLoginReqUrl({ socialSite: social })} passHref>
                 <Image
                     src={`/${social}.png`}
                     alt=""
