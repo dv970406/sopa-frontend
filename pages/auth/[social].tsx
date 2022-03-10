@@ -24,7 +24,12 @@ export default function SocialLogin() {
             body: JSON.stringify({ code })
         });
 
-        const { jwtToken } = await response.json();
+        const { jwtToken, error } = await response.json();
+
+        if (error) {
+            alert(error);
+            return;
+        };
 
         if (jwtToken) {
             localStorage.setItem("TOKEN", jwtToken);
