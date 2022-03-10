@@ -6,6 +6,7 @@
 import Loading from '@components/shared/Loading';
 import MainLayout from '@components/shared/MainLayout';
 import { tokenState } from '@utils/atoms';
+import { makeSocialLoginReqUrl } from '@utils/utilFunctions';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -27,7 +28,11 @@ export default function SocialLogin() {
         const { jwtToken, error } = await response.json();
 
         if (error) {
-            alert(error);
+            confirm(`${error} 다시 요청하시겠습니까?`) ? (
+                makeSocialLoginReqUrl({ socialSite: "naver", reprompt: true })
+            ) : (
+                router.replace("/")
+            );
             return;
         };
 
