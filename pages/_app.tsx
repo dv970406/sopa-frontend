@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           className="
             font-NotoSans box-border
             dark:bg-dark-ultra dark:text-dark-text-color
-            min-h-screen min-w-full overflow-hidden
+            min-h-screen min-w-full
           "
         >
           <Component {...pageProps} />

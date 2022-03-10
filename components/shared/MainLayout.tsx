@@ -44,11 +44,6 @@ export default function MainLayout({ title, children }: IMainLayout) {
                 `}
             >
                 {children}
-                {isAuthPage ? null : (
-                    <footer
-                        className="py-40"
-                    />
-                )}
             </div>
         </div>
     );

@@ -11,3 +11,15 @@
 *{
     box-sizing: border-box;
 }
+*::-webkit-scrollbar{
+    display:none;
+}
+
+@media (prefers-color-scheme: dark) { 
+    /*다크모드 시 스마트폰이나 맥OS에서 맨 아래화면에서 드래그 했을 때에도 검은화면이 보이게 하기 위함*/
+    html{
+        background-color: #1E1F21;
+        height:auto;
+    }
+}
+
