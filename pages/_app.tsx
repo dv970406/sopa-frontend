@@ -8,7 +8,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <RecoilRoot>
-        <Component {...pageProps} />
+        <div className="h-screen">
+          <Component {...pageProps} />
+        </div>
       </RecoilRoot>
     </ApolloProvider>
   );

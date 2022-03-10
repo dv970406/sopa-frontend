@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.10
  */
 
 import { postEditModeState } from '@utils/atoms';
@@ -12,9 +12,7 @@ export default function EditPostBtn() {
     return (
         <button
             onClick={() => setPostEditMode(true)}
-            className={`
-                p-1
-            `}
+            className="p-1"
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"

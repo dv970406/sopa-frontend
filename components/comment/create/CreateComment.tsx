@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.20
- * 수정일: 2022.03.09
+ * 수정일: 2022.03.10
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -119,52 +119,47 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
     };
 
     return (
-        <div>
-            <h1 className="font-bold text-lg">
-                댓글을 입력하세요.
-            </h1>
-            <form
-                onSubmit={handleSubmit(onValid)}
+        <form
+            onSubmit={handleSubmit(onValid)}
+            className="
+                flex flex-col rounded-lg
+                w-full  
+                border-2 border-sopa-default 
+                focus-within:border-[2.5px] focus-within:border-sopa-accent
+                transition
+            "
+        >
+            <textarea
+                {...register("comment", {
+                    required: true,
+                    maxLength: {
+                        value: 200,
+                        message: "200글자 미만이어야 합니다."
+                    }
+                })}
                 className="
-                    flex flex-col rounded-lg
-                    w-full  
-                    border-2 border-sopa-default 
-                    focus-within:border-[2.5px] focus-within:border-sopa-accent
-                    transition
-                "
-            >
-                <textarea
-                    {...register("comment", {
-                        required: true,
-                        maxLength: {
-                            value: 200,
-                            message: "200글자 미만이어야 합니다."
-                        }
-                    })}
-                    className="
                         rounded-md
                         p-4
                         dark:bg-dark-default
                         focus:outline-none
                     "
-                    rows={5}
-                    cols={50}
-                    placeholder="댓글을 입력하세요"
-                    maxLength={200}
-                    onChange={changeTextCount}
-                    required
-                />
-                <div
-                    className={`
+                rows={5}
+                cols={50}
+                placeholder="댓글을 입력하세요"
+                maxLength={200}
+                onChange={changeTextCount}
+                required
+            />
+            <div
+                className={`
                         flex items-center place-content-end
                         w-full p-2 space-x-2
                         border-t-2 border-t-sopa-default
                     `}
-                >
-                    <p className='font-bold'>{checkTextCount} / 200</p>
-                    <Button text="추가" />
-                </div>
-            </form>
-        </div>
+            >
+                <p className='font-bold'>{checkTextCount} / 200</p>
+                <Button text="추가" />
+            </div>
+        </form>
     );
 };

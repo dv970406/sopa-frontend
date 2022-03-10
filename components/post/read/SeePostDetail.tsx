@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.09
+ * 수정일: 2022.03.10
  */
 
 import MetaData from '../MetaData';
@@ -15,8 +15,7 @@ import { useRecoilValue } from "recoil";
 import { tokenState } from "@utils/atoms";
 import Loading from '@components/shared/Loading';
 import { ApolloQueryResult } from '@apollo/client';
-import Link from 'next/link';
-import Image from 'next/image';
+import AuthorGithubLink from '../AuthorGithubLink';
 
 interface ISeePostDetailComponent {
     pageTitle: string;
@@ -47,39 +46,9 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                 {seePost?.isMine ? (
                     <MenuBtn postId={seePost?.id} />
                 ) : (
-                    seePost?.user?.githubURL ? (
-                        <div
-                            className="flex items-center space-x-2"
-                        >
-                            <Image
-                                src="/github.png"
-                                width={30}
-                                height={30}
-                                alt=""
-                                className='bg-white rounded-full'
-                            />
-                            <Link
-                                href={seePost?.user?.githubURL}
-                            >
-                                <a
-                                    className="
-                                        hover:text-sopa-default text-lg font-bold transition
-                                    "
-                                >
-                                    {seePost?.user?.name}
-                                </a>
-                            </Link>
-                        </div>
-                    ) : (
-                        <p
-                            className="
-                                text-lg font-bold
-                            "
-                        >
-                            {seePost?.user?.name}
-                        </p>
-                    )
-
+                    <AuthorGithubLink
+                        user={seePost?.user}
+                    />
                 )}
             </div>
             {seePost?.id ? (
