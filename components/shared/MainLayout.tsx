@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.06
+ * 수정일: 2022.03.10
  */
 
 import { tokenState } from '@utils/atoms';
@@ -31,10 +31,10 @@ export default function MainLayout({ title, children }: IMainLayout) {
     }, [pathname, isAuthPage, neededLoginPage, token, push]);
     return (
         <div
-            className={`
+            className="
                 font-NotoSans box-border
                 dark:bg-dark-ultra dark:text-dark-text-color
-            `}
+            "
         >
             <Head>
                 <title>{title?.includes("undefined") || undefined ? "SOPA" : `${title} | SOPA`} </title>
