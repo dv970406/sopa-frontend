@@ -12,7 +12,7 @@ export default function UserEditPage() {
 
     return (
         <MainLayout title={`${seeMyInfo?.name} 수정`}>
-            <EditUser />
+            <EditUser {...seeMyInfo!} />
         </MainLayout>
     );
 };

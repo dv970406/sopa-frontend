@@ -12,10 +12,10 @@ import { USER_SIMPLE_FRAGMENT } from '@utils/fragments';
 export interface ISeeMyInfoQuery {
     seeMyInfo: {
         id: number;
-        githubURL?: string;
-        socialLogin?: string;
         name: string;
         email: string;
+        githubURL?: string;
+        socialLogin?: string;
         isMe: boolean;
     }
 };
@@ -45,13 +45,11 @@ export default function useMyInfo() {
         };
     };
 
-    /* 
-        apollo가 알아서 요청 후에는 cache에 있는 데이터를 가져다 쓰는 cache-first가 기본값이므로
-        별다른 fetchPolicy 설정은 필요없는 듯
-    */
+    // 유효한 토큰인지 매 요청마다 확인할 것 이니까 network-only를 사용함
     const { data: myInfoData } = useQuery<ISeeMyInfoQuery>(SEE_MY_INFO_QUERY, {
         skip: !token,
         onCompleted: myInfoDataCompleted,
+        fetchPolicy: 'network-only'
     });
 
     return {
