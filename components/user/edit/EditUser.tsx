@@ -9,7 +9,6 @@ import Input from '@components/form/Input';
 import Button from '@components/shared/Button';
 import { tokenState } from '@utils/atoms';
 import { IMutationResults } from '@utils/types/interfaces';
-import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useResetRecoilState } from 'recoil';
@@ -20,6 +19,13 @@ interface IForm {
     password?: string;
     password2?: string;
 };
+interface IEditUserComponent {
+    id: number;
+    email: string;
+    name: string;
+    githubURL?: string;
+    socialLogin?: string;
+}
 
 const EDIT_USER_MUTATION = gql`
     mutation editUser($name:String,$githubURL:String,$password:String){
@@ -30,21 +36,21 @@ const EDIT_USER_MUTATION = gql`
     }
 `;
 
-export default function EditUser() {
+export default function EditUser({ id, email, name, githubURL, socialLogin }: IEditUserComponent) {
     const resetToken = useResetRecoilState(tokenState);
     const router = useRouter();
-    const { seeMyInfo } = useMyInfo();
+
     const { register, handleSubmit, clearErrors, getValues, formState: { errors } } = useForm<IForm>({
         mode: "onChange",
         defaultValues: {
-            name: seeMyInfo?.name,
-            githubURL: seeMyInfo?.githubURL
+            name,
+            githubURL,
         }
     });
 
     // editUser Mutation 처리 후 cache 수정 작업
     const updateEditUser: MutationUpdaterFn = (cache, { data }) => {
-        const { editUser: { ok, error } }: any = data
+        const { editUser: { ok, error } }: any = data;
         if (!ok) {
             alert(error);
             clearErrors();
@@ -52,13 +58,13 @@ export default function EditUser() {
         };
         const { name } = getValues();
         cache.modify({
-            id: `User:${seeMyInfo?.id}`,
+            id: `User:${id}`,
             fields: {
                 name() {
-                    return name
+                    return name;
                 }
             }
-        })
+        });
         router.push("/");
     };
     const [editUser, { loading }] = useMutation<IMutationResults>(EDIT_USER_MUTATION, {
@@ -66,7 +72,7 @@ export default function EditUser() {
     });
 
     // form을 제출하면 비밀번호 일치여부 확인 후 Mutation 실행
-    const onValid = ({ name, password, password2, githubURL }: IForm) => {
+    const onValid = ({ name: newName, password, password2, githubURL: newGithubURL }: IForm) => {
         if (loading) return;
 
         if (password !== password2) {
@@ -76,9 +82,9 @@ export default function EditUser() {
 
         editUser({
             variables: {
-                ...(name && { name }),
-                ...(password && { password }),
-                ...(githubURL && { githubURL })
+                name: newName || name,
+                password,
+                githubURL: newGithubURL || null
             }
         });
     };
@@ -108,13 +114,14 @@ export default function EditUser() {
                             message: "이름은 2글자 이상이어야 합니다."
                         },
                     })}
+                    required
                     error={errors.name?.message}
-                    placeholder="https://github.com/sopaisthebest"
+                    defaultValue={name}
                 />
                 <Input
                     disabled={true}
                     type="email"
-                    defaultValue={seeMyInfo?.email}
+                    defaultValue={email}
                 />
                 <Input
                     type="githubURL"
@@ -133,9 +140,10 @@ export default function EditUser() {
                     })}
                     error={errors.githubURL?.message}
                     placeholder="https://github.com/sopaisthebest"
+                    defaultValue={githubURL}
                 />
 
-                {seeMyInfo?.socialLogin ? null : (
+                {socialLogin ? null : (
                     <>
                         <Input
                             type="password"
@@ -154,6 +162,7 @@ export default function EditUser() {
                                     message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                                 }
                             })}
+                            required
                             error={errors.password?.message}
                         />
                         <Input
@@ -173,13 +182,14 @@ export default function EditUser() {
                                     message: "비밀번호는 영문, 숫자, 특수문자 포함 8~15자리입니다."
                                 }
                             })}
+                            required
                             error={errors.password2?.message}
                         />
                     </>
                 )}
 
                 <FormButton
-                    text={`${seeMyInfo?.name}의 프로필 수정`}
+                    text={`${name}의 프로필 수정`}
                     loading={loading}
                 />
             </form>
