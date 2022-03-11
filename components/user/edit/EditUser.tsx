@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.09
+ * 수정일: 2022.03.11
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -10,6 +10,7 @@ import Button from '@components/shared/Button';
 import { tokenState } from '@utils/atoms';
 import { IMutationResults } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useResetRecoilState } from 'recoil';
 
@@ -39,13 +40,8 @@ const EDIT_USER_MUTATION = gql`
 export default function EditUser({ id, email, name, githubURL, socialLogin }: IEditUserComponent) {
     const resetToken = useResetRecoilState(tokenState);
     const router = useRouter();
-
-    const { register, handleSubmit, clearErrors, getValues, formState: { errors } } = useForm<IForm>({
+    const { register, handleSubmit, clearErrors, getValues, setValue, formState: { errors } } = useForm<IForm>({
         mode: "onChange",
-        defaultValues: {
-            name,
-            githubURL,
-        }
     });
 
     // editUser Mutation 처리 후 cache 수정 작업
@@ -82,9 +78,9 @@ export default function EditUser({ id, email, name, githubURL, socialLogin }: IE
 
         editUser({
             variables: {
-                name: newName || name,
+                name: newName,
                 password,
-                githubURL: newGithubURL || null
+                githubURL: newGithubURL
             }
         });
     };
@@ -94,6 +90,11 @@ export default function EditUser({ id, email, name, githubURL, socialLogin }: IE
         localStorage.removeItem("TOKEN");
         resetToken();
     };
+
+    useEffect(() => {
+        setValue("name", name);
+        setValue("githubURL", githubURL);
+    }, [name, githubURL, setValue]);
 
     return (
         <>
@@ -109,10 +110,12 @@ export default function EditUser({ id, email, name, githubURL, socialLogin }: IE
                 <Input
                     type="name"
                     register={register("name", {
+                        required: "이름은 필수입니다.",
                         minLength: {
                             value: 2,
                             message: "이름은 2글자 이상이어야 합니다."
                         },
+                        value: name
                     })}
                     required
                     error={errors.name?.message}
@@ -136,7 +139,8 @@ export default function EditUser({ id, email, name, githubURL, socialLogin }: IE
                                     value?.includes("https://github.com/") ? true : "깃허브 링크 형식을 확인해주세요."
                                 )
                             }
-                        }
+                        },
+                        value: githubURL
                     })}
                     error={errors.githubURL?.message}
                     placeholder="https://github.com/sopaisthebest"
