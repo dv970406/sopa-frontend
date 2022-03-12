@@ -16,7 +16,7 @@ export default function NoData() {
         >
             <Image
                 src="/sopa.png"
-                alt=""
+                alt="소파"
                 width={200}
                 height={200}
                 quality={100}

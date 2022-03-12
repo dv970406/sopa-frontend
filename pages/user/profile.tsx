@@ -11,6 +11,7 @@ import SeeMyLikes from '@components/user/read/SeeMyLikes';
 import SeeMyPosts from '@components/user/read/SeeMyPosts';
 import { myActivitiesTabState } from '@utils/atoms';
 import { USER_DETAIL_FRAGMENT } from '@utils/fragments';
+import { NextPage } from 'next';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -24,7 +25,7 @@ const SEE_MY_INFO_QUERY = gql`
     ${USER_DETAIL_FRAGMENT}
 `;
 
-export default function UserProfilePage() {
+const UserProfilePage: NextPage = () => {
     const [myActivitiesTab, setMyActivitiesTab] = useRecoilState(myActivitiesTabState);
     const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
 
@@ -94,3 +95,5 @@ export default function UserProfilePage() {
         </MainLayout>
     );
 };
+
+export default UserProfilePage;

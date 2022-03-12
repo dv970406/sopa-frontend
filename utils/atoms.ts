@@ -36,7 +36,7 @@ export const myActivitiesTabState = atom<kindOfMyActivitiesTab>({
 // 브라우저가 렌더링되면 쿠키에서 토큰을 꺼내 state에 저장한다.
 export const tokenState = atom<string | null>({
     key: "tokenState",
-    default: typeof window === "undefined" ? null : localStorage.getItem("TOKEN"),
+    default: null,
 });
 
 export const postsState = atom<IPostDisplay[]>({

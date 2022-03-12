@@ -6,8 +6,9 @@
 import MainLayout from '@components/shared/MainLayout';
 import EditUser from '@components/user/edit/EditUser';
 import useMyInfo from 'hooks/useMyInfo';
+import { NextPage } from 'next';
 
-export default function UserEditPage() {
+const UserEditPage: NextPage = () => {
     const { seeMyInfo } = useMyInfo();
 
     return (
@@ -16,3 +17,5 @@ export default function UserEditPage() {
         </MainLayout>
     );
 };
+
+export default UserEditPage;

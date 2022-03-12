@@ -8,8 +8,9 @@ import MainLayout from '@components/shared/MainLayout';
 import { useResetRecoilState } from "recoil";
 import { skillsState } from "@utils/atoms";
 import { useEffect } from "react";
+import { NextPage } from 'next';
 
-export default function PostUploadPage() {
+const PostUploadPage: NextPage = () => {
     const resetSkillsState = useResetRecoilState(skillsState);
 
     useEffect(() => {
@@ -21,3 +22,5 @@ export default function PostUploadPage() {
         </MainLayout >
     );
 };
+
+export default PostUploadPage;

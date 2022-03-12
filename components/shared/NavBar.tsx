@@ -9,7 +9,7 @@ import { tokenState } from '@utils/atoms';
 import useMyInfo from 'hooks/useMyInfo';
 import SearchPostsBtn from '@components/post/search/SearchPostsBtn';
 import LoginHoverEvent from './LoginHoverEvent';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 
 
@@ -27,11 +27,8 @@ function NavBar() {
 
     useEffect(() => {
         // token state값이 변경될 때 마다 로컬 스토리지에 저장된 token을 set함
-        if (token) {
-            setToken(localStorage.getItem("TOKEN"));
-        };
+        setToken(localStorage.getItem("TOKEN"));
     }, [token, setToken]);
-
     return (
         <div
             className="
@@ -52,7 +49,7 @@ function NavBar() {
             >
                 <Image
                     src="/sopa.png"
-                    alt=""
+                    alt="소파"
                     width={70}
                     height={70}
                     quality={100}
@@ -108,4 +105,5 @@ function NavBar() {
     );
 };
 
-export default NavBar;
+// 사용중인 page에서 리렌더링이 일어난다고 해서 덩달아 리렌더링 되지 않게 한다.
+export default React.memo(NavBar);

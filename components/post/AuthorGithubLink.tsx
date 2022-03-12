@@ -21,7 +21,7 @@ export default function AuthorGithubLink({ user }: IAuthorGithubLinkComponent) {
                     src="/github.png"
                     width={30}
                     height={30}
-                    alt=""
+                    alt="깃허브"
                     className='bg-white rounded-full'
                 />
                 <Link

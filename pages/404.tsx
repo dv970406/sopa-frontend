@@ -4,11 +4,12 @@
  */
 
 import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
-export default function NoExistsPage() {
+const NoExistsPage: NextPage = () => {
     // 이미지를 screen 안에 가둬 놓을 때 쓰는 div
     const neverGoOutBox = useRef(null);
 
@@ -83,3 +84,5 @@ export default function NoExistsPage() {
         </motion.div>
     );
 };
+
+export default NoExistsPage;
