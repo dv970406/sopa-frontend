@@ -57,7 +57,7 @@ const Home: NextPage = () => {
 
   return (
     <MainLayout
-      title="당신의 소울파트너"
+      title="프로젝트 팀원 매칭 사이트"
     >
       {searchMode ? null : (
         <>
