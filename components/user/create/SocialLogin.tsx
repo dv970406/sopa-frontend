@@ -18,7 +18,7 @@ const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
             <Link href={makeSocialLoginReqUrl({ socialSite: social })} passHref>
                 <Image
                     src={`/${social}.png`}
-                    alt=""
+                    alt={social}
                     width={isAuthPage ? 50 : 40}
                     height={isAuthPage ? 50 : 40}
                 />

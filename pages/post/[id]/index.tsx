@@ -8,6 +8,7 @@ import SeePost from '@components/post/read/SeePost';
 import MainLayout from '@components/shared/MainLayout';
 import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -34,7 +35,7 @@ interface ISeePostCompleted {
     };
 }
 
-export default function PostDetailPage() {
+const PostDetailPage: NextPage = () => {
     const router = useRouter();
     const { id: postId, title: postTitle } = router.query;
     const [comments, setComments] = useState<ICommentInfo[]>([]);
@@ -73,3 +74,5 @@ export default function PostDetailPage() {
         </MainLayout>
     );
 };
+
+export default PostDetailPage;

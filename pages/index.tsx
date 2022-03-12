@@ -9,6 +9,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { postsState, searchModeState } from '@utils/atoms';
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard';
 import SortPosts from '@components/post/SortPosts';
+import { NextPage } from 'next';
+import { client } from '@utils/apollo';
 
 interface ISeePostsQuery {
   [key: string]: IPostDisplay[];
@@ -36,7 +38,7 @@ const SEE_POSTS_COUNT_QUERY = gql`
   }
 `;
 
-const Home = () => {
+const Home: NextPage = () => {
   const setPosts = useSetRecoilState(postsState);
   const searchMode = useRecoilValue(searchModeState);
 

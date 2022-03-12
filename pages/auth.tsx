@@ -9,8 +9,9 @@ import { loginModeState } from '@utils/atoms';
 import Login from '@components/user/Login';
 import LoginOrSignUp from '@components/form/LoginOrSignUp';
 import CreateUser from '@components/user/create/CreateUser';
+import { NextPage } from 'next';
 
-export default function AuthenticationPage() {
+const AuthenticationPage: NextPage = () => {
     const loginMode = useRecoilValue(loginModeState);
 
     return (
@@ -20,3 +21,5 @@ export default function AuthenticationPage() {
         </MainLayout>
     );
 };
+
+export default AuthenticationPage;

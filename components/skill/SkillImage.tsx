@@ -33,10 +33,12 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                             >
                                 <Image
                                     src={skill.imgSrc}
-                                    alt=""
+                                    alt={skill.name}
                                     width={50}
                                     height={50}
                                     quality={100}
+                                    placeholder="blur"
+                                    blurDataURL={skill.imgSrc}
                                 />
                                 <p className="font-bold">{skill.name}</p>
                             </div>
@@ -60,7 +62,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                         >
                             <Image
                                 src={skill.imgSrc}
-                                alt=""
+                                alt={skill.name}
                                 width={50}
                                 height={50}
                                 quality={100}
@@ -80,7 +82,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                     >
                         <Image
                             src={skill.imgSrc}
-                            alt=""
+                            alt={skill.name}
                             width={50}
                             height={50}
                             quality={100}

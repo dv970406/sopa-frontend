@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <div
           className="
-            font-NotoSans box-border
+            box-border
             dark:bg-dark-ultra dark:text-dark-text-color
             min-h-screen min-w-full
           "

@@ -94,7 +94,7 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                 >
                     <Image
                         src={selectedSkill.skillImage}
-                        alt=""
+                        alt={selectedSkill.name}
                         width={50}
                         height={50}
                         quality={100}

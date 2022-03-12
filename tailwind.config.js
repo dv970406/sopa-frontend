@@ -5,10 +5,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        Dongle: ['Dongle', "sans-serif"],
-        NotoSans: ['Noto Sans KR', "sans-serif"]
-      },
       colors: {
         'white': "#FFFFFF",
         'sopa-ultra': "#C026D3",

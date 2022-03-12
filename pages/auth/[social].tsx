@@ -7,11 +7,12 @@ import Loading from '@components/shared/Loading';
 import MainLayout from '@components/shared/MainLayout';
 import { tokenState } from '@utils/atoms';
 import { makeSocialLoginReqUrl } from '@utils/utilFunctions';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-export default function SocialLogin() {
+const SocialLogin: NextPage = () => {
     const setToken = useSetRecoilState(tokenState);
     const router = useRouter();
 
@@ -55,3 +56,5 @@ export default function SocialLogin() {
         </MainLayout>
     );
 };
+
+export default SocialLogin;
