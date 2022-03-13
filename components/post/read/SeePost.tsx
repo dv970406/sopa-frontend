@@ -1,15 +1,15 @@
 /**
  * 생성일: 2022.02.18
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.13
  */
 
 import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
-import EditPost from '../edit/EditPost';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { postEditModeState } from '@utils/atoms';
 import { useEffect } from 'react';
 import SeePostDetail from './SeePostDetail';
 import { ApolloQueryResult } from '@apollo/client';
+import dynamic from 'next/dynamic';
 
 interface IPostDetailComponent {
     postTitle: string;
@@ -22,6 +22,9 @@ interface IPostDetailComponent {
 export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPostDetailComponent) {
     const postEditMode = useRecoilValue(postEditModeState);
     const resetPostEditMode = useResetRecoilState(postEditModeState);
+
+    // 분기처리된 EditPost를 다이나믹 임포트로 최적화
+    const EditPost = dynamic(() => import("../edit/EditPost"));
 
     useEffect(() => {
         resetPostEditMode();
@@ -40,7 +43,12 @@ export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPo
                 apps={seePost?.apps}
             />
         ) : (
-            <SeePostDetail comments={comments} fetchMore={fetchMore} pageTitle={postTitle} seePost={seePost} />
+            <SeePostDetail
+                comments={comments}
+                fetchMore={fetchMore}
+                pageTitle={postTitle}
+                seePost={seePost}
+            />
         )
     );
 };

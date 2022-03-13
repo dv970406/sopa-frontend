@@ -10,7 +10,6 @@ import { postsState, searchModeState } from '@utils/atoms';
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard';
 import SortPosts from '@components/post/SortPosts';
 import { NextPage } from 'next';
-import { client } from '@utils/apollo';
 
 interface ISeePostsQuery {
   [key: string]: IPostDisplay[];
@@ -57,7 +56,7 @@ const Home: NextPage = () => {
 
   return (
     <MainLayout
-      title="프로젝트 스터디 팀원 매칭 사이트"
+      title="소파"
     >
       {searchMode ? null : (
         <>

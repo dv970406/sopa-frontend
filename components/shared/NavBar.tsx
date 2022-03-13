@@ -12,7 +12,6 @@ import LoginHoverEvent from './LoginHoverEvent';
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 
-
 function NavBar() {
     const [token, setToken] = useRecoilState(tokenState);
     const { seeMyInfo } = useMyInfo();
@@ -29,13 +28,14 @@ function NavBar() {
         // token state값이 변경될 때 마다 로컬 스토리지에 저장된 token을 set함
         setToken(localStorage.getItem("TOKEN"));
     }, [token, setToken]);
+
     return (
         <div
             className="
-                flex justify-around items-center top-0 rounded-b-3xl
-                w-full h-24 px-10
-                shadow-md
-            "
+                    flex justify-around items-center top-0 rounded-b-3xl
+                    w-full h-24 px-10
+                    shadow-md
+                "
         >
             <div
                 onClick={() => router.push("/")}
