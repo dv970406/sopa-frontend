@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.10
+ * 수정일: 2022.03.13
  */
 
 import { tokenState } from '@utils/atoms';
@@ -32,7 +32,7 @@ export default function MainLayout({ title, children }: IMainLayout) {
     return (
         <div>
             <Head>
-                <title>{title?.includes("undefined") || undefined ? "SOPA" : `${title} | SOPA`} </title>
+                <title>{title?.includes("undefined") || title === undefined ? "SOPA" : `${title} | SOPA`} </title>
             </Head>
             {isAuthPage ? null : <NavBar />}
             <div
