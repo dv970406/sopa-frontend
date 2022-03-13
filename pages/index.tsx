@@ -13,7 +13,7 @@ import { NextPage } from 'next';
 import { client } from '@utils/apollo';
 
 interface ISeePostsQuery {
-  [key: string]: IPostDisplay[];
+  seePosts: IPostDisplay[];
 };
 interface ISeePostsCountQuery {
   seePostsCount: {
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
 
   return (
     <MainLayout
-      title="프로젝트 스터디 팀원 매칭 사이트"
+      title="소파"
     >
       {searchMode ? null : (
         <>
@@ -78,5 +78,20 @@ const Home: NextPage = () => {
     </MainLayout>
   );
 };
+
+export async function getServerSideProps() {
+  await client.query({
+    query: SEE_POSTS_QUERY,
+    variables: {
+      howToSort: "new"
+    }
+  });
+
+  return {
+    props: {
+      initialCache: client.cache.extract()
+    }
+  }
+}
 
 export default Home;

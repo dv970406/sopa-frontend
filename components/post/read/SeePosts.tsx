@@ -37,7 +37,7 @@ export default function SeePosts({ loading, fetchMore, howManyData }: ISeePostsC
     const posts = useRecoilValue(postsState);
     const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
 
-    // AnimatedPresence가 SSR에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 빈 fragment만 반환
+    // AnimatedPresence가 서버 측에서 읽힐 때 경고문이 발생하는 데 이를 방지하기 위해 컴포넌트가 마운트 되기 전에는 빈 fragment만 반환
     const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {

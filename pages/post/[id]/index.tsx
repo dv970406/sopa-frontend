@@ -1,14 +1,15 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.13
  */
 
 import { gql, useQuery } from '@apollo/client';
 import SeePost from '@components/post/read/SeePost';
 import MainLayout from '@components/shared/MainLayout';
+import { client } from '@utils/apollo';
 import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
-import { NextPage } from 'next';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -74,5 +75,20 @@ const PostDetailPage: NextPage = () => {
         </MainLayout>
     );
 };
+
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+    await client.query({
+        query: SEE_POST_QUERY,
+        variables: {
+            postId: +query.id!
+        },
+    })
+
+    return {
+        props: {
+            initialCache: client.cache.extract()
+        }
+    }
+}
 
 export default PostDetailPage;

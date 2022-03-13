@@ -1,17 +1,16 @@
 /**
  * 생성일: 2022.02.22
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.13
  */
 
 import { gql, useQuery } from '@apollo/client';
 import MainLayout from '@components/shared/MainLayout';
 import ProfileTab from '@components/user/read/ProfileTab';
-import SeeMyComments from '@components/user/read/SeeMyComments';
 import SeeMyLikes from '@components/user/read/SeeMyLikes';
-import SeeMyPosts from '@components/user/read/SeeMyPosts';
 import { myActivitiesTabState } from '@utils/atoms';
 import { USER_DETAIL_FRAGMENT } from '@utils/fragments';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -25,9 +24,13 @@ const SEE_MY_INFO_QUERY = gql`
     ${USER_DETAIL_FRAGMENT}
 `;
 
+// 개인 페이지라서 SEO가 필요한 페이지 느낌은 아니라 SSR 안해도 될듯
 const UserProfilePage: NextPage = () => {
     const [myActivitiesTab, setMyActivitiesTab] = useRecoilState(myActivitiesTabState);
     const { data: userData } = useQuery(SEE_MY_INFO_QUERY);
+
+    const SeeMyPosts = dynamic(() => import("@components/user/read/SeeMyPosts"))
+    const SeeMyComments = dynamic(() => import("@components/user/read/SeeMyComments"))
 
     useEffect(() => {
         setMyActivitiesTab("like");

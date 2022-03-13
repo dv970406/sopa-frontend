@@ -11,7 +11,7 @@ import SearchPostsBtn from '@components/post/search/SearchPostsBtn';
 import LoginHoverEvent from './LoginHoverEvent';
 import React, { useEffect } from 'react';
 import Image from 'next/image';
-
+import { motion } from "framer-motion";
 
 function NavBar() {
     const [token, setToken] = useRecoilState(tokenState);
@@ -29,79 +29,103 @@ function NavBar() {
         // token state값이 변경될 때 마다 로컬 스토리지에 저장된 token을 set함
         setToken(localStorage.getItem("TOKEN"));
     }, [token, setToken]);
+
     return (
-        <div
-            className="
-                flex justify-around items-center top-0 rounded-b-3xl
-                w-full h-24 px-10
-                shadow-md
-            "
-        >
+        <>
+            {isHomePage ? (
+                <motion.div
+                    className="absolute left-0 right-0 top-24 font-bold flex justify-center"
+                    initial={{
+                        y: -50,
+                        opacity: 0
+                    }}
+                    animate={{
+                        y: 0,
+                        opacity: 1
+                    }}
+                    transition={{
+                        duration: 1
+                    }}
+                >
+                    <h1 className="text-sopa-accent text-xl">
+                        사이드 프로젝트 스터디 팀원 매칭을 도와드려요!
+                    </h1>
+                </motion.div>
+            ) : null}
+
             <div
-                onClick={() => router.push("/")}
                 className="
-                    rounded-full
-                    w-16 h-16
-                    border-opacity-50 
-                    hover:scale-110 
-                    transition cursor-pointer
+                    flex justify-around items-center top-0 rounded-b-3xl
+                    w-full h-24 px-10
+                    shadow-md
                 "
             >
-                <Image
-                    src="/sopa.png"
-                    alt="소파"
-                    width={70}
-                    height={70}
-                    quality={100}
-                />
-            </div>
-
-            <div
-                className={`
-                    flex items-center
-                    space-x-8
-                `}
-            >
-                {isHomePage ? (
-                    <SearchPostsBtn />
-                ) : null}
-
-                <button
-                    onClick={token ? goToCreatePost : goToLogin}
-                    className="font-bold"
+                <div
+                    onClick={() => router.push("/")}
+                    className="
+                        rounded-full
+                        w-16 h-16
+                        border-opacity-50 
+                        hover:scale-110 
+                        transition cursor-pointer
+                    "
                 >
-                    글 쓰기
-                </button>
+                    <Image
+                        src="/sopa.png"
+                        alt="소파"
+                        width={70}
+                        height={70}
+                        quality={100}
+                    />
+                </div>
 
-                {token ? (
-                    isMyProfilePage ? (
-                        <button
-                            className="
-                                font-bold text-sopa-default text-lg
-                                hover:text-sopa-accent 
-                                transition
-                            "
-                            onClick={goToEditUser}
-                        >
-                            {seeMyInfo?.name}
-                        </button>
+                <div
+                    className={`
+                        flex items-center
+                        space-x-8
+                    `}
+                >
+                    {isHomePage ? (
+                        <SearchPostsBtn />
+                    ) : null}
+
+                    <button
+                        onClick={token ? goToCreatePost : goToLogin}
+                        className="font-bold"
+                    >
+                        글 쓰기
+                    </button>
+
+                    {token ? (
+                        isMyProfilePage ? (
+                            <button
+                                className="
+                                    font-bold text-sopa-default text-lg
+                                    hover:text-sopa-accent 
+                                    transition
+                                "
+                                onClick={goToEditUser}
+                            >
+                                {seeMyInfo?.name}
+                            </button>
+                        ) : (
+                            <button
+                                className="
+                                    font-bold text-sopa-default text-lg 
+                                    hover:text-sopa-accent 
+                                    transition 
+                                "
+                                onClick={goToSeeMyProfile}
+                            >
+                                프로필
+                            </button>
+                        )
                     ) : (
-                        <button
-                            className="
-                                font-bold text-sopa-default text-lg 
-                                hover:text-sopa-accent 
-                                transition 
-                            "
-                            onClick={goToSeeMyProfile}
-                        >
-                            프로필
-                        </button>
-                    )
-                ) : (
-                    <LoginHoverEvent />
-                )}
+                        <LoginHoverEvent />
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

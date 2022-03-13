@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.27
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.13
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -29,7 +29,6 @@ interface ISeeMyPostsComponent {
 interface ISeeMyPostsQuery {
     seeMyPosts: IPostDisplay[]
 };
-
 
 export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {
     const myActivitiesTab = useRecoilValue(myActivitiesTabState);
