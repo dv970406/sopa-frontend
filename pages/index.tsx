@@ -9,7 +9,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { postsState, searchModeState } from '@utils/atoms';
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard';
 import SortPosts from '@components/post/SortPosts';
-import { NextPage } from 'next';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { client } from '@utils/apollo';
 
 interface ISeePostsQuery {
@@ -79,11 +79,16 @@ const Home: NextPage = () => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   await client.query({
     query: SEE_POSTS_QUERY,
     variables: {
       howToSort: "new"
+    },
+    context: {
+      headers: {
+        token: req.cookies["TOKEN"]
+      }
     }
   });
 

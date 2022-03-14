@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.14
  */
 
 import { useRouter } from 'next/router';
@@ -54,8 +54,7 @@ export default function Login() {
         };
 
         setToken(token);
-        //document.cookie = `TOKEN=${token}`;
-        localStorage.setItem("TOKEN", token);
+        document.cookie = `TOKEN=${token}`;
         router.push("/");
     };
     const [loginMutation, { loading }] = useMutation<ILoginCompleted>(LOGIN_MUTATION, {

@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.08
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.14
  */
 
 import { useRouter } from 'next/router';
@@ -27,7 +27,7 @@ function NavBar() {
 
     useEffect(() => {
         // token state값이 변경될 때 마다 로컬 스토리지에 저장된 token을 set함
-        setToken(localStorage.getItem("TOKEN"));
+        setToken(document.cookie.split("TOKEN=")[1]);
     }, [token, setToken]);
 
     return (
@@ -47,7 +47,7 @@ function NavBar() {
                         duration: 1
                     }}
                 >
-                    <h1 className="text-sopa-accent text-xl">
+                    <h1 className="text-sopa-accent text-sm sm:text-xl">
                         사이드 프로젝트 스터디 팀원 매칭을 도와드려요!
                     </h1>
                 </motion.div>
