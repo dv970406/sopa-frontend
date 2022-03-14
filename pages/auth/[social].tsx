@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.06
+ * 수정일: 2022.03.14
  */
 
 import Loading from '@components/shared/Loading';
@@ -35,7 +35,7 @@ const SocialLogin: NextPage = () => {
         };
 
         if (jwtToken) {
-            localStorage.setItem("TOKEN", jwtToken);
+            document.cookie = `TOKEN=${jwtToken}`;
             setToken(jwtToken);
             router.push("/");
         };

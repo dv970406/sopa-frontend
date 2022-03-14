@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.13
+ * 수정일: 2022.03.14
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -54,7 +54,7 @@ const PostDetailPage: NextPage = () => {
         variables: {
             postId: +postId!
         },
-        onCompleted: seePostCompleted
+        onCompleted: seePostCompleted,
     });
     useEffect(() => {
         setComments(data?.seePost?.post?.comments!);
@@ -76,13 +76,18 @@ const PostDetailPage: NextPage = () => {
     );
 };
 
-export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
     await client.query({
         query: SEE_POST_QUERY,
         variables: {
             postId: +query.id!
         },
-    })
+        context: {
+            headers: {
+                token: req.cookies["TOKEN"]
+            }
+        }
+    });
 
     return {
         props: {

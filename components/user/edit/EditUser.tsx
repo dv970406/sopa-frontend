@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.11
+ * 수정일: 2022.03.14
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -87,7 +87,8 @@ export default function EditUser({ id, email, name, githubURL, socialLogin }: IE
 
     const logOut = () => {
         router.replace("/");
-        localStorage.removeItem("TOKEN");
+        //쿠키의 토큰 삭제 코드
+        document.cookie = `TOKEN=; expires=${new Date().toUTCString()};`;
         resetToken();
     };
 
