@@ -5,14 +5,14 @@
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import { IMutationResults } from '@utils/types/interfaces';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface IEditCommentForm {
     editedComment: string;
 };
 interface IEditCommentComponent {
-    setEditCommentMode(current: boolean): void;
+    setEditCommentMode: Dispatch<SetStateAction<boolean>>;
     postId: number;
     comment: string;
     commentId: number;

@@ -86,7 +86,6 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                     >
                         {seePost?.openChatLink ? <OpenChatLink openChatLink={seePost?.openChatLink} /> : null}
                         <MetaData
-                            isSeePost={true}
                             postId={seePost?.id}
                             readCount={seePost?.readCount}
                             commentCount={seePost?.commentCount}

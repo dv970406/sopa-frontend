@@ -62,7 +62,7 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
     const onClick = () => {
         if (loading) return;
         deletePostMutation();
-    }
+    };
     return (
         <button
             onClick={onClick}
