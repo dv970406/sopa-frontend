@@ -6,12 +6,12 @@
 import { loginModeState } from '@utils/atoms';
 import { useRecoilState } from 'recoil';
 
-interface ISelectOne {
+interface ILoginOrSignUpComponent {
     leftText: string;
     rightText: string;
 };
 
-export default function LoginOrSignUp({ leftText, rightText }: ISelectOne) {
+export default function LoginOrSignUp({ leftText, rightText }: ILoginOrSignUpComponent) {
     const [loginMode, setLoginMode] = useRecoilState(loginModeState);
     const changeLoginMode = (bool: boolean) => setLoginMode(bool);
 

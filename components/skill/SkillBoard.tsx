@@ -3,16 +3,16 @@
  * 수정일: 2022.03.05
  */
 
-import type { ISkill } from '@utils/types/interfaces';
+import type { ISkillInfo } from '@utils/types/interfaces';
 import React from 'react';
 import Skill from './Skill';
 
-interface ISkillBoard {
-    skillsOfPosition: ISkill[]
+interface ISkillBoardComponent {
+    skillsOfPosition: ISkillInfo[]
 };
 
 // 메모이징으로 prop에 변화가 생기는 SkillBoard만 리렌더링
-function SkillBoard({ skillsOfPosition }: ISkillBoard) {
+function SkillBoard({ skillsOfPosition }: ISkillBoardComponent) {
 
     // 스킬보드의 이름을 한글로 바꾼다
     const BoardName = () => {
@@ -48,7 +48,7 @@ function SkillBoard({ skillsOfPosition }: ISkillBoard) {
                     w-full h-1/3 px-3 py-6 
                 "
             >
-                {skillsOfPosition?.map((skill: ISkill, index: number) => <Skill key={skill.name} index={index} {...skill} />)}
+                {skillsOfPosition?.map((skill: ISkillInfo, index: number) => <Skill key={skill.name} index={index} {...skill} />)}
             </div>
         </div>
     );

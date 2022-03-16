@@ -3,11 +3,11 @@
  * 수정일: 2022.03.05
  */
 
-interface IDivider {
+interface IDividerComponent {
     text: string;
 };
 
-export default function Divider({ text }: IDivider) {
+export default function Divider({ text }: IDividerComponent) {
     return (
         <div
             className={`

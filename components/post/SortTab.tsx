@@ -3,14 +3,14 @@
  * 수정일: 2022.03.05
  */
 
-interface ISortTab {
+interface ISortTabComponent {
     tabName: string | JSX.Element;
     selectedTab: string;
     comparisonTarget: string;
     onClick(): void;
 };
 
-export default function SortTab({ tabName, selectedTab, comparisonTarget, onClick }: ISortTab) {
+export default function SortTab({ tabName, selectedTab, comparisonTarget, onClick }: ISortTabComponent) {
     return (
         <div
             className={`

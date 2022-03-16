@@ -3,7 +3,7 @@
  * 수정일: 2022.03.13
  */
 
-import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import type { ICommentInfo, IPostDetailInfo } from '@utils/types/interfaces';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { postEditModeState } from '@utils/atoms';
 import { useEffect } from 'react';
@@ -11,15 +11,15 @@ import SeePostDetail from './SeePostDetail';
 import { ApolloQueryResult } from '@apollo/client';
 import dynamic from 'next/dynamic';
 
-interface IPostDetailComponent {
+interface IPostDetailInfoComponent {
     postTitle: string;
-    seePost: IPostDetail;
+    seePost: IPostDetailInfo;
     fetchMore: () => Promise<ApolloQueryResult<unknown>>;
     comments: ICommentInfo[];
 };
 
 
-export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPostDetailComponent) {
+export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPostDetailInfoComponent) {
     const postEditMode = useRecoilValue(postEditModeState);
     const resetPostEditMode = useResetRecoilState(postEditModeState);
 

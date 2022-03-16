@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.16
  */
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
@@ -27,7 +27,7 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
 
     // deletePost Mutation 처리 후 cache 수정작업
     const updateDeletePost: MutationUpdaterFn = (cache, { data }) => {
-        const { deletePost: { ok, error } }: any = data
+        const { deletePost: { ok, error } }: any = data;
         if (!ok) {
             alert(error);
             return;
@@ -62,7 +62,7 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
     const onClick = () => {
         if (loading) return;
         deletePostMutation();
-    }
+    };
     return (
         <button
             onClick={onClick}

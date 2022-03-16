@@ -3,13 +3,13 @@
  * 수정일: 2022.03.05
  */
 
-interface IButton {
+interface IButtonComponent {
     text: string;
-    onClick?(): void;
+    onClick?: () => void;
     placeRight?: boolean;
 };
 
-export default function Button({ text, onClick, placeRight = false }: IButton) {
+export default function Button({ text, onClick, placeRight = false }: IButtonComponent) {
     return (
         <button
             className={`

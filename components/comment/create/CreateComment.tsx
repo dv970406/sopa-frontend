@@ -40,7 +40,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
 
     // createComment Mutation 처리 후 cache 수정작업
     const updateCreateComment: MutationUpdaterFn = (cache, { data }) => {
-        const { createComment }: any = data
+        const { createComment }: any = data;
         if (!createComment.id) {
             alert("잘못된 접근입니다.");
             return;

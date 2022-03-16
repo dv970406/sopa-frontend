@@ -8,7 +8,7 @@ import SeePost from '@components/post/read/SeePost';
 import MainLayout from '@components/shared/MainLayout';
 import { client } from '@utils/apollo';
 import { COMMENT_FRAGMENT, POST_DISPLAY_FRAGMENT } from '@utils/fragments';
-import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import type { ICommentInfo, IPostDetailInfo } from '@utils/types/interfaces';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -31,7 +31,7 @@ const SEE_POST_QUERY = gql`
 
 interface ISeePostCompleted {
     seePost: {
-        post: IPostDetail;
+        post: IPostDetailInfo;
         error?: string;
     };
 }

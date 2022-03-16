@@ -3,11 +3,11 @@
  * 수정일: 2022.03.05
  */
 
-import type { IFetchedSkillsInfo, IMakeSkillImages } from '@utils/types/interfaces';
+import type { IFetchedSkillsInfo, ISkillImage } from '@utils/types/interfaces';
 import { makeSkillImages } from '@utils/utilFunctions';
 import Image from 'next/image';
 
-interface ISkillImage {
+interface ISkillImageComponent {
     displayMode?: boolean;
     frontends: IFetchedSkillsInfo[];
     backends: IFetchedSkillsInfo[];
@@ -15,7 +15,7 @@ interface ISkillImage {
 };
 
 
-export default function SkillImage({ displayMode = false, frontends, backends, apps }: ISkillImage) {
+export default function SkillImage({ displayMode = false, frontends, backends, apps }: ISkillImageComponent) {
     const skillsInfo = makeSkillImages(frontends, backends, apps);
 
     return (
@@ -23,7 +23,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
             {displayMode ? (
                 skillsInfo?.length > 3 ? (
                     <>
-                        {skillsInfo?.slice(0, 3).map((skill: IMakeSkillImages, index: number) =>
+                        {skillsInfo?.slice(0, 3).map((skill: ISkillImage, index: number) =>
                             <div
                                 key={index}
                                 className="
@@ -32,13 +32,13 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                                 "
                             >
                                 <Image
-                                    src={skill.imgSrc}
+                                    src={skill.skillImageSrc}
                                     alt={skill.name}
                                     width={50}
                                     height={50}
                                     quality={100}
                                     placeholder="blur"
-                                    blurDataURL={skill.imgSrc}
+                                    blurDataURL={skill.skillImageSrc}
                                 />
                                 <p className="font-bold">{skill.name}</p>
                             </div>
@@ -52,7 +52,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                         </div>
                     </>
                 ) : (
-                    skillsInfo?.map((skill: IMakeSkillImages, index: number) =>
+                    skillsInfo?.map((skill: ISkillImage, index: number) =>
                         <div
                             key={index}
                             className="
@@ -61,7 +61,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                             "
                         >
                             <Image
-                                src={skill.imgSrc}
+                                src={skill.skillImageSrc}
                                 alt={skill.name}
                                 width={50}
                                 height={50}
@@ -72,7 +72,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                     )
                 )
             ) : (
-                skillsInfo?.map((skill: IMakeSkillImages, index: number) =>
+                skillsInfo?.map((skill: ISkillImage, index: number) =>
                     <div
                         key={index}
                         className="
@@ -81,7 +81,7 @@ export default function SkillImage({ displayMode = false, frontends, backends, a
                         "
                     >
                         <Image
-                            src={skill.imgSrc}
+                            src={skill.skillImageSrc}
                             alt={skill.name}
                             width={50}
                             height={50}

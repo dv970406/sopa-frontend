@@ -8,7 +8,7 @@ import FormButton from '@components/form/FormButton';
 import Input from '@components/form/Input';
 import UploadSkillsSelector from '@components/form/UploadSkillsSelector';
 import { selectedSkillsToUploadState } from '@utils/atoms';
-import { IMutationResults, ISkill } from '@utils/types/interfaces';
+import { IMutationResults, ISkillInfo } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -71,8 +71,8 @@ export default function CreatePost() {
             alert("스킬을 하나 이상 선택해주세요!");
             return;
         };
-        const skills = selectedSkillsToUpload.map((skill: ISkill) => {
-            const { isSelected, skillImage, ...skillInfo } = skill;
+        const skills = selectedSkillsToUpload.map((skill: ISkillInfo) => {
+            const { isSelected, skillImageSrc, ...skillInfo } = skill;
             return skillInfo;
         });
 
@@ -132,7 +132,7 @@ export default function CreatePost() {
                         message: "링크는 70자 이내여야 합니다."
                     },
                     validate: {
-                        checkKakao: (value: any): boolean | string => {
+                        checkKakao: (value): boolean | string => {
                             return value?.length === 0 ? true : (
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )

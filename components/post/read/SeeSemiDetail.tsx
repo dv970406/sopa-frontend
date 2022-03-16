@@ -3,16 +3,16 @@
  * 수정일: 2022.03.05
  */
 
-import type { IPostDisplay } from '@utils/types/interfaces';
+import type { IPostSemiDetailInfo } from '@utils/types/interfaces';
 import { useRouter } from 'next/router';
 import React from 'react';
 import SkillImage from '../../skill/SkillImage';
 
-interface ISeeSemiDetail {
-    semiDetail: IPostDisplay
+interface ISeeSemiDetailComponent {
+    semiDetail: IPostSemiDetailInfo
 };
 
-export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetail) {
+export default function SeeSemiDetail({ semiDetail }: ISeeSemiDetailComponent) {
     const router = useRouter();
 
     // 부모 컴포넌트(seePosts)로부터의 이벤트 캡쳐링을 막아 SemiDetail이 꺼지지 않게 한다.

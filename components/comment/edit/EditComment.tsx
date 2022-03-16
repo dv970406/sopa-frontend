@@ -5,14 +5,14 @@
 
 import { gql, MutationUpdaterFn, useMutation } from '@apollo/client';
 import { IMutationResults } from '@utils/types/interfaces';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
-interface IEditCommentForm {
+interface IForm {
     editedComment: string;
 };
 interface IEditCommentComponent {
-    setEditCommentMode(current: boolean): void;
+    setEditCommentMode: Dispatch<SetStateAction<boolean>>;
     postId: number;
     comment: string;
     commentId: number;
@@ -28,7 +28,7 @@ const EDIT_COMMENT_MUTATION = gql`
 `;
 
 export default function EditComment({ setEditCommentMode, comment, commentId }: IEditCommentComponent) {
-    const { register, handleSubmit, getValues } = useForm<IEditCommentForm>();
+    const { register, handleSubmit, getValues } = useForm<IForm>();
 
     // editComment Mutation 처리 후 cache 수정작업
     const updateEditComment: MutationUpdaterFn = (cache, { data }) => {
@@ -61,7 +61,7 @@ export default function EditComment({ setEditCommentMode, comment, commentId }: 
     });
 
     // form이 제출되었을 때 실행
-    const onValid = ({ editedComment }: IEditCommentForm) => {
+    const onValid = ({ editedComment }: IForm) => {
         if (loading) return;
 
         editCommentMutation({

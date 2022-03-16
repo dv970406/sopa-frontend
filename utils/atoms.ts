@@ -5,7 +5,7 @@
 
 import { atom, selector } from 'recoil';
 import { skillSet } from './skillSet';
-import type { ICommentInfo, IPostDisplay, ISkill, ISkillPositions } from './types/interfaces';
+import type { ICommentInfo, IPostSemiDetailInfo, ISkillInfo, ISkillsOfPositions } from './types/interfaces';
 import type { kindOfSortMethod, kindOfMyActivitiesTab, KindOfPosition } from './types/types';
 
 // LoginOrSignUp Component에서 사용하는 로그인/회원가입 화면 결정
@@ -39,7 +39,7 @@ export const tokenState = atom<string | null>({
     default: null,
 });
 
-export const postsState = atom<IPostDisplay[]>({
+export const postsState = atom<IPostSemiDetailInfo[]>({
     key: "postsState",
     default: []
 });
@@ -50,7 +50,7 @@ export const commentsState = atom<ICommentInfo[]>({
 });
 
 
-export const skillsState = atom<ISkillPositions>({
+export const skillsState = atom<ISkillsOfPositions>({
     key: "skillsState",
     default: {
         "frontend": skillSet.frontend,
@@ -59,7 +59,7 @@ export const skillsState = atom<ISkillPositions>({
     }
 });
 
-export const selectedSkillsState = atom<ISkill[]>({
+export const selectedSkillsState = atom<ISkillInfo[]>({
     key: "selectedSkillsState",
     default: []
 });
@@ -69,13 +69,13 @@ export const selectedPositionState = atom<KindOfPosition>({
     default: "frontend"
 });
 
-export const selectedSkillsToUploadState = atom<ISkill[]>({
+export const selectedSkillsToUploadState = atom<ISkillInfo[]>({
     key: "selectedSkillsToUploadState",
     default: []
 });
 
 
-export const skillsOfPositionSelector = selector<ISkill[]>({
+export const skillsOfPositionSelector = selector<ISkillInfo[]>({
     key: "skillsOfPositionSelector",
     get: ({ get }) => {
         const selectedPosition = get(selectedPositionState);

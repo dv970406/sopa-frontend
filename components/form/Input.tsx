@@ -18,7 +18,7 @@ interface IInput {
 
 // 건네받은 type을 한글로 변경
 const typeTranslater = (engVerType: string) => {
-    let korVerType = null;
+    let korVerType;
     switch (engVerType) {
         case "name":
             return korVerType = "이름";

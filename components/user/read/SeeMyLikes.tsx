@@ -10,7 +10,7 @@ import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import SortPosts from '@components/post/SortPosts';
-import { IPostDisplay } from '@utils/types/interfaces';
+import { IPostSemiDetailInfo } from '@utils/types/interfaces';
 
 const SEE_MY_LIKES_QUERY = gql`
     query seeMyLikes($offset:Int,$howToSort:String){
@@ -27,7 +27,7 @@ interface ISeeMyLikesComponent {
     }
 };
 interface ISeeMyLikesQuery {
-    seeMyLikes: IPostDisplay[]
+    seeMyLikes: IPostSemiDetailInfo[]
 };
 
 export default function SeeMyLikes({ seeMyInfo }: ISeeMyLikesComponent) {

@@ -7,19 +7,21 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { selectedSkillsState, skillsState } from '@utils/atoms';
-import type { ISkill } from '@utils/types/interfaces';
+import type { ISkillInfo } from '@utils/types/interfaces';
 import Image from 'next/image';
+import { ApolloQueryResult } from '@apollo/client';
+import { ISeePostsCountQuery, ISeePostsQuery } from '../../pages/index';
 
-interface ISelectedSkillBoard {
-    refetchSeePosts: any;
-    refetchSeePostsCount: any;
+interface ISelectedSkillBoardComponent {
+    refetchSeePosts: ({ skills }: { skills: string }) => Promise<ApolloQueryResult<ISeePostsQuery>>;
+    refetchSeePostsCount: ({ skills }: { skills: string }) => Promise<ApolloQueryResult<ISeePostsCountQuery>>;
 };
 
-export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCount }: ISelectedSkillBoard) {
+export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCount }: ISelectedSkillBoardComponent) {
     const [selectedSkills, setSelectedSkills] = useRecoilState(selectedSkillsState);
     const setSkills = useSetRecoilState(skillsState);
 
-    const onClick = (selectedSkill: ISkill, index: number): void => {
+    const onClick = (selectedSkill: ISkillInfo, index: number): void => {
         // 셀렉한 스킬을 다시 클릭하면 제거 시킴
         setSelectedSkills(prev => {
             const copiedPrev = [...prev];
@@ -52,8 +54,8 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
 
     // 셀렉한 스킬이 변경될 때마다 query 요청을 refetch시킨다.
     useEffect(() => {
-        const clearedSelectedSkills = selectedSkills.map((skill: ISkill) => {
-            const { isSelected, skillImage, ...skillWithPosition } = skill;
+        const clearedSelectedSkills = selectedSkills.map((skill: ISkillInfo) => {
+            const { isSelected, skillImageSrc, ...skillWithPosition } = skill;
             return skillWithPosition;
         });
 
@@ -86,14 +88,14 @@ export default function SelectedSkillBoard({ refetchSeePosts, refetchSeePostsCou
                 duration: 0.3,
             }}
         >
-            {selectedSkills?.map((selectedSkill: ISkill, index: number) =>
+            {selectedSkills?.map((selectedSkill: ISkillInfo, index: number) =>
                 <motion.button
                     key={selectedSkill.name}
                     onClick={() => onClick(selectedSkill, index)}
                     layoutId={selectedSkill.name}
                 >
                     <Image
-                        src={selectedSkill.skillImage}
+                        src={selectedSkill.skillImageSrc}
                         alt={selectedSkill.name}
                         width={50}
                         height={50}
