@@ -8,7 +8,7 @@ import { IMutationResults } from '@utils/types/interfaces';
 import useMyInfo from 'hooks/useMyInfo';
 import React from 'react';
 
-interface IMetaData {
+interface IMetaDataComponent {
     postId: number;
     readCount: number;
     commentCount: number;
@@ -25,7 +25,7 @@ const TOGGLE_LIKE_MUTATION = gql`
     }
 `;
 
-export default function MetaData({ postId, readCount, commentCount, likeCount, isLiked }: IMetaData) {
+export default function MetaData({ postId, readCount, commentCount, likeCount, isLiked }: IMetaDataComponent) {
     const { seeMyInfo } = useMyInfo();
 
     // toggleLike Mutation 처리 후 cache 수정 작업
@@ -61,12 +61,17 @@ export default function MetaData({ postId, readCount, commentCount, likeCount, i
 
         // seeMyLikes query cache에서 추가, 삭제 반영
 
+        interface LikeCacheData {
+            post: {
+                __ref: string;
+            };
+        }
         cache.modify({
             id: `ROOT_QUERY`,
             fields: {
                 seeMyLikes(prev) {
-                    const findPost = prev.find((like: any) => like?.post?.__ref === `Post:${postId}`);
-                    return isLiked ? prev.filter((like: any) => like !== findPost) : [...prev];
+                    const findPost = prev.find((like: LikeCacheData) => like?.post?.__ref === `Post:${postId}`);
+                    return isLiked ? prev.filter((like: LikeCacheData) => like !== findPost) : [...prev];
                 }
             }
         });

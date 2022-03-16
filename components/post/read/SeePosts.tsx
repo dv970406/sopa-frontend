@@ -11,7 +11,7 @@ import { useRecoilValue } from 'recoil';
 import SeeSemiDetail from './SeeSemiDetail';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import NoData from '@components/shared/NoData';
-import { IPostDisplay } from '@utils/types/interfaces';
+import { IPostSemiDetailInfo } from '@utils/types/interfaces';
 import Loading from '@components/shared/Loading';
 import { ApolloQueryResult } from '@apollo/client';
 
@@ -61,7 +61,7 @@ export default function SeePosts({ loading, fetchMore, howManyData }: ISeePostsC
                         {posts?.length === 0 ? (
                             <NoData />
                         ) : (
-                            posts?.map((post: IPostDisplay, index: number) =>
+                            posts?.map((post: IPostSemiDetailInfo, index: number) =>
                                 <motion.div
                                     layoutId={String(index)}
                                     onClick={() => setSelectedPostId(index)}

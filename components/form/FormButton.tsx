@@ -3,13 +3,13 @@
  * 수정일: 2022.03.05
  */
 
-interface IFormButton {
+interface IFormButtonComponent {
     text: string;
     loading: boolean;
-    onClick?(): void;
+    onClick?: () => void;
 };
 
-export default function FormButton({ text, loading, onClick }: IFormButton) {
+export default function FormButton({ text, loading, onClick }: IFormButtonComponent) {
     return (
         <button
             disabled={loading}

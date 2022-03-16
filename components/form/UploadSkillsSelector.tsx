@@ -6,7 +6,7 @@
 import SortTab from '@components/post/SortTab';
 import Skill from '@components/skill/Skill';
 import { selectedPositionState, skillsOfPositionSelector } from '@utils/atoms';
-import { ISkill } from '@utils/types/interfaces';
+import { ISkillInfo } from '@utils/types/interfaces';
 import { useEffect } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
 
@@ -78,7 +78,7 @@ export default function UploadSkillsSelector() {
                     dark:bg-dark-default
                 `}
             >
-                {skillsOfPosition?.map((skill: ISkill, index: number) =>
+                {skillsOfPosition?.map((skill: ISkillInfo, index: number) =>
                     <Skill uploadMode={true} key={index} index={index} {...skill} />
                 )}
             </div>

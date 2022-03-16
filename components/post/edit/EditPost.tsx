@@ -165,7 +165,7 @@ export default function EditPost({ postId, title, description, openChatLink, app
                         message: "링크는 70자 이내여야 합니다."
                     },
                     validate: {
-                        checkKakao: (value: any): boolean | string => {
+                        checkKakao: (value): boolean | string => {
                             return value?.length === 0 ? true : (
                                 value?.includes("https://open.kakao.com/") ? true : "카카오 오픈채팅 형식을 확인해주세요."
                             )

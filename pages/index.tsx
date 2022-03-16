@@ -2,18 +2,18 @@ import { gql, useQuery } from '@apollo/client';
 import SkillBoards from '@components/skill/SkillBoards';
 import MainLayout from '@components/shared/MainLayout';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
-import type { IPostDisplay } from '@utils/types/interfaces';
+import type { IPostSemiDetailInfo } from '@utils/types/interfaces';
 import SeePosts from '@components/post/read/SeePosts';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { postsState, searchModeState } from '@utils/atoms';
 import SelectedSkillBoard from '@components/skill/SelectedSkillBoard';
 import SortPosts from '@components/post/SortPosts';
-import { NextPage } from 'next';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { client } from '@utils/apollo';
 
 interface ISeePostsQuery {
-  seePosts: IPostDisplay[];
+  seePosts: IPostSemiDetailInfo[];
 };
 interface ISeePostsCountQuery {
   seePostsCount: {
@@ -79,11 +79,16 @@ const Home: NextPage = () => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }: GetServerSidePropsContext) {
   await client.query({
     query: SEE_POSTS_QUERY,
     variables: {
       howToSort: "new"
+    },
+    context: {
+      headers: {
+        token: req.cookies["TOKEN"]
+      }
     }
   });
 

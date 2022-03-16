@@ -135,7 +135,7 @@ export default function EditUser({ id, email, name, githubURL, socialLogin }: IE
                             message: "링크는 70자 이내여야 합니다."
                         },
                         validate: {
-                            githubURLFormat: (value: any): boolean | string => {
+                            githubURLFormat: (value): boolean | string => {
                                 return value?.length === 0 ? true : (
                                     value?.includes("https://github.com/") ? true : "깃허브 링크 형식을 확인해주세요."
                                 )

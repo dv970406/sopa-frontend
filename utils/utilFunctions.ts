@@ -3,13 +3,14 @@
  * 수정일: 2022.03.16
  */
 
-import type { IFetchedSkillsInfo, IMakeSkillImages } from './types/interfaces';
+import type { IFetchedSkillsInfo, ISkillImage } from './types/interfaces';
 
 interface IMakeSocialLoginReqUrl {
     socialSite: string;
     reprompt?: boolean;
 }
-export const makeSocialLoginReqUrl = ({ socialSite, reprompt }: IMakeSocialLoginReqUrl) => {
+// 소셜로그인 요청 URL을 만들어주는 함수
+export const makeSocialLoginReqUrl = ({ socialSite, reprompt }: IMakeSocialLoginReqUrl): string => {
     let baseUrl = null;
     let config = {};
 
@@ -50,40 +51,34 @@ export const makeSocialLoginReqUrl = ({ socialSite, reprompt }: IMakeSocialLogin
     return reqUrl;
 };
 
-export const makeSkillImages = (
-    frontends: IFetchedSkillsInfo[],
-    backends: IFetchedSkillsInfo[],
-    apps: IFetchedSkillsInfo[]
-) => {
+type MakeSkillImages = (frontends: IFetchedSkillsInfo[], backends: IFetchedSkillsInfo[], apps: IFetchedSkillsInfo[]) => ISkillImage[];
+// 스킬 정보를 받아 포지션과 스킬 이름을 파악하여 해당 img의 경로와 이어주는 함수
+export const makeSkillImages: MakeSkillImages = (frontends, backends, apps) => {
     const combineSkills = frontends?.concat(backends)?.concat(apps) || [];
-    const skillsInfo = combineSkills?.map((skill: IFetchedSkillsInfo): IMakeSkillImages => {
+    const skillsInfo = combineSkills?.map((skill: IFetchedSkillsInfo): ISkillImage => {
         switch (skill.__typename) {
             case "Frontend":
                 return {
                     name: skill.name,
-                    imgSrc: `/frontend/${skill.name}.png`
+                    skillImageSrc: `/frontend/${skill.name}.png`
                 };
             case "Backend":
                 return {
                     name: skill.name,
-                    imgSrc: `/backend/${skill.name}.png`
+                    skillImageSrc: `/backend/${skill.name}.png`
                 };
             default:
                 return {
                     name: skill.name,
-                    imgSrc: `/app/${skill.name}.png`
+                    skillImageSrc: `/app/${skill.name}.png`
                 };
         };
     })
     return skillsInfo;
 };
 
+// 게시물, 댓글의 업로드 시간을 밀리초로 받아 YYYY년 M월 D일 HH:MM 으로 변환해주는 함수
 export const getCreatedDate = (createdAt: number): string => {
-    // "-" Style Date
-    /* const transformDate = new Date(createdAt).toLocaleDateString().replace(/\./g, " -").slice(0, -1)
-    const changeDivision = transformDate.split("-");
-    const makeDateFormat = changeDivision.map(item => item.trim().padStart(2, "0")).join("-") */
-
     // Korean Style Date
     const date = new Date(createdAt);
     const getYear = date.getFullYear();

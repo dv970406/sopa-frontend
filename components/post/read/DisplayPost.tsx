@@ -3,14 +3,14 @@
  * 수정일: 2022.03.16
  */
 
-import type { IPostDisplay } from '@utils/types/interfaces';
+import type { IPostSemiDetailInfo } from '@utils/types/interfaces';
 import MetaData from '../MetaData';
 import SkillImage from '../../skill/SkillImage';
 import { getCreatedDate } from '@utils/utilFunctions';
 
 // index 페이지나 profile페이지에서 게시글의 대략적인 정보를 알려 줄 DisplayPost Component
 export default function DisplayPost(
-    { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, createdAt }: IPostDisplay
+    { id, title, commentCount, isExpired, likeCount, isLiked, readCount, frontends, backends, apps, createdAt }: IPostSemiDetailInfo
 ) {
     return (
         <div

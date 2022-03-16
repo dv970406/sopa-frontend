@@ -3,6 +3,7 @@
  * 수정일: 2022.03.05
  */
 
+import { ApolloQueryResult } from '@apollo/client';
 import { postSortMethodState, searchModeState, selectedSkillsState } from '@utils/atoms';
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -11,7 +12,7 @@ import { useRecoilValue } from 'recoil';
 interface IInfiniteScrollingComponent {
     howManyData: number;
     children: React.ReactNode;
-    fetchMore?: any;
+    fetchMore: () => Promise<ApolloQueryResult<unknown>>;
     css: string;
 };
 

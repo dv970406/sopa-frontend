@@ -8,7 +8,7 @@ import SortPosts from '@components/post/SortPosts';
 import SeePosts from '@components/post/read/SeePosts';
 import { myActivitiesTabState, postsState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
-import { IPostDisplay } from '@utils/types/interfaces';
+import { IPostSemiDetailInfo } from '@utils/types/interfaces';
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
@@ -27,7 +27,7 @@ interface ISeeMyPostsComponent {
     }
 };
 interface ISeeMyPostsQuery {
-    seeMyPosts: IPostDisplay[]
+    seeMyPosts: IPostSemiDetailInfo[]
 };
 
 export default function SeeMyPosts({ seeMyInfo }: ISeeMyPostsComponent) {

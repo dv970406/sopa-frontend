@@ -9,11 +9,11 @@ import { useSetRecoilState } from 'recoil';
 import { selectedSkillsState, selectedSkillsToUploadState, skillsState } from '@utils/atoms';
 import Image from 'next/image';
 
-interface ISkillInfo {
+interface ISkillComponent {
     uploadMode?: boolean;
     index: number;
     name: string;
-    skillImage: string;
+    skillImageSrc: string;
     position: string;
     isSelected: boolean;
 };
@@ -29,7 +29,7 @@ const skillVar = {
 
 
 // 해당 포지션 Board에 속해있는 Skill들 중 메모이징으로 변화가 생기는 Skill만 리렌더링
-function Skill({ uploadMode = false, index, position, name, skillImage, isSelected }: ISkillInfo) {
+function Skill({ uploadMode = false, index, position, name, skillImageSrc, isSelected }: ISkillComponent) {
     const setSelectedSkills = useSetRecoilState(selectedSkillsState);
     const setSkills = useSetRecoilState(skillsState);
     const setSelectedSkillsToUpload = useSetRecoilState(selectedSkillsToUploadState);
@@ -40,7 +40,7 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
             setSelectedSkillsToUpload(prev => {
                 const newSelectedSkill = {
                     name,
-                    skillImage,
+                    skillImageSrc,
                     isSelected: true,
                     position
                 };
@@ -59,7 +59,7 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
             setSelectedSkills(prev => {
                 const newSelectedSkill = {
                     name,
-                    skillImage,
+                    skillImageSrc,
                     isSelected: true,
                     position
                 };
@@ -75,7 +75,7 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
         setSkills(prev => {
             const selectedSkill = {
                 name,
-                skillImage,
+                skillImageSrc,
                 isSelected: !isSelected,
                 position
             };
@@ -105,13 +105,13 @@ function Skill({ uploadMode = false, index, position, name, skillImage, isSelect
             whileHover="hover"
         >
             <Image
-                src={skillImage}
+                src={skillImageSrc}
                 alt={name}
                 width={50}
                 height={50}
                 quality={100}
                 placeholder="blur"
-                blurDataURL={skillImage}
+                blurDataURL={skillImageSrc}
                 className={`
                     ${isSelected ? "opacity-100" : uploadMode ? "opacity-30" : "opacity-100"}
                     transition-opacity

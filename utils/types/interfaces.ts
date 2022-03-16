@@ -11,7 +11,7 @@ export interface IMutationResults {
 };
 
 // 게시글 관련
-export interface IPostDisplay {
+export interface IPostSemiDetailInfo {
     //__typename?: string;
     id: number;
     title: string;
@@ -29,7 +29,7 @@ export interface IPostDisplay {
     updatedAt: string;
 };
 
-export interface IPostDetail extends IPostDisplay {
+export interface IPostDetailInfo extends IPostSemiDetailInfo {
     comments: ICommentInfo[];
     openChatLink: string;
     isMine: boolean;
@@ -54,20 +54,19 @@ export interface IUserInfo {
 
 
 // 스킬셋 관련
-export interface ISkill {
+
+export interface ISkillImage {
     name: string;
-    skillImage: string;
+    skillImageSrc: string;
+};
+
+export interface ISkillInfo extends ISkillImage {
     isSelected: boolean;
     position: string;
 };
 
-export interface IMakeSkillImages {
-    name: string;
-    imgSrc: string;
-};
-
-export interface ISkillPositions {
-    [key: string]: ISkill[]
+export interface ISkillsOfPositions {
+    [key: string]: ISkillInfo[]
 };
 
 export interface IFetchedSkillsInfo {

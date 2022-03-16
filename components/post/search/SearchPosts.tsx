@@ -6,7 +6,7 @@
 import { gql, useLazyQuery } from '@apollo/client';
 import { postsState, searchModeState } from '@utils/atoms';
 import { POST_DISPLAY_FRAGMENT } from '@utils/fragments';
-import { IPostDisplay } from '@utils/types/interfaces';
+import { IPostSemiDetailInfo } from '@utils/types/interfaces';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useResetRecoilState, useSetRecoilState } from 'recoil';
@@ -27,7 +27,7 @@ interface IForm {
 };
 
 interface ISearchPostsCompleted {
-    searchPosts: IPostDisplay[]
+    searchPosts: IPostSemiDetailInfo[]
 };
 
 const searchInputVariants = {

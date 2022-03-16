@@ -9,7 +9,7 @@ import SkillImage from '../../skill/SkillImage';
 import DisplayComment from '../../comment/read/DisplayComment';
 import CreateComment from '../../comment/create/CreateComment';
 import MenuBtn from '../MenuBtn';
-import type { ICommentInfo, IPostDetail } from '@utils/types/interfaces';
+import type { ICommentInfo, IPostDetailInfo } from '@utils/types/interfaces';
 import InfiniteScrolling from '@components/shared/InfiniteScrolling';
 import { useRecoilValue } from "recoil";
 import { tokenState } from "@utils/atoms";
@@ -19,7 +19,7 @@ import AuthorGithubLink from '../AuthorGithubLink';
 
 interface ISeePostDetailComponent {
     pageTitle: string;
-    seePost: IPostDetail;
+    seePost: IPostDetailInfo;
     fetchMore: () => Promise<ApolloQueryResult<unknown>>;
     comments: ICommentInfo[];
 };

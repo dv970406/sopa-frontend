@@ -3,13 +3,15 @@
  * 수정일: 2022.03.05
  */
 
+import { ApolloQueryResult } from '@apollo/client';
 import { postSortMethodState } from '@utils/atoms';
+import { kindOfSortMethod } from '@utils/types/types';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import SortTab from './SortTab';
 
 interface ISortPostComponent {
-    refetchFn: any;
+    refetchFn: ({ howToSort }: { howToSort: kindOfSortMethod }) => Promise<ApolloQueryResult<unknown>>;
 };
 
 export default function SortPosts({ refetchFn }: ISortPostComponent) {

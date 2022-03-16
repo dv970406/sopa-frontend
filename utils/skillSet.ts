@@ -3,8 +3,10 @@
  * 수정일: 2022.03.05
  */
 
+import type { ISkillsOfPositions } from './types/interfaces';
+
 // 스킬셋 종류를 지정하는 파일
-export const skillSet = {
+export const skillSet: ISkillsOfPositions = {
     frontend: [
         "react",
         "vue",
@@ -16,7 +18,7 @@ export const skillSet = {
     ].map(name => {
         return {
             name,
-            skillImage: `/frontend/${name}.png`,
+            skillImageSrc: `/frontend/${name}.png`,
             isSelected: false,
             position: "frontend"
         }
@@ -33,7 +35,7 @@ export const skillSet = {
     ].map(name => {
         return {
             name,
-            skillImage: `/backend/${name}.png`,
+            skillImageSrc: `/backend/${name}.png`,
             isSelected: false,
             position: "backend"
         }
@@ -46,7 +48,7 @@ export const skillSet = {
     ].map(name => {
         return {
             name,
-            skillImage: `/app/${name}.png`,
+            skillImageSrc: `/app/${name}.png`,
             isSelected: false,
             position: "app"
         }
