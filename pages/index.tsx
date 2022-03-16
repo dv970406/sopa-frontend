@@ -80,6 +80,7 @@ const Home: NextPage = () => {
 };
 
 export async function getServerSideProps({ req }: GetServerSidePropsContext) {
+  client.cache.reset();
   await client.query({
     query: SEE_POSTS_QUERY,
     variables: {
@@ -89,9 +90,8 @@ export async function getServerSideProps({ req }: GetServerSidePropsContext) {
       headers: {
         token: req.cookies["TOKEN"]
       }
-    }
+    },
   });
-
   return {
     props: {
       initialCache: client.cache.extract()

@@ -16,13 +16,10 @@ import { useEffect, useState } from 'react';
 const SEE_POST_QUERY = gql`
     query seePost($postId:Int!,$offset:Int){
         seePost(postId:$postId){
-            post{
-                ...PostDisplayFragment
-                comments(offset:$offset){
-                    ...CommentFragment
-                }
+            ...PostDisplayFragment
+            comments(offset:$offset){
+                ...CommentFragment
             }
-            error
         }
     }
     ${POST_DISPLAY_FRAGMENT}
@@ -30,10 +27,7 @@ const SEE_POST_QUERY = gql`
 `;
 
 interface ISeePostCompleted {
-    seePost: {
-        post: IPostDetailInfo;
-        error?: string;
-    };
+    seePost: IPostDetailInfo;
 }
 
 const PostDetailPage: NextPage = () => {
@@ -42,8 +36,7 @@ const PostDetailPage: NextPage = () => {
     const [comments, setComments] = useState<ICommentInfo[]>([]);
 
     const seePostCompleted = ({ seePost }: ISeePostCompleted) => {
-        const { error }: any = seePost;
-        if (error) {
+        if (!seePost) {
             router.replace("/");
             return;
         }
@@ -56,20 +49,20 @@ const PostDetailPage: NextPage = () => {
         onCompleted: seePostCompleted,
     });
     useEffect(() => {
-        setComments(data?.seePost?.post?.comments!);
+        setComments(data?.seePost?.comments!);
     }, [data]);
 
     return (
-        <MainLayout title={`${postTitle || data?.seePost?.post?.title}`}>
+        <MainLayout title={`${postTitle || data?.seePost?.title}`}>
             <SeePost
                 fetchMore={
                     () => fetchMore({
-                        variables: { offset: data?.seePost?.post?.comments?.length },
+                        variables: { offset: data?.seePost?.comments?.length },
                     })
                 }
                 comments={comments}
                 postTitle={postTitle as string}
-                seePost={data?.seePost?.post!}
+                seePost={data?.seePost!}
             />
         </MainLayout>
     );
@@ -86,10 +79,13 @@ export async function getServerSideProps({ req, res, query }: GetServerSideProps
             headers: {
                 token: req.cookies["TOKEN"]
             }
-        }
+        },
     });
 
-    if (data?.seePost?.error) return res.end(`/Post/${query.id} is Not Found`);
+    if (!data?.seePost) {
+        res.statusCode = 404;
+        return res.end(`/Post/${query.id} is Not Found`);
+    };
 
     return {
         props: {

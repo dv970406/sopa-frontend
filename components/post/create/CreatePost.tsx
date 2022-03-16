@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.15
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.16
  */
 
 import { gql, useApolloClient, useMutation } from '@apollo/client';
@@ -37,14 +37,15 @@ export default function CreatePost() {
     const { seeMyInfo } = useMyInfo();
     const { cache } = useApolloClient();
     const { register, handleSubmit, formState: { errors } } = useForm<IForm>();
+
     // createPost Mutation 처리 후 cache 수정작업
     const createPostCompleted = ({ createPost }: IMutationResults) => {
-        const { ok, error } = createPost;
+        const { ok, error }: any = createPost;
         if (!ok) {
             alert(error);
+            router.replace("/");
             return;
         };
-        // 어차피 index로 보내지면 index Component에서 fetch가 일어나므로 cache 수정할 필요없다.
 
         cache.modify({
             id: `User:${seeMyInfo?.id}`,
