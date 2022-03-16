@@ -17,7 +17,7 @@ export default function EditPostBtn() {
             <svg
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                 className="
-                    h-5 w-5 
+                    h-6 w-6
                     text-white opacity-50 hover:opacity-100
                     transition
                 "

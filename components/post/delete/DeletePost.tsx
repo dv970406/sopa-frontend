@@ -28,6 +28,7 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
     // deletePost Mutation 처리 후 cache 수정작업
     const updateDeletePost: MutationUpdaterFn = (cache, { data }) => {
         const { deletePost: { ok, error } }: any = data;
+
         if (!ok) {
             alert(error);
             return;
@@ -71,7 +72,7 @@ export default function DeletePost({ postId }: IDeletePostComponent) {
             <svg
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                 className="
-                    h-5 w-5
+                    h-6 w-6
                     text-emphasize hover:scale-110
                     transition
                 "
