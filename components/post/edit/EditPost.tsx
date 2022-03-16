@@ -62,13 +62,13 @@ export default function EditPost({ postId, title, description, openChatLink, app
             id: `Post:${postId}`,
             fields: {
                 title() {
-                    return editedTitle
+                    return editedTitle;
                 },
                 description() {
-                    return editedDescription
+                    return editedDescription;
                 },
                 openChatLink() {
-                    return editedOpenChatLink
+                    return editedOpenChatLink;
                 }
             }
         });
