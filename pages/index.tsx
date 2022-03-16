@@ -12,10 +12,10 @@ import SortPosts from '@components/post/SortPosts';
 import { GetServerSidePropsContext, NextPage } from 'next';
 import { client } from '@utils/apollo';
 
-interface ISeePostsQuery {
+export interface ISeePostsQuery {
   seePosts: IPostSemiDetailInfo[];
 };
-interface ISeePostsCountQuery {
+export interface ISeePostsCountQuery {
   seePostsCount: {
     count: number;
   };

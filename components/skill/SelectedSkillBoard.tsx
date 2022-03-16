@@ -10,7 +10,7 @@ import { selectedSkillsState, skillsState } from '@utils/atoms';
 import type { ISkillInfo } from '@utils/types/interfaces';
 import Image from 'next/image';
 import { ApolloQueryResult } from '@apollo/client';
-import { ISeePostsCountQuery, ISeePostsQuery } from 'pages';
+import { ISeePostsCountQuery, ISeePostsQuery } from '../../pages/index';
 
 interface ISelectedSkillBoardComponent {
     refetchSeePosts: ({ skills }: { skills: string }) => Promise<ApolloQueryResult<ISeePostsQuery>>;
