@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.16
- * 수정일: 2022.03.05
+ * 수정일: 2022.03.16
  */
 
 import type { IFetchedSkillsInfo, IMakeSkillImages } from './types/interfaces';
@@ -78,7 +78,7 @@ export const makeSkillImages = (
     return skillsInfo;
 };
 
-export const getUploadedDate = (createdAt: number) => {
+export const getCreatedDate = (createdAt: number): string => {
     // "-" Style Date
     /* const transformDate = new Date(createdAt).toLocaleDateString().replace(/\./g, " -").slice(0, -1)
     const changeDivision = transformDate.split("-");
@@ -89,6 +89,8 @@ export const getUploadedDate = (createdAt: number) => {
     const getYear = date.getFullYear();
     const getMonth = date.getMonth() + 1;
     const getDay = date.getDate();
-    const makeDateFormat = `${getYear}년 ${getMonth}월 ${getDay}일`;
+    const getHour = String(date.getHours()).padStart(2, "0");
+    const getMinute = String(date.getMinutes()).padStart(2, "0");
+    const makeDateFormat = `${getYear}년 ${getMonth}월 ${getDay}일 ${getHour}:${getMinute}`;
     return makeDateFormat;
 };

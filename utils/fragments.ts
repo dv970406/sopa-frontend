@@ -49,6 +49,7 @@ export const COMMENT_FRAGMENT = gql`
         }
         postId
         isMine
+        createdAt
     }
 `;
 

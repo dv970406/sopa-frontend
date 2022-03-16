@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.17
- * 수정일: 2022.03.09
+ * 수정일: 2022.03.16
  */
 
 export interface IMutationResults {
@@ -42,6 +42,7 @@ export interface ICommentInfo {
     comment: string;
     user: IUserInfo;
     isMine: boolean;
+    createdAt: string;
 };
 
 // 유저 관련
