@@ -1,6 +1,6 @@
 /**
  * 생성일: 2022.02.21
- * 수정일: 2022.03.14
+ * 수정일: 2022.03.16
  */
 
 import { gql, useQuery } from '@apollo/client';
@@ -44,7 +44,6 @@ const PostDetailPage: NextPage = () => {
     const seePostCompleted = ({ seePost }: ISeePostCompleted) => {
         const { error }: any = seePost;
         if (error) {
-            alert(error);
             router.replace("/");
             return;
         }
@@ -76,8 +75,9 @@ const PostDetailPage: NextPage = () => {
     );
 };
 
-export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
-    await client.query({
+export async function getServerSideProps({ req, res, query }: GetServerSidePropsContext) {
+
+    const { data } = await client.query({
         query: SEE_POST_QUERY,
         variables: {
             postId: +query.id!
@@ -88,6 +88,8 @@ export async function getServerSideProps({ req, query }: GetServerSidePropsConte
             }
         }
     });
+
+    if (data?.seePost?.error) return res.end(`/Post/${query.id} is Not Found`);
 
     return {
         props: {
