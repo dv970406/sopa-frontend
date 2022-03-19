@@ -13,7 +13,6 @@ class MyDocument extends Document {
                     <meta property="og:description" content="프로젝트 스터디 팀원 매칭 사이트 소파입니다!" />
                     <meta property="og:image" content="/sopa.png" />
                     <meta property="og:url" content="https://sopa.life" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
                     <meta name="naver-site-verification" content="0e64f40739e6498e5b76b9b1ef44e2aa487f6a55" />
                     <meta name="google-site-verification" content="srp9jK3TFsDUgBynirvmzHcnvmiYV2xmv8u28ALEr9E" />
