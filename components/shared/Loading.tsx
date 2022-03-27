@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 export default function Loading() {
     return (
         <motion.div
-            className="flex justify-center items-center place-self-center top-1/2 rounded-full "
+            className="flex items-center justify-center rounded-full place-self-center top-1/2 "
             initial={{
                 rotate: -60
             }}
@@ -25,7 +25,7 @@ export default function Loading() {
         >
             <motion.img
                 src="/sopa.png"
-                className="rounded-full w-40 h-40"
+                className="w-40 h-40 rounded-full"
             />
         </motion.div>
     );

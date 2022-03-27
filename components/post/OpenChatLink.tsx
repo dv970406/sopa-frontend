@@ -53,12 +53,7 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLinkComponent) {
         <Link href={openChatLink}>
             <a target="_blank">
                 <motion.div
-                    className="
-                        flex 
-                        h-12
-                        hover:scale-110 
-                        transition-all cursor-pointer 
-                    "
+                    className="flex h-12 transition-all cursor-pointer  hover:scale-110"
                     onHoverStart={() => getShowing(true)}
                     onHoverEnd={() => getShowing(false)}
                 >
@@ -76,23 +71,14 @@ export default function OpenChatLink({ openChatLink }: IOpenChatLinkComponent) {
                                 initial="invisible"
                                 animate="visible"
                                 exit="exit"
-                                className="
-                                    flex flex-col items-center justify-center rounded-r-lg
-                                    p-2
-                                    bg-sopa-pure text-xs
-                                    dark:bg-sopa-lightDark
-                                "
+                                className="flex flex-col items-center justify-center p-2 text-xs rounded-r-lg  bg-sopa-pure dark:bg-sopa-lightDark"
                             >
                                 {openChatLink}
                                 <p
-                                    className="
-                                        flex items-center 
-                                        h-full
-                                        font-bold text-sm 
-                                    "
+                                    className="flex items-center h-full text-sm font-bold "
                                 >
                                     카카오 오픈채팅 바로가기
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </p>

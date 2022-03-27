@@ -18,9 +18,7 @@ export default function ProfileTab({ autoFocus, count, onFocusTab, svg }: ITabCo
     const [myActivitiesTab, setMyActivitiesTab] = useRecoilState(myActivitiesTabState);
     return (
         <div
-            className='
-                flex flex-col items-center space-y-1
-            '
+            className='flex flex-col items-center space-y-1 '
         >
             <button
                 className={`

@@ -9,10 +9,7 @@ import Image from 'next/image';
 export default function NoData() {
     return (
         <div
-            className="
-                flex flex-col items-center justify-start rounded-full 
-                h-screen space-y-2
-            "
+            className="flex flex-col items-center justify-start h-screen space-y-2 rounded-full "
         >
             <Image
                 src="/sopa.png"
@@ -21,7 +18,7 @@ export default function NoData() {
                 height={200}
                 quality={100}
             />
-            <p className="font-bold text-lg">데이터가 없습니다!</p>
+            <p className="text-lg font-bold">데이터가 없습니다!</p>
         </div>
     );
 };

@@ -127,19 +127,13 @@ export default function EditPost({ postId, title, description, openChatLink, app
                 <h1>
                     스킬
                     <span
-                        className="
-                            ml-1 
-                            text-sopa-default font-bold
-                        "
+                        className="ml-1 font-bold  text-sopa-default"
                     >
                         (수정 불가)
                     </span>
                 </h1>
                 <div
-                    className="
-                        flex gap-5 flex-wrap justify-center items-center
-                        mt-4 
-                    "
+                    className="flex flex-wrap items-center justify-center gap-5 mt-4 "
                 >
                     <SkillImage
                         frontends={frontends}

@@ -137,12 +137,7 @@ export default function CreateComment({ postId }: ICreateCommentComponent) {
                         message: "200글자 미만이어야 합니다."
                     }
                 })}
-                className="
-                        rounded-md
-                        p-4
-                        dark:bg-dark-default
-                        focus:outline-none
-                    "
+                className="p-4 rounded-md  dark:bg-dark-default focus:outline-none"
                 rows={5}
                 cols={50}
                 placeholder="댓글을 입력하세요"

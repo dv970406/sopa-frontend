@@ -30,20 +30,14 @@ const NoExistsPage: NextPage = () => {
     }, [x, getScreenWidth, router]);
     return (
         <motion.div
-            className="
-                flex items-center justify-center 
-                h-screen w-screen overflow-hidden space-x-7
-            "
+            className="flex items-center justify-center w-screen h-screen overflow-hidden  space-x-7"
             ref={neverGoOutBox}
         >
             <Head>
                 <title>404 NOT FOUND!</title>
             </Head>
             <motion.div
-                className="
-                    flex flex-col items-center
-                    w-48 h-48 space-y-3 
-                "
+                className="flex flex-col items-center w-48 h-48 space-y-3 "
             >
                 <motion.img
                     drag='x'
@@ -59,11 +53,7 @@ const NoExistsPage: NextPage = () => {
                 />
             </motion.div>
             <motion.div
-                className="
-                    flex items-center 
-                    space-x-3
-                    text-xl 
-                "
+                className="flex items-center space-x-3 text-xl "
                 initial={{
                     x: -200,
                     opacity: 0

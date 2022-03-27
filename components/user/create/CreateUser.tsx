@@ -205,7 +205,7 @@ export default function CreateUser() {
                             type="text"
                             placeholder='인증번호를 입력하세요'
                             maxLength={6}
-                            className="focus:outline-none dark:bg-dark-default p-2 rounded-lg"
+                            className="p-2 rounded-lg focus:outline-none dark:bg-dark-default"
                         />
                         <FormButton
                             text='회원가입'

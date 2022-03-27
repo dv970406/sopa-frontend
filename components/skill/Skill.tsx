@@ -94,11 +94,7 @@ function Skill({ uploadMode = false, index, position, name, skillImageSrc, isSel
 
     return (
         <motion.div
-            className="
-                group flex justify-center items-center 
-                m-3
-                cursor-pointer
-            "
+            className="flex items-center justify-center m-3 cursor-pointer  group"
             onClick={() => onClick()}
             layoutId={uploadMode ? undefined : name}
             variants={skillVar}
