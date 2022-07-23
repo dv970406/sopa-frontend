@@ -30,7 +30,7 @@ export default function SeePost({ fetchMore, postTitle, seePost, comments }: IPo
         resetPostEditMode();
     }, [resetPostEditMode]);
 
-    // postEditMode로 분기처리하여 edit모드인지 Detail모드인지 나눈다.
+    // postEditMode인지에 따라 분기처리하여 edit모드인지 Detail모드인지 나눈다.
     return (
         postEditMode ? (
             <EditPost

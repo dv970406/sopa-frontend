@@ -31,6 +31,7 @@ export default function InfiniteScrolling({ howManyData, children, fetchMore, cs
     };
 
     // hasMore을 정해주기 위해 likeCount, postCount, commentCount 등을 가져와서 조건식에 활용함
+    // 총 개수에 도달하면 hasMore이 false로 바뀌므로 더이상 인피니티 스크롤링이 안되게 설정
     const isHasMore = howManyData >= countDataLength * 6;
 
     useEffect(() => {

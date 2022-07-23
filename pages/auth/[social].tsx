@@ -29,7 +29,9 @@ const SocialLogin: NextPage = () => {
         const { jwtToken, error } = await response.json();
 
         if (error) {
-            const checkAgain = confirm(`${error} 다시 요청하시겠습니까?`)
+            const checkAgain = confirm(`${error} 다시 요청하시겠습니까?`);
+
+            // 소셜로그인에 에러가 생겼을 때 재차 요청을 보내게 함
             checkAgain ? window.location.href = makeSocialLoginReqUrl({ socialSite: "naver", reprompt: true }) : router.replace("/");
             return;
         };
