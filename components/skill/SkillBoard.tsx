@@ -27,26 +27,15 @@ function SkillBoard({ skillsOfPosition }: ISkillBoardComponent) {
     };
     return (
         <div
-            className="
-                relative flex flex-col items-center rounded-3xl 
-                bg-sopa-soft border-2 border-sopa-pure shadow-lg 
-                dark:bg-sopa-deepDark
-            "
+            className="relative flex flex-col items-center border-2 shadow-lg  rounded-3xl bg-sopa-soft border-sopa-pure dark:bg-sopa-deepDark"
         >
             <p
-                className="
-                    absolute -top-3 rounded-md 
-                    px-8 py-1 
-                    bg-sopa-accent text-white font-bold text-base
-                "
+                className="absolute px-8 py-1 text-base font-bold text-white rounded-md  -top-3 bg-sopa-accent"
             >
                 {BoardName()}
             </p>
             <div
-                className="
-                    flex flex-row flex-wrap justify-center 
-                    w-full h-1/3 px-3 py-6 
-                "
+                className="flex flex-row flex-wrap justify-center w-full px-3 py-6  h-1/3"
             >
                 {skillsOfPosition?.map((skill: ISkillInfo, index: number) => <Skill key={skill.name} index={index} {...skill} />)}
             </div>

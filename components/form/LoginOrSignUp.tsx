@@ -17,11 +17,7 @@ export default function LoginOrSignUp({ leftText, rightText }: ILoginOrSignUpCom
 
     return (
         <div
-            className="
-                flex align-center justify-around
-                max-w-lg w-full mb-10 space-x-2
-                text-4xl
-            "
+            className="flex justify-around w-full max-w-lg mb-10 space-x-2 text-4xl  align-center"
         >
             <div
                 className={`

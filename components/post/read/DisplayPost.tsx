@@ -14,16 +14,10 @@ export default function DisplayPost(
 ) {
     return (
         <div
-            className="
-                flex flex-col justify-between items-center rounded-lg
-                w-full h-full p-6 space-y-8 
-                border-2 border-fuchsia-100 shadow-xl
-                hover:border-sopa-pure hover:ring-2 ring-sopa-default ring-offset-2 dark:bg-dark-default
-                hover:scale-105 transition-all duration-300 cursor-pointer
-            "
+            className="flex flex-col items-center justify-between w-full h-full p-6 space-y-8 transition-all duration-300 border-2 rounded-lg shadow-xl cursor-pointer border-fuchsia-100 hover:border-sopa-pure hover:ring-2 ring-sopa-default ring-offset-2 dark:bg-dark-default hover:scale-105"
         >
             <div
-                className="flex flex-wrap gap-6 justify-center"
+                className="flex flex-wrap justify-center gap-6"
             >
                 <SkillImage
                     displayMode
@@ -33,15 +27,12 @@ export default function DisplayPost(
                 />
             </div>
             <h1
-                className="font-bold line-clamp-2 text-base"
+                className="text-base font-bold line-clamp-2"
             >
                 {title}
             </h1>
             <div
-                className="
-                    flex justify-between items-center place-self-end
-                    w-full
-                "
+                className="flex items-center justify-between w-full place-self-end"
             >
                 <MetaData
                     commentCount={commentCount}
@@ -51,10 +42,7 @@ export default function DisplayPost(
                     readCount={readCount}
                 />
                 <p
-                    className="
-                        place-self-end
-                        text-sm font-semibold
-                    "
+                    className="text-sm font-semibold place-self-end"
                 >
                     {getCreatedDate(+createdAt)}
                 </p>

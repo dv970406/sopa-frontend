@@ -28,9 +28,7 @@ export default function AuthorGithubLink({ user }: IAuthorGithubLinkComponent) {
                     href={user?.githubURL}
                 >
                     <a
-                        className="
-                            hover:text-sopa-default text-lg font-bold transition
-                        "
+                        className="text-lg font-bold transition  hover:text-sopa-default"
                     >
                         {user?.name}
                     </a>
@@ -38,9 +36,7 @@ export default function AuthorGithubLink({ user }: IAuthorGithubLinkComponent) {
             </div>
         ) : (
             <p
-                className="
-                    text-lg font-bold
-                "
+                className="text-lg font-bold "
             >
                 {user?.name}
             </p>

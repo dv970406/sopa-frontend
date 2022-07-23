@@ -26,10 +26,7 @@ export default function UploadSkillsSelector() {
                 className="flex items-center justify-around"
             >
                 <div
-                    className="
-                        flex items-center
-                        w-24
-                    "
+                    className="flex items-center w-24 "
                 >
                     <label
                         className="font-bold"
@@ -38,7 +35,7 @@ export default function UploadSkillsSelector() {
                     </label>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5 ml-1 text-sopa-accent"
+                        className="w-5 h-5 ml-1 text-sopa-accent"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                     >
@@ -46,10 +43,7 @@ export default function UploadSkillsSelector() {
                     </svg>
                 </div>
                 <div
-                    className="
-                        flex justify-around 
-                        w-full space-x-4 ml-7
-                    "
+                    className="flex justify-around w-full space-x-4  ml-7"
                 >
                     <SortTab
                         comparisonTarget={selectedPosition}

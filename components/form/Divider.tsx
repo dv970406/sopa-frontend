@@ -17,7 +17,7 @@ export default function Divider({ text }: IDividerComponent) {
             `}
         >
             <div className='rounded-full w-full h-[2px] bg-sopa-pure' />
-            <div className='w-full text-sopa-default font-bold'>{text}</div>
+            <div className='w-full font-bold text-sopa-default'>{text}</div>
             <div className='rounded-full w-full h-[2px] bg-sopa-pure' />
         </div>
     );

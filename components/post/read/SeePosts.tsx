@@ -77,12 +77,7 @@ export default function SeePosts({ loading, fetchMore, howManyData }: ISeePostsC
                     <AnimatePresence>
                         {selectedPostId !== null ? (
                             <motion.div
-                                className="
-                                    flex justify-center items-center 
-                                    h-screen w-screen px-6 
-                                    sm:px-20 md:px-32 lg:px-48 xl:px-72 2xl:px-96
-                                    fixed inset-0
-                                "
+                                className="fixed inset-0 flex items-center justify-center w-screen h-screen px-6  sm:px-20 md:px-32 lg:px-48 xl:px-72 2xl:px-96"
                                 onClick={() => setSelectedPostId(null)}
                                 variants={semiDetailVariants}
                                 initial="invisible"

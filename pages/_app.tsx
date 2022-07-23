@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import { ApolloProvider } from '@apollo/client';
 import { client } from '@utils/apollo';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -16,12 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <RecoilRoot>
         <div
-          className="
-            box-border
-            dark:bg-dark-ultra dark:text-dark-text-color
-            min-h-screen min-w-full
-          "
+          className="box-border min-w-full min-h-screen  dark:bg-dark-ultra dark:text-dark-text-color"
         >
+          <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+          </Head>
           <Component {...pageProps} />
         </div>
       </RecoilRoot>

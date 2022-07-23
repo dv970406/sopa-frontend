@@ -31,21 +31,11 @@ function NavBar() {
 
     return (
         <div
-            className="
-                flex justify-around items-center top-0 rounded-b-3xl
-                w-full h-24 px-10
-                shadow-md
-            "
+            className="top-0 flex items-center justify-around w-full h-24 px-10 shadow-md rounded-b-3xl"
         >
             <div
                 onClick={() => router.push("/")}
-                className="
-                    rounded-full
-                    w-16 h-16
-                    border-opacity-50 
-                    hover:scale-110 
-                    transition cursor-pointer
-                "
+                className="w-16 h-16 transition border-opacity-50 rounded-full cursor-pointer hover:scale-110"
             >
                 <Image
                     src="/sopa.png"
@@ -57,10 +47,7 @@ function NavBar() {
             </div>
 
             <div
-                className="
-                    flex items-center
-                    space-x-8
-                "
+                className="flex items-center space-x-8 "
             >
                 {isHomePage ? (
                     <SearchPostsBtn />
@@ -76,22 +63,14 @@ function NavBar() {
                 {token ? (
                     isMyProfilePage ? (
                         <button
-                            className="
-                                font-bold text-sopa-default text-lg
-                                hover:text-sopa-accent 
-                                transition
-                            "
+                            className="text-lg font-bold transition text-sopa-default hover:text-sopa-accent"
                             onClick={goToEditUser}
                         >
                             {seeMyInfo?.name}
                         </button>
                     ) : (
                         <button
-                            className="
-                                font-bold text-sopa-default text-lg 
-                                hover:text-sopa-accent 
-                                transition 
-                            "
+                            className="text-lg font-bold transition text-sopa-default hover:text-sopa-accent"
                             onClick={goToSeeMyProfile}
                         >
                             프로필

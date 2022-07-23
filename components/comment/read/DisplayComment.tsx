@@ -19,33 +19,24 @@ function DisplayComment({ postId, id, comment, user, isMine, createdAt }: IComme
 
     return (
         <div
-            className="
-                w-full
-                border-b-2 border-b-sopa-soft
-            "
+            className="w-full border-b-2  border-b-sopa-soft"
         >
             <div
-                className="
-                    flex justify-between
-                "
+                className="flex justify-between "
             >
                 <div
-                    className="
-                        font-bold text-lg
-                    "
+                    className="text-lg font-bold "
                 >
                     {user?.name}
                     <p
-                        className="font-bold text-xs"
+                        className="text-xs font-bold"
                     >
                         {getCreatedDate(+createdAt)}
                     </p>
                 </div>
                 {isMine ? (
                     <div
-                        className="
-                            flex space-x-3
-                        "
+                        className="flex space-x-3 "
                     >
                         <EditCommentBtn setEditCommentMode={setEditCommentMode} />
                         <DeleteCommentBtn postId={postId!} commentId={id} />
@@ -53,7 +44,7 @@ function DisplayComment({ postId, id, comment, user, isMine, createdAt }: IComme
                 ) : null}
             </div>
             <div
-                className="text-base p-2"
+                className="p-2 text-base"
             >
                 {editCommentMode ? (
                     <EditComment setEditCommentMode={setEditCommentMode} postId={postId!} comment={comment} commentId={id} />

@@ -3,7 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 class MyDocument extends Document {
     render(): JSX.Element {
         return (
-            <Html>
+            <Html lang="ko">
                 <Head>
                     <link rel="canonical" href="https://sopa.life" />
                     <meta name="robots" content="index,follow" />

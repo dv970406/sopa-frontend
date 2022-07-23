@@ -31,16 +31,10 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
     return (
         <>
             <div
-                className="
-                    flex justify-between items-center
-                    w-full p-3
-                    border-b-2 border-b-sopa-default                 
-                "
+                className="flex items-center justify-between w-full p-3 border-b-2  border-b-sopa-default"
             >
                 <h1
-                    className="
-                        text-4xl font-bold
-                    "
+                    className="text-4xl font-bold "
                 >
                     {seePost?.title || pageTitle}
                 </h1>
@@ -54,15 +48,10 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
             </div>
             {seePost?.id ? (
                 <div
-                    className="
-                        w-full py-3
-                        border-b-2 border-b-sopa-default
-                    "
+                    className="w-full py-3 border-b-2  border-b-sopa-default"
                 >
                     <div
-                        className="
-                            flex flex-wrap justify-center gap-5
-                        "
+                        className="flex flex-wrap justify-center gap-5 "
                     >
                         <SkillImage
                             frontends={seePost?.frontends}
@@ -71,11 +60,7 @@ export default function SeePostDetail({ pageTitle, seePost, fetchMore, comments 
                         />
                     </div>
                     <p
-                        className="
-                            py-7
-                            break-words whitespace-pre-wrap
-                            text-md lg:text-lg 
-                        "
+                        className="break-words whitespace-pre-wrap  py-7 text-md lg:text-lg"
                     >
                         {seePost?.description}
                     </p>

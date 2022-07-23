@@ -80,15 +80,7 @@ export default function Input({ type, register, required, disabled = false, erro
                     <textarea
                         id={type}
                         {...register}
-                        className="
-                            rounded-t-lg 
-                            w-full p-3
-                            border-b-2 border-b-form-gray text-sm shadow-sm
-                            dark:bg-dark-default 
-                            placeholder:text-base placeholder-form-gray dark:placeholder-dark-form-gray
-                            focus:placeholder-sopa-accent focus:outline-none 
-                            focus:ring-sopa-accent focus:border-b-sopa-accent
-                        "
+                        className="w-full p-3 text-sm border-b-2 rounded-t-lg shadow-sm  border-b-form-gray dark:bg-dark-default placeholder:text-base placeholder-form-gray dark:placeholder-dark-form-gray focus:placeholder-sopa-accent focus:outline-none focus:ring-sopa-accent focus:border-b-sopa-accent"
                         rows={10}
                         {...props}
                         onChange={changeTextCount}
@@ -101,15 +93,13 @@ export default function Input({ type, register, required, disabled = false, erro
                 <div className="space-y-2">
                     <label
                         htmlFor={type}
-                        className="
-                            flex items-center font-bold
-                        "
+                        className="flex items-center font-bold "
                     >
                         <p>{typeTranslater(type)}</p>
                         {required ? (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5 ml-1 text-sopa-accent"
+                                className="w-5 h-5 ml-1 text-sopa-accent"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -136,9 +126,7 @@ export default function Input({ type, register, required, disabled = false, erro
                         onChange={changeTextCount}
                     />
                     <div
-                        className="
-                            text-emphasize font-bold
-                        "
+                        className="font-bold  text-emphasize"
                     >
                         {error}
                     </div>
@@ -149,16 +137,13 @@ export default function Input({ type, register, required, disabled = false, erro
                 <div className="space-y-2">
                     <label
                         htmlFor={type}
-                        className="
-                            flex items-center 
-                            font-bold
-                        "
+                        className="flex items-center font-bold "
                     >
                         {typeTranslater(type)}
                         {required ? (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5 ml-1 text-sopa-accent"
+                                className="w-5 h-5 ml-1 text-sopa-accent"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                             >
@@ -185,9 +170,7 @@ export default function Input({ type, register, required, disabled = false, erro
                         onChange={changeTextCount}
                     />
                     <div
-                        className="
-                            text-emphasize font-bold
-                        "
+                        className="font-bold  text-emphasize"
                     >
                         {error}
                     </div>

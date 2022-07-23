@@ -108,10 +108,7 @@ export default function Login() {
             />
             <Divider text="소셜 로그인" />
             <div
-                className="
-                    flex space-x-5 justify-center items-center
-                    w-full
-                "
+                className="flex items-center justify-center w-full space-x-5 "
             >
                 <SocialLogin isAuthPage social='naver' />
                 <SocialLogin isAuthPage social='github' />
