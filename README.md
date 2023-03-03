@@ -4,7 +4,7 @@
 
 - 소파 설명 : [벨로그](https://velog.io/@db970406/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%8C%8C%ED%8A%B8%EB%84%88-%EB%A7%A4%EC%B9%AD-%EC%82%AC%EC%9D%B4%ED%8A%B8-%EC%86%8C%ED%8C%8C)
 
-- 소파 주소 : [소파](https://sopa.life)
+- 소파 주소 : [소파](https://sopa.pro)
 
 # 사용된 기술
 
