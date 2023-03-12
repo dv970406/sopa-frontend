@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api*/
 Disallow: /user*/
 Disallow: /auth*/
-Sitemap: https://sopa.pro/sitemap.xml
+Sitemap: https://www.sopa.pro/sitemap.xml
