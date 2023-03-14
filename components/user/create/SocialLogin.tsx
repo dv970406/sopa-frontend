@@ -18,7 +18,7 @@ const SocialLogin = ({ social, isAuthPage = false }: ISocialLogin) => {
     <button
       disabled={social === "naver"}
       style={{
-        opacity: social === "naver" ? 0.3 : 1,
+        opacity: social === "naver" ? 0.05 : 1,
         pointerEvents: social === "naver" ? "none" : "auto",
       }}
     >
