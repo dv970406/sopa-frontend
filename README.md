@@ -17,7 +17,7 @@
 
 # 만든 이
 
-- **Choi** - _Full work_ - [db970406](https://github.com/db970406)
+- **Choi** - _Full work_ - [dv970406](https://github.com/dv970406)
 
 # 설명
 
